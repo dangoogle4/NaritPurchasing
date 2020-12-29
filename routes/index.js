@@ -63,14 +63,16 @@ router.post("/api/adddata", function (req, res, next) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
     var myitem = {
-      shop: req.body.shop,
+      shop: req.body.shop, //--> come from shoptable (must add shop first)
       item: req.body.item,
       partnumber: req.body.partnumber,
       price: req.body.price,
       amount: req.body.amount,
       sumprice: req.body.sumprice,
       responsibleperson: req.body.responsibleperson,
-      statusz: req.body.statusz,
+      statusz: req.body.statusz, //--> come from admin table (admin must add this thing)
+      picture: req.body.picture, //--> can't do this rightnow (don't have knowlage to do)
+      //reason:  req.body.reason, --> from admin cuz admin can add this thing into maintable
         //group: req.body.group,
         //department: req.body.department,
     };
@@ -83,6 +85,28 @@ router.post("/api/adddata", function (req, res, next) {
     );
   });
 });
+
+router.post("/api/addshop", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myitem = {
+      nameOfShop: req.body.shop, //--> come from shoptable (must add shop first)
+      typeOfShop: req.body.type,
+      tax: req.body.tax,
+     
+    };
+    dbo.collection("shop").insertOne(myitem, function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
 
 router.post("/get/maintable", function (req, res, next) {
   // console.log("hkr");
@@ -192,6 +216,7 @@ router.post("/save/editdata", function (req, res, next) {
 
 router.post("/get/shop", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.nameuser);
+  console.log('Dan');
 
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;

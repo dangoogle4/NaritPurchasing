@@ -155,7 +155,7 @@ body {
  
 </style>
 
-<body>
+<body onload="showData()" >
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -207,9 +207,10 @@ body {
               <td>ผู้รับผิดชอบ</td>
               <td>รูป</td>
               <td width="230">สถานะ</td>
+              <tbody id="room-namedata"></tbody>
            </tr>
      
-           <tr>
+           <!-- <tr>
               <td>1</td>
               <td><a href="/">NewNewNew</a></td>
               <td>jane.doe@foo.com</td>
@@ -222,114 +223,7 @@ body {
               <td>01 800 2000</td>
               <td>
                 <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/>
-               <!-- <select>
-                    <option value="">รออนุมัติ / อนุมัติ /ตรวจรับแล้ว/ รอส่งของ <option>
-                    <option style="color: red;" value="1">asdasd</option>
-                    <option value="2">อนุมัติ</option>
-                    <option value="3">ตรวจรับแล้ว</option>
-                    <option value="4">รอส่งของ</option>
-                  </select>-->
-                  <!-- <span class="label label-success">Success Label</span>
-                  <br>
-                  <span class="label label-warning">Warning Label</span>
-                  <br>
-                  <span class="label label-danger">Danger Label</span>
-                  
-                  <br> -->
-            </td>
-              <!--<td><input type="color" id="favcolor" name="favcolor" value="#ff0000"><br><br></td>-->
-           </tr>
-           <tr>
-            <td>2</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>3</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td><input name="first" type="text"></td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-
-           <!--<tr>
-              <td><img src="https://i.picsum.photos/id/1027/100/100.jpg" alt="" /></td>
-              <td>John Doe</td>
-              <td>john.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
-           </tr>
-     
-           <tr>
-              <td><img src="https://i.picsum.photos/id/64/100/100.jpg" alt="" /></td>
-              <td>Jane Smith</td>
-              <td>jane.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
-           </tr>
-           
-           <tr>
-              <td><img src="https://i.picsum.photos/id/1025/100/100.jpg" alt="" /></td>
-              <td>John Smith</td>
-              <td>john.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
-           </tr>
-          -->
+               -->
         </table>
      </div>
      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
@@ -432,63 +326,7 @@ body {
               <td>01 800 2000</td>
               <td>01 800 2000</td>
            </tr>
-           <tr>
-            <td>2</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>3</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-           <!--<tr>
-              <td><img src="https://i.picsum.photos/id/1027/100/100.jpg" alt="" /></td>
-              <td>John Doe</td>
-              <td>john.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
-           </tr>
-     
-           <tr>
-              <td><img src="https://i.picsum.photos/id/64/100/100.jpg" alt="" /></td>
-              <td>Jane Smith</td>
-              <td>jane.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
-           </tr>
-           
-           <tr>
-              <td><img src="https://i.picsum.photos/id/1025/100/100.jpg" alt="" /></td>
-              <td>John Smith</td>
-              <td>john.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
-           </tr>
-          -->
+          
         </table>
      </div>
      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
@@ -591,63 +429,7 @@ body {
               <td>01 800 2000</td>
               <td>01 800 2000</td>
            </tr>
-           <tr>
-            <td>2</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>3</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-           <!--<tr>
-              <td><img src="https://i.picsum.photos/id/1027/100/100.jpg" alt="" /></td>
-              <td>John Doe</td>
-              <td>john.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
-           </tr>
-     
-           <tr>
-              <td><img src="https://i.picsum.photos/id/64/100/100.jpg" alt="" /></td>
-              <td>Jane Smith</td>
-              <td>jane.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
-           </tr>
-           
-           <tr>
-              <td><img src="https://i.picsum.photos/id/1025/100/100.jpg" alt="" /></td>
-              <td>John Smith</td>
-              <td>john.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
-           </tr>
-          -->
+         
         </table>
      </div>
      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
@@ -750,96 +532,7 @@ body {
               <td>01 800 2000</td>
               <td>01 800 2000</td>
            </tr>
-           <tr>
-            <td>2</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>3</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-         <tr>
-            <td>4</td>
-            <td><a href="">NewNewNew</a></td>
-            <td>jane.doe@foo.com</td>
-            <td>01 800 2000</td>
-            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-            <td>01 800 2000</td>
-         </tr>
-           <!--<tr>
-              <td><img src="https://i.picsum.photos/id/1027/100/100.jpg" alt="" /></td>
-              <td>John Doe</td>
-              <td>john.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Blanditiis, aliquid numquam iure voluptatibus ut maiores explicabo ducimus neque, nesciunt rerum perferendis, inventore.</td>
-           </tr>
-     
-           <tr>
-              <td><img src="https://i.picsum.photos/id/64/100/100.jpg" alt="" /></td>
-              <td>Jane Smith</td>
-              <td>jane.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td> Culpa praesentium unde pariatur fugit eos recusandae voluptas.</td>
-           </tr>
-           
-           <tr>
-              <td><img src="https://i.picsum.photos/id/1025/100/100.jpg" alt="" /></td>
-              <td>John Smith</td>
-              <td>john.smith@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Aut voluptatum accusantium, eveniet, sapiente quaerat adipisci consequatur maxime temporibus quas, dolorem impedit.</td>
-           </tr>
-          -->
+          
         </table>
      </div>
      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
@@ -905,10 +598,6 @@ body {
   <button class="tablink" onclick="openPage('About', this, 'orange')">ร้านสี่</button>
 <br>
 <br>
- 
-    
-    
-       
         สถานะการจัดชื้อ:
         <select>
             <option value="">รออนุมัติ / อนุมัติ /ตรวจรับแล้ว/ รอส่งของ <option>
@@ -994,7 +683,7 @@ function Export(){
     {
       var row = [], cols = rows[i].querySelectorAll("td, th");
       
-          for (var j = 0; j < cols.length; j++)
+          for (var j = 0; j < cols.length-1; j++)
           {
             row.push(cols[j].innerText);
           } 
@@ -1033,4 +722,76 @@ function download_csv(csv, filename) {
   // Lanzamos
   downloadLink.click();
 }
+
+
+
+function showData() {
+    
+		
+    $.post("/get/data", function (data, status) {
+      console.log(data);
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		// let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+        $("#room-namedata").append(
+		  "<tr><td>" +
+            (i + 1) +
+            "</td>" +
+            "<td id='order"+i+"'>" +
+            data[i].shop +
+			"</td>" +
+			"<td>" +
+            data[i].item +
+			"</td>" +
+			"<td>" +
+            data[i].partnumber +
+			"</td>" +
+			"<td>" +
+            data[i].price +
+			"</td>" +
+			"<td>" +
+            data[i].amount +
+      "</td>" +
+      "<td>" +
+            data[i].sumprice +
+      "</td>" +
+      "<td>" +
+            data[i].responsibleperson +
+      "</td>" +
+      "<td>" +
+            data[i].statusz +
+      "</td>" +
+			// "<td>" +
+			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+			// "</td>" +
+			 "<td><a data-toggle='modal' data-target='#ModalForEditData'   onclick='editData("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+            "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+			"</tr>"
+			
+
+        );
+      }
+    });
+  }
+
+
 </script>
