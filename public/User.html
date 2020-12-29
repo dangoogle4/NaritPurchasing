@@ -600,7 +600,7 @@ body {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForEditData" onclick="addzz()">Update</button>
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">UpdateData</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -763,23 +763,55 @@ body {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-					"รหัสจัดชื้อ <br>"+
-					"<input id='ordernew'type='text' type='text'value='"+ data[i].shop +"'>" +'<br>'+ 
-					'<br>'
-					// "ชื่อผู้รับผิดชอบ <br>"+
-					// "<input id='responnew' type='text'value='"+ data[i].respon +"'>" + '<br>' +
-					// '<br>' +
-					// "ยอดการจัดชื้อ <br>"+
-					// "<input id='amountnew' type='text'value='"+ data[i].amount +"'>" + '<br>' +
-					// '<br>'+ 
-					// "ชื่องบประมาณ <br>"+
-					// "<input id='nameordernew' type='text'value='"+ data[i].nameorder +"'>" + 
-					// '<br>' +
-					// '<br>'+
-					// "สถานะ <br>"+
-					// "<input id='statusnew' type='text'value='"+ data[i].status +"'>"
-					// "<button onclick='addzz()'>update</button>"
-							
+					"ชื่อร้าน <br>"+
+					"<input id='shopnew'type='text' type='text'value='"+ data[i].shop +"'>" +'<br>'+ 
+          '<br>'+
+          "ชื่อวัสดุ <br>"+
+					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
+          '<br>'+
+          "Part Number <br>"+
+					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคา <br>"+
+					"<input id='pricenew'type='text' type='text'value='"+ data[i].price +"'>" +'<br>'+ 
+          '<br>'+
+          "จำนวน <br>"+
+					"<input id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคารวม <br>"+
+					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+          '<br>'+
+          "ผู้รับผิดชอบ <br>"+
+					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
+          '<br>'+
+          "สถานะ <br>"+
+					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          '<br>'+
+          "รูป <br>"+
+					"<input type='file' id='img' name='img' accept='image/*'>"
+
+				);
+						
+						
+			});
+    }
+    
+
+    function showshop(){
+			console.log("addzzzz");
+			$.post("/get/shop", function (data, status) {
+						
+				console.log(data[i]._id);
+        getDataId = data[i]._id;
+        console.log(data);
+				//console.log("add");
+				document.getElementById("Modal-b").innerHTML="";
+				$("#Modal-b").append(
+					"ชื่อร้าน <br>"+
+					"<input id='shopnew'type='text' type='text'value='"+ data[i].shop +"'>" +'<br>'+ 
+          '<br>'
+          
+
 				);
 						
 						
@@ -790,12 +822,50 @@ body {
 	let dropRoomId = obj_id.toString();
 	console.log(obj_id);
     $.post("/drop/DataKrup", { dropRoomId: dropRoomId }, function (data, status) {
-		showMaintable();
+      showData();
       console.log(obj_id);
 	});
   }	
 
+  function addEdit(){
+			console.log('DDan');
+    var shopnew = $("#shopnew").val();
+    var itemnew = $("#itemnew").val();
+    var partnumbernew = $("#partnumbernew").val();
+    var pricenew = $("#pricenew").val();
+    var amountnew = $("#amountnew").val();
+    var sumpricenew = $("#sumpricenew").val();
+    var responsiblepersonnew = $("#responsiblepersonnew").val();
+    var statusznew = $("#statusznew").val();
+   //var statusnew = $("#statusnew").val();
+    //var statusnew = $("#statusnew").val();
 
+
+  console.log(shopnew,itemnew,partnumbernew);
+  console.log(getDataId);
+
+    $.post("/save/editdata",{  
+							              'ServergetDataId':getDataId,	
+							              'shopnew':shopnew,
+                            'itemnew':itemnew,
+                            'partnumbernew':partnumbernew,
+                            'pricenew':pricenew,
+                            'amountnew':amountnew,
+                            'sumpricenew':sumpricenew,	
+							              'responsiblepersonnew':responsiblepersonnew,
+                            'statusznew':statusznew,
+                            //amountnew:amountnew,
+                            // nameordernew:nameordernew,
+                            // statusnew:statusnew,
+                            // department: department
+                            
+                        },function(data, status){
+							showData();
+        });
+}			
+		
+
+var getDataId = "";
 
   </script>
   

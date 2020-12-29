@@ -120,6 +120,7 @@ router.post("/get/data", function (req, res, next) {
   });
 });
 
+var getDataId = "";
 
 router.post("/save/editmain", function (req, res, next) {
   // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
@@ -151,17 +152,55 @@ router.post("/save/editmain", function (req, res, next) {
   });
 });
 
-router.post("/get/profile", function (req, res, next) {
+router.post("/save/editdata", function (req, res, next) {
+  //console.log('DDDD');
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    console.log("DAN" + req.body.ServergetDataId);
+    console.log(req.body.shopnew);
+    console.log(req.body.itemnew);
+    var newvalues = {
+      $set: {
+        shop:req.body.shopnew,
+        item:req.body.itemnew,
+        partnumber:req.body.partnumbernew,
+        price:req.body.pricenew,
+        amount:req.body.amountnew,
+        sumprice:req.body.sumpricenew,	
+        responsibleperson:req.body.responsiblepersonnew,
+       // picture: picture,
+        statusz:req.body.statusznew,
+        //shopid: ObjectId(req.body.shopid),
+        //mainid: ObjectId(req.body.mainid),
+      },
+    };
+    dbo
+      .collection("data")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        res.send(true);
+      });
+  });
+});
+
+
+router.post("/get/shop", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.nameuser);
 
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
-    var query = { _id: ObjectId(req.body.profile) };
-    console.log(query);
+    //var query = { _id: ObjectId(req.body.profile) };
+    //console.log(query);
     dbo
-      .collection("maintable")
-      .find(query)
+      .collection("shop")
+      .find({})
       .toArray(function (err, result) {
         if (err) throw err;
         // console.log(result);
@@ -195,7 +234,7 @@ router.post("/drop/DataKrup", function (req, res, next) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
     var dropcategory = { _id: ObjectId(req.body.dropRoomId) };
-    dbo.collection("maintable").deleteOne(dropcategory, function (err, obj) {
+    dbo.collection("data").deleteOne(dropcategory, function (err, obj) {
       if (err) throw err;
       console.log("1 document deleted");
       res.send('Dan');
