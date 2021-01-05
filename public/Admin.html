@@ -746,6 +746,7 @@ function showData() {
          data[i].sumprice = data[i].price * data[i].amount;
       //   sum += parseInt(data[i].sumpriceadmin);
        
+
       //  console.log("Sum = "+ sum);   
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
@@ -967,7 +968,7 @@ function showData() {
 
     function DeleteDataAdmin(obj_id) {
 	let dropRoomId = obj_id.toString();
-	console.log(obj_id);
+	console.log("delete--->>>    " + obj_id);
     $.post("/drop/dataAdmin", { dropRoomId: dropRoomId }, function (data, status) {
       window.location.href = "/admin";
       console.log(obj_id);

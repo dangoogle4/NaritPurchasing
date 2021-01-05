@@ -307,6 +307,7 @@ table td, table th  {
 		  var amount = $("#amount").val();
 		  var nameorder = $("#nameorder").val();
 		  var status = $("#status").val();
+		  var reason = "";
 		  console.log(order,respon,amount,nameorder,status);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
@@ -319,6 +320,7 @@ table td, table th  {
 			  email: amount,
 			  phone: nameorder,
 			  password: status,
+			  reason: reason,
 			  //group: status,
 			  //department: department,
 			},
@@ -348,7 +350,9 @@ table td, table th  {
 		document.getElementById("room-name").innerHTML="";
 		//console.log("Dataaa" + data.name);
       for (let i = 0; i < data.length; i++) {
+		  
 		  //console.log(data[i]._id);
+		  str2 = data[i]._id.replace(/\s/g, '');
 		  str = data[i]._id.replace(/\s/g, '');
 		  console.log("STRRRRRRRRRRRR ---->>    "+str);
         roomId = data;
@@ -422,12 +426,12 @@ table td, table th  {
 // }
 		//function edit(i){
 		function edit(i){
-			console.log("adqwdjqwd9qwd");
+			console.log("adqwdjqwd9qwd--->>" + i );
 			$.post("/get/maintable", function (data, status) {
 						
-				//console.log("DDAANN" + data);
-				getDataId = str;
-				console.log("Dannnn" + getDataId);
+				//console.log("DDAANN" + str2);
+				getDataId = data[i]._id;
+				//console.log("Dannnn" + getDataId);
 				document.getElementById("Modal-a").innerHTML="";
 				$("#Modal-a").append(
 					"รหัสจัดชื้อ <br>"+
@@ -455,7 +459,7 @@ table td, table th  {
 
 
 		function addzz(){
-			console.log('Dan');
+			console.log('Dan--->>>'+ getDataId);
     var ordernew = $("#ordernew").val();
     var responnew = $("#responnew").val();
     var amountnew = $("#amountnew").val();
