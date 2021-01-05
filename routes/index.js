@@ -144,7 +144,7 @@ router.post("/get/maintable", function (req, res, next) {
       .find({})
       .toArray(function (err, result_category) {
         if (err) throw err;
-         console.log("DDannn" + result._id);
+         //console.log("DDannn" + result._id);
         res.send(result_category);
         db.close();
       });

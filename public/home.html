@@ -334,7 +334,7 @@ table td, table th  {
 
 	function dropMainTable(obj_id) {
 	let dropRoomId = obj_id.toString();
-	console.log(obj_id);
+	console.log("DDDDANNNANANNAN"+ obj_id);
     $.post("/drop/mainTable", { dropRoomId: dropRoomId }, function (data, status) {
 		showMaintable();
       //console.log(obj_id);
@@ -350,7 +350,7 @@ table td, table th  {
       for (let i = 0; i < data.length; i++) {
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
-		  console.log(str);
+		  console.log("STRRRRRRRRRRRR ---->>    "+str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
@@ -422,12 +422,12 @@ table td, table th  {
 // }
 		//function edit(i){
 		function edit(i){
-			//console.log("addzzzz");
+			console.log("adqwdjqwd9qwd");
 			$.post("/get/maintable", function (data, status) {
 						
-				console.log("DDAANN" + status);
-				//getDataId = data[i]._id;
-				//console.log("Dannnn" + getDataId);
+				//console.log("DDAANN" + data);
+				getDataId = str;
+				console.log("Dannnn" + getDataId);
 				document.getElementById("Modal-a").innerHTML="";
 				$("#Modal-a").append(
 					"รหัสจัดชื้อ <br>"+
