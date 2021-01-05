@@ -1,14 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>NARIT | ครุภัณฑ์</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:700,600' rel='stylesheet' type='text/css'>
-    <link rel="icon" href="narit.png" />
     <style>
-       /* @extend display-flex; */
-       display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+        /* @extend display-flex; */
+        display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
           display: flex;
           display: -webkit-flex; }
         
@@ -600,222 +595,141 @@
         
         /*# sourceMappingURL=style.css.map */
         
-        body{
-          font-family: 'Open Sans', sans-serif;
-          margin: 0 auto 0 auto;  
-          width:100%; 
-          text-align:center;
-          margin: 20px 0px 20px 0px;   
-        }
-        p{
-          font-size:12px;
-          text-decoration: none;
-          color:#ffffff;
-        }
-      
-        .box{
-          background:white;
-          width:300px;
-          border-radius:1px;
-          margin: 0 auto 0 auto;
-          padding:0px 0px 70px 0px;
-          border:  rgb(16, 197, 0) 4px solid; 
-        }
-        .box-register{
-          background:white;
-          width:300px;
-          border-radius:0px;
-          margin: 0 auto 0 auto;
-          padding:0px 0px 70px 0px;
-          /* border:  rgb(0, 191, 197) 4px solid;  */
-        }
-        .username{
-          background:#ecf0f1;
-          border: #ccc 1px solid;
-          border-bottom: #ccc 2px solid;
-          padding: 8px;
-          width:250px;
-          color:#AAAAAA;
-          margin-top:10px;
-          font-size:1em;
-          border-radius:4px;
-        }
-        .button{
-          background: rgb(150, 245, 131);
-          width:125px;
-          padding-top:5px;
-          padding-bottom:5px;
-          color:white;
-          border-radius:4px;
-          border:  rgb(0, 191, 197) 1px solid;
-          margin-top:20px;
-          margin-bottom:20px;
-          float:left;
-          margin-left:88px;
-          font-weight:800;
-          font-size:0.8em;
-        }
-        .button:hover{
-          background:#2CC06B; 
-        }
-        .fpwd{
-            color:#f1c40f;
-            text-decoration: underline;
-        }
-       #absoluteCenteredDiv{
-            position: absolute;
-            top:0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width:400px;
-            height: 300px;
-            text-align: center;
-       }
-
-       body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0 22px 0;
-  display: inline-block;
-  border: none;
-  background: #f1f1f1;
+/*the container must be positioned relative:*/
+.custom-select {
+  position: relative;
+  font-family: Arial;
 }
 
-/* Add a background color when the inputs get focus */
-input[type=text]:focus, input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
 }
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  opacity: 0.9;
+.select-selected {
+  background-color: DodgerBlue;
 }
 
-button:hover {
-  opacity:1;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  padding: 14px 20px;
-  background-color: #f44336;
-}
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
-  float: left;
-  width: 50%;
-}
-
-/* Add padding to container elements */
-.container {
-  padding: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: #474e5d;
-  padding-top: 50px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* Style the horizontal ruler */
-hr {
-  border: 1px solid #f1f1f1;
-  margin-bottom: 25px;
-}
- 
-/* The Close Button (x) */
-.close {
+/*style the arrow inside the select element:*/
+.select-selected:after {
   position: absolute;
-  right: 35px;
-  top: 15px;
-  font-size: 40px;
-  font-weight: bold;
-  color: #f1f1f1;
-}
-
-.close:hover,
-.close:focus {
-  color: #f44336;
-  cursor: pointer;
-}
-
-/* Clear floats */
-.clearfix::after {
   content: "";
-  clear: both;
-  display: table;
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
 }
 
-/* Change styles for cancel button and signup button on extra small screens */
-@media screen and (max-width: 300px) {
-  .cancelbtn, .signupbtn {
-     width: 100%;
-  }
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
 }
 
-       
-       /* body {
-          background-image: url('https://addons.cdn.mozilla.net/user-media/previews/full/215/215878.png?modified=1551714865');
-          background-repeat: no-repeat;
-          background-attachment: fixed;
-          background-size: 100% 100%;
-        } */
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+}
 
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
 
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
 
-        .box{
-          background:white;
-          width:300px;
-          border-radius:1px;
-          margin: 0 auto 0 auto;
-          padding:0px 0px 70px 0px;
-          border:  rgb(16, 197, 0) 4px solid; 
-        }
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
         
+            </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
 
-
-    </style>
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="../registemp/fonts/material-icon/css/material-design-iconic-font.min.css">
+            
+    <!-- Main css -->
+    <link rel="stylesheet" href="../registemp/css/style.css">
 </head>
 <body>
 
-   <!-- Sing in  Form -->
-        <section class="sign-in" style="margin: 150px;" >
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup" >
+            <div class="container" >
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="name" id="name" placeholder="Your Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="surname" placeholder="Your Surname"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="pass" id="username" placeholder="Username"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="re_pass" id="password" placeholder="password"/>
+                            </div>
+                            <div class="form-group">
+                                <select >
+                                    <option value="0">Select Priority:</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">user</option>
+                                  </select>
+                            </div>
+                            <!-- <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div> -->
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                            
+                        </form>
+                        
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="./images/ดาวน์โหลด (1).png" alt="sing up image"></figure>
+                        <a href="/" class="signup-image-link">have an account</a>
+                        <!-- <a href="#" class="signup-image-link">I am already member</a> -->
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Sing in  Form
+        <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="./images/ดาวน์โหลด (1).png" alt="sing up image"></figure>
-                        <a href="/register" class="signup-image-link">Create an account</a>
+                        <figure><img src="../registemp/images/signin-image.jpg" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">Create an account</a>
                     </div>
 
                     <div class="signin-form">
@@ -829,117 +743,31 @@ hr {
                                 <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
                                 <input type="password" name="your_pass" id="your_pass" placeholder="Password"/>
                             </div>
-                           
+                            <div class="form-group">
+                                <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                                <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                            </div>
                             <div class="form-group form-button">
                                 <input type="submit" name="signin" id="signin" class="form-submit" value="Log in"/>
                             </div>
                         </form>
-                       
+                        <div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <div id="absoluteCenteredDiv">
-        <form action="javascript:void(0)">
-            <div class="box">
-                <h1>Login</h1> -->
-                <!-- <img src="https://www.narit.or.th/images/00_banners/narit_logo_s.png"> -->
-                <!-- <form action="">
-                <input class="username" type="email" placeholder="Email" id="email" required>
-                <input class="username" type="password" placeholder="Password" id="password" required>
-                <button class="button" onclick="login()">login</button>
-            </div>
-        </form>
-        <div class="box-register">
-            <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Sign Up</button> -->
-          <!-- <button class="button" onclick="forgetPassword()">ลืมรหัสผ่าน</button>
-        </div>
-    </div> 
-     -->
+        </section> -->
 
-
-
-
-<!-- <div id="id01" class="modal">
-  <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-  <form class="modal-content" action="/action_page.php">
-    <div class="container">
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr>
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required>
-
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
-
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-      
-      <label>
-        <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-      </label>
-
-      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-
-      <div class="clearfix">
-        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-        <button type="submit" class="signupbtn">Sign Up</button>
-      </div>
     </div>
-  </form>
-</div> -->
 
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>
-   
-
-</body>
+    <!-- JS -->
+    <script src="../registemp/vendor/jquery/jquery.min.js"></script>
+    <script src="../registemp/js/main.js"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
-<script>
-  function register(){
-    window.location.href = "/account";
-  }
-  
-  function login()
-  {
-    var email = $("#email").val();
-    var password = $("#password").val();
-
-    if(email != "")
-    {
-        if(password != "")
-        {
-          $.post("/users/login", {email:email,password:password}, 
-          function(data,status)
-          {
-              if(data)
-              {
-                // console.log(getCookie("CookieUser"));
-
-                
-                 window.location.href = "/main";
-              }
-              else{
-
-                alert("NO USER");
-                window.location.href = "/";
-              }
-          });
-        }
-    }
-
-  }
-
-
-</script>

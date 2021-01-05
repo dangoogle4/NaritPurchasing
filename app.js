@@ -45,6 +45,13 @@ app.get("/eiei", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/eiei.html"));
 });
 
+app.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/regisPage.html"));
+});
+
+
+
+
 
 
 
@@ -65,3 +72,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+

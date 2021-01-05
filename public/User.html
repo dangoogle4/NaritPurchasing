@@ -55,6 +55,11 @@ body {
  table tr:nth-child(2n+1) {
 	 background-color: #edf7f8;
 }
+table td, table th  {
+    border: 0.5px solid powderblue;
+    
+}
+ 
  @media screen and (max-width: 700px) {
 	 table, tr, td {
 		 display: block;
@@ -152,6 +157,7 @@ body {
 	}
   
 }
+
  
 </style>
 
@@ -162,14 +168,14 @@ body {
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
+    <div class="container-fluid" style="background-color: rgb(0, 0, 0);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
+        <a class="navbar-brand" href="#">Purchasing</a>
       </div>
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="/main">Page 1</a></li>
-        <li><a href="/main">Page 2</a></li>
+        <li ><a href="/main">Home</a></li>
+        <li><a href="/user">user</a></li>
+        <li><a href="/admin">admin</a></li>
         <li><a href="/">Page 3</a></li>
       </ul>
     </div>
@@ -177,7 +183,7 @@ body {
   <div id="Home" class="tabcontent">
     <h3>Home</h3>
     <div>
-        <form>
+        <form >
           รหัสการชื้อ 
           <input name="first" type="text">
              
@@ -193,7 +199,7 @@ body {
           <!--<button >ค้นหา</button>-->
         </form>
         <br>
-    
+        <br>
     
         <div class="header">Users</div>
         
@@ -205,8 +211,8 @@ body {
               <th>จำนวน</th>
               <th>ราคารวม</th>
               <th>ผู้รับผิดชอบ</th>
-              <th>รูป</th>
-              <th width="230">สถานะ</th>
+              <!-- <th>รูป</th> -->
+              <th>สถานะ</th>
               <th>แก้ไข</th>
               <th>ลบ</th>
               <tbody id="room-name"></tbody>
@@ -217,8 +223,43 @@ body {
           
         </table>
      </div>
-     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูลสั่งชื้อ</button>
-     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
+
+     <div>
+      <form>
+        รหัสการชื้อ 
+        <input name="first" type="text">
+           
+        ชื่องบประมาณ
+        <input  name="last" type="text">
+          
+        ราคารวมทั้งหมดของทุกชิ้น
+        <input  name="lastmak" type="text">
+        ค้นหาที่นี่
+        <input id="myInput" type="text" placeholder="ค้นหาที่นี่">
+        <table id="myTable" cellspacing="0">
+  
+        <!--<button >ค้นหา</button>-->
+      </form>
+      <br>
+  
+  
+      <div class="header">Shop</div>
+      
+         <tr>
+            <th>ลำดับ </th>
+            <th>ชื่อวัสดุ</th>
+            <th>Part Number</th>
+            
+            <tbody id="room-namezz"></tbody>
+         </tr>
+   
+        
+
+        
+      </table>
+   </div>
+     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูลสั่งชื้อ</button>
+     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -231,9 +272,6 @@ body {
             </div>
             <div class="modal-body">
               <form>
-                <label>ชื่อร้าน</label>
-                <input id="shop"name="shop" type="text"><br>
-                <br>
                 <label>ชื่อวัสดุ</label>
                 <input  id="item" name="item" type="text"><br>
                 <br>
@@ -378,8 +416,13 @@ body {
       </div>
   </div>
  
+
+
+  
      
     
+
+
   <!-- Modal for Edit-->
   <div class="modal fade" id="ModalForEditData" role="dialog" >
     <!-- <div class="modal fade" id="Modalzz" role="dialog" onload="profile()"> -->
@@ -409,6 +452,7 @@ body {
         
       </div>
     </div>
+    
   
   <div id="shopNameTab"></div>
   <!-- <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">ร้านแรก</button>
@@ -481,7 +525,7 @@ body {
 
   function addEdit(){
 			console.log('DDan');
-    var shopnew = $("#shopnew").val();
+    //var shopnew = $("#shopnew").val();
     var itemnew = $("#itemnew").val();
     var partnumbernew = $("#partnumbernew").val();
     var pricenew = $("#pricenew").val();
@@ -498,7 +542,7 @@ body {
 
     $.post("/save/editdata",{  
 							              'ServergetDataId':getDataId,	
-							              'shopnew':shopnew,
+							              //'shopnew':shopnew,
                             'itemnew':itemnew,
                             'partnumbernew':partnumbernew,
                             'pricenew':pricenew,
@@ -537,27 +581,33 @@ body {
 		console.log("danxxx");
 	  {
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-		  var shop = $("#shop").val();
-		  var item = $("#item").val();
+		  //var shop = $("#shop").val();
+      var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
 		  var price = $("#price").val();
       var amount = $("#amountz").val();
+      var priceadmin =  "";
+      var amountadmin =  "";
       var sumprice = $("#sumprice").val();
+      var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      console.log(shop,responsibleperson,item,partnumber)
+      console.log(responsibleperson,item,partnumber)
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
 		  $.post(
 			"/api/adddata",
 			{
-			  shop: shop,
-			  item: item,
+			  //shop: shop,
+        item: item,
 			  partnumber: partnumber,
         price: price,
         amount: amount,
+        priceadmin: priceadmin,
+        amountadmin: amountadmin,
         sumprice: sumprice,
+        sumpriceadmin: sumpriceadmin,
         responsibleperson: responsibleperson,
         statusz: statusz,
         //picture: req.body.picture,
@@ -629,10 +679,7 @@ body {
         $("#room-name").append(
 		  "<tr><td>" +
             (i + 1) +
-            "</td>" +
-            "<td id='order"+i+"'>" +
-            data[i].shop +
-			"</td>" +
+            "</td>" +    
 			"<td>" +
             data[i].item +
 			"</td>" +
@@ -693,12 +740,12 @@ body {
 		  // "<tr><td>" +
       //       (i + 1) +
       //       "</td>" +
-            "<td>"+
-            "<button id='order"+i+"'>" + 
-            data[i].nameOfShop +
-      "</button>" +
-      "</td>" 
-		
+            //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+            // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+            // "<button></button>" 
+             "<button onclick='showshop("+i+")'>" + data[i].nameOfShop +"</button>" 
+            
+            
 			
 			
 
@@ -706,6 +753,21 @@ body {
       }
     });
   }
+
+  function openPage(pageName,elmnt,color) {
+    console.log("openPage");
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablink");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].style.backgroundColor = "";
+      }
+      document.getElementById(pageName).style.display = "block";
+      elmnt.style.backgroundColor = color;
+    }
 
   function editData(i){
 			console.log("addzzzz");
@@ -717,9 +779,6 @@ body {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-					"ชื่อร้าน <br>"+
-					"<input id='shopnew'type='text' type='text'value='"+ data[i].shop +"'>" +'<br>'+ 
-          '<br>'+
           "ชื่อวัสดุ <br>"+
 					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
@@ -824,7 +883,8 @@ body {
                             // department: department
                             
                         },function(data, status){
-							showData();
+                          window.location.href = "/user";
+							          //showData();
         });
 }			
 		

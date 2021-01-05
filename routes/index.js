@@ -43,6 +43,28 @@ router.post("/api/addmaintable", function (req, res, next) {
         amount: req.body.email,
         nameorder: req.body.phone,
         status: req.body.password,
+        reason: req.body.reason,
+        //group: req.body.group,
+        //department: req.body.department,
+    };
+    dbo.collection("maintable").insertOne(myitem, function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
+router.post("/api/addmaintableadmin", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myitem = {
+        reason: req.body.reason,
+        status: req.body.status,
         //group: req.body.group,
         //department: req.body.department,
     };
@@ -63,12 +85,15 @@ router.post("/api/adddata", function (req, res, next) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
     var myitem = {
-      shop: req.body.shop, //--> come from shoptable (must add shop first)
+      //shop: req.body.shop, //--> come from shoptable (must add shop first)
       item: req.body.item,
       partnumber: req.body.partnumber,
       price: req.body.price,
       amount: req.body.amount,
+      priceadmin:req.body.priceadmin,
+      amountadmin:req.body.amountadmin,
       sumprice: req.body.sumprice,
+      sumpriceadmin:req.body.sumpriceadmin,
       responsibleperson: req.body.responsibleperson,
       statusz: req.body.statusz, //--> come from admin table (admin must add this thing)
       picture: req.body.picture, //--> can't do this rightnow (don't have knowlage to do)
@@ -119,7 +144,7 @@ router.post("/get/maintable", function (req, res, next) {
       .find({})
       .toArray(function (err, result_category) {
         if (err) throw err;
-        // console.log(result.name);
+         console.log("DDannn" + result._id);
         res.send(result_category);
         db.close();
       });
@@ -188,12 +213,55 @@ router.post("/save/editdata", function (req, res, next) {
     console.log(req.body.itemnew);
     var newvalues = {
       $set: {
-        shop:req.body.shopnew,
+        //shop:req.body.shopnew,
         item:req.body.itemnew,
         partnumber:req.body.partnumbernew,
         price:req.body.pricenew,
         amount:req.body.amountnew,
-        sumprice:req.body.sumpricenew,	
+        priceadmin:req.body.pricenewedit,
+        amountadmin:req.body.amountnewedit,
+        sumprice:req.body.sumpricenew,
+        sumpriceadmin:req.body.sumpricenewedit,
+        responsibleperson:req.body.responsiblepersonnew,
+       // picture: picture,
+        statusz:req.body.statusznew,
+        //shopid: ObjectId(req.body.shopid),
+        //mainid: ObjectId(req.body.mainid),
+      },
+    };
+    dbo
+      .collection("data")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        res.send(true);
+      });
+  });
+});
+
+router.post("/save/editdataadmin", function (req, res, next) {
+  console.log('DDDD');
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    console.log("DAN" + req.body.ServergetDataId);
+    console.log(req.body.shopnew);
+    console.log(req.body.itemnew);
+    var newvalues = {
+      $set: {
+        //shop:req.body.shopnew,
+        item:req.body.itemnew,
+        partnumber:req.body.partnumbernew,
+        price:req.body.pricenew,
+        amount:req.body.amountnew,
+        priceadmin:req.body.pricenewedit,
+        amountadmin:req.body.amountnewedit,
+        sumprice:req.body.sumpricenew,
+        sumpriceadmin:req.body.sumpricenewedit,	
         responsibleperson:req.body.responsiblepersonnew,
        // picture: picture,
         statusz:req.body.statusznew,
@@ -253,6 +321,22 @@ router.post("/drop/mainTable", function (req, res, next) {
 });
 
 router.post("/drop/DataKrup", function (req, res, next) {
+  // console.log("Hi category");
+  // console.log(req.body.drop_id_category);
+  MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var dropcategory = { _id: ObjectId(req.body.dropRoomId) };
+    dbo.collection("data").deleteOne(dropcategory, function (err, obj) {
+      if (err) throw err;
+      console.log("1 document deleted");
+      res.send('Dan');
+      db.close();
+    });
+  });
+});
+
+router.post("/drop/dataAdmin", function (req, res, next) {
   // console.log("Hi category");
   // console.log(req.body.drop_id_category);
   MongoClient.connect(url, function (err, db) {
