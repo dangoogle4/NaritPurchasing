@@ -59,16 +59,17 @@ router.post("/api/addmaintable", function (req, res, next) {
 
 router.post("/api/addmaintableadmin", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
+  console.log("Dannwqpdokqwpod");
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
     var myitem = {
-        reason: req.body.reason,
         status: req.body.status,
+        reason: req.body.reason,
         //group: req.body.group,
         //department: req.body.department,
     };
-    dbo.collection("maintable").insertOne(myitem, function (err, result) {
+    dbo.collection("maintable").updateOne(myitem, function (err, result) {
         if (err) throw err;
         res.send(true);
 

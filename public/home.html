@@ -343,6 +343,8 @@ table td, table th  {
 	});
   }	
 
+	  
+  var test;
 
 	function showMaintable() {
 		
@@ -350,11 +352,12 @@ table td, table th  {
 		document.getElementById("room-name").innerHTML="";
 		//console.log("Dataaa" + data.name);
       for (let i = 0; i < data.length; i++) {
-		  
+		test = "Dannnnqwe";
+		console.log("----->>>   "+test);
 		  //console.log(data[i]._id);
 		  str2 = data[i]._id.replace(/\s/g, '');
 		  str = data[i]._id.replace(/\s/g, '');
-		  console.log("STRRRRRRRRRRRR ---->>    "+str);
+		  //console.log("STRRRRRRRRRRRR ---->>    "+str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
@@ -362,9 +365,9 @@ table td, table th  {
 		  "<tr><td>" +
             (i + 1) +
             "</td>" +
-            "<td id='order"+i+"'>" +
+            "<td><a onclick='Dan("+  +")' id='order"+i+"'>" +
             data[i].order +
-			"</td>" +
+			"</a></td>" +
 			"<td>" +
             data[i].respon +
 			"</td>" +
@@ -425,6 +428,13 @@ table td, table th  {
 //     });
 // }
 		//function edit(i){
+
+			function Dan(Data){
+				console.log("DATAAAA--->>>>   "+Data);
+				localStorage.setItem("thisIsParameterName",Data);
+				window.location.href = "/admin";
+			}
+
 		function edit(i){
 			console.log("adqwdjqwd9qwd--->>" + i );
 			$.post("/get/maintable", function (data, status) {

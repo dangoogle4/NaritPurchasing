@@ -587,7 +587,8 @@ table td, table th  {
 		  $.post(
 			"/api/addmaintableadmin",
 			{
-			  //shop: shop,
+        //shop: shop,
+        ServergetDataId: getDataId,
         status: status,
         reason: reason,
         //picture: req.body.picture,
@@ -708,7 +709,7 @@ function showData() {
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
-          $("#codeForBuy").val(data[1]._id);
+          $("#codeForBuy").val(data[i].order);
           $("#nameproject").val(data[i].nameorder);
          // $("#amountAll").val(data[i].amount);
         
@@ -978,5 +979,6 @@ function showData() {
 
     
     var getDataId = "";
+    var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 
 </script>
