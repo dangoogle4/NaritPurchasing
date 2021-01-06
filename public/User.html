@@ -218,6 +218,7 @@ table td, table th  {
               <th>ผู้รับผิดชอบ</th>
               <!-- <th>รูป</th> -->
               <th>สถานะ</th>
+              <th>ร้านค้า</th>
               <th>แก้ไข</th>
               <th>ลบ</th>
               <tbody id="room-name"></tbody>
@@ -604,7 +605,8 @@ table td, table th  {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      console.log(responsibleperson,item,partnumber)
+      var storage = $("#storage").val();
+      console.log("NAMEOFSHOP!!!---> "+storage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -622,6 +624,7 @@ table td, table th  {
         sumpriceadmin: sumpriceadmin,
         responsibleperson: responsibleperson,
         statusz: statusz,
+        storage: storage,
         //picture: req.body.picture,
         //reason:  req.body.reason,
 			  //group: status,
@@ -679,8 +682,9 @@ table td, table th  {
       let roomData = data;
       for (let i = 0; i < roomData.length; i++) {
         let roomName = roomData[i].nameOfShop;
+        console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
         $(".storage").append(
-          "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+          "<option value=" + roomData[i].nameOfShop + ">" + roomName + "</option>"
         );
       }
               });
@@ -723,6 +727,9 @@ table td, table th  {
       "</td>" +
       "<td>" +
             data[i].statusz +
+      "</td>" +
+      "<td>" +
+            data[i].shopid +
       "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +

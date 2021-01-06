@@ -93,6 +93,7 @@ router.post("/api/adddata", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
+    console.log("Danooo"+ req.body.item);
     var dbo = db.db("Purchasing");
     var myitem = {
       //shop: req.body.shop, //--> come from shoptable (must add shop first)
@@ -105,6 +106,7 @@ router.post("/api/adddata", function (req, res, next) {
       sumprice: req.body.sumprice,
       sumpriceadmin:req.body.sumpriceadmin,
       responsibleperson: req.body.responsibleperson,
+      shopid: req.body.storage,
       statusz: req.body.statusz, //--> come from admin table (admin must add this thing)
       picture: req.body.picture, //--> can't do this rightnow (don't have knowlage to do)
       //reason:  req.body.reason, --> from admin cuz admin can add this thing into maintable
@@ -302,8 +304,8 @@ router.post("/get/shop", function (req, res, next) {
     //var query = { _id: ObjectId(req.body.profile) };
     //console.log(query);
     dbo
-      .collection("shop")
-      .find({})
+      .collection("data")
+      .find({shopid: req.body.shop})
       .toArray(function (err, result) {
         if (err) throw err;
         // console.log(result);
