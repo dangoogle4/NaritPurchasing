@@ -15,11 +15,11 @@ body {
 	 text-align: center;
 	 text-transform: uppercase;
 }
- img {
+ /* img {
 	 border-radius: 50%;
 	 height: 60px;
 	 width: 60px;
-}
+} */
  .table-users {
 	 border: 1px solid #84F079;
 	 border-radius: 10px;
@@ -71,7 +71,13 @@ table td, table th  {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <nav class="navbar navbar-default">
+  <script> 
+    $(function(){
+      $("#includedContent").load("navbar.html"); 
+    });
+    </script> 
+    <div id="includedContent"></div>
+  <!-- <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Purchasing</a>
@@ -83,7 +89,7 @@ table td, table th  {
         <li><a href="/">Page 3</a></li>
       </ul>
     </div>
-  </nav>
+  </nav> -->
   <div id="Home" class="tabcontent"style="margin: 40px;">
     <h3>Home</h3>
     <div>

@@ -15,11 +15,11 @@ body {
 	 text-align: center;
 	 text-transform: uppercase;
 }
- img {
+ /* img {
 	 border-radius: 50%;
 	 height: 60px;
 	 width: 60px;
-}
+} */
  .table-users {
 	 border: 1px solid #327a81;
 	 border-radius: 10px;
@@ -109,13 +109,13 @@ body {
 		 padding: 0;
 		 text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
 	}
-	 img {
+	 /* img {
 		 border: 3px solid;
 		 border-color: #daeff1;
 		 height: 100px;
 		 margin: 0.5rem 0;
 		 width: 100px;
-	}
+	} */
 	 td:first-child {
 		 background-color: #c8e7ea;
 		 border-bottom: 1px solid #91ced4;
@@ -168,7 +168,13 @@ table td, table th  {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <nav class="navbar navbar-default">
+  <script> 
+    $(function(){
+      $("#includedContent").load("navbar.html"); 
+    });
+    </script> 
+    <div id="includedContent"></div>
+  <!-- <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Purchasing</a>
@@ -184,7 +190,7 @@ table td, table th  {
         <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
-  </nav>
+  </nav> -->
   <div id="Home" class="tabcontent">
     <h3>Home</h3>
     <div style="margin: 40px;">
