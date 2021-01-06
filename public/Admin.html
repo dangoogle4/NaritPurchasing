@@ -515,11 +515,11 @@ table td, table th  {
 <br>
         สถานะการจัดชื้อ:
         <select id="statusadmin"  >
-            <option value="">รออนุมัติ / อนุมัติ /ตรวจรับแล้ว/ รอส่งของ <option>
-            <option value="1">รออนุมัติ</option>
-            <option value="2">อนุมัติ</option>
-            <option value="3">ตรวจรับแล้ว</option>
-            <option value="4">รอส่งของ</option>
+            <option>รออนุมัติ / อนุมัติ /ตรวจรับแล้ว/ รอส่งของ </option>
+            <option value="รออนุมัติ">รออนุมัติ</option>
+            <option value="อนุมัติ">อนุมัติ</option>
+            <option value="ตรวจรับแล้ว">ตรวจรับแล้ว</option>
+            <option value="รอส่งของ">รอส่งของ</option>
           </select>
           <br>
           <br>
@@ -572,10 +572,12 @@ table td, table th  {
 </html>
 
 <script>
+  
+
     function goToTable() {
-		console.log("บันทึกข้อมูล");
-	  {
-      
+    console.log("บันทึกข้อมูล");
+    //console.log(getValueLocalStorage);
+	  {    
 		if (confirm("คุณต้องการบันทึกข้อมูลใช่หรือไม่")) {
       //var shop = $("#shop").val();
       var reason = $("#reasonadmin").val();
@@ -583,12 +585,12 @@ table td, table th  {
       console.log(status,reason);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
-  
-		  $.post(
+      console.log(getValueLocalStorage);
+      $.post(
 			"/api/addmaintableadmin",
 			{
         //shop: shop,
-        ServergetDataId: getDataId,
+        LetServerGetDataOrderFromMainTable: getValueLocalStorage,
         status: status,
         reason: reason,
         //picture: req.body.picture,
@@ -596,7 +598,6 @@ table td, table th  {
 			  //group: status,
 			  //department: department,
 			},
-
 			function (data, status) {
 			  window.location.href = "/main";
 			  
@@ -709,7 +710,7 @@ function showData() {
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
-          $("#codeForBuy").val(data[i].order);
+          $("#codeForBuy").val(getValueLocalStorage);
           $("#nameproject").val(data[i].nameorder);
          // $("#amountAll").val(data[i].amount);
         

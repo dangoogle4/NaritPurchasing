@@ -297,6 +297,13 @@ table td, table th  {
                 <br>
                 <label>สถานะ</label>
                 <input  id="statusz" type="text"><br>
+                <br>
+                <label>ร้านค้าของท่าน</label>
+                <select
+                    class="custom-select storage"
+                    id="storage"
+                    required
+                  ></select>
                 <div class="form-group">
                     <label for="img">รูป:</label>
                     <input type="file" id="img" name="img" accept="image/*">
@@ -666,6 +673,17 @@ table td, table th  {
   }
   
   function showData() {
+
+
+    $.post("/get/shopforadd", function (data, status) {
+      let roomData = data;
+      for (let i = 0; i < roomData.length; i++) {
+        let roomName = roomData[i].nameOfShop;
+        $(".storage").append(
+          "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+        );
+      }
+              });
     
 		
     $.post("/get/data", function (data, status) {
@@ -893,7 +911,7 @@ table td, table th  {
         });
 }			
 		
-
+var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 var getDataId = "";
 
   </script>

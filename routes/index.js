@@ -59,17 +59,26 @@ router.post("/api/addmaintable", function (req, res, next) {
 
 router.post("/api/addmaintableadmin", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
-  console.log("Dannwqpdokqwpod");
+  console.log("Dannwqpdokqwpod"+ req.body.LetServerGetDataOrderFromMainTable);
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
-    var myitem = {
-        status: req.body.status,
-        reason: req.body.reason,
+    var myquery = { order: req.body.LetServerGetDataOrderFromMainTable};
+    //console.log(myquery);
+    var myitem = { 
+      //status: req.body.status,
+      $set: { status: [req.body.status], reason: [req.body.reason]
+      
+       },
+       
+    };
+    // { $set: { [status: req.body.status],
+    //   reason: req.body.reason,}
+        
         //group: req.body.group,
         //department: req.body.department,
-    };
-    dbo.collection("maintable").updateOne(myitem, function (err, result) {
+     //};
+    dbo.collection("maintable").updateOne(myquery,myitem, function (err, result) {
         if (err) throw err;
         res.send(true);
 
@@ -299,6 +308,32 @@ router.post("/get/shop", function (req, res, next) {
         if (err) throw err;
         // console.log(result);
         res.send(result);
+        db.close();
+      });
+  });
+});
+
+router.post("/get/shopforadd", function (req, res, next) {
+
+  
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    //Find all documents in the customers collection:
+    dbo
+      .collection("shop")
+      .find({})
+      .sort({nameOfShop : 1})
+      .toArray(function (err, roomName) {
+        for(let i = 0;i < roomName.length;i++){
+          //console.log("resultsearchroom   "+roomName[i].room)
+        }
+        if (err) throw err;
+        // console.log([category_result,result_owner]);
+        //console.log("room      "+roomName[1].room);
+        res.send(roomName);
+        // owner_name(result_owner);
+
         db.close();
       });
   });

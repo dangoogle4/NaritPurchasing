@@ -352,7 +352,7 @@ table td, table th  {
 		document.getElementById("room-name").innerHTML="";
 		//console.log("Dataaa" + data.name);
       for (let i = 0; i < data.length; i++) {
-		test = "Dannnnqwe";
+		test = data[i]._id;
 		console.log("----->>>   "+test);
 		  //console.log(data[i]._id);
 		  str2 = data[i]._id.replace(/\s/g, '');
@@ -362,11 +362,10 @@ table td, table th  {
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
         $("#room-name").append(
-		  "<tr><td>" +
-            (i + 1) +
-            "</td>" +
-            "<td><a onclick='Dan("+  +")' id='order"+i+"'>" +
-            data[i].order +
+		  "<tr><td>" +           
+			(i + 1) +
+			"</td>" +
+			"<td><a onclick='Dan(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
 			"</a></td>" +
 			"<td>" +
             data[i].respon +
@@ -386,7 +385,7 @@ table td, table th  {
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
+			 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
 				// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -401,7 +400,7 @@ table td, table th  {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
+            "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
@@ -429,10 +428,14 @@ table td, table th  {
 // }
 		//function edit(i){
 
-			function Dan(Data){
-				console.log("DATAAAA--->>>>   "+Data);
-				localStorage.setItem("thisIsParameterName",Data);
-				window.location.href = "/admin";
+
+
+			function Dan(i) {
+				console.log("datanakub--->> "+ i);
+			let setValue = document.getElementById("roWorder" + String(i)).innerHTML;
+			console.log("DATAAAA--->>>> " + setValue);
+			localStorage.setItem("thisIsParameterName", setValue); //ระบุค่าครั้งที่ได้จากในนี้
+			window.location.href = "/admin";
 			}
 
 		function edit(i){
@@ -466,6 +469,7 @@ table td, table th  {
 						
 			});
 		}
+
 
 
 		function addzz(){
