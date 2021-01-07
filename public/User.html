@@ -159,7 +159,11 @@ table td, table th  {
 .user{
 	background: rgb(236,245,245,0.3);
 	background: linear-gradient(0deg, rgba(236,245,245,0.3) 10%, rgba(200,200,200,0.3) 100%);
-}   
+}
+.textsum{
+	margin: 10px;
+} 
+
 
 
  
@@ -195,40 +199,33 @@ table td, table th  {
     </div>
   </nav> -->
   <div id="Home" class="tabcontent">
-    <h3>Home</h3>
-    <div style="margin: 40px;">
+    <div style="margin: 40px 30px 0px 30px">
         <form style="text-align:  center; ">
-          รหัสการชื้อ 
-          <input name="first" type="text">
-             
-          ชื่องบประมาณ
-          <input  name="last" type="text">
-            
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  name="lastmak" type="text">
-          ค้นหาที่นี่
-          <input id="myInput" type="text" placeholder="ค้นหาที่นี่">
-          <table id="myTable" cellspacing="0">
-    
+          <p>รหัสการชื้อ<input name="first" type="text" class="textsum">
+            ชื่องบประมาณ<input  name="last" type="text" class="textsum">
+            ราคารวมทั้งหมดของทุกชิ้น<input  name="lastmak" type="text" class="textsum">
+            ค้นหา<input id="myInput" type="text" placeholder="ค้นหาที่นี่" class="textsum">
+            <table id="myTable" cellspacing="0">
+          </p>
           <!--<button >ค้นหา</button>-->
         </form>
         <br>
         <br>
     
         <!-- <div class="header">Users</div> -->
-        <table cellspacing="0" style="margin-top: 100px">
+        <table cellspacing="0" style="margin-top: 50px">
            <tr>
-              <th>ลำดับ </th>
-              <th>ชื่อวัสดุ</th>
-              <th>Part Number</th>
-              <th>ราคา</th>
-              <th>จำนวน</th>
-              <th>ราคารวม</th>
-              <th>ผู้รับผิดชอบ</th>
+              <td>ลำดับ </td>
+              <td>ชื่อวัสดุ</td>
+              <td>Part Number</td>
+              <td>ราคา</td>
+              <td>จำนวน</td>
+              <td>ราคารวม</td>
+              <td>ผู้รับผิดชอบ</td>
               <!-- <th>รูป</th> -->
-              <th>สถานะ</th>
-              <th>แก้ไข</th>
-              <th>ลบ</th>
+              <td>สถานะ</td>
+              <td>แก้ไข</td>
+              <td>ลบ</td>
               <tbody id="room-name"></tbody>
            </tr>
      

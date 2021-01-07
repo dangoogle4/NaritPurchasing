@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const { ObjectId, Int32 } = require("mongodb");
 let MongoClient = require("mongodb").MongoClient;
-var url = "mongodb://localhost:27017/mydata";
+var url = "mongodb://localhost:27017/";
 
 
 router.post("/initializeCollection", function (req, res, next) {

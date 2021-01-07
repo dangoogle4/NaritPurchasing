@@ -63,7 +63,9 @@ table td, table th  {
 	background: rgb(236,245,245,0.3);
 	background: linear-gradient(0deg, rgba(236,245,245,0.3) 10%, rgba(200,200,200,0.3) 100%);
 }  
- 
+.textsum{
+	margin: 10px;
+}  
  
  
 </style>
@@ -94,19 +96,13 @@ table td, table th  {
       </ul>
     </div>
   </nav> -->
-  <div id="Home" class="tabcontent"style="margin: 40px;">
-    <h3>Home</h3>
-    <div>
-        <form style="text-align:  center; margin: 40px;" >
-          รหัสการชื้อ 
-          <input  readonly id="codeForBuy" name="first" type="text" >
-             
-          ชื่องบประมาณ
-          <input  readonly id="nameproject" name="last" type="text">
-            
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  readonly id="amountAll" name="lastmak" type="text">
-    
+  <div id="Home" class="tabcontent">
+    <div style="margin: 40px 30px 0px 30px">
+        <form style="text-align:  center;">
+          <p>รหัสการชื้อ<input  readonly id="codeForBuy" name="first" type="text" class="textsum">
+            ชื่องบประมาณ<input  readonly id="nameproject" name="last" type="text" class="textsum">
+            ราคารวมทั้งหมดของทุกชิ้น<input  readonly id="amountAll" name="lastmak" type="text" class="textsum">
+          </p>
           <!--<button >ค้นหา</button>-->
         </form>
         <br>
@@ -114,7 +110,7 @@ table td, table th  {
     
         <!-- <div class="header">Users</div> -->
         
-        <table cellspacing="0">
+        <table cellspacing="0" style="margin-top: 50px">
            <tr>
               <td>ลำดับ </td>
               <td>ชื่อวัสดุ</td>
