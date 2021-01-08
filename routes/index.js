@@ -32,6 +32,64 @@ router.post("/initializeCollection", function (req, res, next) {
   });
 });
 
+router.post("/api/regis", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    dbo.collection("user").insertOne(
+      {
+        name: req.body.name,
+        surname: req.body.surname,
+        username: req.body.username,
+        password: req.body.password,
+        priority: req.body.priority,
+      },
+      function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
+router.post("/get/user", function (req, res, next) {
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    dbo.collection("user").count({}, function (err, result_count_user) {
+      if (err) throw err;
+      // console.log(result_count_user);
+      dbo
+        .collection("user")
+        .find(
+          {},
+          {
+            projection: {
+              _id: 1,
+              name: 1,
+              surname: 1,
+              username: 1,
+              priority: 1,
+            },
+          }
+        )
+        // .skip(paging_admin)
+        // .limit(per_page_admin)
+        .sort({ _id: -1 })
+        .toArray(function (err, result) {
+          if (err) throw err;
+          // console.log(userid);
+          res.send([result, result_count_user]);
+          db.close();
+        });
+    });
+  });
+  // res.send("ok" + req.body.tabel);
+});
+
 router.post("/api/addmaintable", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {

@@ -24,6 +24,17 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 //app.use('/product', productRouter);
 
+// app.all("*", (req, res, next) => {
+//   // cookie doesn't exist redirect to login
+//   if (req.cookies["CookieUser"] != null) {
+//     // how to pass to the next layer ? load the routes below code etc..
+//     next();
+//     //  console.log(req.cookies["CookieUser"]);
+//   } else {
+//     res.redirect("/");
+//   }
+// });
+
 app.get("/main", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/home.html"));
 });
@@ -48,6 +59,11 @@ app.get("/eiei", (req, res) => {
 app.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/regisPage.html"));
 });
+
+app.get("/edituser", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/EditUser.html"));
+});
+
 
 
 

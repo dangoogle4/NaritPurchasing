@@ -51,11 +51,11 @@ router.post("/login", function (req, res, next) {
   });
 });
 
-router.post("/logout", function (req, res, next) {
-  res.clearCookie("CookieUser");
-  // res.redirect('/');
-  // res.end();
-  res.send(true);
-});
+// router.post("/logout", function (req, res, next) {
+//   res.clearCookie("CookieUser");
+//   // res.redirect('/');
+//   // res.end();
+//   res.send(true);
+// });
 
 module.exports = router;
