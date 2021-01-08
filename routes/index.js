@@ -106,7 +106,7 @@ router.post("/api/adddata", function (req, res, next) {
       sumprice: req.body.sumprice,
       sumpriceadmin:req.body.sumpriceadmin,
       responsibleperson: req.body.responsibleperson,
-      shopid: req.body.storage,
+      shopid: ObjectId(req.body.storage),
       statusz: req.body.statusz, //--> come from admin table (admin must add this thing)
       picture: req.body.picture, //--> can't do this rightnow (don't have knowlage to do)
       //reason:  req.body.reason, --> from admin cuz admin can add this thing into maintable
@@ -304,8 +304,9 @@ router.post("/get/shop", function (req, res, next) {
     //var query = { _id: ObjectId(req.body.profile) };
     //console.log(query);
     dbo
-      .collection("data")
-      .find({shopid: req.body.shop})
+      .collection("shop")
+      //.find({shopid: req.body.shop})
+       .find({})
       .toArray(function (err, result) {
         if (err) throw err;
         // console.log(result);
@@ -313,6 +314,30 @@ router.post("/get/shop", function (req, res, next) {
         db.close();
       });
   });
+});
+
+router.post("/get/showshopnameintable", function (req, res, next) {
+  // res.send("ok post complete"+" "+req.body.nameuser);
+  console.log('Dan');
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    // console.log("asdsadsad");
+    // var query = { _id: req.body._ID }; // ไแกกกกกก --- ก้ทำเหมือน Edit ไง ส่งค่า post มา
+    //console.log(query);
+    dbo
+      .collection("data")
+      //.find({shopid: req.body.shop})
+       .find({shopid: ObjectId(req.body._ID)}) //เย้ ติดมาประมาน 7 วัน อันตราย ขนลุกเลย
+      .toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+        db.close();
+      });
+  });
+  
 });
 
 router.post("/get/shopforadd", function (req, res, next) {

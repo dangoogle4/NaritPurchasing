@@ -346,12 +346,18 @@ table td, table th  {
 	  
   var test;
 
+  			// var setValueForAdminPricetable = document.getElementById("nameOderForAdminTable" + String(i)).innerHTML;
+			// console.log("DATAAAA--->>>> " + setValueForAdminPricetable);
+			// localStorage.setItem("thisIsForAdminNameOderTable", setValueForAdminPricetable); //ระบุค่าครั้งที่ได้จากในนี้
+
 	function showMaintable() {
+		
 		
     $.post("/get/maintable", function (data, status) {
 		document.getElementById("room-name").innerHTML="";
 		//console.log("Dataaa" + data.name);
       for (let i = 0; i < data.length; i++) {
+		  
 		test = data[i]._id;
 		console.log("----->>>   "+test);
 		  //console.log(data[i]._id);
@@ -365,7 +371,7 @@ table td, table th  {
 		  "<tr><td>" +           
 			(i + 1) +
 			"</td>" +
-			"<td><a onclick='Dan(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+			"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
 			"</a></td>" +
 			"<td>" +
             data[i].respon +
@@ -376,6 +382,9 @@ table td, table th  {
 			"<td>" +
             data[i].nameorder +
 			"</td>" +
+			// "</td>" +
+			// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
+			// "</a></td>" +
 			"<td>" +
             data[i].status +
 			"</td>" +
@@ -427,10 +436,10 @@ table td, table th  {
 //     });
 // }
 		//function edit(i){
+			
 
 
-
-			function Dan(i) {
+			function GotoAnotherTable1(i) {
 				console.log("datanakub--->> "+ i);
 			let setValue = document.getElementById("roWorder" + String(i)).innerHTML;
 			console.log("DATAAAA--->>>> " + setValue);
@@ -438,30 +447,30 @@ table td, table th  {
 			window.location.href = "/admin";
 			}
 
-		function edit(i){
-			console.log("adqwdjqwd9qwd--->>" + i );
+		function edit(DataForQueryData){
+			console.log("adqwdjqwd9qwd--->>" + DataForQueryData );
 			$.post("/get/maintable", function (data, status) {
 						
 				//console.log("DDAANN" + str2);
-				getDataId = data[i]._id;
+				getDataId = data[DataForQueryData]._id;
 				//console.log("Dannnn" + getDataId);
 				document.getElementById("Modal-a").innerHTML="";
 				$("#Modal-a").append(
 					"รหัสจัดชื้อ <br>"+
-					"<input id='ordernew'type='text' type='text'value='"+ data[i].order +"'>" +'<br>'+ 
+					"<input id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
 					'<br>'+
 					"ชื่อผู้รับผิดชอบ <br>"+
-					"<input id='responnew' type='text'value='"+ data[i].respon +"'>" + '<br>' +
+					"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + '<br>' +
 					'<br>' +
 					"ยอดการจัดชื้อ <br>"+
-					"<input id='amountnew' type='text'value='"+ data[i].amount +"'>" + '<br>' +
+					"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
 					'<br>'+ 
 					"ชื่องบประมาณ <br>"+
-					"<input id='nameordernew' type='text'value='"+ data[i].nameorder +"'>" + 
+					"<input id='nameordernew' type='text'value='"+ data[DataForQueryData].nameorder +"'>" + 
 					'<br>' +
 					'<br>'+
 					"สถานะ <br>"+
-					"<input id='statusnew' type='text'value='"+ data[i].status +"'>"
+					"<input id='statusnew' type='text'value='"+ data[DataForQueryData].status +"'>"
 					// "<button onclick='addzz()'>update</button>"
 							
 				);
@@ -498,5 +507,7 @@ table td, table th  {
 		
 			
 var getDataId = "";
+
+			
   </script>
 
