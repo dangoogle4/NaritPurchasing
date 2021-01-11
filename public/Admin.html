@@ -85,7 +85,7 @@ table td, table th  {
     </div>
   </nav>
   <div id="Home" class="tabcontent"style="margin: 40px;">
-    <h3>Home</h3>
+    <!-- <h3>Home</h3> -->
     <div>
         <form style="text-align:  center; margin: 40px;" >
           รหัสการชื้อ 
@@ -118,6 +118,7 @@ table td, table th  {
               <td>ผู้รับผิดชอบ</td>
               <!-- <td>รูป</td> -->
               <td width="230">สถานะ</td>
+              <td>ร้านค้า</td>
               <td>แก้ไข</td>
               <td>ลบ</td>
               <tbody id="room-namedata"></tbody>
@@ -140,6 +141,7 @@ table td, table th  {
         </table>
      </div>
      <button type="button" style="float: right; margin: 12.5px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูลสินค้า</button>
+     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
     
       <!-- Modal -->
       <div class="modal fade" id="myModalforadddata" role="dialog">
@@ -173,6 +175,12 @@ table td, table th  {
                 <br>
                 <label>สถานะ</label>
                 <input  id="statusz" type="text"><br>
+                <label>ร้านค้าของท่าน</label>
+                <select
+                    class="custom-select storage"
+                    id="storage"
+                    required
+                  ></select>
                 <div class="form-group">
                     <label for="img">รูป:</label>
                     <input type="file" id="img" name="img" accept="image/*">
@@ -194,57 +202,46 @@ table td, table th  {
   </div>
 
 
-  
-  
-  
-  <div id="News" class="tabcontent">
-    <h3>News</h3>
-    <div>
-        <form>
-          รหัสการชื้อ 
-          <input name="first" type="text">
-             
-          ชื่องบประมาณ
-          <input  name="last" type="text">
-            
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  name="lastmak" type="text">
+  <div class="modal fade" id="ModalForAddShop" role="dialog">
+    <div class="modal-dialog">
     
-          <!--<button >ค้นหา</button>-->
-        </form>
-        <br>
-    
-    
-        <div class="header">Users</div>
-        
-        <table cellspacing="0">
-           <tr>
-              <th>ลำดับ </th>
-              <th>ชื่อวัสดุ</th>
-              <th>Part Number</th>
-              <th>ราคา</th>
-              <th>จำนวน</th>
-              <th>ราคารวม</th>
-              <th>ผู้รับผิดชอบ</th>
-              <th>รูป</th>
-              <th width="230">สถานะ</th>
-           </tr>
-     
-           <tr>
-              <td>1</td>
-              <td><a href="/">NewNewNew</a></td>
-              <td>jane.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-           </tr>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">แก้ไขข้อมูล</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+            <label>ชื่อร้านค้า</label>
+            <input name="nameshop" type="text" id="nameshop"><br>
+            <br>
+            <label for="typeshop">ประเภทร้านค้า</label>
+            <select name="typeshopp" id="typeshoppp">
+              <option value="1">ในประเทศ</option>
+              <option value="2">ต่างประเทศ</option>
+            </select>
+            <br>
+            <label>ภาษีร้านค้า</label>
+            <input name="taxshop" type="float" id="taxshop"><br>  
+            <br>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">เพิ่มข้อมูล</button>
+            <input class="btn btn-info btn-lg" type="reset" value="Reset">
+            </form>    
+        </div>
+        <div class="modal-footer">
           
-        </table>
-     </div>
-     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  
+  
+  
+
     
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -286,7 +283,7 @@ table td, table th  {
                     <input type="file" id="img" name="img" accept="image/*">
                 </div>
                 <br>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+
                 <input class="btn btn-info btn-lg" type="reset" value="Reset">
                 </form>    
             </div>
@@ -300,54 +297,8 @@ table td, table th  {
       </div>
   </div>
   
-  <div id="Contact" class="tabcontent">
-    <h3>Contact</h3>
-    <div>
-        <form>
-          รหัสการชื้อ 
-          <input name="first" type="text">
-             
-          ชื่องบประมาณ
-          <input  name="last" type="text">
-            
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  name="lastmak" type="text">
+  
     
-          <!--<button >ค้นหา</button>-->
-        </form>
-        <br>
-    
-    
-        <div class="header">Users</div>
-        
-        <table cellspacing="0">
-           <tr>
-              <th>ลำดับ </th>
-              <th>ชื่อวัสดุ</th>
-              <th>Part Number</th>
-              <th>ราคา</th>
-              <th>จำนวน</th>
-              <th>ราคารวม</th>
-              <th>ผู้รับผิดชอบ</th>
-              <th>รูป</th>
-              <th width="230">สถานะ</th>
-           </tr>
-     
-           <tr>
-              <td>1</td>
-              <td><a href="/">NewNewNew</a></td>
-              <td>jane.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-           </tr>
-         
-        </table>
-     </div>
-     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
     
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -389,7 +340,7 @@ table td, table th  {
                     <input type="file" id="img" name="img" accept="image/*">
                 </div>
                 <br>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+
                 <input class="btn btn-info btn-lg" type="reset" value="Reset">
                 </form>    
             </div>
@@ -403,54 +354,8 @@ table td, table th  {
       </div>
   </div>
   
-  <div id="About" class="tabcontent">
-    <h3>About</h3>
-    <div>
-        <form>
-          รหัสการชื้อ 
-          <input name="first" type="text">
-             
-          ชื่องบประมาณ
-          <input  name="last" type="text">
-            
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  name="lastmak" type="text">
-    
-          <!--<button >ค้นหา</button>-->
-        </form>
-        <br>
-    
-    
-        <div class="header">Users</div>
-        
-        <table cellspacing="0">
-           <tr>
-              <th>ลำดับ </th>
-              <th>ชื่อวัสดุ</th>
-              <th>Part Number</th>
-              <th>ราคา</th>
-              <th>จำนวน</th>
-              <th>ราคารวม</th>
-              <th>ผู้รับผิดชอบ</th>
-              <th>รูป</th>
-              <th width="230">สถานะ</th>
-           </tr>
-     
-           <tr>
-              <td>1</td>
-              <td><a href="/">NewNewNew</a></td>
-              <td>jane.doe@foo.com</td>
-              <td>01 800 2000</td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-              <td><input name="first" type="text"></td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-           </tr>
-          
-        </table>
-     </div>
-     <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+  
+
     
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -506,12 +411,14 @@ table td, table th  {
         </div>
       </div>
   </div>
-  <br>
+
+   <div id="shopNameTab"><button type="button" class="btn btn-primary" onclick="showAllData()">DataAll</button></div>
+  <!-- <br>
   <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">ร้านแรก</button>
   <button class="tablink" onclick="openPage('News', this, 'green')" >ร้านสอง</button>
   <button class="tablink" onclick="openPage('Contact', this, 'blue')">ร้านสาม</button>
   <button class="tablink" onclick="openPage('About', this, 'orange')">ร้านสี่</button>
-<br>
+<br> -->
 <br>
         สถานะการจัดชื้อ:
         <select id="statusadmin"  >
@@ -567,11 +474,113 @@ table td, table th  {
         
       </div>
     </div>
+   
 
 </body>
 </html>
 
 <script>
+
+function showshop(val) {
+
+console.log("DDDDDDDD---->>   "+ val)
+//console.log("PEEGALE:"+ data[i].nameOfShop)
+var valueid = document.getElementById("forshop"+val).value;
+
+console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
+
+//กรีด เดะวันนี้ไปชื้อบราวนี้ให้เลย มึงถามเขาก่อนส่งมาจะบูดไหม 55555 ช๊อต
+
+    $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
+    document.getElementById("room-namedata").innerHTML="";
+    console.log("sadsadegeg ---->>>"+data.length)
+    for (let i = 0; i < data.length; i++) {
+
+    str = data[i]._id.replace(/\s/g, '');
+    console.log(str);
+    roomId = data;
+   // let rstripId = data[i]._id.rs
+    //$("#room-name-value").val(data[0].room);
+     $("#room-namedata").append(
+    "<tr><td>" +
+      (i + 1) +
+      "</td>" +
+      "<td id='order"+i+"'>" +
+        ShowShopName[data[i].shopid] +
+        //  ShowShopName[data[i].shopid] +
+      "</td>" +
+      "<td >" +
+     data[i].item +
+        //  ShowShopName[data[i].shopid] +
+      "</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>"+
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].item +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  ShowShopName[data[i].shopid] +
+        //  ShowShopName[data[i].shopid] +
+"</td>" +
+"<td >" +
+  data[i].mainid +
+        //  ShowShopName[data[i].shopid] +
+"</td>" 
+
+
+
+  );
+}
+
+});
+
+}
+
+
+var ShowShopName = {};
+
+$(document).ready(function(){
+    $.post('/get/shop', function(data, status)
+    {
+      ShopName = data;
+        for(let i=0; i<ShopName.length; i++)
+        {
+            // console.log([data[i]]); 
+            let objId = ShopName[i]._id;
+
+            ShowShopName[objId] = ShopName[i].nameOfShop;
+
+            //let nameCategory = categoryName[i].equip_category;
+
+        }
+    });
+});
   
 
     function goToTable() {
@@ -606,6 +615,9 @@ table td, table th  {
 		 } 
 	  } 
   }
+
+  
+
   </script>
 
 <script>
@@ -698,6 +710,102 @@ function download_csv(csv, filename) {
 
 
 
+
+function showAllData() {
+
+  location.reload();
+
+  // $.post("/get/dataForSearchTableMainIdAdmin2" ,{_ID: getValueLocalStorage},function (data, status) {
+  //   //document.getElementById("room-namedata").innerHTML="";
+  //     //console.log('Daaawww'+getValueLocalStorage);
+  //     var sum = 0 ;
+	// 	//document.getElementById("room-name").innerHTML="";
+  //     for (let i = 0; i < data.length; i++) {
+  //      // data[i].sumpriceadmin = 0;
+  //      console.log("NEWNEWNEWNEWNEWNEWNEWN"+data.length);
+  //        //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+  //       //  data[i].sumprice = data[i].price * data[i].amount;
+  //        //data[i].sumprice = "";
+  //       // data[i].sumpriceadmin = "";
+  //     //   sum += parseInt(data[i].sumpriceadmin);
+       
+
+  //     //  console.log("Sum = "+ sum);   
+	// 	  //console.log(data[i]._id);
+	// 	  str = data[i]._id.replace(/\s/g, '');
+	// 	  console.log("newienqwpdjqwidjmqowidjqwdij --->>>>>>>>"+str);
+  //       roomId = data;
+	// 	// let rstripId = data[i]._id.rs
+  //       //$("#room-name-value").val(data[0].room);
+  //       $("#room-namedata").append(
+	// 	  "<tr><td>" +
+  //           (i + 1) +
+  //           "</td>" +
+	// 		"<td>" +
+  //           data[i].item +
+	// 		"</td>" +
+	// 		"<td>" +
+  //           data[i].partnumber +
+	// 		"</td>" +
+	// 		"<td>" +
+  //           data[i].price +
+	// 		"</td>" +
+	// 		"<td>" +
+  //           data[i].amount +
+  //     "</td>" +
+  //     "<td>" +
+  //           data[i].priceadmin +
+	// 		"</td>" +
+	// 		"<td>" +
+  //           data[i].amountadmin +
+  //     "</td>" +
+  //     "<td>" +
+  //           data[i].sumprice +
+  //     "</td>" +
+  //     "<td>" +
+  //           data[i].sumpriceadmin +
+  //     "</td>" +
+  //     "<td>" +
+  //           data[i].responsibleperson +
+  //     "</td>" +
+  //     "<td>" +
+  //           data[i].statusz +
+  //     "</td>" +
+  //     "<td>" +
+  //           ShowShopName[data[i].shopid] +
+  //     "</td>" +
+  //     "<td>" +
+  //           [data[i].mainid] +
+  //     "</td>" +
+	// 		// "<td>" +
+	// 		// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+	// 		// "</td>" +
+	// 		 "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData('"+i+"')' >แก้ไข</a>" +
+	// 			//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+  //           "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+  //           "<div class='modal-dialog modal-dialog-centered'>" +
+  //           "<div class='modal-content'>" +
+  //           "<div class='modal-header'>" +
+  //           "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+  //           "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+  //           "<span aria-hidden='true'>&times;</span>" +
+  //           "</button>" +
+  //           "</div>" +
+  //           "<div class='modal-footer'>" +
+  //           "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+  //           "</div>" +
+  //           "</div></td>" +
+  //           "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+	// 		"</tr>"
+			
+
+  //       );  
+  //     }
+      
+  //   }); 
+
+}
+
 function showData() {
 
   $.post("/get/maintable", function (data, status) {
@@ -711,13 +819,25 @@ function showData() {
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
           $("#codeForBuy").val(getValueLocalStorage);
-          $("#nameproject").val(data[i].nameorder);
-         // $("#amountAll").val(data[i].amount);
+          $("#nameproject").val(getValueLocalStorageNameOrder);
+          $("#amountAll").val(getValueLocalStorageAmount);
         
       }   
     }); 
+
+    $.post("/get/shopforadd", function (data, status) {
+      let roomData = data;
+      for (let i = 0; i < roomData.length; i++) {
+        let roomName = roomData[i].nameOfShop;
+        console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
+        $(".storage").append(
+          "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+        );
+      }
+              });
     
-    $.post("/get/data", function (data, status) {
+    $.post("/get/data",function (data, status) {
+
       console.log("newnewnewnewnewnenwenwnen"+data);
       var sum = 0 ;
 		//document.getElementById("room-name").innerHTML="";
@@ -732,20 +852,25 @@ function showData() {
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
           
-          $("#amountAll").val(sum);
+          //$("#amountAll").val(sum);
         
       }   
     }); 
 
-  $.post("/get/data", function (data, status) {
-      console.log('Daaawww');
+    
+
+  $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+    //document.getElementById("room-name").innerHTML="";
+      console.log('Daaawww'+getValueLocalStorage);
       var sum = 0 ;
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
        // data[i].sumpriceadmin = 0;
        
-         data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
-         data[i].sumprice = data[i].price * data[i].amount;
+         //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+        //  data[i].sumprice = data[i].price * data[i].amount;
+         //data[i].sumprice = "";
+        // data[i].sumpriceadmin = "";
       //   sum += parseInt(data[i].sumpriceadmin);
        
 
@@ -790,6 +915,12 @@ function showData() {
       "<td>" +
             data[i].statusz +
       "</td>" +
+      "<td>" +
+            ShowShopName[data[i].shopid] +
+      "</td>" +
+      "<td>" +
+            [data[i].mainid] +
+      "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
@@ -816,6 +947,38 @@ function showData() {
       }
       
     }); 
+
+    $.post("/get/shop", function (data, status) {
+
+    //document.getElementById("room-namezz").innerHTML="";
+    for (let i = 0; i < data.length; i++) {
+    //console.log(data[i]._id);
+    str = data[i]._id.replace(/\s/g, '');
+    console.log(str);
+    roomId = data;
+    // let rstripId = data[i]._id.rs
+    //$("#room-name-value").val(data[0].room);
+      $("#shopNameTab").append(
+    // "<tr><td>" +
+    //       (i + 1) +
+    //       "</td>" +
+      //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+      // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+      // "<button></button>" 
+      '&nbsp;'+
+       "<button type='button' class='btn btn-primary'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>"
+       
+       
+        // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
+      // ใช่ปะ ไรนะ ได้ ๆ  เยส      งานไม่ทำละเหรอพี่55555      
+
+
+
+  );
+}
+
+});
+
   }
 
   function addDataAdmin() {
@@ -823,7 +986,8 @@ function showData() {
 	  {
       
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-		  //var shop = $("#shop").val();
+      //var shop = $("#shop").val();
+      var codeForBuy = $("#codeForBuy").val();
 		  var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
 		  var price = $("#price").val();
@@ -834,7 +998,8 @@ function showData() {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      console.log(priceadmin,amountadmin,sumpriceadmin);
+      var storage = $("#storage").val();
+      console.log(codeForBuy);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -852,6 +1017,8 @@ function showData() {
         sumpriceadmin: sumpriceadmin,
         responsibleperson: responsibleperson,
         statusz: statusz,
+        storage: storage,
+        mainid: codeForBuy,
         //picture: req.body.picture,
         //reason:  req.body.reason,
 			  //group: status,
@@ -869,11 +1036,11 @@ function showData() {
 
   function editData(i){
 			console.log("addzsadsadzzz");
-			$.post("/get/data", function (data, status) {
+			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
 						
-				console.log(data[i]._id);
+				//console.log(data[i]._id);
         getDataId = data[i]._id;
-        console.log(data);
+        console.log("DATAID"+getDataId);
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
@@ -976,10 +1143,69 @@ function showData() {
       console.log(obj_id);
 	});
   }	
+
+  function addShop() {
+		console.log("danxxx");
+	  {
+		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+		  var shop = $("#nameshop").val();
+		  var type = $("#typeshoppp").val();
+		  var tax = $("#taxshop").val();
+      console.log(shop,type,tax);
+		  //var group = $("#group").val();
+		  //var department = $("#department").val();
+      if(tax="7"){
+        tax=1.07;
+      }
+		  $.post(
+			"/api/addshop",
+			{
+			  shop: shop,
+			  type: type,
+			  tax: tax,
+        //picture: req.body.picture,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+			},
+
+			function (data, status) {
+        console.log(data);
+			  window.location.href = "/admin";
+			  
+			}
+		  );
+		 } 
+	  } 
+  }
+
+  var ShowShopName = {};
+
+  $(document).ready(function(){
+      $.post('/get/shop', function(data, status)
+      {
+        ShopName = data;
+          for(let i=0; i<ShopName.length; i++)
+          {
+              // console.log([data[i]]); 
+              let objId = ShopName[i]._id;
+
+              ShowShopName[objId] = ShopName[i].nameOfShop;
+
+              //let nameCategory = categoryName[i].equip_category;
+
+          }
+      });
+  });
   
 
     
     var getDataId = "";
+
     var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
+
+    var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
+
+    var getValueLocalStorageAmount = localStorage.getItem("thisIsParameterNameForAmount");
 
 </script>

@@ -190,16 +190,16 @@ table td, table th  {
     <div style="margin: 40px;">
         <form style="text-align:  center; ">
           รหัสการชื้อ 
-          <input name="first" type="text">
+          <input readonly id="codeForBuy" type="text" >
              
           ชื่องบประมาณ
-          <input  name="last" type="text">
+          <input  readonly id="nameproject" type="text">
             
           ราคารวมทั้งหมดของทุกชิ้น
-          <input  name="lastmak" type="text">
-          ค้นหาที่นี่
+          <input  readonly id="amountAll" type="text">
+          <!-- ค้นหาที่นี่
           <input id="myInput" type="text" placeholder="ค้นหาที่นี่">
-          <table id="myTable" cellspacing="0">
+          <table id="myTable" cellspacing="0"> -->
     
           <!--<button >ค้นหา</button>-->
         </form>
@@ -595,7 +595,8 @@ table td, table th  {
 		console.log("danxxx");
 	  {
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-		  //var shop = $("#shop").val();
+      //var shop = $("#shop").val();
+      var codeForBuy = $("#codeForBuy").val();
       var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
 		  var price = $("#price").val();
@@ -607,7 +608,7 @@ table td, table th  {
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
       var storage = $("#storage").val();
-      console.log("NAMEOFSHOP!!!---> "+storage);
+      console.log("NAMEOFSHOP!!!---> "+codeForBuy);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -626,6 +627,7 @@ table td, table th  {
         responsibleperson: responsibleperson,
         statusz: statusz,
         storage: storage,
+        mainid: codeForBuy,
         //picture: req.body.picture,
         //reason:  req.body.reason,
 			  //group: status,
@@ -678,6 +680,26 @@ table td, table th  {
   
   function showData() {
 
+    console.log("amountAll"+getValueLocalStorage,getValueLocalStorageNameOrder,getValueLocalStorageAmount);
+
+    $.post("/get/maintable", function (data, status) {
+      console.log(data);
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		// let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+          $("#codeForBuy").val(getValueLocalStorage);
+          $("#nameproject").val(getValueLocalStorageNameOrder);
+          $("#amountAll").val(getValueLocalStorageAmount);
+          //console.log("wpodkpoqwkdpqw"+getValueLocalStorageAmount);
+        
+      }   
+    }); 
+
 
     $.post("/get/shopforadd", function (data, status) {
       let roomData = data;
@@ -691,7 +713,7 @@ table td, table th  {
               });
     
 		
-    $.post("/get/data", function (data, status) {
+    $.post("/get/dataForSearchTableMainIdUser", {_ID: getValueLocalStorage},function (data, status) {
     document.getElementById("room-name").innerHTML="";
       
       console.log(data);
@@ -956,6 +978,8 @@ table td, table th  {
 }			
 		
 var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
+var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
+var getValueLocalStorageAmount = localStorage.getItem("thisIsParameterNameForAmount");
 var getDataId = "";
 
 

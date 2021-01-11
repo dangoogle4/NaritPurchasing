@@ -181,8 +181,8 @@ table td, table th  {
         <li><a href="/">Page 3</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
-		<li><a href="/history"><span class="glyphicon glyphicon-user"></span> User</a></li>
-		<li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		<li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+		<li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	  </ul>
     </div>
   </nav>
@@ -360,10 +360,8 @@ table td, table th  {
     $.post("/get/maintable", function (data, status) {
 		document.getElementById("room-name").innerHTML="";
 		//console.log("Dataaa" + data.name);
-		var j = 0;
       for (let i = 0; i < data.length; i++) {
-		 if(data[i].deldummymaintable == 0){
-			 
+		if(data[i].deldummymaintable == 1){
 			test = data[i]._id;
 		console.log("----->>>   "+test);
 		  //console.log(data[i]._id);
@@ -375,7 +373,7 @@ table td, table th  {
         //$("#room-name-value").val(data[0].room);
         $("#room-name").append(
 		  "<tr><td>" +           
-			(j+1) +
+			(i + 1) +
 			"</td>" +
 			"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
 			"</a></td>" +
@@ -400,7 +398,7 @@ table td, table th  {
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
+			 "<td><a   class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >คืนค่า</a>" +
 				// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -420,9 +418,8 @@ table td, table th  {
 			"</tr>"
 			
 
-		);
-		j++;
-		 }
+        );
+			}
 		// test = data[i]._id;
 		// console.log("----->>>   "+test);
 		//   //console.log(data[i]._id);
@@ -525,30 +522,16 @@ table td, table th  {
 			console.log("adqwdjqwd9qwd--->>" + DataForQueryData );
 			$.post("/get/maintable", function (data, status) {
 						
-				//console.log("DDAANN" + str2);
-				getDataId = data[DataForQueryData]._id;
-				//console.log("Dannnn" + getDataId);
-				document.getElementById("Modal-a").innerHTML="";
-				$("#Modal-a").append(
-					"รหัสจัดชื้อ <br>"+
-					"<input id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
-					'<br>'+
-					"ชื่อผู้รับผิดชอบ <br>"+
-					"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + '<br>' +
-					'<br>' +
-					"ยอดการจัดชื้อ <br>"+
-					"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
-					'<br>'+ 
-					"ชื่องบประมาณ <br>"+
-					"<input id='nameordernew' type='text'value='"+ data[DataForQueryData].nameorder +"'>" + 
-					'<br>' +
-					'<br>'+
-					"สถานะ <br>"+
-					"<input id='statusnew' type='text'value='"+ data[DataForQueryData].status +"'>"
-					// "<button onclick='addzz()'>update</button>"
-							
-				);
 						
+						getDataId2 = data[DataForQueryData]._id;
+						$.post("/save/recovermain",{ 
+							ServergetDataId:getDataId2,
+							
+                            // department: department
+                            
+                        },function(data, status){
+							showMaintable();    
+			});
 						
 			});
 		}
