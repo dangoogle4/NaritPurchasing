@@ -40,11 +40,11 @@ body {
 	 text-align: center;
 	 vertical-align: middle;
 }
- table td:last-child {
+ /* table td:last-child {
 	 font-size: 0.95em;
 	 line-height: 1.4;
 	 text-align: left;
-}
+} */
  table th {
 	 background-color: #ffffff;
 	 font-weight: 300;
@@ -135,9 +135,9 @@ body {
 		 padding-top: 0.3em;
 		 position: relative;
 	}
-	 td:last-child {
+	 /* td:last-child {
 		 padding-bottom: 1rem !important;
-	}
+	} */
 	 tr {
 		 background-color: white !important;
 		 border: 1px solid #6cbec6;
@@ -191,7 +191,7 @@ table td, table th  {
             <td>Username</td>
         <td> แก้ไข </td>
         <td>ลบ</td>
-        <tbody id="room-name"></tbody>
+        <tbody id="table_user"></tbody>
          </tr>
        
     </table>
@@ -205,35 +205,37 @@ table td, table th  {
   
   function tableData(){
 
-    let per_page_admin = $("#perpage").val();
+    //let per_page_admin = $("#perpage").val();
 
     $.post('/get/user', {}, function(data, status)
     {
 
-      let user_data = data[0];
-      let user_count = data[1];
+	  let user_data = data[0];
+	  console.log(user_data)
+	  let user_count = data[1];
+	  console.log(user_count)
 
       //let paging_user = user_count/per_page_admin;
       // console.log(paging_user)
 
       response = data[0];
-      if(user_count > 0)
-      {
-        for(let j=0; j<paging_user; j++)
-        {
+    //   if(user_count > 0)
+    //   {
+        // for(let j=0; j<paging_user; j++)
+        // {
 
 
-          if(j == 0)
-          {
-            $("#pagex").append("<li class='page-item active'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
-          }
-          else
-          {
-            $("#pagex").append("<li class='page-item'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
-          }
+        //   if(j == 0)
+        //   {
+        //     $("#pagex").append("<li class='page-item active'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
+        //   }
+        //   else
+        //   {
+        //     $("#pagex").append("<li class='page-item'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
+        //   }
 
 
-        }
+        // }
         for(let i = 0; i < user_data.length; i++)
         {
 
@@ -241,76 +243,22 @@ table td, table th  {
                                     + [i+1] +"</td><td>"
                                     + user_data[i].name +"</td><td>"
                                     + user_data[i].surname +"</td><td>"
-                                    + user_data[i].email +"</td><td>"
-                                    + user_data[i].phone +"</td><td>"
-                                    + user_data[i].group +"</td><td>"
-                                    +"<a href='#' onclick='edit("+i+")'><i class='fa fa-edit'></i></a></td><td>"
-                                    +"<a href='' onclick='drop("+i+")'><i class='fa fa-trash-o'></i></a>"
+                                    + user_data[i].username +"</td><td>"
+                                    +"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='edit("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td><td>"
+                                    +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a>"
                                     +"</td></tr>");                                                                                 
         }        
-      }
+    //   }
       
     });    
   }
 
-  function limitadmin(current_page_admin)
-  {
-    $("#table_user").html("");
-    $("#pagex").html("");
-
-    let per_page_admin = $("#perpage").val();
-
-    let number = (current_page_admin-1)*per_page_admin; 
-    console.log(number);
-    $.post('/get/user', {per_page_admin : per_page_admin, current_page_admin : current_page_admin}, function(data, status)
-    {
-
-      let user_data = data[0];
-      let user_count = data[1];
-
-      let paging_user = user_count/per_page_admin;
-
-      response = data[0];
-      if(user_count > 0)
-      {
-        for(let j=0; j<paging_user; j++)
-        {
-          
-          if(j == current_page_admin-1)
-          {
-            $("#pagex").append("<li class='page-item active'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
-          }
-          else
-          {
-            $("#pagex").append("<li class='page-item'><a onclick='limitadmin("+(j+1)+")' class='page-link' href='javascript:void(0)'>"+(j+1)+"</a></li>");
-          }
-
-        }
-        for(let i = 0; i < user_data.length; i++)
-        {
-
-           $("#table_user").append("<tr><td>"
-                                    + [i+1+number] +"</td><td>"
-                                    + user_data[i].name +"</td><td>"
-                                    + user_data[i].surname +"</td><td>"
-                                    + user_data[i].email +"</td><td>"
-                                    + user_data[i].phone +"</td><td>"
-                                    + user_data[i].group +"</td><td>"
-                                    +"<a href='#' onclick='edit("+i+")'><i class='fa fa-edit'></i></a></td><td>"
-                                    +"<a href='' onclick='drop("+i+")'><i class='fa fa-trash-o'></i></a>"
-                                    +"</td></tr>");                                                                                 
-        }        
-      }
-      
-    });
-  }
-
   function edit(i)
   {
-
+	//console.log(response[i]);
       localStorage.setItem("editname", response[i]._id);
 
-      window.location.href="/edit_user";
+      //window.location.href="/edit_user";
   }
 
   function drop(i){
