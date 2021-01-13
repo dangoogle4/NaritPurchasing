@@ -60,6 +60,47 @@ table td, table th  {
     border: 0.5px solid powderblue;
 }
  
+
+.dropbtn {
+  background-color: #ffffff;
+  color: rgb(73, 69, 69);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
+
  
  
 </style>
@@ -76,26 +117,42 @@ table td, table th  {
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Purchasing</a>
       </div>
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
         <li><a href="/user">user</a></li>
         <li><a href="/admin">admin</a></li>
         <li><a href="/">Page 3</a></li>
-      </ul>
+      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <div class="dropdown">
+             <button class="dropbtn">Setting
+             <i class="fa fa-caret-down"></i>
+             </button>
+             <div class="dropdown-content">
+             <a href="/useredit">ดูข้อมูลสมาชิก</a>
+             <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+             <!-- <a href="#">Link 3</a> -->
+             </div>
+           </div>
+           </li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
     </div>
+    
   </nav>
+  
   <div id="Home" class="tabcontent"style="margin: 40px;">
     <!-- <h3>Home</h3> -->
     <div>
         <form style="text-align:  center; margin: 40px;" >
-          รหัสการชื้อ 
-          <input  readonly id="codeForBuy" name="first" type="text" >
+          <label > รหัสการชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
              
-          ชื่องบประมาณ
-          <input  readonly id="nameproject" name="last" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label> ชื่องบประมาณ </label>&nbsp;&nbsp; <input  readonly id="nameproject" type="text">
             
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  readonly id="amountAll" name="lastmak" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label>ราคารวมทั้งหมดของทุกชิ้น </label> &nbsp;&nbsp;<input readonly id="amountAll" type="text">
     
           <!--<button >ค้นหา</button>-->
         </form>
@@ -116,11 +173,11 @@ table td, table th  {
               <td>ราคารวม(เสนอ)</td>
               <td>ราคารวม(แก้ไข)</td>
               <td>ผู้รับผิดชอบ</td>
-              <!-- <td>รูป</td> -->
+              <td>รูป</td>
               <td width="230">สถานะ</td>
               <td>ร้านค้า</td>
-              <td>แก้ไข</td>
-              <td>ลบ</td>
+              <!-- <td>แก้ไข</td>
+              <td>ลบ</td> -->
               <tbody id="room-namedata"></tbody>
            </tr>
      
@@ -412,7 +469,7 @@ table td, table th  {
       </div>
   </div>
 
-   <div id="shopNameTab"><button type="button" class="btn btn-primary" onclick="showAllData()">DataAll</button></div>
+   <div id="shopNameTab"><button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
   <!-- <br>
   <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">ร้านแรก</button>
   <button class="tablink" onclick="openPage('News', this, 'green')" >ร้านสอง</button>
@@ -457,6 +514,37 @@ table td, table th  {
             <h4 class="modal-title">Modal EDIT</h4>
           </div>
           <div class="modal-body"  id="Modal-c">
+        
+            <form>
+        <input class="btn btn-info btn-lg" type="reset" value="Reset">
+        <!-- <div id="Modal-a"></div> -->
+        
+        
+              </form>
+              <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    
+
+     <!-- Modal for Edit-->
+  <div class="modal fade" id="modalforeditshop" role="dialog" >
+    <!-- <div class="modal fade" id="Modalzz" role="dialog" onload="profile()"> -->
+      <div class="modal-dialog"  >
+      
+        <!-- Modal content-->
+        <div class="modal-content" >
+          <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal EDIT</h4>
+          </div>
+          <div class="modal-body"  id="Modal-D">
         
             <form>
         <input class="btn btn-info btn-lg" type="reset" value="Reset">
@@ -924,7 +1012,7 @@ function showData() {
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+			//  "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
 				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -939,7 +1027,7 @@ function showData() {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+            // "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
@@ -966,7 +1054,11 @@ function showData() {
       // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
       // "<button></button>" 
       '&nbsp;'+
-       "<button type='button' class='btn btn-primary'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>"
+       "<button type='button' data-target='modalforeditshop' class='btn btn-light'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'  ondblclick='Editshop("+ i +")' >" + data[i].nameOfShop +"</button>" 
+      //  "<button data-target='modalforeditshop' ondblclick='Editshop("+ i +")'>" + "DDDDD" + "</button>" 
+        // "<button type='button' class='btn btn-primary' >" + "Dan" +"</button>"
+       
+       
        
        
         // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
@@ -1198,6 +1290,71 @@ function showData() {
       });
   });
   
+
+  function Editshop(){
+
+    $.post("/get/shop",function (data, status) {
+
+      
+    //document.getElementById("room-name").innerHTML="";
+      console.log('Daaawwwwdqwdqwdqwd');
+      //var sum = 0 ;
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+       // data[i].sumpriceadmin = 0;
+       
+         //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+        //  data[i].sumprice = data[i].price * data[i].amount;
+         //data[i].sumprice = "";
+        // data[i].sumpriceadmin = "";
+      //   sum += parseInt(data[i].sumpriceadmin);
+       
+
+      //  console.log("Sum = "+ sum);   
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		// let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+        $("#modal-D").append(
+          "ชื่อวัสดุ <br>"+
+					"<input id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>" +'<br>'+ 
+          '<br>'+
+          "Part Number <br>"+
+					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคา(เสนอ) <br>"+
+					"<input id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
+          '<br>'
+			// "<td>" +
+			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+			// "</td>" +
+			//  "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+			// 	//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+      //       "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+      //       "<div class='modal-dialog modal-dialog-centered'>" +
+      //       "<div class='modal-content'>" +
+      //       "<div class='modal-header'>" +
+      //       "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+      //       "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+      //       "<span aria-hidden='true'>&times;</span>" +
+      //       "</button>" +
+      //       "</div>" +
+      //       "<div class='modal-footer'>" +
+      //       "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+      //       "</div>" +
+      //       "</div></td>" +
+      //       "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+		
+			
+
+        );  
+      }
+      
+    }); 
+
+  }
 
     
     var getDataId = "";

@@ -53,6 +53,18 @@ app.get("/history", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/HistoryDel.html"));
 });
 
+app.get("/useredit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/EditUserUser.html"));
+});
+
+app.get("/adminedit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/EditUserAdmin.html"));
+});
+
+app.get("/shopedit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/Shopedit.html"));
+});
+
 
 
 

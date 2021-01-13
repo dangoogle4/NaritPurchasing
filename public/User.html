@@ -157,6 +157,45 @@ table td, table th  {
     border: 0.5px solid powderblue;
 }
   
+.dropbtn {
+  background-color: #ffffff;
+  color: rgb(73, 69, 69);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
 
 
  
@@ -171,32 +210,44 @@ table td, table th  {
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Purchasing</a>
+        <a class="navbar-brand" href="/main">Purchasing</a>
       </div>
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
         <li><a href="/user">user</a></li>
         <li><a href="/admin">admin</a></li>
         <li><a href="/">Page 3</a></li>
-      </ul>
+      </ul> -->
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li>
+          <div class="dropdown">
+             <button class="dropbtn">Setting
+             <i class="fa fa-caret-down"></i>
+             </button>
+             <div class="dropdown-content">
+             <a href="/useredit">ดูข้อมูลสมาชิก</a>
+             <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+             <!-- <a href="#">Link 3</a> -->
+             </div>
+           </div>
+           </li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
   </nav>
   <div id="Home" class="tabcontent">
-    <h3>Home</h3>
+    <!-- <h3>Home</h3> -->
     <div style="margin: 40px;">
-        <form style="text-align:  center; ">
-          รหัสการชื้อ 
-          <input readonly id="codeForBuy" type="text" >
+        <form style="text-align:  center;">
+          <!-- <form style="text-align:  center; "> -->
+          
+          <label > รหัสการชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
              
-          ชื่องบประมาณ
-          <input  readonly id="nameproject" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label> ชื่องบประมาณ </label>&nbsp;&nbsp; <input  readonly id="nameproject" type="text">
             
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  readonly id="amountAll" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label>ราคารวมทั้งหมดของทุกชิ้น </label> &nbsp;&nbsp;<input readonly id="amountAll" type="text">
           <!-- ค้นหาที่นี่
           <input id="myInput" type="text" placeholder="ค้นหาที่นี่">
           <table id="myTable" cellspacing="0"> -->
@@ -216,11 +267,12 @@ table td, table th  {
               <th>จำนวน</th>
               <th>ราคารวม</th>
               <th>ผู้รับผิดชอบ</th>
+              <th>รูป</th>
               <!-- <th>รูป</th> -->
               <th>สถานะ</th>
-              <th>ร้านค้า</th>
+              <!-- <th>ร้านค้า</th> -->
               <th>แก้ไข</th>
-              <th>ลบ</th>
+              <!-- <th>ลบ</th> -->
               <tbody id="room-name"></tbody>
            </tr>
      
@@ -264,8 +316,8 @@ table td, table th  {
 <!--         
       </table>
    </div>  -->
-     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูลสั่งชื้อ</button>
-     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
+     <button style="float: right; margin: 20px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูลสั่งชื้อ</button>
+     <button style="float: right; margin: 20px;" type="button"  class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
      <!-- <button  style="float: right; margin: 10px;" onclick='showshop()'>DATAALL</button> -->
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -279,52 +331,43 @@ table td, table th  {
             </div>
             <div class="modal-body">
               <form>
-                <label>ชื่อวัสดุ</label>
-                <input  id="item" name="item" type="text"><br>
+                <label>ร้านค้าของท่าน</label>&nbsp;&nbsp;&nbsp;&nbsp;<select class="custom-select storage" id="storage" required></select>
+              <br>
+              <br>
+                <label>ชื่อวัสดุ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="item" name="item" type="text"><br>
                 <br>
                 <label>Part Number</label>
                 <input id="partnumber" name="partnumber" type="text"><br>  
                 <br>
-                <label>ราคา</label>
-                <input  id="price" name="price" type="number"><br>
+                <label>ราคา</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="price" name="price" type="number"><br>
                 <br>
-                <label>จำนวน</label>
-                <input  id="amountz" name="amount" type="number"><br>
+                <label>จำนวน</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="amountz" name="amount" type="number"><br>
                 <br>
-                <label>ราคารวม</label>
-                <input  id="sumprice" name="sumprice" type="text"><br>
+                <label>ราคารวม</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="sumprice" name="sumprice" type="text"><br>
                 <br>
-                <label>ผู้รับผิดชอบ</label>
-                <input  id="responsibleperson" name="responsibleperson" type="text"><br>
+                <label>ผู้รับผิดชอบ</label>&nbsp;&nbsp;&nbsp;&nbsp;<input  id="responsibleperson" name="responsibleperson" type="text"><br>
                 <br>
-                <label>สถานะ</label>
-                <input  id="statusz" type="text"><br>
+                <label >สถานะ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="statusz" type="text"><br>
                 <br>
-                <label>ร้านค้าของท่าน</label>
-                <select
-                    class="custom-select storage"
-                    id="storage"
-                    required
-                  ></select>
                 <div class="form-group">
                     <label for="img">รูป:</label>
                     <input type="file" id="img" name="img" accept="image/*">
                 </div>
                 <br>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
-                <input class="btn btn-info btn-lg" type="reset" value="Reset">
+                <button type="button" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
+                <input  type="reset" value="ล้าง">
                 </form>    
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
           </div>
           
         </div>
       </div>
 
-
+      <div id="shopNameTab"><button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
 
       <div class="modal fade" id="ModalForAddShop" role="dialog">
         <div class="modal-dialog">
@@ -340,23 +383,26 @@ table td, table th  {
                 <label>ชื่อร้านค้า</label>
                 <input name="nameshop" type="text" id="nameshop"><br>
                 <br>
+              
+                
                 <label for="typeshop">ประเภทร้านค้า</label>
                 <select name="typeshopp" id="typeshoppp">
                   <option value="1">ในประเทศ</option>
                   <option value="2">ต่างประเทศ</option>
                 </select>
                 <br>
+                <br>
                 <label>ภาษีร้านค้า</label>
                 <input name="taxshop" type="float" id="taxshop"><br>  
                 <br>
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">เพิ่มข้อมูล</button>
-                <input class="btn btn-info btn-lg" type="reset" value="Reset">
+                <button type="button"  data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+                <input  type="reset" value="ล้าง">
                 </form>    
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
           </div>
           
         </div>
@@ -751,9 +797,9 @@ table td, table th  {
       "<td>" +
             data[i].statusz +
       "</td>" +
-      "<td>" +
-            ShowShopName[data[i].shopid] +
-      "</td>" +
+      // "<td>" +
+      //       ShowShopName[data[i].shopid] +
+      // "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
@@ -772,7 +818,7 @@ table td, table th  {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+            // "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
@@ -781,8 +827,12 @@ table td, table th  {
     });
     $.post("/get/shop", function (data, status) {
 
-		  //document.getElementById("room-namezz").innerHTML="";
+      //document.getElementById("room-namezz").innerHTML="";
+      // $("#shopNameTab").append(
+      //     "<a style='margin-left: 40px;'></a>"
+      //   );
       for (let i = 0; i < data.length; i++) {
+       
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
 		  console.log(str);
@@ -796,7 +846,7 @@ table td, table th  {
             //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
             // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
             // "<button></button>" 
-             "<button value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>"
+             "<button class='btn btn-light' value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>&nbsp;"
              
              
               // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"

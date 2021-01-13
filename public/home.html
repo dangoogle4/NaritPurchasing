@@ -157,7 +157,45 @@ table td, table th  {
     border: 0.5px solid powderblue;
 }
  
+.dropbtn {
+  background-color: #ffffff;
+  color: rgb(73, 69, 69);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
 
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
 
 
 
@@ -166,52 +204,65 @@ table td, table th  {
 <body onload="showMaintable()" >
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Purchasing</a>
+        <a class="navbar-brand" href="#">X</a>
       </div>
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
         <li><a href="/user">User</a></li>
         <li><a href="/admin">Admin</a></li>
         <li><a href="/">Page 3</a></li>
-	  </ul>
+	  </ul> -->
 	  <ul class="nav navbar-nav navbar-right">
-		<li><a href="/history"><span class="glyphicon glyphicon-user"></span> User</a></li>
+		<li>
+			<div class="dropdown">
+			   <button class="dropbtn">Setting
+				 <i class="fa fa-caret-down"></i>
+			   </button>
+			   <div class="dropdown-content">
+				 <a href="/useredit">ดูข้อมูลสมาชิก</a>
+				 <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+				 <!-- <a href="#">Link 3</a> -->
+			   </div>
+			 </div>
+		   </li>
 		<li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	  </ul>
     </div>
   </nav>
   <div style="margin: 40px;">
-	<form style="text-align:  center; ">
-      ชื่อผู้รับผิดชอบ
-      <input id="" type="text">
-         
-      ชื่องบประมาณ
-      <input  id="" type="text">
-        
-      <button onclick="search()">ค้นหา</button>
+	<form style="text-align: left; ">
+		
+		ค้นหา &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+      <input id="" type="text" placeholder="ชื่องบประมาณ" >
+	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+      
+      <input  id="" type="text"placeholder="ผู้รับผิดชอบ" >
+	  
+      <button  style="float: right;" class="btn btn-light" onclick="search()">ค้นหา</button>
     </form>
     <br>
 
 
     <!-- <div class="header" style="margin-top: 20px" >Users</div> -->
     
-    <table cellspacing="0" style="margin-top: 100px">
+    <table cellspacing="0" style="margin-top: 100px" >
        <tr>
 		  <td>ลำดับ</td>
           <td>รหัสจัดซื้อ</td>
           <td>ชื่อผู้รับผิดชอบ</td>
           <td>ยอดการจัดซื้อ</td>
           <td>ซื่องบประมาณ</td>
-		  <td width="230">สถานะ</td>
-		  <td>เหตุผล</td>
-		  <td> แก้ไข </td>
-		  <td>ลบ</td>
+		  <td >สถานะ</td>
+		  <!-- <td>เหตุผล</td> -->
+		  <td width="100" style="text-align: center"> แก้ไข </td>
+		  <!-- <td>ลบ</td> -->
 		  <tbody id="room-name"></tbody>
        </tr>
 	   
@@ -229,34 +280,41 @@ table td, table th  {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal ADD</h4>
+          <h4 class="modal-title"></h4>
         </div>
         <div class="modal-body">
           <form>
 
             <label>รหัสจัดชื้อ</label>
-            <input id="order" type="text"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input style="margin: 10px;" id="order" type="text"><br>
             <br>
             <label>ผู้รับผิดชอบ</label>
-            <input  id="respon" type="text"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<input  style="margin: 5px;" id="respon" type="text"><br>
             <br>
             <label>ยอดการจัดซื้อ</label>
-            <input id="amount" type="text"><br>  
+            &nbsp;<input style="margin: 5px;" id="amount" type="text"><br>  
             <br>
             <label>ชื่องบประมาณ</label>
-            <input  id="nameorder" type="text"><br>
+            &nbsp;<input  style="margin: 5px;" id="nameorder" type="text"><br>
             <br>
             <label>สถานะ</label>
-            <input  id="status" type="text"><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  style="margin: 10px;" id="status" type="text"><br>
 			<br>
-			<input class="btn btn-info btn-lg" type="reset" value="Reset">
-            </form>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal"  onclick="Add()" >เพิ่มข้อมูล</button>
-        </div>
-        <div class="modal-footer">
 			
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</form>
+			<br>
+			<br>
+			<br>
+			<button type="button"  data-toggle="modal" class="btn btn-light"  onclick="Add()" >บันทึก</button>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  class="btn btn-light" type="reset" value="ล้าง">
+			<br>
+			<br>
+			<br>
         </div>
+        <!-- <div class="modal-footer">
+			
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+        <!-- </div>  -->
       </div>
       
     </div>
@@ -271,7 +329,7 @@ table td, table th  {
       <div class="modal-content" >
         <div class="modal-header" >
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal EDIT</h4>
+          <!-- <h4 class="modal-title">Modal EDIT</h4> -->
         </div>
         <div class="modal-body"  id="Modal-a" >
 			
@@ -280,12 +338,14 @@ table td, table th  {
 			<!-- <div id="Modal-a"></div> -->
 			
 			
-            </form>
+			</form>
+			
             <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
         </div>
         <div class="modal-footer">
-			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz" onclick="addzz()">Update</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button style="float: left;" type="button"  data-toggle="modal" data-target="#Modalzz" onclick="addzz()">Update</button> 
+
+			<button  style="float: left;" type="button"  data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -394,13 +454,13 @@ table td, table th  {
 			"<td>" +
             data[i].status +
 			"</td>" +
-			"<td>" +
-            data[i].reason +
-			"</td>" +
+			// "<td>" +
+            // data[i].reason +
+			// "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
+			 "<td><button style='margin-left: 10px ;' data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</button>" +
 				// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -416,7 +476,7 @@ table td, table th  {
             "</div>" +
             "</div></td>" +
 			// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-			"<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
+			// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
 			"</tr>"
 			
 
