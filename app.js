@@ -65,6 +65,9 @@ app.get("/shopedit", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/Shopedit.html"));
 });
 
+app.get("/homeadmin", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/homeadmin.html"));
+});
 
 
 

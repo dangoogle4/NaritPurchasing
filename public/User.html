@@ -241,7 +241,7 @@ table td, table th  {
         <form style="text-align:  center;">
           <!-- <form style="text-align:  center; "> -->
           
-          <label > รหัสการชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
+          <label > รหัสการจัดชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
              
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <label> ชื่องบประมาณ </label>&nbsp;&nbsp; <input  readonly id="nameproject" type="text">
@@ -271,7 +271,7 @@ table td, table th  {
               <!-- <th>รูป</th> -->
               <th>สถานะ</th>
               <!-- <th>ร้านค้า</th> -->
-              <th>แก้ไข</th>
+              <!-- <th>แก้ไข</th> -->
               <!-- <th>ลบ</th> -->
               <tbody id="room-name"></tbody>
            </tr>
@@ -316,8 +316,8 @@ table td, table th  {
 <!--         
       </table>
    </div>  -->
-     <button style="float: right; margin: 20px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูลสั่งชื้อ</button>
-     <button style="float: right; margin: 20px;" type="button"  class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
+     <button style="float: right; margin: 20px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+     <button style="float: right; margin: 20px;" type="button"  class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มร้านค้า</button>
      <!-- <button  style="float: right; margin: 10px;" onclick='showshop()'>DATAALL</button> -->
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
@@ -331,7 +331,7 @@ table td, table th  {
             </div>
             <div class="modal-body">
               <form>
-                <label>ร้านค้าของท่าน</label>&nbsp;&nbsp;&nbsp;&nbsp;<select class="custom-select storage" id="storage" required></select>
+                <label>ร้านค้าของท่าน</label>&nbsp;&nbsp;&nbsp;&nbsp;<select class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select>
               <br>
               <br>
                 <label>ชื่อวัสดุ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="item" name="item" type="text"><br>
@@ -354,8 +354,8 @@ table td, table th  {
                     <input type="file" id="img" name="img" accept="image/*">
                 </div>
                 <br>
-                <button type="button" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
-                <input  type="reset" value="ล้าง">
+                <button class="btn btn-light" type="button" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
+                <input  class="btn btn-light" type="reset" value="ล้าง">
                 </form>    
             </div>
             <!-- <div class="modal-footer">

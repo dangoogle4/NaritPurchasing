@@ -420,7 +420,7 @@ body {
 
   function editData(i){
 			console.log("addzzzz");
-			$.post("/get/user", function (data, status) {
+			$.post("/get/shop", function (data, status) {
 						
 				console.log(data[i]._id);
         getDataId = data[i]._id;
@@ -429,17 +429,17 @@ body {
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
           "ชื่อ <br>"+
-					"<input id='itemnew'type='text' type='text'value='"+ data[i].name +"'>" +'<br>'+ 
+					"<input id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>" +'<br>'+ 
           '<br>'+
           "นามสกุล <br>"+
-					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].surname +"'>" +'<br>'+ 
+					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
           '<br>'+
           "username <br>"+
-					"<input id='pricenew'type='text' type='text'value='"+ data[i].username +"'>" +'<br>'+ 
-          '<br>'+
-          "password <br>"+
-					"<input id='amountnew'type='text' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
+					"<input id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
           '<br>'
+        //   "password <br>"+
+		// 			"<input id='amountnew'type='text' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
+        //   '<br>'
         //   "ราคารวม <br>"+
 		// 			"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
         //   '<br>'+
