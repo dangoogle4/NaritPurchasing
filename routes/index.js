@@ -539,6 +539,28 @@ router.post("/get/shop", function (req, res, next) {
   });
 });
 
+router.post("/get/users", function (req, res, next) {
+  // res.send("ok post complete"+" "+req.body.nameuser);
+  console.log('Dan');
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    //var query = { _id: ObjectId(req.body.profile) };
+    //console.log(query);
+    dbo
+      .collection("user")
+      //.find({shopid: req.body.shop})
+       .find({})
+      .toArray(function (err, result) {
+        if (err) throw err;
+        // console.log(result);
+        res.send(result);
+        db.close();
+      });
+  });
+});
+
 router.post("/get/showshopnameintable", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.nameuser);
   console.log('Dan');

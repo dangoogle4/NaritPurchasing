@@ -420,7 +420,7 @@ body {
 
   function editData(i){
 			console.log("addzzzz");
-			$.post("/get/user", function (data, status) {
+			$.post("/get/users", function (data, status) {
 						
 				console.log(data[i]._id);
         getDataId = data[i]._id;
