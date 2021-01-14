@@ -593,56 +593,50 @@ console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage)
    // let rstripId = data[i]._id.rs
     //$("#room-name-value").val(data[0].room);
      $("#room-namedata").append(
-    "<tr><td>" +
-      (i + 1) +
+      "<tr><td>" +
+            (i + 1) +
+            "</td>" +
+			"<td>" +
+            data[i].item +
+			"</td>" +
+			"<td>" +
+            data[i].partnumber +
+			"</td>" +
+			"<td>" +
+            data[i].price +
+			"</td>" +
+			"<td>" +
+            data[i].amount +
       "</td>" +
-      "<td id='order"+i+"'>" +
-        ShowShopName[data[i].shopid] +
-        //  ShowShopName[data[i].shopid] +
+      "<td>" +
+            data[i].priceadmin +
+			"</td>" +
+			"<td>" +
+            data[i].amountadmin +
       "</td>" +
-      "<td >" +
-     data[i].item +
-        //  ShowShopName[data[i].shopid] +
+      "<td>" +
+            data[i].sumprice +
       "</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>"+
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  ShowShopName[data[i].shopid] +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].mainid +
-        //  ShowShopName[data[i].shopid] +
-"</td>" 
+      "<td>" +
+            data[i].sumpriceadmin +
+      "</td>" +
+      "<td>" +
+            data[i].responsibleperson +
+      "</td>" +
+      "<td>" +
+            data[i].picture +
+      "</td>" +
+      "<td>" +
+            data[i].statusz +
+      "</td>"  
+// "<td >" +
+//   ShowShopName[data[i].shopid] +
+//         //  ShowShopName[data[i].shopid] +
+// "</td>" +
+// "<td >" +
+//   data[i].mainid +
+//         //  ShowShopName[data[i].shopid] +
+// "</td>" 
 
 
 

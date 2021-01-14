@@ -933,16 +933,31 @@ table td, table th  {
 		  "<tr><td>" +
             (i + 1) +
             "</td>" +
-            "<td id='order"+i+"'>" +
-              ShowShopName[data[i].shopid] +
-              //  ShowShopName[data[i].shopid] +
-      "</td>" +
-      "<td >" +
-              data[i].item +
-              //  ShowShopName[data[i].shopid] +
-			"</td>" 
-			
-			
+            "<td >" +
+             data[i].item +
+            "</td>" +
+            "<td>" +
+            data[i].partnumber +
+            "</td>" +
+            "<td>" +
+            data[i].price +
+			      "</td>" +
+            "<td>" +
+            data[i].amount +
+            "</td>" +
+            "<td>" +
+            data[i].sumprice +
+            "</td>" +
+            "<td>" +
+            data[i].responsibleperson +
+            "</td>" +
+            "<td>" +
+            data[i].statusz +
+            "</td>" 
+      // "<td id='order"+i+"'>" +
+      //         ShowShopName[data[i].shopid] +
+      //         //  ShowShopName[data[i].shopid] +
+      // "</td>" +
 
         );
       }
@@ -1018,6 +1033,101 @@ table td, table th  {
 							          //showData();
         });
 }			
+
+function showAllData() {
+
+location.reload();
+
+// $.post("/get/dataForSearchTableMainIdAdmin2" ,{_ID: getValueLocalStorage},function (data, status) {
+//   //document.getElementById("room-namedata").innerHTML="";
+//     //console.log('Daaawww'+getValueLocalStorage);
+//     var sum = 0 ;
+// 	//document.getElementById("room-name").innerHTML="";
+//     for (let i = 0; i < data.length; i++) {
+//      // data[i].sumpriceadmin = 0;
+//      console.log("NEWNEWNEWNEWNEWNEWNEWN"+data.length);
+//        //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+//       //  data[i].sumprice = data[i].price * data[i].amount;
+//        //data[i].sumprice = "";
+//       // data[i].sumpriceadmin = "";
+//     //   sum += parseInt(data[i].sumpriceadmin);
+     
+
+//     //  console.log("Sum = "+ sum);   
+// 	  //console.log(data[i]._id);
+// 	  str = data[i]._id.replace(/\s/g, '');
+// 	  console.log("newienqwpdjqwidjmqowidjqwdij --->>>>>>>>"+str);
+//       roomId = data;
+// 	// let rstripId = data[i]._id.rs
+//       //$("#room-name-value").val(data[0].room);
+//       $("#room-namedata").append(
+// 	  "<tr><td>" +
+//           (i + 1) +
+//           "</td>" +
+// 		"<td>" +
+//           data[i].item +
+// 		"</td>" +
+// 		"<td>" +
+//           data[i].partnumber +
+// 		"</td>" +
+// 		"<td>" +
+//           data[i].price +
+// 		"</td>" +
+// 		"<td>" +
+//           data[i].amount +
+//     "</td>" +
+//     "<td>" +
+//           data[i].priceadmin +
+// 		"</td>" +
+// 		"<td>" +
+//           data[i].amountadmin +
+//     "</td>" +
+//     "<td>" +
+//           data[i].sumprice +
+//     "</td>" +
+//     "<td>" +
+//           data[i].sumpriceadmin +
+//     "</td>" +
+//     "<td>" +
+//           data[i].responsibleperson +
+//     "</td>" +
+//     "<td>" +
+//           data[i].statusz +
+//     "</td>" +
+//     "<td>" +
+//           ShowShopName[data[i].shopid] +
+//     "</td>" +
+//     "<td>" +
+//           [data[i].mainid] +
+//     "</td>" +
+// 		// "<td>" +
+// 		// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+// 		// "</td>" +
+// 		 "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData('"+i+"')' >แก้ไข</a>" +
+// 			//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+//           "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+//           "<div class='modal-dialog modal-dialog-centered'>" +
+//           "<div class='modal-content'>" +
+//           "<div class='modal-header'>" +
+//           "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+//           "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+//           "<span aria-hidden='true'>&times;</span>" +
+//           "</button>" +
+//           "</div>" +
+//           "<div class='modal-footer'>" +
+//           "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+//           "</div>" +
+//           "</div></td>" +
+//           "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+// 		"</tr>"
+    
+
+//       );  
+//     }
+    
+//   }); 
+
+}
 		
 var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
