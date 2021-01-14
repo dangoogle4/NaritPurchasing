@@ -331,8 +331,8 @@ body {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button style="float: left;" type="button"  data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">UpdateData</button>
-            <button style="float: left;" type="button"  data-dismiss="modal">Close</button>
+        <button  class="btn btn-light" style="float: left;" type="button"  data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button>
+            <button class="btn btn-light" style="float: left;" type="button"  data-dismiss="modal">ล้าง</button>
           </div>
         </div>
         
@@ -428,14 +428,11 @@ body {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-          "ชื่อ <br>"+
-					"<input id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>" +'<br>'+ 
+		  "<label style='padding: left; margin: 10px'>ชื่อร้านค้า</label>"+"<input style='margin-left: 30px;' id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>" +'<br>'+ 
           '<br>'+
-          "นามสกุล <br>"+
-					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
+		  "<label style='padding: left; margin: 10px'>ประเภทร้านค้า</label>"+"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
           '<br>'+
-          "username <br>"+
-					"<input id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ภาษีร้านค้า</label>"+"<input style='margin-left: 25px;' id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
           '<br>'
         //   "password <br>"+
 		// 			"<input id='amountnew'type='text' type='text'value='"+ data[i].password +"'>" +'<br>'+ 

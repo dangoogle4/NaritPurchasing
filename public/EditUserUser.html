@@ -334,8 +334,8 @@ body {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button style="float: left;" type="button"  data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button>
-            <button style="float: left;" type="button"  data-dismiss="modal">ล้าง</button>
+        <button class="btn btn-light" style="float: left;" type="button"  data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button>
+            <button class="btn btn-light" style="float: left;" type="button"  data-dismiss="modal">ล้าง</button>
           </div>
         </div>
         
@@ -422,7 +422,7 @@ body {
 
   function editData(i){
 			console.log("addzzzz");
-			$.post("/get/user", function (data, status) {
+			$.post("/get/users", function (data, status) {
 						
 				console.log(data[i]._id);
         getDataId = data[i]._id;
@@ -436,7 +436,7 @@ body {
           '<br>'+
           "<label style='margin: 10px'>username</label>"+"<input id='pricenew'type='text' type='text'value='"+ data[i].username +"'>" +'<br>'+ 
           '<br>'+
-          "<label style='margin: 10px'>password</label>"+"<input id='amountnew'type='text' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
+          "<label style='margin: 10px'>password</label>"+"<input id='amountnew'type='password' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
           '<br>'
         //   "ราคารวม <br>"+
 		// 			"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 

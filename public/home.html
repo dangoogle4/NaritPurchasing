@@ -240,10 +240,10 @@ table td, table th  {
 	<form style="text-align: left; ">
 		
 		ค้นหา &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-      <input id="" type="text" placeholder="ชื่องบประมาณ" >
+      <input id="" type="text" placeholder="ผู้รับผิดชอบ" >
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
       
-      <input  id="" type="text"placeholder="ผู้รับผิดชอบ" >
+      <input  id="" type="text"placeholder="ชื่องบประมาณ" >
 	  
       <button  style="float: right;" class="btn btn-light" onclick="search()">ค้นหา</button>
     </form>
@@ -343,9 +343,9 @@ table td, table th  {
             <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
         </div>
         <div class="modal-footer">
-			<button style="float: left;" type="button"  data-toggle="modal" data-target="#Modalzz" onclick="addzz()">Update</button> 
+			<button class="btn btn-light" style="float: left;" type="button"  data-toggle="modal" data-target="#Modalzz" onclick="addzz()">บันทึก</button> 
 
-			<button  style="float: left;" type="button"  data-dismiss="modal">Close</button>
+			<button  class="btn btn-light" style="float: left;" type="button"  data-dismiss="modal">ล้าง</button>
         </div>
       </div>
       
@@ -591,21 +591,16 @@ table td, table th  {
 				//console.log("Dannnn" + getDataId);
 				document.getElementById("Modal-a").innerHTML="";
 				$("#Modal-a").append(
-					"รหัสจัดชื้อ <br>"+
-					"<input id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
+					"<label style='padding: left; margin: 10px'>รหัสจัดชื้อ</label>"+"<input style='margin-left: 31px;' id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
 					'<br>'+
-					"ชื่อผู้รับผิดชอบ <br>"+
-					"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + '<br>' +
+					"<label style='padding: left; margin: 10px'>ชื่อผู้รับผิดชอบ</label>"+"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + '<br>' +
 					'<br>' +
-					"ยอดการจัดชื้อ <br>"+
-					"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
+					"<label style='padding: left; margin: 10px'>ยอดการจัดชื้อ</label>"+"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
 					'<br>'+ 
-					"ชื่องบประมาณ <br>"+
-					"<input id='nameordernew' type='text'value='"+ data[DataForQueryData].nameorder +"'>" + 
+					"<label style='padding: left; margin: 10px'>ชื่องบประมาณ</label>"+"<input id='nameordernew' type='text'value='"+ data[DataForQueryData].nameorder +"'>" + 
 					'<br>' +
 					'<br>'+
-					"สถานะ <br>"+
-					"<input id='statusnew' type='text'value='"+ data[DataForQueryData].status +"'>"
+					"<label style='padding: left; margin: 10px'>สถานะ</label>"+ "<input style='margin-left: 45px;' id='statusnew' type='text'value='"+ data[DataForQueryData].status +"'>"
 					// "<button onclick='addzz()'>update</button>"
 							
 				);

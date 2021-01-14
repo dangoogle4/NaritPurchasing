@@ -175,7 +175,7 @@ table td, table th  {
               <td>ผู้รับผิดชอบ</td>
               <td>รูป</td>
               <td width="230">สถานะ</td>
-              <td>ร้านค้า</td>
+              <!-- <td>ร้านค้า</td> -->
               <!-- <td>แก้ไข</td>
               <td>ลบ</td> -->
               <tbody id="room-namedata"></tbody>
@@ -197,8 +197,8 @@ table td, table th  {
                -->
         </table>
      </div>
-     <button type="button" style="float: right; margin: 12.5px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูลสินค้า</button>
-     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
+     <button type="button" style="float: right; margin: 12px;" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูลสินค้า</button>
+     <button style="float: right; margin: 12px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
     
       <!-- Modal -->
       <div class="modal fade" id="myModalforadddata" role="dialog">
@@ -206,13 +206,13 @@ table td, table th  {
         
           <!-- Modal content-->
           <div class="modal-content">
-            <div class="modal-header">
+            <!-- <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">เพิ่มสินค้า</h4>
-            </div>
+            </div> -->
             <div class="modal-body">
               <form>
-                
+                <br>
                 <label>ร้านค้าของท่าน</label> <select class="custom-select storage" id="storage" required></select>
                 <br>
                 <br>
@@ -242,14 +242,14 @@ table td, table th  {
                 </div>
                 <br>
                 
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">เพิ่มข้อมูล</button>
-                <input class="btn btn-info btn-lg" type="reset" value="Reset">
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
+                <input class="btn btn-light" type="reset" value="ล้าง">
                 </form>    
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
           </div>
           
         </div>
@@ -262,12 +262,13 @@ table td, table th  {
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <!-- <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">แก้ไขข้อมูล</h4>
-        </div>
+        </div> -->
         <div class="modal-body">
           <form>
+            <br>
             <label>ชื่อร้านค้า</label>
             <input name="nameshop" type="text" id="nameshop"><br>
             <br>
@@ -277,17 +278,18 @@ table td, table th  {
               <option value="2">ต่างประเทศ</option>
             </select>
             <br>
+            <br>
             <label>ภาษีร้านค้า</label>
             <input name="taxshop" type="float" id="taxshop"><br>  
             <br>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">เพิ่มข้อมูล</button>
-            <input class="btn btn-info btn-lg" type="reset" value="Reset">
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+            <input class="btn btn-light" type="reset" value="ล้าง">
             </form>    
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+        </div> -->
       </div>
       
     </div>
@@ -1002,14 +1004,17 @@ function showData() {
             data[i].responsibleperson +
       "</td>" +
       "<td>" +
+            data[i].picture +
+      "</td>" +
+      "<td>" +
             data[i].statusz +
       "</td>" +
-      "<td>" +
-            ShowShopName[data[i].shopid] +
-      "</td>" +
-      "<td>" +
-            [data[i].mainid] +
-      "</td>" +
+      // "<td>" +
+      //       ShowShopName[data[i].shopid] +
+      // "</td>" +
+      // "<td>" +
+      //       [data[i].mainid] +
+      // "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +

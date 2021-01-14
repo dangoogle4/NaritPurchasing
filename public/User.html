@@ -490,10 +490,10 @@ table td, table th  {
       
         <!-- Modal content-->
         <div class="modal-content" >
-          <div class="modal-header" >
+          <!-- <div class="modal-header" >
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Modal EDIT</h4>
-          </div>
+          </div> -->
           <div class="modal-body"  id="Modal-b" >
         
             <form>
@@ -505,8 +505,8 @@ table td, table th  {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">UpdateData</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button  style="float: left;" type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button>
+            <button style="float: left;" type="button" class="btn btn-default" data-dismiss="modal">ล้าง</button>
           </div>
         </div>
         
@@ -885,29 +885,21 @@ table td, table th  {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-          "ชื่อวัสดุ <br>"+
-					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ชื่อวัสดุ</label>"+"<input style='margin-left: 35px;' id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
-          "Part Number <br>"+
-					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>Part Number</label>"+	"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
           '<br>'+
-          "ราคา <br>"+
-					"<input id='pricenew'type='text' type='text'value='"+ data[i].price +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ราคา</label>"+"<input  style='margin-left: 49px;' id='pricenew'type='text' type='text'value='"+ data[i].price +"'>" +'<br>'+ 
           '<br>'+
-          "จำนวน <br>"+
-					"<input id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>จำนวน</label>"+	"<input  style='margin-left: 41px;' id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
           '<br>'+
-          "ราคารวม <br>"+
-					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ราคารวม</label>"+"<input  style='margin-left: 35px;' id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
           '<br>'+
-          "ผู้รับผิดชอบ <br>"+
-					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ผู้รับผิดชอบ</label>"+	"<input style='margin-left: 10px;' id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
           '<br>'+
-          "สถานะ <br>"+
-					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
-          '<br>'+
-          "รูป <br>"+
-					"<input type='file' id='img' name='img' accept='image/*'>"
+          // "<label style='padding: left; margin: 10px'>สถานะ</label>"+	"<input style='margin-left: 48px;' id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          // '<br>'+
+          "<label style='padding: left; margin: 10px'>รูป</label>"+"<input type='file' id='img' name='img' accept='image/*'>"
 
 				);
 						
