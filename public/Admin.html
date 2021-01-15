@@ -213,7 +213,7 @@ table td, table th  {
             <div class="modal-body">
               <form>
                 <br>
-                <label>ร้านค้าของท่าน</label> <select class="custom-select storage" id="storage" required></select>
+                <label>ร้านค้าของท่าน</label> <select style="width:185px; height: 25px;" class="custom-select storage" id="storage" required></select>
                 <br>
                 <br>
                 <label>ชื่อวัสดุ</label> <input  style="margin-left:4em" id="item" name="item" type="text"><br>
@@ -270,17 +270,17 @@ table td, table th  {
           <form>
             <br>
             <label>ชื่อร้านค้า</label>
-            <input name="nameshop" type="text" id="nameshop"><br>
+            <input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
             <br>
             <label for="typeshop">ประเภทร้านค้า</label>
-            <select name="typeshopp" id="typeshoppp">
+            <select style="margin-left:2em" name="typeshopp" id="typeshoppp">
               <option value="ในประเทศ">ในประเทศ</option>
               <option value="ต่างประเทศ">ต่างประเทศ</option>
             </select>
             <br>
             <br>
             <label>ภาษีร้านค้า</label>
-            <input name="taxshop" type="float" id="taxshop"><br>  
+            <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>  
             <br>
             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
             <input class="btn btn-light" type="reset" value="ล้าง">
@@ -578,15 +578,38 @@ console.log("DDDDDDDD---->>   "+ val)
 //console.log("PEEGALE:"+ data[i].nameOfShop)
 var valueid = document.getElementById("forshop"+val).value;
 
+var checkPriceAdmin;
+var checkAmountAdmin;
+var checkSumPriceAdmin;
+      
+
 console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
 
-//กรีด เดะวันนี้ไปชื้อบราวนี้ให้เลย มึงถามเขาก่อนส่งมาจะบูดไหม 55555 ช๊อต
+
 
     $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
     document.getElementById("room-namedata").innerHTML="";
     console.log("sadsadegeg ---->>>"+data.length)
     for (let i = 0; i < data.length; i++) {
 
+      if(data[i].priceadmin == null){
+            checkPriceAdmin = 0
+      } else {
+        checkPriceAdmin = data[i].priceadmin;
+        }
+        if(data[i].amountadmin == null){
+          checkAmountAdmin = 0
+      } else {
+        checkAmountAdmin = data[i].amountadmin;
+        }
+        if(data[i].sumpriceadmin == null){
+          checkSumPriceAdmin = ""
+      } else {
+        checkSumPriceAdmin = data[i].sumpriceadmin;
+        }
+
+
+        data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
     str = data[i]._id.replace(/\s/g, '');
     console.log(str);
     roomId = data;
@@ -609,16 +632,19 @@ console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage)
             data[i].amount +
       "</td>" +
       "<td>" +
-            data[i].priceadmin +
+            checkPriceAdmin +
+            // data[i].priceadmin +
 			"</td>" +
-			"<td>" +
-            data[i].amountadmin +
+      "<td>" +
+            checkAmountAdmin +
+            // data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice +
+            data[i].sumprice.toFixed(2) +
       "</td>" +
       "<td>" +
-            data[i].sumpriceadmin +
+            //checkSumPriceAdmin +
+            data[i].sumpriceadmin.toFixed(2) +
       "</td>" +
       "<td>" +
             data[i].responsibleperson +
@@ -929,6 +955,9 @@ function showData() {
       for (let i = 0; i < data.length; i++) {
         data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
         data[i].sumprice = data[i].price * data[i].amount;
+        if(data[i]){
+
+        }
         sum += parseInt(data[i].sumpriceadmin);
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
@@ -945,17 +974,46 @@ function showData() {
     
 
   $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+    
+       
     //document.getElementById("room-name").innerHTML="";
       console.log('Daaawww'+getValueLocalStorage);
       var sum = 0 ;
+      // var handlenull = ""; 
+      var checkPriceAdmin;
+      var checkAmountAdmin;
+      var checkSumPriceAdmin;
+      
+      // var sumprice =
+      // var amountadmin 
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+
+        if(data[i].priceadmin == null){
+            checkPriceAdmin = 0
+      } else {
+        checkPriceAdmin = data[i].priceadmin;
+        }
+        if(data[i].amountadmin == null){
+          checkAmountAdmin = 0
+      } else {
+        checkAmountAdmin = data[i].amountadmin;
+        }
+        if(data[i].sumpriceadmin == null){
+          checkSumPriceAdmin = ""
+      } else {
+        checkSumPriceAdmin = data[i].sumpriceadmin;
+        }
+        
        // data[i].sumpriceadmin = 0;
        
          //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
-        //  data[i].sumprice = data[i].price * data[i].amount;
+          // data[i].sumprice = data[i].price * data[i].amount  
+          data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
          //data[i].sumprice = "";
         // data[i].sumpriceadmin = "";
+        data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+        //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
       //   sum += parseInt(data[i].sumpriceadmin);
        
 
@@ -983,16 +1041,19 @@ function showData() {
             data[i].amount +
       "</td>" +
       "<td>" +
-            data[i].priceadmin +
+             //data[i].priceadmin +
+            checkPriceAdmin +
 			"</td>" +
-			"<td>" +
-            data[i].amountadmin +
+      "<td>" +
+            checkAmountAdmin +
+             //data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice +
+            data[i].sumprice.toFixed(2) +
       "</td>" +
       "<td>" +
-            data[i].sumpriceadmin +
+        //checkSumPriceAdmin +
+             data[i].sumpriceadmin.toFixed(2) +
       "</td>" +
       "<td>" +
             data[i].responsibleperson +
@@ -1034,7 +1095,7 @@ function showData() {
         );  
       }
       
-    }); 
+     
 
     $.post("/get/shop", function (data, status) {
 
@@ -1066,12 +1127,13 @@ function showData() {
 
 
 
-  );
-}
-
+    );
+  
+  }
+  });
 });
 
-  }
+}
 
   function addDataAdmin() {
 		console.log("asdasd");
@@ -1272,6 +1334,7 @@ function showData() {
   }
 
   var ShowShopName = {};
+  var ShowShopTax = {};
 
   $(document).ready(function(){
       $.post('/get/shop', function(data, status)
@@ -1283,6 +1346,7 @@ function showData() {
               let objId = ShopName[i]._id;
 
               ShowShopName[objId] = ShopName[i].nameOfShop;
+              ShowShopTax[objId] =  ShopName[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
 
