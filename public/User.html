@@ -238,7 +238,7 @@ table td, table th  {
   <div id="Home" class="tabcontent">
     <!-- <h3>Home</h3> -->
     <div style="margin: 40px;">
-        <form style="text-align:  center;">
+        <form style="text-align:  center; margin: 40px;"">
           <!-- <form style="text-align:  center; "> -->
           
           <label > รหัสการจัดชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
@@ -387,8 +387,8 @@ table td, table th  {
                 
                 <label for="typeshop">ประเภทร้านค้า</label>
                 <select name="typeshopp" id="typeshoppp">
-                  <option value="1">ในประเทศ</option>
-                  <option value="2">ต่างประเทศ</option>
+                  <option value="ในประเทศ">ในประเทศ</option>
+                  <option value="ต่างประเทศ">ต่างประเทศ</option>
                 </select>
                 <br>
                 <br>
@@ -765,7 +765,7 @@ table td, table th  {
       console.log(data);
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
-        data[i].sumprice =  data[i].price * data[i].amount;
+        // data[i].sumprice =  data[i].price * data[i].amount;
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
 		  console.log(str);
