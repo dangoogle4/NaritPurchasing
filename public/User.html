@@ -210,7 +210,7 @@ table td, table th  {
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/main">Purchasing</a>
+        <a class="navbar-brand" href="/main">X</a>
       </div>
       <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
@@ -367,7 +367,8 @@ table td, table th  {
         </div>
       </div>
 
-      <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
+      <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;<select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select></div>
+      
       
 
       <div class="modal fade" id="ModalForAddShop" role="dialog">
@@ -377,16 +378,17 @@ table td, table th  {
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">แก้ไขข้อมูล</h4>
+              <h4 class="modal-title">เพิ่มร้านค้า</h4>
             </div>
             <div class="modal-body">
               <form>
-                <label>ชื่อร้านค้า</label>
-                <input style="margin-left:2em" name="nameshop" type="text" id="nameshop"><br>
+                <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select>
+                <!-- <label>ชื่อร้านค้า</label><input style="margin-left:2em" name="nameshop" type="text" id="nameshop"><br> -->
+                <br>
                 <br>
               
                 
-                <label for="typeshop">ประเภทร้านค้า</label>
+                <!-- <label for="typeshop">ประเภทร้านค้า</label>
                 <select style="width:185px; height: 25px;" name="typeshopp" id="typeshoppp">
                   <option value="ในประเทศ">ในประเทศ</option>
                   <option value="ต่างประเทศ">ต่างประเทศ</option>
@@ -395,9 +397,9 @@ table td, table th  {
                 <br>
                 <label>ภาษีร้านค้า</label>
                 <input style="margin-left:1.5em" name="taxshop" type="float" id="taxshop"><br>  
-                <br>
-                <button type="button"  data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
-                <input  type="reset" value="ล้าง">
+                <br> -->
+                <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+                <input  class="btn btn-default" type="reset" value="ล้าง">
                 </form>    
             </div>
             <!-- <div class="modal-footer">
@@ -655,7 +657,7 @@ table td, table th  {
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
       var storage = $("#storage").val();
-      console.log("NAMEOFSHOP!!!---> "+codeForBuy);
+      console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -749,6 +751,7 @@ table td, table th  {
 
 
     $.post("/get/shopforadd", function (data, status) {
+    
       let roomData = data;
       for (let i = 0; i < roomData.length; i++) {
         let roomName = roomData[i].nameOfShop;
@@ -757,6 +760,8 @@ table td, table th  {
         $(".storage").append(
           
             "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+            
+
           
           
           
@@ -814,7 +819,7 @@ table td, table th  {
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			//  "<td><a data-toggle='modal' data-target='#ModalForEditData'   onclick='editData("+i+")' >แก้ไข</a>" +
+			 "<td><a data-toggle='modal' data-target='#ModalForEditData'   onclick='editData("+i+")' >แก้ไข</a>" +
 				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -829,7 +834,7 @@ table td, table th  {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            // "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+            "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
@@ -838,7 +843,7 @@ table td, table th  {
     });
     $.post("/get/shop", function (data, status) {
 
-      //document.getElementById("room-namezz").innerHTML="";
+     // document.getElementById("room-namezz").innerHTML="";
       // $("#shopNameTab").append(
       //     "<a style='margin-left: 40px;'></a>"
       //   );
@@ -926,13 +931,13 @@ table td, table th  {
     
 
     
-    function showshop(val) {
+    function showshop(valeshop) {
 
-      console.log("DDDDDDDD---->>   "+ val)
+      console.log("DDDDDDDD---->>   "+ valeshop)
       //console.log("PEEGALE:"+ data[i].nameOfShop)
-      var valueid = document.getElementById("forshop"+val).value;
+      var valueid = document.getElementById("forshop"+valeshop).value;
 
-      console.log("มาแล้วสัส   -----"+ valueid) // ส่งไป >> ได้ ได้
+      console.log("มาแล้ว   -----"+ valueid) // ส่งไป >> ได้ ได้
 
       
 
@@ -1060,7 +1065,7 @@ function myFunctionselect(){
       //console.log("PEEGALE:"+ data[i].nameOfShop)
       var valueid = document.getElementById("forshop"+val).value;
 
-      console.log("มาแล้วสัส   -----"+ valueid) // ส่งไป >> ได้ ได้
+      console.log("มาแล้ว   -----"+ valueid) // ส่งไป >> ได้ ได้
 
       
 
@@ -1206,6 +1211,67 @@ location.reload();
 //   }); 
 
 }
+
+
+
+                  var tablesToExcel = (function() {
+                      var uri = 'data:application/vnd.ms-excel;base64,'
+                      , tmplWorkbookXML = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'
+                        + '<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office"><Author>Axel Richter</Author><Created>{created}</Created></DocumentProperties>'
+                        + '<Styles>'
+                        + '<Style ss:ID="Currency"><NumberFormat ss:Format="Currency"></NumberFormat></Style>'
+                        + '<Style ss:ID="Date"><NumberFormat ss:Format="Medium Date"></NumberFormat></Style>'
+                        + '</Styles>' 
+                        + '{worksheets}</Workbook>'
+                      , tmplWorksheetXML = '<Worksheet ss:Name="{nameWS}"><Table>{rows}</Table></Worksheet>'
+                      , tmplCellXML = '<Cell{attributeStyleID}{attributeFormula}><Data ss:Type="{nameType}">{data}</Data></Cell>'
+                      , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                      , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+                      return function(tables, wsnames, wbname, appname) {
+                        var ctx = "";
+                        var workbookXML = "";
+                        var worksheetsXML = "";
+                        var rowsXML = "";
+
+                        for (var i = 0; i < tables.length; i++) {
+                          if (!tables[i].nodeType) tables[i] = document.getElementById(tables[i]);
+                          for (var j = 0; j < tables[i].rows.length; j++) {
+                            rowsXML += '<Row>'
+                            for (var k = 0; k < tables[i].rows[j].cells.length; k++) {
+                              var dataType = tables[i].rows[j].cells[k].getAttribute("data-type");
+                              var dataStyle = tables[i].rows[j].cells[k].getAttribute("data-style");
+                              var dataValue = tables[i].rows[j].cells[k].getAttribute("data-value");
+                              dataValue = (dataValue)?dataValue:tables[i].rows[j].cells[k].innerHTML;
+                              var dataFormula = tables[i].rows[j].cells[k].getAttribute("data-formula");
+                              dataFormula = (dataFormula)?dataFormula:(appname=='Calc' && dataType=='DateTime')?dataValue:null;
+                              ctx = {  attributeStyleID: (dataStyle=='Currency' || dataStyle=='Date')?' ss:StyleID="'+dataStyle+'"':''
+                                    , nameType: (dataType=='Number' || dataType=='DateTime' || dataType=='Boolean' || dataType=='Error')?dataType:'String'
+                                    , data: (dataFormula)?'':dataValue
+                                    , attributeFormula: (dataFormula)?' ss:Formula="'+dataFormula+'"':''
+                                    };
+                              rowsXML += format(tmplCellXML, ctx);
+                            }
+                            rowsXML += '</Row>'
+                          }
+                          ctx = {rows: rowsXML, nameWS: wsnames[i] || 'Sheet' + i};
+                          worksheetsXML += format(tmplWorksheetXML, ctx);
+                          rowsXML = "";
+                        }
+
+                        ctx = {created: (new Date()).getTime(), worksheets: worksheetsXML};
+                        workbookXML = format(tmplWorkbookXML, ctx);
+
+                  console.log(workbookXML);
+
+                        var link = document.createElement("A");
+                        link.href = uri + base64(workbookXML);
+                        link.download = wbname || 'Workbook.xls';
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                      }
+                    })();
 		
 var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");

@@ -269,8 +269,7 @@ table td, table th  {
         <div class="modal-body">
           <form>
             <br>
-            <label>ชื่อร้านค้า</label>
-            <input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+            <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
             <br>
             <label for="typeshop">ประเภทร้านค้า</label>
             <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
@@ -583,7 +582,7 @@ var checkAmountAdmin;
 var checkSumPriceAdmin;
       
 
-console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
+console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
 
 
 
@@ -1073,7 +1072,7 @@ function showData() {
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			//  "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+			 "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
 				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -1088,7 +1087,7 @@ function showData() {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            // "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
