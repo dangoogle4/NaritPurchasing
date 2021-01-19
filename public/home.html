@@ -240,7 +240,7 @@ table td, table th  {
 	<form style="text-align: left; ">
 		
 		ค้นหา &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-      <input id="" type="text" placeholder="ผู้รับผิดชอบ" >
+      <input id="amountAll" type="text" placeholder="ผู้รับผิดชอบ" >
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
       
       <input  id="" type="text"placeholder="ชื่องบประมาณ" >
@@ -297,12 +297,12 @@ table td, table th  {
             <label>ชื่องบประมาณ</label>
             &nbsp;<input  style="margin: 5px;" id="nameorder" type="text"><br>
             <br>
-            <label>สถานะ</label>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  style="margin: 10px;" id="status" type="text"><br>
+            <!-- <label>สถานะ</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  style="margin: 10px;" id="status" type="text"><br> -->
 			<br>
 			
 			</form>
-			<br>
+			
 			<br>
 			<br>
 			<button type="button"  data-toggle="modal" class="btn btn-light"  onclick="Add()" >บันทึก</button>
@@ -366,7 +366,7 @@ table td, table th  {
 		  var respon = $("#respon").val();
 		  var amount = $("#amount").val();
 		  var nameorder = $("#nameorder").val();
-		  var status = $("#status").val();
+		  var status = "รออนุมัติ";
 		  var DeleteForDummyMainTable = "0";
 		  var reason = "";
 		  console.log(order,respon,amount,nameorder,status);
@@ -415,6 +415,35 @@ table td, table th  {
 			// localStorage.setItem("thisIsForAdminNameOderTable", setValueForAdminPricetable); //ระบุค่าครั้งที่ได้จากในนี้
 
 	function showMaintable() {
+
+		// $.post("/get/showshopnameintableinadminaccessZ", {'MAIN_IDD': local } ,function (data, status) {
+		$.post("/get/data", function (data, status) {
+      console.log(data);
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+        
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+		//   $("#room-name").append(
+		//   "<tr>"+
+		// 	// "<td>" +
+        //     // data[i].sumprice +
+		// 	// "</td>" +
+		// 	"<td id='AmountForAnotherTable" + i + "'>" +
+        //     data[i].sumprice +
+		// 	"</td>" +
+		// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
+        //     data[i].sumpriceadmin +
+		// 	"</td>" +
+		// 	"</tr>"
+			
+
+		// );
+		 	}
+    }); 
+
+		
 		
 		
     $.post("/get/maintable", function (data, status) {
@@ -435,9 +464,9 @@ table td, table th  {
         //$("#room-name-value").val(data[0].room);
         $("#room-name").append(
 		  "<tr>"+
-		//   "<td>" +           
-		// 	(j+1) +
-		// 	"</td>" +
+			//   "<td>" +           
+			// 	(j+1) +
+			// 	"</td>" +
 			"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
 			"</a></td>" +
 			"<td>" +
@@ -453,7 +482,7 @@ table td, table th  {
 			// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
 			// "</a></td>" +
 			"<td>" +
-            data[i].status +
+				ShowDataAmount[data[i].mainid] +
 			"</td>" +
 			// "<td>" +
             // data[i].reason +
@@ -612,6 +641,34 @@ table td, table th  {
 	
 
 
+  var ShowDataAmount = {};
+  //var ShowShopTax = {};
+
+  var sum = 0;
+
+  $(document).ready(function(){
+      $.post('/get/data', function(data, status)
+      {
+        DataAmount = data;
+          for(let i=0; i<DataAmount.length; i++)
+          {
+			  sum = sum += data[i].sumprice ;
+              // console.log([data[i]]); 
+			  let objId = DataAmount[i]._id;
+
+			  console.log("++++++"+ sum.toFixed(2))
+
+              ShowDataAmount[objId] = DataAmount[i].sumprice;
+              //ShowShopTax[objId] =  DataAmount[i].tax;
+
+              //let nameCategory = categoryName[i].equip_category;
+
+          }
+      });
+  });
+
+
+
 		function dropMainTableForDummyMainTable(DataForQueryData){
 			console.log('Dan--->>>'+ getDataId);
 			var deldummymaintablemark2 = "1";
@@ -663,7 +720,10 @@ table td, table th  {
 		
 			
 var getDataId = "";
-
+var getValueLocalStorageAmountAdminToMain = localStorage.getItem("thisIsParameterNameForAmountAdminToMainTable");
+var Dan = localStorage.getItem("thisIsParameterNameForAmount"); 
+var local = localStorage.getItem("thisIsParameterName");
+var add = localStorage.getItem("shopIdForAdd");
 			
   </script>
 

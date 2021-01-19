@@ -176,8 +176,8 @@ table td, table th  {
               <td>รูป</td>
               <td width="230">สถานะ</td>
               <!-- <td>ร้านค้า</td> -->
-              <!-- <td>แก้ไข</td>
-              <td>ลบ</td> -->
+              <td>แก้ไข</td>
+              <td>ลบ</td> 
               <tbody id="room-namedata"></tbody>
            </tr>
      
@@ -212,9 +212,9 @@ table td, table th  {
             </div> -->
             <div class="modal-body">
               <form>
-                <br>
+                <!-- <br>
                 <label>ร้านค้าของท่าน</label> <select style="margin-left: 0.5em; width:183px; height: 25px;" class="custom-select storage" id="storage" required></select>
-                <br>
+                <br> -->
                 <br>
                 <label>ชื่อวัสดุ</label> <input  style="margin-left:4em" id="item" name="item" type="text"><br>
                 <br>
@@ -571,11 +571,17 @@ table td, table th  {
 
 <script>
 
+  
+
 function showshop(val) {
 
 console.log("DDDDDDDD---->>   "+ val)
 //console.log("PEEGALE:"+ data[i].nameOfShop)
 var valueid = document.getElementById("forshop"+val).value;
+var shopname = document.getElementById("forshop"+val).innerHTML;
+console.log(" -0000000-000000000-00000000-0-0-"+document.getElementById("forshop"+val).innerHTML);
+localStorage.setItem("shopIdForAdd", valueid);
+localStorage.setItem("ShopNameForAddData", shopname);
 
 var checkPriceAdmin;
 var checkAmountAdmin;
@@ -746,7 +752,7 @@ $(document).ready(function(){
     }
     
     // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+    //document.getElementById("defaultOpen").click();
     </script>
 
 <script>
@@ -916,12 +922,22 @@ function showAllData() {
 
 }
 
+ function admintomain(i){ 
+
+      setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+			console.log("AmountForMainTable--->>>> " + setValue);
+      localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
+      
+ }
 function showData() {
 
+
+  
   $.post("/get/maintable", function (data, status) {
       console.log(data);
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+        
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
 		  console.log(str);
@@ -930,6 +946,7 @@ function showData() {
         //$("#room-name-value").val(data[0].room);
           $("#codeForBuy").val(getValueLocalStorage);
           $("#nameproject").val(getValueLocalStorageNameOrder);
+          // $("#amountAll").val(getValueLocalStorageAmount);
           $("#amountAll").val(getValueLocalStorageAmount);
         
       }   
@@ -982,11 +999,14 @@ function showData() {
       var checkPriceAdmin;
       var checkAmountAdmin;
       var checkSumPriceAdmin;
+      var sum = 0;
       
       // var sumprice =
       // var amountadmin 
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+
+        
 
         if(data[i].priceadmin == null){
             checkPriceAdmin = 0
@@ -1003,7 +1023,15 @@ function showData() {
       } else {
         checkSumPriceAdmin = data[i].sumpriceadmin;
         }
+      if(data[i].sumpriceadmin !== 0.00){
+        data[i].sumprice = data[i].sumpriceadmin;
+      }
+
         
+        
+        sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+        console.log("--->>   ++++"+sum.toFixed(2))
+        $("#amountAll").val(sum.toFixed(2));
        // data[i].sumpriceadmin = 0;
        
          //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
@@ -1011,10 +1039,13 @@ function showData() {
           data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
          //data[i].sumprice = "";
         // data[i].sumpriceadmin = "";
-        data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+          data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
         //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
       //   sum += parseInt(data[i].sumpriceadmin);
        
+       //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+			// console.log("AmountForMainTable--->>>> " + setValue);
+			 //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
       //  console.log("Sum = "+ sum);   
 		  //console.log(data[i]._id);
@@ -1036,7 +1067,7 @@ function showData() {
 			"<td>" +
             data[i].price +
 			"</td>" +
-			"<td>" +
+      "<td>" +
             data[i].amount +
       "</td>" +
       "<td>" +
@@ -1048,6 +1079,7 @@ function showData() {
              //data[i].amountadmin +
       "</td>" +
       "<td>" +
+        // "<td id='AmountForMainTable" + i + "'>" +
             data[i].sumprice.toFixed(2) +
       "</td>" +
       "<td>" +
@@ -1063,6 +1095,12 @@ function showData() {
       "<td>" +
             data[i].statusz +
       "</td>" +
+      "<td>" +
+            sum.toFixed(2) +
+      "</td>" +
+      // "<td>" +
+      //       Dan +
+      // "</td>" +
       // "<td>" +
       //       ShowShopName[data[i].shopid] +
       // "</td>" +
@@ -1088,7 +1126,8 @@ function showData() {
             "</div>" +
             "</div></td>" +
              "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
-			"</tr>"
+      "</tr>"
+      
 			
 
         );  
@@ -1139,7 +1178,7 @@ function showData() {
 	  {
       
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-      //var shop = $("#shop").val();
+      var storage = localStorage.getItem("shopIdForAdd");
       var codeForBuy = $("#codeForBuy").val();
 		  var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
@@ -1151,8 +1190,8 @@ function showData() {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      var storage = $("#storage").val();
-      console.log(codeForBuy);
+      //var storage = $("#storage").val();
+      console.log(codeForBuy,storage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -1427,5 +1466,7 @@ function showData() {
     var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
 
     var getValueLocalStorageAmount = localStorage.getItem("thisIsParameterNameForAmount");
+
+    var Dannnn = localStorage.getItem("thisIsParameterNameForAmountAdminToMainTable"); //ระบุค่าครั้งที่ได้จากในนี้
 
 </script>

@@ -613,6 +613,34 @@ router.post("/get/showshopnameintableinadminaccess", function (req, res, next) {
   
 });
 
+// router.post("/get/showshopnameintableinadminaccessZzzz", function (req, res, next) {
+//   // res.send("ok post complete"+" "+req.body.nameuser);
+//   //console.log('Danqq'+ _ID2);
+
+//   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+//     if (err) throw err;
+//     var dbo = db.db("Purchasing");
+//     // console.log("asdsadsad");
+//      // query = { shopid: ObjectId(req.body._ID)}; // ไแกกก
+//     //console.log(query);
+//     dbo
+//       .collection("data")
+//       //.find({shopid: req.body.shop})
+
+//        //.find( {shopid: ObjectId(req.body._ID)},
+//        .find({}) //เย้ ติดมาประมาน 7 วัน อันตราย ขนลุกเลย
+
+//       .toArray(function (err, result) {
+//         if (err) throw err;
+//         console.log(result);
+//         res.send(result);
+//         db.close();
+//       });
+//   });
+  
+// });
+
+
 router.post("/get/shopforadd", function (req, res, next) {
 
   

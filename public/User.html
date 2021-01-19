@@ -211,6 +211,7 @@ table td, table th  {
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
         <a class="navbar-brand" href="/main">X</a>
+        
       </div>
       <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
@@ -271,8 +272,8 @@ table td, table th  {
               <!-- <th>รูป</th> -->
               <th>สถานะ</th>
               <!-- <th>ร้านค้า</th> -->
-              <!-- <th>แก้ไข</th> -->
-              <!-- <th>ลบ</th> -->
+              <th>แก้ไข</th> 
+              <th>ลบ</th>
               <tbody id="room-name"></tbody>
            </tr>
      
@@ -770,7 +771,7 @@ table td, table th  {
       }
               });
     
-		
+		 var sum = 0;
     $.post("/get/dataForSearchTableMainIdUser", {_ID: getValueLocalStorage},function (data, status) {
     document.getElementById("room-name").innerHTML="";
       
@@ -778,6 +779,12 @@ table td, table th  {
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
         // data[i].sumprice =  data[i].price * data[i].amount;
+        if(data[i].sumpriceadmin !== 0.00){
+        data[i].sumprice = data[i].sumpriceadmin;
+      }
+        sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+        $("#amountAll").val(sum.toFixed(2));
+        
         data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
@@ -812,6 +819,9 @@ table td, table th  {
       "</td>" +
       "<td>" +
             data[i].statusz +
+      "</td>" +
+      "<td>" +
+              sum.toFixed(2) +
       "</td>" +
       // "<td>" +
       //       ShowShopName[data[i].shopid] +
@@ -1276,6 +1286,9 @@ location.reload();
 var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
 var getValueLocalStorageAmount = localStorage.getItem("thisIsParameterNameForAmount");
+var getValueLocalStorageAmountAdminToMain = localStorage.getItem("thisIsParameterNameForAmountAdminToMainTable");
+var add = localStorage.getItem("shopIdForAdd");
+
 var getDataId = "";
 
 
