@@ -259,7 +259,7 @@ table td, table th  {
         <br>
     
         <!-- <div class="header">Users</div> -->
-        <table id ="myInput"cellspacing="0" style="margin-top: 100px">
+        <table id ="myInput"cellspacing="0" style="margin-top: 5px">
            <tr>
               <th>ลำดับ </th>
               <th>ชื่อวัสดุ</th>
@@ -332,8 +332,8 @@ table td, table th  {
             </div>
             <div class="modal-body">
               <form>
-                <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select>
-              <br>
+                <!-- <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select> -->
+              
               <br>
                 <label>ชื่อวัสดุ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="item" name="item" type="text"><br>
                 <br>
@@ -645,7 +645,7 @@ table td, table th  {
 		console.log("danxxx");
 	  {
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-      //var shop = $("#shop").val();
+      //var add = localStorage.getItem("shopIdForAdd");
       var codeForBuy = $("#codeForBuy").val();
       var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
@@ -657,7 +657,7 @@ table td, table th  {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      var storage = $("#storage").val();
+      var storage = localStorage.getItem("shopIdForAdd");
       console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
@@ -779,10 +779,11 @@ table td, table th  {
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
         // data[i].sumprice =  data[i].price * data[i].amount;
-        if(data[i].sumpriceadmin !== 0.00){
-        data[i].sumprice = data[i].sumpriceadmin;
-      }
+        if( data[i].sumpriceadmin == null) {
         sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+    }else {
+      sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+    }
         $("#amountAll").val(sum.toFixed(2));
         
         data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
@@ -908,7 +909,7 @@ table td, table th  {
 
   function editData(i){
 			console.log("addzzzz");
-			$.post("/get/data", function (data, status) {
+			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
 						
 				console.log(data[i]._id);
         getDataId = data[i]._id;
@@ -946,8 +947,11 @@ table td, table th  {
       console.log("DDDDDDDD---->>   "+ valeshop)
       //console.log("PEEGALE:"+ data[i].nameOfShop)
       var valueid = document.getElementById("forshop"+valeshop).value;
+      var shopname = document.getElementById("forshop"+valeshop).innerHTML;
 
-      console.log("มาแล้ว   -----"+ valueid) // ส่งไป >> ได้ ได้
+      console.log("มาแล้ว   -----"+ valueid,shopname) // ส่งไป >> ได้ ได้
+      localStorage.setItem("ShopNameForAddData", shopname);
+      localStorage.setItem("shopIdForAdd", valueid);
 
       
 

@@ -586,6 +586,7 @@ localStorage.setItem("ShopNameForAddData", shopname);
 var checkPriceAdmin;
 var checkAmountAdmin;
 var checkSumPriceAdmin;
+var sum = 0;
       
 
 console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
@@ -612,6 +613,11 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
       } else {
         checkSumPriceAdmin = data[i].sumpriceadmin;
         }
+      //   if(data[i].sumpriceadmin !== 0){
+      //   data[i].sumprice = data[i].sumpriceadmin;
+      // }
+
+      //   sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
 
 
         data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
@@ -659,7 +665,24 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
       "</td>" +
       "<td>" +
             data[i].statusz +
-      "</td>"  
+      "</td>" +
+      "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+      "</tr>"
 // "<td >" +
 //   ShowShopName[data[i].shopid] +
 //         //  ShowShopName[data[i].shopid] +
@@ -990,8 +1013,11 @@ function showData() {
     
 
   $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
-    
-       
+
+
+    //let sumpriceDan = document.getElementById("Dan").innerHTML;
+
+    //localStorage.setItem("thisIsParameterNameForAmountz", sumpriceDan);
     //document.getElementById("room-name").innerHTML="";
       console.log('Daaawww'+getValueLocalStorage);
       var sum = 0 ;
@@ -1005,6 +1031,9 @@ function showData() {
       // var amountadmin 
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+
+            
+    
 
         
 
@@ -1023,13 +1052,21 @@ function showData() {
       } else {
         checkSumPriceAdmin = data[i].sumpriceadmin;
         }
-      if(data[i].sumpriceadmin !== 0.00){
-        data[i].sumprice = data[i].sumpriceadmin;
-      }
+    //   if(data[i].sumpriceadmin !== 0){
+    //     data[i].sumprice = data[i].sumpriceadmin ;
+    //   }else {
+       
+    //     data[i].sumpriceadmin = data[i].sumprice;
+      
+      
+    // }
 
-        
-        
+        console.log(data[i].sumpriceadmin);
+    if( data[i].sumpriceadmin == null) {
         sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+    }else {
+      sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+    }
         console.log("--->>   ++++"+sum.toFixed(2))
         $("#amountAll").val(sum.toFixed(2));
        // data[i].sumpriceadmin = 0;
@@ -1096,6 +1133,7 @@ function showData() {
             data[i].statusz +
       "</td>" +
       "<td>" +
+        "<td id='Dan" + i + "'>" +
             sum.toFixed(2) +
       "</td>" +
       // "<td>" +

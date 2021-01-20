@@ -280,6 +280,26 @@ router.post("/get/dataForSearchTableMainIdAdmin", function (req, res, next) {
     dbo
       .collection("data")
       .find({mainid: req.body._ID})
+      .sort({_id: -1 })
+      .toArray(function (err, result_category) {
+        if (err) throw err;
+        // console.log(result.name);
+        res.send(result_category);
+        db.close();
+      });
+  });
+});
+
+router.post("/get/dataForSearchTableMainIdAdminDan", function (req, res, next) {
+  // console.log("hkr");
+  // res.send("HRK");
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    console.log("DataMapow-->"+ req.body._ID)
+    dbo
+      .collection("data")
+      .find({_id: ObjectId(req.body._ID)})
       .toArray(function (err, result_category) {
         if (err) throw err;
         // console.log(result.name);
@@ -299,6 +319,7 @@ router.post("/get/dataForSearchTableMainIdAdmin2", function (req, res, next) {
     dbo
       .collection("data")
       .find({mainid: req.body._ID})
+      .sort({_id: -1 })
       .toArray(function (err, result_category) {
         if (err) throw err;
         // console.log(result.name);
@@ -308,7 +329,7 @@ router.post("/get/dataForSearchTableMainIdAdmin2", function (req, res, next) {
   });
 });
 
-router.post("/get/dataForSearchTableMainIdAdmin", function (req, res, next) {
+router.post("/get/dataForSearchTableMainIdAdmin3", function (req, res, next) {
   // console.log("hkr");
   // res.send("HRK");
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
@@ -326,6 +347,7 @@ router.post("/get/dataForSearchTableMainIdAdmin", function (req, res, next) {
       });
   });
 });
+
 
 router.post("/get/dataForSearchTableMainIdUser", function (req, res, next) {
   // console.log("hkr");
@@ -337,6 +359,7 @@ router.post("/get/dataForSearchTableMainIdUser", function (req, res, next) {
     dbo
       .collection("data")
       .find({mainid: req.body._ID})
+      .sort({_id: -1 })
       .toArray(function (err, result_category) {
         if (err) throw err;
         // console.log(result.name);

@@ -243,7 +243,7 @@ table td, table th  {
       <input id="amountAll" type="text" placeholder="ผู้รับผิดชอบ" >
 	  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
       
-      <input  id="" type="text"placeholder="ชื่องบประมาณ" >
+      <input  id="test101" type="text"placeholder="ชื่องบประมาณ" >
 	  
       <button  style="float: right;" class="btn btn-light" onclick="search()">ค้นหา</button>
     </form>
@@ -414,164 +414,170 @@ table td, table th  {
 			// console.log("DATAAAA--->>>> " + setValueForAdminPricetable);
 			// localStorage.setItem("thisIsForAdminNameOderTable", setValueForAdminPricetable); //ระบุค่าครั้งที่ได้จากในนี้
 
-	function showMaintable() {
+// 	function showMaintable() {
 
-		// $.post("/get/showshopnameintableinadminaccessZ", {'MAIN_IDD': local } ,function (data, status) {
-		$.post("/get/data", function (data, status) {
-      console.log(data);
-		//document.getElementById("room-name").innerHTML="";
-      for (let i = 0; i < data.length; i++) {
+// 		// $.post("/get/showshopnameintableinadminaccessZ", {'MAIN_IDD': local } ,function (data, status) {
+// 		$.post("/get/dataForSearchTableMainIdAdmin3", {_ID: localStorage.getItem("thisIsParameterName")},function (data, status) {
+// 	  console.log(data);
+// 	  var sum = 0;
+// 	 // var newnew = [];
+// 		//document.getElementById("room-name").innerHTML="";
+//       for (let i = 0; i < data.length; i++) {
+
+// 		if( data[i].sumpriceadmin == null) {
+//         sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+//     }else {
+//       sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+//     }
         
-		  //console.log(data[i]._id);
-		  str = data[i]._id.replace(/\s/g, '');
-		  console.log(str);
-		//   $("#room-name").append(
-		//   "<tr>"+
-		// 	// "<td>" +
-        //     // data[i].sumprice +
-		// 	// "</td>" +
-		// 	"<td id='AmountForAnotherTable" + i + "'>" +
-        //     data[i].sumprice +
-		// 	"</td>" +
-		// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
-        //     data[i].sumpriceadmin +
-		// 	"</td>" +
-		// 	"</tr>"
-			
-
-		// );
-		 	}
-    }); 
+// 		  //console.log(data[i]._id);
+// 		  str = data[i]._id.replace(/\s/g, '');
+// 		  console.log(str);
+		
+// 		  console.log("NEWNEWNEWNENWENWENWENWNENEWNEN    "+sum.toFixed(2));
+// 		 // $("#amountAll").val(localStorage.getItem("thisIsParameterName"));
+// 		 $("#amountAll").val(sum.toFixed(2));
+// 		//  $("#room-name").append(
+// 		// 	"<tr>"+
+// 		// 		"<td>" +
+//         //     		sum.toFixed(2) +
+// 		// 	"</td>" +
+// 		// 	"</tr>"
+// 		//  );
+// 		// );
+// 		 	}
+//     }); 
 
 		
 		
 		
-    $.post("/get/maintable", function (data, status) {
-		document.getElementById("room-name").innerHTML="";
-		//console.log("Dataaa" + data.name);
-		var j = 0;
-      for (let i = 0; i < data.length; i++) {
-		 if(data[i].deldummymaintable == 0){
+//     $.post("/get/maintable", function (data, status) {
+// 		document.getElementById("room-name").innerHTML="";
+// 		//console.log("Dataaa" + data.name);
+// 		var j = 0;
+//       for (let i = 0; i < data.length; i++) {
+// 		 if(data[i].deldummymaintable == 0){
 			 
-			test = data[i]._id;
-		console.log("----->>>   "+test);
-		  //console.log(data[i]._id);
-		  str2 = data[i]._id.replace(/\s/g, '');
-		  str = data[i]._id.replace(/\s/g, '');
-		  //console.log("STRRRRRRRRRRRR ---->>    "+str);
-        roomId = data;
-		// let rstripId = data[i]._id.rs
-        //$("#room-name-value").val(data[0].room);
-        $("#room-name").append(
-		  "<tr>"+
-			//   "<td>" +           
-			// 	(j+1) +
-			// 	"</td>" +
-			"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-			"</a></td>" +
-			"<td>" +
-            data[i].respon +
-			"</td>" +
-			"<td id='AmountForAnotherTable" + i + "'>" +
-            data[i].amount +
-			"</td>" +
-			"<td id='nameOrderForAnotherTable" + i + "' >" +
-            data[i].nameorder +
-			"</td>" +
-			// "</td>" +
-			// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
-			// "</a></td>" +
-			"<td>" +
-				ShowDataAmount[data[i].mainid] +
-			"</td>" +
-			// "<td>" +
-            // data[i].reason +
-			// "</td>" +
-			// "<td>" +
-			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-			// "</td>" +
-			 "<td><button style='margin-left: 10px ;' data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</button>" +
-				// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
-            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-            "<div class='modal-dialog modal-dialog-centered'>" +
-            "<div class='modal-content'>" +
-            "<div class='modal-header'>" +
-            "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
-            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-            "<span aria-hidden='true'>&times;</span>" +
-            "</button>" +
-            "</div>" +
-            "<div class='modal-footer'>" +
-            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-            "</div>" +
-            "</div></td>" +
-			// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-			// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
-			"</tr>"
+// 			test = data[i]._id;
+// 		console.log("----->>>   "+test);
+// 		  //console.log(data[i]._id);
+// 		  str2 = data[i]._id.replace(/\s/g, '');
+// 		  str = data[i]._id.replace(/\s/g, '');
+// 		  //console.log("STRRRRRRRRRRRR ---->>    "+str);
+//         roomId = data;
+// 		// let rstripId = data[i]._id.rs
+//         //$("#room-name-value").val(data[0].room);
+//         $("#room-name").append(
+// 		  "<tr>"+
+// 			//   "<td>" +           
+// 			// 	(j+1) +
+// 			// 	"</td>" +
+// 			"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+// 			"</a></td>" +
+// 			"<td>" +
+//             data[i].respon +
+// 			"</td>" +
+// 			"<td id='AmountForAnotherTable" + i + "'>" +
+//             data[i].amount +
+// 			"</td>" +
+// 			"<td id='nameOrderForAnotherTable" + i + "' >" +
+//             data[i].nameorder +
+// 			"</td>" +
+			
+// 			// "</td>" +
+// 			// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
+// 			// "</a></td>" +
+// 			// "<td>" +
+// 			// 	ShowDataAmount[data[i].mainid] +
+// 			// "</td>" +
+// 			"<td>" +
+//             data[i].reason +
+// 			"</td>" +
+// 			// "<td>" +
+// 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+// 			// "</td>" +
+// 			 "<td><button style='margin-left: 10px ;' data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</button>" +
+// 				// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
+//             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+//             "<div class='modal-dialog modal-dialog-centered'>" +
+//             "<div class='modal-content'>" +
+//             "<div class='modal-header'>" +
+//             "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
+//             "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+//             "<span aria-hidden='true'>&times;</span>" +
+//             "</button>" +
+//             "</div>" +
+//             "<div class='modal-footer'>" +
+//             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+//             "</div>" +
+//             "</div></td>" +
+// 			// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
+// 			// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
+// 			"</tr>"
 			
 
-		);
-		j++;
-		 }
-		// test = data[i]._id;
-		// console.log("----->>>   "+test);
-		//   //console.log(data[i]._id);
-		//   str2 = data[i]._id.replace(/\s/g, '');
-		//   str = data[i]._id.replace(/\s/g, '');
-		//   //console.log("STRRRRRRRRRRRR ---->>    "+str);
-        // roomId = data;
-		// // let rstripId = data[i]._id.rs
-        // //$("#room-name-value").val(data[0].room);
-        // $("#room-name").append(
-		//   "<tr><td>" +           
-		// 	(i + 1) +
-		// 	"</td>" +
-		// 	"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-		// 	"</a></td>" +
-		// 	"<td>" +
-        //     data[i].respon +
-		// 	"</td>" +
-		// 	"<td id='AmountForAnotherTable" + i + "'>" +
-        //     data[i].amount +
-		// 	"</td>" +
-		// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
-        //     data[i].nameorder +
-		// 	"</td>" +
-		// 	// "</td>" +
-		// 	// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
-		// 	// "</a></td>" +
-		// 	"<td>" +
-        //     data[i].status +
-		// 	"</td>" +
-		// 	"<td>" +
-        //     data[i].reason +
-		// 	"</td>" +
-		// 	// "<td>" +
-		// 	// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-		// 	// "</td>" +
-		// 	 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
-		// 		// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
-        //     "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-        //     "<div class='modal-dialog modal-dialog-centered'>" +
-        //     "<div class='modal-content'>" +
-        //     "<div class='modal-header'>" +
-        //     "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
-        //     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-        //     "<span aria-hidden='true'>&times;</span>" +
-        //     "</button>" +
-        //     "</div>" +
-        //     "<div class='modal-footer'>" +
-        //     "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-        //     "</div>" +
-        //     "</div></td>" +
-        //     "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-		// 	"</tr>"
+// 		);
+// 		j++;
+// 		 }
+// 		// test = data[i]._id;
+// 		// console.log("----->>>   "+test);
+// 		//   //console.log(data[i]._id);
+// 		//   str2 = data[i]._id.replace(/\s/g, '');
+// 		//   str = data[i]._id.replace(/\s/g, '');
+// 		//   //console.log("STRRRRRRRRRRRR ---->>    "+str);
+//         // roomId = data;
+// 		// // let rstripId = data[i]._id.rs
+//         // //$("#room-name-value").val(data[0].room);
+//         // $("#room-name").append(
+// 		//   "<tr><td>" +           
+// 		// 	(i + 1) +
+// 		// 	"</td>" +
+// 		// 	"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+// 		// 	"</a></td>" +
+// 		// 	"<td>" +
+//         //     data[i].respon +
+// 		// 	"</td>" +
+// 		// 	"<td id='AmountForAnotherTable" + i + "'>" +
+//         //     data[i].amount +
+// 		// 	"</td>" +
+// 		// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
+//         //     data[i].nameorder +
+// 		// 	"</td>" +
+// 		// 	// "</td>" +
+// 		// 	// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
+// 		// 	// "</a></td>" +
+// 		// 	"<td>" +
+//         //     data[i].status +
+// 		// 	"</td>" +
+// 		// 	"<td>" +
+//         //     data[i].reason +
+// 		// 	"</td>" +
+// 		// 	// "<td>" +
+// 		// 	// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+// 		// 	// "</td>" +
+// 		// 	 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
+// 		// 		// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
+//         //     "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+//         //     "<div class='modal-dialog modal-dialog-centered'>" +
+//         //     "<div class='modal-content'>" +
+//         //     "<div class='modal-header'>" +
+//         //     "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
+//         //     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+//         //     "<span aria-hidden='true'>&times;</span>" +
+//         //     "</button>" +
+//         //     "</div>" +
+//         //     "<div class='modal-footer'>" +
+//         //     "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+//         //     "</div>" +
+//         //     "</div></td>" +
+//         //     "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
+// 		// 	"</tr>"
 			
 
-        // );
-      }
-    });
-  }
+//         // );
+//       }
+//     });
+//   }
 
 //   function profile(i){
 //     //var nameuser = JSON.parse(getCookie("CookieUser")).id;
@@ -641,31 +647,241 @@ table td, table th  {
 	
 
 
-  var ShowDataAmount = {};
+//   var ShowDataAmount = {};
   //var ShowShopTax = {};
 
-  var sum = 0;
+  var ShowShopName = {};
+  var ShowShopTax = {};
 
   $(document).ready(function(){
-      $.post('/get/data', function(data, status)
+      $.post('/get/shop', function(data, status)
       {
-        DataAmount = data;
-          for(let i=0; i<DataAmount.length; i++)
+        ShopName = data;
+          for(let i=0; i<ShopName.length; i++)
           {
-			  sum = sum += data[i].sumprice ;
               // console.log([data[i]]); 
-			  let objId = DataAmount[i]._id;
+              let objId = ShopName[i]._id;
 
-			  console.log("++++++"+ sum.toFixed(2))
-
-              ShowDataAmount[objId] = DataAmount[i].sumprice;
-              //ShowShopTax[objId] =  DataAmount[i].tax;
+              ShowShopName[objId] = ShopName[i].nameOfShop;
+              ShowShopTax[objId] =  ShopName[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
 
           }
       });
   });
+
+  var ShowDataItem = {};
+//   var ShowShopTax = {};
+
+  $(document).ready(function(){
+      $.post('/get/dataForSearchTableMainIdAdmin3', {_ID: localStorage.getItem("thisIsParameterName")}, function(data, status)
+      {
+        DataItem = data;
+          for(let i=0; i<DataItem.length; i++)
+          {
+              // console.log([data[i]]); 
+              let objId = DataItem[i]._id;
+
+			  ShowDataItem[objId] = DataItem[i].order;
+			  console.log("Dan"+ objId);
+            //   ShowShopTax[objId] =  DataItem[i].tax;
+
+              //let nameCategory = categoryName[i].equip_category;
+
+          }
+      });
+  });
+
+  function showMaintable() {
+
+// $.post("/get/showshopnameintableinadminaccessZ", {'MAIN_IDD': local } ,function (data, status) {
+
+var z = 0 ;
+var newdan = [] ;
+
+$.post("/get/maintable",function (data, status){
+	
+	console.log(data);
+	
+var sum = 0;
+
+
+//   var newnew = [];
+//document.getElementById("room-name").innerHTML="";
+for (let i = 0; i < data.length; i++) {
+	
+	//console.log("maintable");
+	//console.log(i+"data[i]._id",data[i].order);
+	$.post("/get/dataForSearchTableMainIdAdmin3", {_ID: data[i].order},function (data, status){
+		sum = 0;
+		for(let j = 0 ; j <data.length; j++){
+			//console.log(i+"data[i]._id in j",data[i]._id);
+			//console.log("maintable_ID"+j);
+			if( data[j].sumpriceadmin == null) { // เอา sum มาใช้
+				sum = sum + data[j].sumprice * ShowShopTax[data[j].shopid];
+			}else {
+				sum = sum + data[j].sumpriceadmin * ShowShopTax[data[j].shopid];
+			}
+			//newdan[0] = 0;
+			if(j == data.length-1){ //เช็คว่าวนเสดรึยัง
+				console.log("newnewfrist "+newdan[z]);
+				console.log("sum " +sum);
+				newdan[z] = sum;
+				z++;
+				console.log("newnew "+newdan[z]);
+
+
+				$.post("/get/maintable", function (data, status) { //แสดงข้อมูล
+					// var newnew = [];
+
+					document.getElementById("room-name").innerHTML="";
+					//console.log("Dataaa" + data.name);
+					var j = 0;
+					for (let i = 0; i < data.length; i++) {
+					if(data[i].deldummymaintable == 0){
+						
+						test = data[i]._id;
+					console.log("----->>>   "+test);
+					//console.log(data[i]._id);
+					str2 = data[i]._id.replace(/\s/g, '');
+					str = data[i]._id.replace(/\s/g, '');
+					//console.log("STRRRRRRRRRRRR ---->>    "+str);
+					roomId = data;
+					// let rstripId = data[i]._id.rs
+					//$("#room-name-value").val(data[0].room);
+					$("#room-name").append(
+					"<tr>"+
+						//   "<td>" +           
+						// 	(j+1) +
+						// 	"</td>" +
+						"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+						"</a></td>" +
+						"<td>" +
+						data[i].respon +
+						"</td>" +
+						"<td id='AmountForAnotherTable" + i + "'>" +
+						// data[i].amount
+						newdan[i].toFixed(2) +
+						"</td>" +
+						"<td id='nameOrderForAnotherTable" + i + "' >" +
+						data[i].nameorder +
+						"</td>" +
+						// "</td>" +
+						// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
+						// "</a></td>" +
+						// "<td>" +
+						// 	ShowDataAmount[data[i].mainid] +
+						// "</td>" +
+						// "<td>" +
+						// data[i].reason +
+						// "</td>" +
+						// "<td>" +
+						// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+						// "</td>" +
+						"<td><button style='margin-left: 10px ;' data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</button>" +
+							// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
+						"<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+						"<div class='modal-dialog modal-dialog-centered'>" +
+						"<div class='modal-content'>" +
+						"<div class='modal-header'>" +
+						"<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
+						"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+						"<span aria-hidden='true'>&times;</span>" +
+						"</button>" +
+						"</div>" +
+						"<div class='modal-footer'>" +
+						"<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+						"</div>" +
+						"</div></td>" +
+						// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
+						// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
+						"</tr>"
+	
+
+		);
+	  j++;
+ 	}
+// test = data[i]._id;
+// console.log("----->>>   "+test);
+//   //console.log(data[i]._id);
+//   str2 = data[i]._id.replace(/\s/g, '');
+//   str = data[i]._id.replace(/\s/g, '');
+//   //console.log("STRRRRRRRRRRRR ---->>    "+str);
+// roomId = data;
+// // let rstripId = data[i]._id.rs
+// //$("#room-name-value").val(data[0].room);
+// $("#room-name").append(
+//   "<tr><td>" +           
+// 	(i + 1) +
+// 	"</td>" +
+// 	"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+// 	"</a></td>" +
+// 	"<td>" +
+//     data[i].respon +
+// 	"</td>" +
+// 	"<td id='AmountForAnotherTable" + i + "'>" +
+//     data[i].amount +
+// 	"</td>" +
+// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
+//     data[i].nameorder +
+// 	"</td>" +
+// 	// "</td>" +
+// 	// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
+// 	// "</a></td>" +
+// 	"<td>" +
+//     data[i].status +
+// 	"</td>" +
+// 	"<td>" +
+//     data[i].reason +
+// 	"</td>" +
+// 	// "<td>" +
+// 	// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+// 	// "</td>" +
+// 	 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
+// 		// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
+//     "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+//     "<div class='modal-dialog modal-dialog-centered'>" +
+//     "<div class='modal-content'>" +
+//     "<div class='modal-header'>" +
+//     "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
+//     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+//     "<span aria-hidden='true'>&times;</span>" +
+//     "</button>" +
+//     "</div>" +
+//     "<div class='modal-footer'>" +
+//     "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+//     "</div>" +
+//     "</div></td>" +
+//     "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
+// 	"</tr>"
+	
+
+// );
+}
+});
+			}
+
+		}
+	});
+
+
+  //console.log(data[i]._id);
+  str = data[i]._id.replace(/\s/g, '');
+  console.log(str);
+
+//   console.log("NEWNEWNEWNENWENWENWENWNENEWNEN    "+newnew[i]);
+ // $("#amountAll").val(localStorage.getItem("thisIsParameterName"));
+
+// );
+	 }
+	 
+	 
+}); 
+
+
+}
+
 
 
 
