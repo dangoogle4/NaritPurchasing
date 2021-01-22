@@ -307,7 +307,48 @@ body {
 
   
 
+
 </table>
+
+
+<div class="modal fade" id="ModalForAddShop" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">แก้ไขข้อมูล</h4>
+        </div> -->
+        <div class="modal-body">
+          <form>
+            <br>
+            <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+            <br>
+            <label for="typeshop">ประเภทร้านค้า</label>
+            <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
+              <option value="ในประเทศ">ในประเทศ</option>
+              <option value="ต่างประเทศ">ต่างประเทศ</option>
+            </select>
+            <br>
+            <br>
+            <label>ภาษีร้านค้า</label>
+            <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>  
+            <br>
+            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+            <input class="btn btn-light" type="reset" value="ล้าง">
+            </form>    
+        </div>
+        <!-- <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
+  </div>
+
+  
 
     <!-- Modal for Edit-->
   <div class="modal fade" id="Modalzz" role="dialog" >
@@ -338,6 +379,7 @@ body {
         
       </div>
 	</div>
+	<button style="float: right; margin: 12px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มร้านค้า</button>
 	
 
 </body>
@@ -418,6 +460,44 @@ body {
     // }); 
   }
 
+
+  function addShop() {
+		console.log("danxxx");
+	  {
+		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+		  //var mainid = getValueLocalStorage;
+		  var shop = $("#nameshop").val();
+		  var type = $("#typeshoppp").val();
+		  var tax = $("#taxshop").val();
+      console.log(shop,type,tax);
+		  //var group = $("#group").val();
+		  //var department = $("#department").val();
+      if(tax="7"){
+        tax=1.07;
+      }
+		  $.post(
+			"/api/addshop",
+			{
+			  //mainid: mainid,	
+			  shop: shop,
+			  type: type,
+			  tax: tax,
+        //picture: req.body.picture,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+			},
+
+			function (data, status) {
+        console.log(data);
+			  window.location.href = "/shopedit";
+			  
+			}
+		  );
+		 } 
+	  } 
+  }
+
   function editData(i){
 			console.log("addzzzz");
 			$.post("/get/shop", function (data, status) {
@@ -471,5 +551,8 @@ body {
     }
     
   }
+
+  var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
+  
 
 </script>

@@ -269,19 +269,24 @@ table td, table th  {
         <div class="modal-body">
           <form>
             <br>
-            <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+            <select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select>
             <br>
+            <input type="text" id="mySelect" onfocus="myFunction(this)">
+            <!-- <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+            <br>
+            
             <label for="typeshop">ประเภทร้านค้า</label>
             <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
               <option value="ในประเทศ">ในประเทศ</option>
               <option value="ต่างประเทศ">ต่างประเทศ</option>
-            </select>
+            </select> -->
             <br>
             <br>
-            <label>ภาษีร้านค้า</label>
-            <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>  
+            <!-- <label>ภาษีร้านค้า</label>
+            <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>   -->
             <br>
-            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+            <button type="button" class="btn btn-light" data-toggle="modal"  onclick="moveValueToTrash()" data-target="#ModalForAddShop" >บันทึก</button> 
+            <!-- onclick="addShop()" -->
             <input class="btn btn-light" type="reset" value="ล้าง">
             </form>    
         </div>
@@ -581,6 +586,7 @@ var valueid = document.getElementById("forshop"+val).value;
 var shopname = document.getElementById("forshop"+val).innerHTML;
 console.log(" -0000000-000000000-00000000-0-0-"+document.getElementById("forshop"+val).innerHTML);
 localStorage.setItem("shopIdForAdd", valueid);
+console.log("qwpodkqwpokdpoqwokdqkpodw           "+localStorage.getItem("shopIdForAdd", valueid))
 localStorage.setItem("ShopNameForAddData", shopname);
 
 var checkPriceAdmin;
@@ -755,6 +761,8 @@ $(document).ready(function(){
 	  } 
   }
 
+
+
   
 
   </script>
@@ -813,7 +821,7 @@ function Export(){
           } 
       csv.push(row.join(","));    
     }
-    // console.log(csv);
+    // m\console.log(csv);
     // Download CSV
     download_csv(csv.join("\n"), "export.csv");
 }
@@ -846,6 +854,84 @@ function download_csv(csv, filename) {
   // Lanzamos
   downloadLink.click();
 }
+
+
+ 
+function  moveValueToTrash(){
+  console.log("Dankub");
+  //document.getElementById("storage").value="";
+  var x = document.getElementById("storage");
+  // x.remove(x.selectedIndex);
+  // document.getElementById('storage').setAttribute("disabled","disabled")
+  //console.log(document.getElementById('storage'))
+  //console.log(storage.value);
+  shoparray = [];
+  
+  if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+      var shopidnew = storage.value;
+      
+      shoparray.push(shopidnew);
+      //console.log("pppppp"+shoparray.push(shopidnew))
+      //var storage = $("#storage").val();
+      console.log("น้องมารึยังน้าาาาาา"+shopidnew,getValueLocalStorage);
+		  //var group = $("#group").val();
+		  //var department = $("#department").val();
+  
+		  $.post(
+      "/api/addmaintableadminforshopid",
+      
+			{
+			  //shop: shop,
+        LetServerGetDataOrderFromMainTable: getValueLocalStorage,
+        shopidnew: shopidnew,
+      
+        //picture: req.body.picture,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+      },
+      
+
+			function (data, status) {
+			  window.location.href = "/admin";
+			  
+			}
+		  );
+		 } 
+}
+
+
+
+
+function myFunction(x) {
+  var x = document.getElementById("mySelect").value;
+  //console.log("Check value:: ",x);
+
+  $.post("/get/maintable", function (data, status) {
+      console.log(getValueLocalStorage);
+      console.log("Check value:: ",x);
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  // console.log(str);
+        roomId = data;
+		
+        
+      }   
+    }); 
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -955,6 +1041,45 @@ function showAllData() {
 function showData() {
 
 
+  // $.post("/get/showshopnameintableinadminaccess2", {'_MAINID': getValueLocalStorage } ,function (data, status) {
+  //     //console.log(""+localStorage.getItem("shopIdForAdd"))
+  //     var x = document.getElementById("storage");
+  //   //document.getElementById("room-namezz").innerHTML="";
+  //   for (let i = 0; i < data.length; i++) {
+  //   //console.log(data[i]._id);
+  //   str = data[i]._id.replace(/\s/g, '');
+  //   console.log(str);
+  //   roomId = data;
+  //   // let rstripId = data[i]._id.rs
+  //   //$("#room-name-value").val(data[0].room);
+  //   // if(data[i]._id == storage.value){
+  //     $("#shopNameTab").append(
+  //   // "<tr><td>" +
+  //   //       (i + 1) +
+  //   //       "</td>" +
+  //     //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+  //     // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+  //     // "<button></button>" 
+  //     '&nbsp;'+
+  //      "<button type='button' data-target='modalforeditshop' class='btn btn-light'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'  ondblclick='Editshop("+ i +")' >" + data[i].nameOfShop +"</button>" 
+  //     //  "<button data-target='modalforeditshop' ondblclick='Editshop("+ i +")'>" + "DDDDD" + "</button>" 
+  //       // "<button type='button' class='btn btn-primary' >" + "Dan" +"</button>"
+       
+       
+       
+       
+  //       // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
+        
+
+
+
+  //   );
+  //   //}
+      
+  
+  // }
+  // });
+
   
   $.post("/get/maintable", function (data, status) {
       console.log(data);
@@ -981,7 +1106,8 @@ function showData() {
         let roomName = roomData[i].nameOfShop;
         console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
         $(".storage").append(
-          "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+          "<option id=" + roomData[i]._id + " value=" + roomData[i]._id + ">" + roomName + "</option>"
+
         );
       }
               });
@@ -1010,6 +1136,26 @@ function showData() {
       }   
     }); 
 
+            $.post("/get/maintable",function (data, status) {
+
+                console.log("newnewnewnewnewnenwenwnen"+data);
+                 
+                //document.getElementById("room-name").innerHTML="";
+                for (let i = 0; i < data.length; i++) {
+                  
+                  //console.log("DWDOWKDPOWKD    ----"+ data[3].shopid);
+                //console.log(data[i]._id);
+                str = data[i]._id.replace(/\s/g, '');
+                console.log(str);
+                  roomId = data;
+                // let rstripId = data[i]._id.rs
+                  //$("#room-name-value").val(data[0].room);
+                    
+                    //$("#amountAll").val(sum);
+          
+        }   
+        }); 
+
     
 
   $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
@@ -1031,11 +1177,6 @@ function showData() {
       // var amountadmin 
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
-
-            
-    
-
-        
 
         if(data[i].priceadmin == null){
             checkPriceAdmin = 0
@@ -1132,10 +1273,10 @@ function showData() {
       "<td>" +
             data[i].statusz +
       "</td>" +
-      "<td>" +
-        "<td id='Dan" + i + "'>" +
-            sum.toFixed(2) +
-      "</td>" +
+      // "<td>" +
+      //   "<td id='Dan" + i + "'>" +
+      //       sum +
+      // "</td>" +
       // "<td>" +
       //       Dan +
       // "</td>" +
@@ -1164,7 +1305,7 @@ function showData() {
             "</div>" +
             "</div></td>" +
              "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
-      "</tr>"
+        "</tr>"
       
 			
 
@@ -1173,43 +1314,52 @@ function showData() {
       
      
 
-    $.post("/get/shop", function (data, status) {
-
-    //document.getElementById("room-namezz").innerHTML="";
-    for (let i = 0; i < data.length; i++) {
-    //console.log(data[i]._id);
-    str = data[i]._id.replace(/\s/g, '');
-    console.log(str);
-    roomId = data;
-    // let rstripId = data[i]._id.rs
-    //$("#room-name-value").val(data[0].room);
-      $("#shopNameTab").append(
-    // "<tr><td>" +
-    //       (i + 1) +
-    //       "</td>" +
-      //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
-      // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
-      // "<button></button>" 
-      '&nbsp;'+
-       "<button type='button' data-target='modalforeditshop' class='btn btn-light'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'  ondblclick='Editshop("+ i +")' >" + data[i].nameOfShop +"</button>" 
-      //  "<button data-target='modalforeditshop' ondblclick='Editshop("+ i +")'>" + "DDDDD" + "</button>" 
-        // "<button type='button' class='btn btn-primary' >" + "Dan" +"</button>"
-       
-       
-       
-       
-        // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
-      // ใช่ปะ ไรนะ ได้ ๆ  เยส      งานไม่ทำละเหรอพี่55555      
-
-
-
-    );
-  
-  }
+   
   });
+
+  $.post("/get/maintableforshopid",{_ID: getValueLocalStorage}, function (data, status) {
+
+// document.getElementById("room-namezz").innerHTML="";
+ // $("#shopNameTab").append(
+ //     "<a style='margin-left: 40px;'></a>"
+ //   );
+ for (let i = 0; i < data.length; i++) {
+  for (let j = 0; j < data[i].shopid.length; j++) {
+   console.log("3z"+data[i].shopid[j]);
+   str = data[i]._id.replace(/\s/g, '');
+ console.log(str);
+   roomId = data;
+// let rstripId = data[i]._id.rs
+   //$("#room-name-value").val(data[0].room);
+   $("#shopNameTab").append(
+ // "<tr><td>" +
+ //       (i + 1) +
+ //       "</td>" +
+       //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+       // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+       // "<button></button>" 
+
+
+        "<button class='btn btn-light' value='" + data[i].shopid[j] +"' id='forshop" + j + "' onclick='showshop("+ j +")'>" + ShowShopName[data[i].shopid[j]] +"</button>&nbsp;"
+     
+        
+        
+         // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
+       // ใช่ปะ ไรนะ ได้ ๆ  เยส      งานไม่ทำละเหรอพี่55555      
+ 
+ 
+
+
+ 
+   );
+  }
+ //console.log(data[i]._id);
+ 
+ }
+ 
 });
 
-}
+  }
 
   function addDataAdmin() {
 		console.log("asdasd");
@@ -1374,40 +1524,7 @@ function showData() {
 	});
   }	
 
-  function addShop() {
-		console.log("danxxx");
-	  {
-		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-		  var shop = $("#nameshop").val();
-		  var type = $("#typeshoppp").val();
-		  var tax = $("#taxshop").val();
-      console.log(shop,type,tax);
-		  //var group = $("#group").val();
-		  //var department = $("#department").val();
-      if(tax="7"){
-        tax=1.07;
-      }
-		  $.post(
-			"/api/addshop",
-			{
-			  shop: shop,
-			  type: type,
-			  tax: tax,
-        //picture: req.body.picture,
-        //reason:  req.body.reason,
-			  //group: status,
-			  //department: department,
-			},
-
-			function (data, status) {
-        console.log(data);
-			  window.location.href = "/admin";
-			  
-			}
-		  );
-		 } 
-	  } 
-  }
+  
 
   var ShowShopName = {};
   var ShowShopTax = {};
@@ -1498,7 +1615,9 @@ function showData() {
 
     
     var getDataId = "";
-
+    
+    var getShop = localStorage.getItem("shopIdForAdd");
+    
     var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 
     var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");

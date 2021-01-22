@@ -129,6 +129,7 @@ router.post("/api/addmaintable", function (req, res, next) {
         status: req.body.password,
         reason: req.body.reason,
         deldummymaintable: req.body.DeleteForDummyMainTable,
+        //shopid: req.body.shopid,
         //group: req.body.group,
         //department: req.body.department,
     };
@@ -153,6 +154,37 @@ router.post("/api/addmaintableadmin", function (req, res, next) {
     var myitem = { 
       //status: req.body.status,
       $set: { status: [req.body.status], reason: [req.body.reason]
+      
+       },
+       
+    };
+    // { $set: { [status: req.body.status],
+    //   reason: req.body.reason,}
+        
+        //group: req.body.group,
+        //department: req.body.department,
+     //};
+    dbo.collection("maintable").updateOne(myquery,myitem, function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
+router.post("/api/addmaintableadminforshopid", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  console.log("[rpfkr[pflew[plfewp[lfwpelfdsplfdsflds]f[l]]]]"+ req.body.LetServerGetDataOrderFromMainTable);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { order: req.body.LetServerGetDataOrderFromMainTable};
+    //console.log(myquery);
+    var myitem = { 
+      //status: req.body.status,
+      $addToSet: { shopid: ObjectId(req.body.shopidnew)
       
        },
        
@@ -220,6 +252,7 @@ router.post("/api/addshop", function (req, res, next) {
       nameOfShop: req.body.shop, //--> come from shoptable (must add shop first)
       typeOfShop: req.body.type,
       tax: req.body.tax,
+      //mainid: req.body.mainid,
      
     };
     dbo.collection("shop").insertOne(myitem, function (err, result) {
@@ -244,6 +277,24 @@ router.post("/get/maintable", function (req, res, next) {
       .collection("maintable")
       .find({})
       .toArray(function (err, result_category) {
+        if (err) throw err;
+         //console.log("DDannn" + result._id);
+        res.send(result_category);
+        db.close();
+      });
+  });
+});
+
+router.post("/get/maintableforshopid", function (req, res, next) {
+  // console.log("hkr");
+  // res.send("HRK");
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    dbo
+      .collection("maintable")
+      .find({order: req.body._ID})
+      .toArray( function (err, result_category) {
         if (err) throw err;
          //console.log("DDannn" + result._id);
         res.send(result_category);
@@ -625,6 +676,35 @@ router.post("/get/showshopnameintableinadminaccess", function (req, res, next) {
 
        //.find( {shopid: ObjectId(req.body._ID)},
        .find({mainid: req.body._MAINID ,shopid: ObjectId(req.body._ID)}) //เย้ ติดมาประมาน 7 วัน อันตราย ขนลุกเลย
+       .sort({_id: -1 })
+      .toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        res.send(result);
+        db.close();
+      });
+  });
+
+  
+  
+});
+
+router.post("/get/showshopnameintableinadminaccess2", function (req, res, next) {
+  // res.send("ok post complete"+" "+req.body.nameuser);
+  //console.log('Danqq'+ _ID2);
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    // console.log("asdsadsad");
+     // query = { shopid: ObjectId(req.body._ID)}; // ไแกกกกกก --- ก้ทำเหมือน Edit ไง ส่งค่า post มา
+    //console.log(query);
+    dbo
+      .collection("shop")
+      //.find({shopid: req.body.shop})
+
+       //.find( {shopid: ObjectId(req.body._ID)},
+       .find({_id: ObjectId(req.body._MAINID)})
 
       .toArray(function (err, result) {
         if (err) throw err;
@@ -633,6 +713,8 @@ router.post("/get/showshopnameintableinadminaccess", function (req, res, next) {
         db.close();
       });
   });
+
+  
   
 });
 

@@ -368,7 +368,7 @@ table td, table th  {
         </div>
       </div>
 
-      <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;<select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select></div>
+      <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
       
       
 
@@ -821,16 +821,16 @@ table td, table th  {
       "<td>" +
             data[i].statusz +
       "</td>" +
-      "<td>" +
-              sum.toFixed(2) +
-      "</td>" +
+      // "<td>" +
+      //         sum.toFixed(2) +
+      // "</td>" +
       // "<td>" +
       //       ShowShopName[data[i].shopid] +
       // "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#ModalForEditData'   onclick='editData("+i+")' >แก้ไข</a>" +
+			 "<td><a data-toggle='modal' data-target='#ModalForEditData' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
 				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -845,23 +845,23 @@ table td, table th  {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+            "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
 			"</tr>"
 			
 
         );
       }
     });
-    $.post("/get/shop", function (data, status) {
+    $.post("/get/maintableforshopid",{_ID: getValueLocalStorage}, function (data, status) {
 
      // document.getElementById("room-namezz").innerHTML="";
       // $("#shopNameTab").append(
       //     "<a style='margin-left: 40px;'></a>"
       //   );
       for (let i = 0; i < data.length; i++) {
-       
-		  //console.log(data[i]._id);
-		  str = data[i]._id.replace(/\s/g, '');
+       for (let j = 0; j < data[i].shopid.length; j++) {
+        console.log("3z"+data[i].shopid[j]);
+        str = data[i]._id.replace(/\s/g, '');
 		  console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
@@ -875,7 +875,7 @@ table td, table th  {
             // "<button></button>" 
 
 
-             "<button class='btn btn-light' value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>&nbsp;"
+            "<button class='btn btn-light' value='" + data[i].shopid[j] +"' id='forshop" + j + "' onclick='showshop("+ j +")'>" + ShowShopName[data[i].shopid[j]] +"</button>&nbsp;"
           
              
              
@@ -887,6 +887,9 @@ table td, table th  {
 
       
         );
+       }
+		  //console.log(data[i]._id);
+		  
       }
       
     });
@@ -991,7 +994,24 @@ table td, table th  {
             data[i].picture +
             "</td>" +
             data[i].statusz +
-            "</td>" 
+            "</td>" +
+            "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+      "</tr>"
       // "<td id='order"+i+"'>" +
       //         ShowShopName[data[i].shopid] +
       //         //  ShowShopName[data[i].shopid] +
@@ -1025,7 +1045,7 @@ table td, table th  {
               // console.log([data[i]]); 
               let objId = ShopName[i]._id;
 
-              ShowShopName[objId] = ShopName[i].tax;
+              ShowShopName[objId] = ShopName[i].nameOfShop;
               ShowShopTax[objId]  = ShopName[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
