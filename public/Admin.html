@@ -269,12 +269,15 @@ table td, table th  {
         <div class="modal-body">
           <form>
             <br>
-            <select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select>
+            <!-- <select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select> -->
             <br>
-            <input type="text" id="mySelect" onfocus="myFunction(this)">
+            <input list="list_shop" type="text" id="storage" onkeyup="myFunction(this.value)">
+            <input id="storage_id" type="hidden">
+            <datalist id="list_shop">
+            </datalist>
+            
             <!-- <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
             <br>
-            
             <label for="typeshop">ประเภทร้านค้า</label>
             <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
               <option value="ในประเทศ">ในประเทศ</option>
@@ -860,20 +863,21 @@ function download_csv(csv, filename) {
 function  moveValueToTrash(){
   console.log("Dankub");
   //document.getElementById("storage").value="";
-  var x = document.getElementById("storage");
   // x.remove(x.selectedIndex);
   // document.getElementById('storage').setAttribute("disabled","disabled")
   //console.log(document.getElementById('storage'))
   //console.log(storage.value);
   shoparray = [];
+  var storage_id = $('#storage_id').val();
   
+  console.log(storage_id)
+
   if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-      var shopidnew = storage.value;
       
-      shoparray.push(shopidnew);
+      //shoparray.push(shopidnew);
       //console.log("pppppp"+shoparray.push(shopidnew))
       //var storage = $("#storage").val();
-      console.log("น้องมารึยังน้าาาาาา"+shopidnew,getValueLocalStorage);
+      console.log("น้องมารึยังน้าาาาาา"+storage_id  ,getValueLocalStorage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -883,7 +887,7 @@ function  moveValueToTrash(){
 			{
 			  //shop: shop,
         LetServerGetDataOrderFromMainTable: getValueLocalStorage,
-        shopidnew: shopidnew,
+        shopidnew: storage_id,
       
         //picture: req.body.picture,
         //reason:  req.body.reason,
@@ -903,22 +907,43 @@ function  moveValueToTrash(){
 
 
 
-function myFunction(x) {
-  var x = document.getElementById("mySelect").value;
-  //console.log("Check value:: ",x);
+function myFunction(keyInput) {
+  // var key = document.getElementById("mySelect").value;
+  
+  
+  console.log("keyinput"+keyInput)
 
-  $.post("/get/maintable", function (data, status) {
-      console.log(getValueLocalStorage);
-      console.log("Check value:: ",x);
-		//document.getElementById("room-name").innerHTML="";
-      for (let i = 0; i < data.length; i++) {
-		  //console.log(data[i]._id);
-		  str = data[i]._id.replace(/\s/g, '');
-		  // console.log(str);
-        roomId = data;
+  // let A2s = {"key": keyInput} ;
+
+  $.post("/get/shopforquery", {'key': keyInput} , function (data, status) {
+
+    let textlist = '';
+
+      console.log(data);
+      // console.log("Check value:: ", data.nameOfShop);
+
+      for( i = 0 ; i < data.length ; i++){ //ได
+        textlist += '<option value="'+data[i].nameOfShop+'"></option>'
+        // console.log("LOOP ["+i+"]: "+textlist)
+        $('#storage_id').val(data[i]._id);
+      }
+
+      // console.log(textlist)
+
+      // $('#list_shop').html(textlist);
+      // document.getElementById("list_shop").innerHTML = textlist; //เอาค่าใน **textlist** ยัดไปใน **list_shop**
+
+
+    //document.getElementById("room-name").innerHTML="";
+    
+      // for (let i = 0; i < data.length; i++) {
+		  // //console.log(data[i]._id);
+		  // // str = data[i]._id.replace(/\s/g, '');
+		  // // console.log(str);
+      //   // roomId = data;
 		
         
-      }   
+      // }   
     }); 
 
   }
@@ -1105,12 +1130,11 @@ function showData() {
       for (let i = 0; i < roomData.length; i++) {
         let roomName = roomData[i].nameOfShop;
         console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
-        $(".storage").append(
-          "<option id=" + roomData[i]._id + " value=" + roomData[i]._id + ">" + roomName + "</option>"
-
-        );
+        $("#list_shop").append(
+          "<option value="+ roomName +" id='list1'"+ roomData[i]._id+"' ></option>"
+          );
       }
-              });
+    });
     
     $.post("/get/data",function (data, status) {
 

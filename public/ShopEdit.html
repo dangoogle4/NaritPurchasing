@@ -424,6 +424,8 @@ body {
         for(let i = 0; i < data.length; i++)
         {
 
+			str = data[i]._id.replace(/\s/g, '');
+
            $("#table_user").append("<tr><td>"
                                     // + [i+1] +"</td><td>"
                                     + data[i].nameOfShop +"</td><td>"
@@ -431,7 +433,7 @@ body {
 									+ data[i].tax +"</td><td>"
 									// + user_data[i].priority +"</td><td>"
 									+"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='editData("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td>"+
-									 "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+i+"') >ลบ</button></td>" +
+									 "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
                                     // +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a> +str.toString()+ "
                                     +"</td></tr>");                                                                                 
         }        
@@ -540,17 +542,34 @@ body {
 			});
     }
 
-  function drop(i){
+//   function drop(i){
 
-    let iduser = response[i]._id;
-    if(confirm("ต้องการลบข้อมูลผู้ใช้หรือไม่ ?"))
-    {
-      $.post("/drop/user",{userid:iduser}, function(data, status){
-            console.log(data);
-      });
-    }
+//     let iduser = response[i]._id;
+//     if(confirm("ต้องการลบข้อมูลผู้ใช้หรือไม่ ?"))
+//     {
+//       $.post("/drop/user",{userid:iduser}, function(data, status){
+//             console.log(data);
+//       });
+//     }
     
-  }
+//   }
+
+
+  function DeleteDataAdmin(obj_id) {
+	let dropRoomId = obj_id.toString();
+	console.log("delete--->>>    " + obj_id);
+    // $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
+		$.post("/drop/DataShopInMain", { dropRoomId: dropRoomId }, function (data, status) {
+		
+			console.log("00"+data);
+			// for ( i = 0 ; i < data[i].length)
+		// window.location.href = "/shopedit";
+		// console.log(obj_id);
+	  });
+      //window.location.href = "/shopedit";
+      
+	// });
+  }	
 
   var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
   

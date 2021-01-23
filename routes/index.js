@@ -605,6 +605,7 @@ router.post("/get/shop", function (req, res, next) {
       .collection("shop")
       //.find({shopid: req.body.shop})
        .find({})
+       .sort({_id: -1 })
       .toArray(function (err, result) {
         if (err) throw err;
         // console.log(result);
@@ -613,6 +614,31 @@ router.post("/get/shop", function (req, res, next) {
       });
   });
 });
+
+router.post("/get/shopforquery", function (req, res, next) {
+  // res.send("ok post complete"+" "+req.body.key);
+
+  console.log('Dan+++++++++++++'+req.body.key);
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    //var query = { _id: ObjectId(req.body.profile) };
+    //console.log(query);
+    dbo
+      .collection("shop")
+      //.find({shopid: req.body.shop})
+       .find( { nameOfShop: {'$regex': req.body.key}} )
+
+      .toArray(function (err, result) {
+        if (err) throw err;
+        // console.log(result);
+        res.send(result);
+        db.close();
+      });
+  });
+});
+
 
 router.post("/get/users", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.nameuser);
@@ -820,6 +846,39 @@ router.post("/drop/dataAdmin", function (req, res, next) {
     });
   });
 });
+
+router.post("/drop/DataShop", function (req, res, next) {
+   console.log("Hi DataShop");
+  // console.log(req.body.drop_id_category);
+  MongoClient.connect(url, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var dropcategory = { _id: ObjectId(req.body.dropRoomId) };
+    dbo.collection("shop").deleteOne(dropcategory, function (err, obj) {
+      if (err) throw err;
+      console.log("1 document deleted");
+      res.send('Dan');
+      db.close();
+    });
+  });
+});
+
+router.post("/drop/DataShopInMain", function (req, res, next) {
+  console.log("Hi DataShop");
+ // console.log(req.body.drop_id_category);
+ MongoClient.connect(url, function (err, db) {
+   if (err) throw err;
+   var dbo = db.db("Purchasing");
+   var dropcategory = { shopid: {'$pull': ObjectId(req.body.dropRoomId)} };
+   dbo.collection("maintable").deleteOne(dropcategory, function (err, obj) {
+     if (err) throw err;
+     console.log("1 document deleted");
+     res.send("Err: "+err+" | OJB: "+obj);
+     db.close();
+   });
+ });
+});
+
 
 
 router.post("/users/login", function (req, res, next) {
