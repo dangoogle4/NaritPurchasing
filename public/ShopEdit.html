@@ -510,17 +510,17 @@ body {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-		  "<label style='padding: left; margin: 10px'>ชื่อร้านค้า</label>"+"<input style='margin-left: 30px;' id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>"  +'<br>'+ 
+		  		"<label style='padding: left; margin: 10px'>ชื่อร้านค้า</label>"+"<input style='margin-left: 30px;' id='shopnewforedit'type='text' type='text'value='"+ data[i].nameOfShop +"'>"  +'<br>'+ 
 		  
-		  "<label style='padding: left; margin: 10px'>ประเภทร้านค้า</label>"+"<select style='width:180px; height: 25px;' name='typeshopp' id='typeshoppp'>"+
-				"<option type='text' value='"+data[i].typeOfShop+"' id='TypeOfShopNew' selected disabled hidden >"+data[i].typeOfShop+"</option>"+
-               "<option type='text' value='ในประเทศ' id='TypeOfShopNew' >ในประเทศ</option>"+
-               "<option type='text' value='ต่างประเทศ' id='TypeOfShopNew' >ต่างประเทศ</option>"+
-            "</select>"+
+		  		"<label style='padding: left; margin: 10px'>ประเภทร้านค้า</label>"+"<select style='width:180px; height: 25px;' name='typeshopp' id='typeshopppnew'>"+
+				"<option type='text' value='"+data[i].typeOfShop+"' id='TypeOfShopNew' selected disabled hidden >"+"ประเภทร้านค้า"+"</option>"+
+                "<option type='text' value='ในประเทศ' id='typeshopppnew' >ในประเทศ</option>"+
+                "<option type='text' value='ต่างประเทศ' id='typeshopppnew' >ต่างประเทศ</option>"+
+                "</select>"+
 		//   "<label style='padding: left; margin: 10px'>ประเภทร้านค้า</label>"+"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
-          '<br>'+
-          "<label style='padding: left; margin: 10px'>ภาษีร้านค้า</label>"+"<input style='margin-left: 25px;' id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
-          '<br>'
+                '<br>'+
+                "<label style='padding: left; margin: 10px'>ภาษีร้านค้า</label>"+"<input style='margin-left: 25px;' id='taxnew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
+                '<br>'
         //   "password <br>"+
 		// 			"<input id='amountnew'type='text' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
         //   '<br>'
@@ -570,6 +570,41 @@ body {
       
 	// });
   }	
+
+
+  function addEdit(){
+			console.log('DDan');
+    var shopnewforedit = $("#shopnewforedit").val();
+    var typeshopppnew = $("#typeshopppnew").val();
+    var taxnew = $("#taxnew").val();
+  
+   //var statusnew = $("#statusnew").val();
+    //var statusnew = $("#statusnew").val();
+
+
+  console.log(shopnewforedit,typeshopppnew,taxnew);
+  console.log(getDataId);
+
+    $.post("/save/editshop",{  
+							'ServergetDataId':getDataId,	
+							'shopnewforedit':shopnewforedit,
+                            'typeshopppnew':typeshopppnew,
+                            'taxnew':taxnew,
+                           
+                            //amountnew:amountnew,
+                            // nameordernew:nameordernew,
+                            // statusnew:statusnew,
+                            // department: department
+                            
+                        },function(data, status){
+                          window.location.href = "/shopedit";
+							          //showData();
+        });
+}			
+
+
+
+
 
   var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
   

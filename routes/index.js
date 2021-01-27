@@ -4,6 +4,18 @@ var cookieParser = require('cookie-parser');
 const { ObjectId, Int32 } = require("mongodb");
 let MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/mydata";
+const fs = require("fs");
+// const koaBody = require('koa-body');
+
+
+// app.use(koaBody({
+//   multipart: true,
+//   formLimit: "10mb",
+//   jsonLimit: "10mb",
+//   textLimit: "10mb",
+//   enableTypes: ['json', 'form', 'text']
+// }));
+
 
 
 router.post("/initializeCollection", function (req, res, next) {
@@ -203,6 +215,61 @@ router.post("/api/addmaintableadminforshopid", function (req, res, next) {
       }
     );
   });
+});
+
+
+
+router.post("/uploadImageTemporary", function (req, res) {
+  // console.log(req.body.serialnum);
+
+  const folderName = __dirname + "/../public/upload/temporary/pic/";
+  // console.log(folderName);
+  try {
+    if (!fs.existsSync(folderName)) {
+      fs.mkdirSync(folderName, { recursive: true });
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  let sampleimage;
+  let uploadPath;
+
+  if (!req.files || Object.keys(req.files).length === 0) {
+    res.status(400).send("No files were uploaded.");
+    return;
+  }
+  console.log(req.files.sampleimage.length);
+  // console.log('req.files >>>', req.files); // eslint-disable-line
+  if (req.files.sampleimage.length > 1) {
+    for (let i = 0; i < req.files.sampleimage.length; i++) {
+      sampleimage = req.files.sampleimage[i];
+
+      uploadPath =
+        __dirname + "/../public/upload/temporary/pic/" + sampleimage.name;
+
+      sampleimage.mv(uploadPath, function (err) {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        // res.send("File uploaded to " + uploadPath);
+      });
+    }
+    res.send("File uploaded to " + uploadPath);
+  } else {
+    sampleimage = req.files.sampleimage;
+
+    uploadPath =
+      __dirname + "/../public/upload/temporary/pic/" + sampleimage.name;
+
+    sampleimage.mv(uploadPath, function (err) {
+      if (err) {
+        return res.status(500).send(err);
+      }
+
+      res.send("File uploaded to " + uploadPath);
+    });
+  }
 });
 
 
@@ -455,6 +522,40 @@ router.post("/save/editmain", function (req, res, next) {
   });
 });
 
+router.post("/save/editshop", function (req, res, next) {
+ 
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    //console.log("MAINMAINMAINMAINMAIN    "+req.body.deldummymaintablenew);
+    
+    //console.log(req.body.ordernew);
+    var newvalues = {
+      $set: {
+        nameOfShop: req.body.shopnewforedit,
+        typeOfShop: req.body.typeshopppnew,
+        tax: req.body.taxnew,
+        // nameorder: req.body.nameordernew,
+        // status: req.body.statusnew,
+        //deldummymaintable: 1,
+        //status: req.body.status,
+      },
+    };
+    dbo
+      .collection("shop")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        res.send(true);
+      });
+  });
+});
+
+
 router.post("/save/editmaindummydrop", function (req, res, next) {
  
   // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
@@ -614,6 +715,37 @@ router.post("/get/shop", function (req, res, next) {
       });
   });
 });
+
+
+// router.get("/getTemporaryImage", function (req, res) {
+//   const directoryPath = __dirname + "/../public/upload/temp/pic/";
+//   //console.log(directoryPath);
+//   fileListImage = { files: [] };
+
+//   try {
+//     if (!fs.existsSync(directoryPath)) {
+//       fs.mkdirSync(directoryPath, { recursive: true });
+//     }
+//   } catch (err) {
+//     console.error(err);
+//   }
+
+//   fs.readdir(directoryPath, function (err, getfiles) {
+//     //handling error
+//     if (err) {
+//       return console.log("Unable to scan directory: " + err);
+//     }
+//     //listing all files using forEach
+//     getfiles.forEach(function (file) {
+//       // Do whatever you want to do with the file
+//       check = fileListImage.files.push(String(file));
+//       console.log(check + " " + file);
+//     });
+//     //console.log(fileList);
+//     res.send(fileListImage);
+//   });
+// });
+
 
 router.post("/get/shopforquery", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.key);

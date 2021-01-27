@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <style>
+
+
+div.preview-images > img {
+        height: 50%;
+        width: 50%;
+      }
+
 body {
 	 background-color: #ffffff;
 }
@@ -15,11 +22,11 @@ body {
 	 text-align: center;
 	 text-transform: uppercase;
 }
- img {
+ /* img {
 	 border-radius: 50%;
 	 height: 60px;
 	 width: 60px;
-}
+} */
  .table-users {
 	 border: 1px solid #84F079;
 	 border-radius: 10px;
@@ -238,8 +245,32 @@ table td, table th  {
                
                 <div class="form-group">
                     <label for="img">รูป:</label>
-                    <input type="file" id="img" name="img" accept="image/*">
+                    <!-- <input type="file" id="img" name="img" accept="image/*"> -->
+                    <!-- <input type="file" name="multi-files"  id="image" class="form-control-file border"/>
+                    <input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
+                    <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                    <!-- <div class="preview-images"></div> -->
+                    <!-- <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                    <br>
+                    <br>
+                    <!-- <input name="imagefile[]" type="file" id="takePictureField" accept="image/*" onchange="uploadPhotos(base66)" />
+                    <form id="uploadImageForm" enctype="multipart/form-data">
+                        <input id="name" value="#{name}" />
+                        ... a few more inputs ... 
+                    </form> -->
+
+                    <input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   /> 
+                    <input type="button" value="Resize Image"   onclick="ResizeImage()"/> 
+                    <button type="button" class="btn btn-light" onclick="Main()">อัพโหลด</button>
+
+                    <br/>
+                  <img src="" id="preview">
+                  <img src="" id="output">
                 </div>
+              
+                
+                    <!-- <div class="preview-images"></div>
+                 -->
                 <br>
                 
                 <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
@@ -256,6 +287,229 @@ table td, table th  {
       </div>
   </div>
 
+
+  <script>
+//     $(document).ready(function() {
+
+// $('#imageFile').change(function(evt) {
+
+//     var files = evt.target.files;
+//     var file = files[0];
+
+//     if (file) {
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             document.getElementById('preview').src = e.target.result;
+//         };
+//         reader.readAsDataURL(file);
+//         console.log("momnew");
+//     }
+// });
+// });
+
+
+
+
+var filekub = "";
+
+ function ResizeImage() {
+   for(let i =0 ; i <2;i++){
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var filesToUploads = document.getElementById('imageFile').files;
+    var file = filesToUploads[0];
+    if (file) {
+
+        var reader = new FileReader();
+        // Set the image once loaded into file reader
+        reader.onload = function(e) {
+
+            var img = document.createElement("img");
+            img.src = e.target.result;
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            var MAX_WIDTH = 400;
+            var MAX_HEIGHT = 400;
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            dataurl = canvas.toDataURL(file.type);
+            document.getElementById('output').src = dataurl;
+            filekub = dataurl;
+            console.log("[qw[pq[pwp"+filekub);
+        }
+        console.log("MAMA");
+        reader.readAsDataURL(file);
+        console.log("file---->>"+canvas.toDataURL(file.type));
+        //filekub = canvas.toDataURL(file.type);
+        //console.log("[qw[pq[pwp"+filekub);
+    }
+
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+   }
+
+}
+
+
+
+
+
+    var base66 = "";
+    const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+async function Main() {
+   const file = document.querySelector('#imageFile').files[0];
+   console.log(await toBase64(file));
+   base66 = await toBase64(file);
+   
+  }
+
+Main();
+
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = 32; // target width
+canvas.height = 32; // target height
+
+var image = new Image();
+document.getElementById("image").appendChild(image);
+
+image.onload = function(e) {
+    ctx.drawImage(image, 
+        0, 0, image.width, image.height, 
+        0, 0, canvas.width, canvas.height
+    );
+    // create a new base64 encoding
+    var resampledImage = new Image();
+    resampledImage.src = canvas.toDataURL();
+    document.getElementById("imagenew").appendChild(resampledImage);
+};
+
+
+// $(document).ready(function() {
+ 
+//  $('#imageFile').change(function(evt) {
+
+//      var files = evt.target.files;
+//      var file = files[0];
+
+//      if (file) {
+//          var reader = new FileReader();
+//          reader.onload = function(e) {
+//              document.getElementById('preview').src = e.target.result;
+//          };
+//          reader.readAsDataURL(file);
+//      }
+//  });
+// });
+
+
+
+
+
+
+$(".image").submit(function (m) {
+                m.preventDefault();
+                var formData = new FormData(this);
+                // console.log(formData.get("sampleimage").name);
+                console.log(formData.get("sampleimage").name);
+
+                let name_image = formData.get("sampleimage").name;
+                // console.log(window.location.pathname);
+
+                $.ajax({
+                  url: "/uploadImageTemporary",
+                  type: "POST",
+                  data: formData,
+                  success: function (data) {
+                    console.log(data);
+                    //updateImage(name_image);
+                    // console.log(file_data);
+                    imageUpload();
+                  },
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                });
+              });
+
+              function updateImage(name_image) {
+                $.post(
+                  "/getPicBySerialNumber",
+                  { serialnumber: serial_local },
+                  function (dataOutput, status) {
+                    var fileData = [];
+                    for (let i = 0; i < dataOutput.files.length; i++) {
+                      // add all files name to array
+                      fileData.push(dataOutput.files[i]);
+                    }
+                    $.post(
+                      "/update/image",
+                      {
+                        equipmentid: equipmentid,
+                        uploadimage: JSON.stringify(fileData),
+                      },
+                      function (data, status) {
+                        // console.log(data);
+
+                        if (data.result.ok == 1) {
+                          //window.location.reload();
+                          editequipment();
+                          // document.getElementById("exgallery").innerHTML = "";
+                        }
+                      }
+                    );
+                  }
+                );
+              }
+
+              
+    $(document).ready(function() {
+      let imagesPreview = function(input, placeToInsertImagePreview) {
+        if (input.files) {
+          let filesAmount = input.files.length;
+          for (i = 0; i < filesAmount; i++) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+              $($.parseHTML("<img>"))
+                .attr("src", event.target.result)
+                .appendTo(placeToInsertImagePreview);
+            };
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      };
+      $("#image").on("change", function() {
+        imagesPreview(this, "div.preview-images");
+      });
+    });
+  </script>
 
   <div class="modal fade" id="ModalForAddShop" role="dialog">
     <div class="modal-dialog">
@@ -670,7 +924,9 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             data[i].responsibleperson +
       "</td>" +
       "<td>" +
-            data[i].picture +
+         "<img width='40px' src="+data[i].picture+"  alt='Red dot' />"+ 
+        //data[i].picture+
+            
       "</td>" +
       "<td>" +
             data[i].statusz +
@@ -1291,8 +1547,8 @@ function showData() {
       "<td>" +
             data[i].responsibleperson +
       "</td>" +
-      "<td>" +
-            data[i].picture +
+      "<td>" + "<img  width='200px' src="+data[i].picture+" />" +
+            // data[i].picture +
       "</td>" +
       "<td>" +
             data[i].statusz +
@@ -1386,10 +1642,13 @@ function showData() {
   }
 
   function addDataAdmin() {
-		console.log("asdasd");
+    //mage = [];
+    
+    console.log("asdasd");
+    console.log(base66);
 	  {
       
-		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+		if (confirm("ต้องการเพิ่มรายการสินค้าใช่หรือไม่")) {
       var storage = localStorage.getItem("shopIdForAdd");
       var codeForBuy = $("#codeForBuy").val();
 		  var item = $("#item").val();
@@ -1402,8 +1661,10 @@ function showData() {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
+      var image = filekub;
+      //image = image[2];
       //var storage = $("#storage").val();
-      console.log(codeForBuy,storage);
+      console.log(codeForBuy,storage,image);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -1423,7 +1684,7 @@ function showData() {
         statusz: statusz,
         storage: storage,
         mainid: codeForBuy,
-        //picture: req.body.picture,
+        picture: image,
         //reason:  req.body.reason,
 			  //group: status,
 			  //department: department,
@@ -1490,6 +1751,11 @@ function showData() {
 			});
     }
 
+
+
+    
+
+              
 
     function addEdit(){
 			console.log('DDazzzn');

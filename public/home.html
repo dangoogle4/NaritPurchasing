@@ -887,7 +887,7 @@ table td, table th  {
 					document.getElementById("room-name").innerHTML="";
 					//console.log("Dataaa" + data.name);
 					if(newdan[i] == undefined){
-						newdan[i] = 0.00.toFixed(2);
+						newdan[i] = 0.00;
 
 					}
 					var j = 0;
@@ -916,7 +916,7 @@ table td, table th  {
 						"<td id='AmountForAnotherTable" + i + "'>" +
 						// data[i].amount
 						// newdan[i].toFixed(2) +
-						newdan[i] +
+						newdan[i].toFixed(2) +
 						"</td>" +
 						"<td id='nameOrderForAnotherTable" + i + "' >" +
 						data[i].nameorder +
