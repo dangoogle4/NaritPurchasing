@@ -310,6 +310,44 @@ router.post("/api/adddata", function (req, res, next) {
   });
 });
 
+
+router.post("/api/adddata2", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    console.log("Danooo"+ req.body.item);
+    var dbo = db.db("Purchasing");
+    var myitem = {
+      //shop: req.body.shop, //--> come from shoptable (must add shop first)
+      item: req.body.item,
+      partnumber: req.body.partnumber,
+      price: parseFloat(req.body.price),
+      amount: parseInt(req.body.amount),
+      priceadmin:parseFloat(req.body.priceadmin),
+      amountadmin:parseInt(req.body.amountadmin),
+      sumprice: parseFloat(req.body.sumprice),
+      sumpriceadmin:parseFloat(req.body.sumpriceadmin),
+      responsibleperson: req.body.responsibleperson,
+      shopid: ObjectId(req.body.storage),
+      mainid: req.body.mainid,
+      statusz: req.body.statusz, //--> come from admin table (admin must add this thing)
+      picture: req.body.picture,
+       //--> can't do this rightnow (don't have knowlage to do)
+      //reason:  req.body.reason, --> from admin cuz admin can add this thing into maintable
+        //group: req.body.group,
+        //department: req.body.department,
+    };
+    
+    dbo.collection("data").insertOne(myitem, function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
 router.post("/api/addshop", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
@@ -446,6 +484,48 @@ router.post("/get/dataForSearchTableMainIdAdmin2", function (req, res, next) {
       });
   });
 });
+
+router.post("/get/dataForSearchTableMainIdAdmin23", function (req, res, next) {
+  // console.log("hkr");
+  // res.send("HRK");
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    console.log("DataMapow-->"+ req.body._ID)
+    dbo
+      .collection("data")
+      .find({mainid: req.body._ID ,shopid: ObjectId(req.body._ID2)})
+      .sort({_id: -1 })
+      .toArray(function (err, result_category) {
+        if (err) throw err;
+        // console.log(result.name);
+        res.send(result_category);
+        db.close();
+      });
+  });
+});
+
+router.post("/get/dataForSearchTableMainIdAdmin234", function (req, res, next) {
+  // console.log("hkr");
+  // res.send("HRK");
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    console.log("DataMapow-->"+ req.body._ID)
+    dbo
+      .collection("data")
+      .find({mainid: req.body._ID ,shopid: ObjectId(req.body._ID2)})
+      .sort({_id: -1 })
+      .toArray(function (err, result_category) {
+        if (err) throw err;
+        // console.log(result.name);
+        res.send(result_category);
+        db.close();
+      });
+  });
+});
+
+
 
 router.post("/get/dataForSearchTableMainIdAdmin3", function (req, res, next) {
   // console.log("hkr");
@@ -634,7 +714,7 @@ router.post("/save/editdata", function (req, res, next) {
         sumprice:parseFloat(req.body.sumpricenew),
         sumpriceadmin:parseFloat(req.body.sumpricenewedit),
         responsibleperson:req.body.responsiblepersonnew,
-       // picture: picture,
+        picture: req.body.image,
         statusz:req.body.statusznew,
         //shopid: ObjectId(req.body.shopid),
         //mainid: ObjectId(req.body.mainid),
@@ -676,7 +756,7 @@ router.post("/save/editdataadmin", function (req, res, next) {
         responsibleperson:req.body.responsiblepersonnew,
        // picture: picture,
         statusz:req.body.statusznew,
-        //shopid: ObjectId(req.body.shopid),
+        picture:req.body.imagenew,
         //mainid: ObjectId(req.body.mainid),
       },
     };
@@ -1050,6 +1130,13 @@ router.post("/users/login", function (req, res, next) {
         }
       );
   });
+});
+
+router.post("/users/logout", function (req, res, next) {
+  res.clearCookie("CookieUser");
+  // res.redirect('/');
+  // res.end();
+  res.send(true);
 });
 
 

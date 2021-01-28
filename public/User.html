@@ -15,11 +15,11 @@ body {
 	 text-align: center;
 	 text-transform: uppercase;
 }
- img {
+ /* img {
 	 border-radius: 50%;
 	 height: 60px;
 	 width: 60px;
-}
+} */
  .table-users {
 	 border: 1px solid #327a81;
 	 border-radius: 10px;
@@ -238,7 +238,7 @@ table td, table th  {
   </nav>
   <div id="Home" class="tabcontent">
     <!-- <h3>Home</h3> -->
-    <div style="margin: 40px;">
+    <div style="margin: 150px;">
         <form style="text-align:  center; margin: 40px;"">
           <!-- <form style="text-align:  center; "> -->
           
@@ -351,9 +351,30 @@ table td, table th  {
                 <label >สถานะ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="statusz" type="text"><br>
                 <br>
                 <div class="form-group">
-                    <label for="img">รูป:</label>
-                    <input type="file" id="img" name="img" accept="image/*">
-                </div>
+                  <label for="img">รูป:</label>
+                  <!-- <input type="file" id="img" name="img" accept="image/*"> -->
+                  <!-- <input type="file" name="multi-files"  id="image" class="form-control-file border"/>
+                  <input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
+                  <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                  <!-- <div class="preview-images"></div> -->
+                  <!-- <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                  <br>
+                  <br>
+                  <!-- <input name="imagefile[]" type="file" id="takePictureField" accept="image/*" onchange="uploadPhotos(base66)" />
+                  <form id="uploadImageForm" enctype="multipart/form-data">
+                      <input id="name" value="#{name}" />
+                      ... a few more inputs ... 
+                  </form> -->
+
+                  <input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   /> 
+                  <!-- <input id="imageFilenew" name="imageFilenew" type="file" class="imageFilenew"  accept="image/*"   />  -->
+                  <input type="button" value="Resize Image"   onclick="ResizeImage()"/> 
+                  <!-- <button type="button" class="btn btn-light" onclick="Main()">อัพโหลด</button> -->
+
+                  <br/>
+                  <img src="" id="preview">
+                  <img src="" id="output">
+              </div>
                 <br>
                 <button class="btn btn-light" type="button" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
                 <input  class="btn btn-light" type="reset" value="ล้าง">
@@ -367,6 +388,292 @@ table td, table th  {
           
         </div>
       </div>
+
+
+      <script>
+
+
+        const fileInput = document.getElementById("imageFile");
+        
+        
+    
+        window.addEventListener('paste', e => {
+          fileInput.files = e.clipboardData.files;
+        });
+
+        // const fileInput2 = document.getElementById("imageFilenew");
+
+        
+       
+
+      var filekub = "";
+      var filekub2 = "";
+
+
+      function ResizeImagenew() {
+        console.log("DDDDD")
+        for(let i =0 ; i <2;i++){
+          if (window.File && window.FileReader && window.FileList && window.Blob) {
+          var filesToUploads = document.getElementById('imageFilenew').files;
+          console.log("filesToUploads"+filesToUploads)
+          var file = filesToUploads[0];
+          if (file) {
+
+              var reader = new FileReader();
+              // Set the image once loaded into file reader
+              reader.onload = function(e) {
+
+                  var img = document.createElement("img");
+                  img.src = e.target.result;
+
+                  var canvas = document.createElement("canvas");
+                  var ctx = canvas.getContext("2d");
+                  ctx.drawImage(img, 0, 0);
+
+                  var MAX_WIDTH = 200;
+                  var MAX_HEIGHT = 200;
+                  var width = img.width;
+                  var height = img.height;
+
+                  if (width > height) {
+                      if (width > MAX_WIDTH) {
+                          height *= MAX_WIDTH / width;
+                          width = MAX_WIDTH;
+                      }
+                  } else {
+                      if (height > MAX_HEIGHT) {
+                          width *= MAX_HEIGHT / height;
+                          height = MAX_HEIGHT;
+                      }
+                  }
+                  canvas.width = width;
+                  canvas.height = height;
+                  var ctx = canvas.getContext("2d");
+                  ctx.drawImage(img, 0, 0, width, height);
+
+                  dataurl = canvas.toDataURL(file.type);
+                  document.getElementById('output').src = dataurl;
+                  filekub2 = dataurl;
+                  console.log("[qw[pq[pwp=-=-=-=-"+filekub2);
+              }
+              console.log("MAMA");
+              reader.readAsDataURL(file);
+              console.log("file---->>"+canvas.toDataURL(file.type));
+              //filekub = canvas.toDataURL(file.type);
+              //console.log("[qw[pq[pwp"+filekub);
+    }
+
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+   }
+
+}
+
+
+
+      function ResizeImage() {
+      for(let i =0 ; i <2;i++){
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+        var filesToUploads = document.getElementById('imageFile').files;
+        var file = filesToUploads[0];
+        if (file) {
+
+        var reader = new FileReader();
+        // Set the image once loaded into file reader
+        reader.onload = function(e) {
+
+            var img = document.createElement("img");
+            img.src = e.target.result;
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            var MAX_WIDTH = 200;
+            var MAX_HEIGHT = 200;
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            dataurl = canvas.toDataURL(file.type);
+            document.getElementById('output').src = dataurl;
+            filekub = dataurl;
+            console.log("[qw[pq[pwp"+filekub);
+        }
+        console.log("MAMA");
+        reader.readAsDataURL(file);
+        console.log("file---->>"+canvas.toDataURL(file.type));
+        //filekub = canvas.toDataURL(file.type);
+        //console.log("[qw[pq[pwp"+filekub);
+    }
+
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+   }
+
+}
+
+
+
+var base66 = "";
+    const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+async function Main() {
+   const file = document.querySelector('#imageFile').files[0];
+   console.log(await toBase64(file));
+   base66 = await toBase64(file);
+   
+  }
+
+Main();
+
+
+
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = 32; // target width
+canvas.height = 32; // target height
+
+var image = new Image();
+document.getElementById("image").appendChild(image);
+
+image.onload = function(e) {
+    ctx.drawImage(image, 
+        0, 0, image.width, image.height, 
+        0, 0, canvas.width, canvas.height
+    );
+    // create a new base64 encoding
+    var resampledImage = new Image();
+    resampledImage.src = canvas.toDataURL();
+    document.getElementById("imagenew").appendChild(resampledImage);
+};
+
+
+// $(document).ready(function() {
+ 
+//  $('#imageFile').change(function(evt) {
+
+//      var files = evt.target.files;
+//      var file = files[0];
+
+//      if (file) {
+//          var reader = new FileReader();
+//          reader.onload = function(e) {
+//              document.getElementById('preview').src = e.target.result;
+//          };
+//          reader.readAsDataURL(file);
+//      }
+//  });
+// });
+
+
+
+
+
+
+$(".image").submit(function (m) {
+                m.preventDefault();
+                var formData = new FormData(this);
+                // console.log(formData.get("sampleimage").name);
+                console.log(formData.get("sampleimage").name);
+
+                let name_image = formData.get("sampleimage").name;
+                // console.log(window.location.pathname);
+
+                $.ajax({
+                  url: "/uploadImageTemporary",
+                  type: "POST",
+                  data: formData,
+                  success: function (data) {
+                    console.log(data);
+                    //updateImage(name_image);
+                    // console.log(file_data);
+                    imageUpload();
+                  },
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                });
+              });
+
+              function updateImage(name_image) {
+                $.post(
+                  "/getPicBySerialNumber",
+                  { serialnumber: serial_local },
+                  function (dataOutput, status) {
+                    var fileData = [];
+                    for (let i = 0; i < dataOutput.files.length; i++) {
+                      // add all files name to array
+                      fileData.push(dataOutput.files[i]);
+                    }
+                    $.post(
+                      "/update/image",
+                      {
+                        equipmentid: equipmentid,
+                        uploadimage: JSON.stringify(fileData),
+                      },
+                      function (data, status) {
+                        // console.log(data);
+
+                        if (data.result.ok == 1) {
+                          //window.location.reload();
+                          editequipment();
+                          // document.getElementById("exgallery").innerHTML = "";
+                        }
+                      }
+                    );
+                  }
+                );
+              }
+
+              
+    $(document).ready(function() {
+      let imagesPreview = function(input, placeToInsertImagePreview) {
+        if (input.files) {
+          let filesAmount = input.files.length;
+          for (i = 0; i < filesAmount; i++) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+              $($.parseHTML("<img>"))
+                .attr("src", event.target.result)
+                .appendTo(placeToInsertImagePreview);
+            };
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      };
+      $("#image").on("change", function() {
+        imagesPreview(this, "div.preview-images");
+      });
+    });
+
+
+
+
+      </script>
 
       <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
       
@@ -578,14 +885,14 @@ table td, table th  {
 
   }
 
-  function dropDataKrub(obj_id) {
-	let dropRoomId = obj_id.toString();
-	console.log(obj_id);
-    $.post("/drop/DataKrup", { dropRoomId: dropRoomId }, function (data, status) {
-      showData();
-      console.log(obj_id);
-	});
-  }	
+  // function dropDataKrub(obj_id) {
+	// let dropRoomId = obj_id.toString();
+	// console.log(obj_id);
+  //   $.post("/drop/DataKrup", { dropRoomId: dropRoomId }, function (data, status) {
+  //     showData();
+  //     console.log(obj_id);
+	// });
+  // }	
 
   function addEdit(){
 			console.log('DDan');
@@ -659,11 +966,13 @@ table td, table th  {
       var statusz = $("#statusz").val();
       var storage = localStorage.getItem("shopIdForAdd");
       console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
+      var image = filekub;
+      console.log("FILEKUB"+ filekub);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
 		  $.post(
-			"/api/adddata",
+			"/api/adddata2",
 			{
 			  //shop: shop,
         item: item,
@@ -678,6 +987,7 @@ table td, table th  {
         statusz: statusz,
         storage: storage,
         mainid: codeForBuy,
+        picture: image,
         //picture: req.body.picture,
         //reason:  req.body.reason,
 			  //group: status,
@@ -816,7 +1126,7 @@ table td, table th  {
             data[i].responsibleperson +
       "</td>" +
       "<td>" +
-            data[i].picture +
+        "<img  width='200px' src="+data[i].picture+" />" +
       "</td>" +
       "<td>" +
             data[i].statusz +
@@ -911,11 +1221,13 @@ table td, table th  {
     }
 
   function editData(i){
-			console.log("addzzzz");
+			console.log("addzzzz"+getDataId);
 			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
 						
 				console.log(data[i]._id);
         getDataId = data[i]._id;
+        getdataPicture = data[i].picture;
+        console.log("DATAID"+getDataId,getdataPicture);
         console.log(data);
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
@@ -934,14 +1246,83 @@ table td, table th  {
           '<br>'+
           // "<label style='padding: left; margin: 10px'>สถานะ</label>"+	"<input style='margin-left: 48px;' id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           // '<br>'+
-          "<label style='padding: left; margin: 10px'>รูป</label>"+"<input type='file' id='img' name='img' accept='image/*'>"
+          "<label style='padding: left; margin: 10px'>รูป</label>"+
+          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+          "<img  width='200px' src="+data[i].picture+" />" +
+          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
 
-				);
-						
+        );
+        
+        const fileInputEditkub = document.getElementById("imageFilenew");
+        window.addEventListener('paste', e => {
+          //editDataSoHard(editphoto);
+          fileInputEditkub.files = e.clipboardData.files;
+          
+          
+         
+        });
+    	
 						
 			});
     }
 
+    //const fileInputEdit = 0;
+   // var editphoto = 0;
+    function editDataSoHard(i){
+      //editphoto = 0;
+      console.log("addzzsadsadsadaszz");
+      var valueID = localStorage.getItem("shopIdForAdd");
+      console.log("DIEDIEDIE"+ valueID);
+      //editphoto = i;
+      $.post("/get/dataForSearchTableMainIdAdmin23",{'_ID2': valueID ,_ID: getValueLocalStorage}, function (data, status) {
+						
+				console.log(data[i]._id);
+        getDataId = data[i]._id;
+        getdataPicture = data[i].picture;
+        console.log("DATAID"+getDataId,getdataPicture);
+        console.log(data);
+				//console.log("add");
+				document.getElementById("Modal-b").innerHTML="";
+				$("#Modal-b").append(
+          "<label style='padding: left; margin: 10px'>ชื่อวัสดุ</label>"+"<input style='margin-left: 35px;' id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
+          '<br>'+
+          "<label style='padding: left; margin: 10px'>Part Number</label>"+	"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
+          '<br>'+
+          "<label style='padding: left; margin: 10px'>ราคา</label>"+"<input  style='margin-left: 49px;' id='pricenew'type='text' type='text'value='"+ data[i].price +"'>" +'<br>'+ 
+          '<br>'+
+          "<label style='padding: left; margin: 10px'>จำนวน</label>"+	"<input  style='margin-left: 41px;' id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
+          '<br>'+
+          "<label style='padding: left; margin: 10px'>ราคารวม</label>"+"<input  style='margin-left: 35px;' id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+          '<br>'+
+          "<label style='padding: left; margin: 10px'>ผู้รับผิดชอบ</label>"+	"<input style='margin-left: 10px;' id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
+          '<br>'+
+          // "<label style='padding: left; margin: 10px'>สถานะ</label>"+	"<input style='margin-left: 48px;' id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          // '<br>'+
+          "<label style='padding: left; margin: 10px'>รูป</label>"+
+          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+          "<img  width='200px' src="+data[i].picture+" />" +
+          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
+
+        );
+        // location.reload();
+        const fileInputEdit = document.getElementById("imageFilenew");
+        window.addEventListener('paste', e => {
+          //editDataSoHard(editphoto);
+          fileInputEdit.files = e.clipboardData.files;
+          
+          
+         
+        });
+						
+      });
+      
+    }
+
+    
+        
+        
+    
+        
     
 
     
@@ -958,7 +1339,7 @@ table td, table th  {
 
       
 
-    $.post("/get/showshopnameintable",{ '_ID': valueid }, function (data, status) {
+      $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
       document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
         data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
@@ -990,12 +1371,12 @@ table td, table th  {
             data[i].responsibleperson +
             "</td>" +
             "<td>" +
-              "<td>" +
-            data[i].picture +
+                "<img width='200px' height='120px' src="+data[i].picture+"  />"+ 
             "</td>" +
+            "<td>"+
             data[i].statusz +
             "</td>" +
-            "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+            "<td><a data-toggle='modal' data-target='#ModalForEditData' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
 				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
             "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
             "<div class='modal-dialog modal-dialog-centered'>" +
@@ -1010,7 +1391,7 @@ table td, table th  {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
       "</tr>"
       // "<td id='order"+i+"'>" +
       //         ShowShopName[data[i].shopid] +
@@ -1018,6 +1399,7 @@ table td, table th  {
       // "</td>" +
 
         );
+        // document.getElementById("room-name").innerHTML="";
       }
       
     });
@@ -1028,7 +1410,8 @@ table td, table th  {
 	let dropRoomId = obj_id.toString();
 	console.log(obj_id);
     $.post("/drop/DataKrup", { dropRoomId: dropRoomId }, function (data, status) {
-      showData();
+      //showData();
+      location.reload();
       console.log(obj_id);
 	});
   }	
@@ -1055,6 +1438,8 @@ table td, table th  {
   });
 
 
+  
+
 
   function addEdit(){
 			console.log('DDan');
@@ -1066,11 +1451,20 @@ table td, table th  {
     var sumpricenew = $("#sumpricenew").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = $("#statusznew").val();
+    var image;
+
+    if (filekub2 != ""){
+      image = filekub2;
+      
+    }else {
+      image = getdataPicture;
+      console.log("getdataPicture!"+getdataPicture,filekub2);
+    }
    //var statusnew = $("#statusnew").val();
     //var statusnew = $("#statusnew").val();
 
 
-  console.log(shopnew,itemnew,partnumbernew);
+  console.log(shopnew,itemnew,partnumbernew,image);
   console.log(getDataId);
 
     $.post("/save/editdata",{  
@@ -1083,6 +1477,7 @@ table td, table th  {
                             'sumpricenew':sumpricenew,	
 							              'responsiblepersonnew':responsiblepersonnew,
                             'statusznew':statusznew,
+                            'image':image,
                             //amountnew:amountnew,
                             // nameordernew:nameordernew,
                             // statusnew:statusnew,
@@ -1092,6 +1487,7 @@ table td, table th  {
                           window.location.href = "/user";
 							          //showData();
         });
+        location.reload();
 }			
 
 function myFunctionselect(){
@@ -1315,6 +1711,8 @@ var add = localStorage.getItem("shopIdForAdd");
 
 var getDataId = "";
 
+
+      
 
 
   </script>

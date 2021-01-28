@@ -232,7 +232,7 @@ table td, table th  {
 			   </div>
 			 </div>
 		   </li>
-		<li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+		<li><a onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	  </ul>
     </div>
   </nav>
@@ -262,7 +262,7 @@ table td, table th  {
 		  <td >สถานะ</td>
 		  <!-- <td>เหตุผล</td> -->
 		  <td width="100" style="text-align: center"> แก้ไข </td>
-		  <!-- <td>ลบ</td> -->
+		  <td>ลบ</td>
 		  <tbody id="room-name"></tbody>
        </tr>
 	   
@@ -357,6 +357,16 @@ table td, table th  {
 
 
 <script>
+
+function logout(){
+
+$.post("/users/logout", function(data, status){
+	if(data) {
+		window.location.href = "/";
+	}
+});
+}
+
   
 	function Add() {
 		console.log("dan");
@@ -952,7 +962,7 @@ table td, table th  {
 						"</div>" +
 						"</div></td>" +
 						// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-						// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
+						"<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
 						"</tr>"
 	
 
