@@ -480,6 +480,50 @@ table td, table th  {
   
   
   <script>
+
+      var myCookie = getCookie("CookieUser");
+
+      if (myCookie == "") {
+        console.log("มอยอ"+myCookie);
+        window.location.href = "/";
+      }
+
+      var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+
+
+// console.log("COOKIE RON RON KUB"+CookieUser);
+
+
+
+console.log("มอยอ"+CookieUser)
+
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+ if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function getCookie(cname) {
+ var name = cname + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(";");
+ for (var i = 0; i < ca.length; i++) {
+   var c = ca[i];
+   while (c.charAt(0) == " ") {
+     c = c.substring(1);
+   }
+   if (c.indexOf(name) == 0) {
+     return c.substring(name.length, c.length);
+   }
+ }
+ return "";
+}
+
+
+
+
+
   function openPage(pageName,elmnt,color) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -920,7 +964,40 @@ table td, table th  {
 
   var ShowShopName = {};
 
+
+        var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+      console.log("มอยอ"+CookieUser)
+
+      function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(";");
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == " ") {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return c.substring(name.length, c.length);
+        }
+      }
+      return "";
+      }
+
+
+
   $(document).ready(function(){
+
+    if(CookieUser.priority != "User"){
+    window.location.href = "/admin";
+  }
       $.post('/get/shop', function(data, status)
       {
         ShopName = data;

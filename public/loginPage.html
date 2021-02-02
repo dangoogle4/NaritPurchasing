@@ -906,12 +906,92 @@ window.onclick = function(event) {
 
 </body>
 </html>
+
 <script>
+<<<<<<< Updated upstream
   function register(){
     window.location.href = "/account";
   }
+=======
+
+
+
+// var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+// console.log("มอยอ"+CookieUser)
+
+// function getCookie(name) {
+//  const value = `; ${document.cookie}`;
+//  const parts = value.split(`; ${name}=`);
+//  if (parts.length === 2) return parts.pop().split(";").shift();
+// }
+
+// function getCookie(cname) {
+//  var name = cname + "=";
+//  var decodedCookie = decodeURIComponent(document.cookie);
+//  var ca = decodedCookie.split(";");
+//  for (var i = 0; i < ca.length; i++) {
+//    var c = ca[i];
+//    while (c.charAt(0) == " ") {
+//      c = c.substring(1);
+//    }
+//    if (c.indexOf(name) == 0) {
+//      return c.substring(name.length, c.length);
+//    }
+//  }
+//  return "";
+// }
+
+
+
+//   $(document).ready(function(){
+
+ 
+//                 if(data.priority != "Admin"){
+//                   window.location.href = "/";
+
+//                 }else if(data.priority != "User"){
+               
+//                   window.location.href = "/";
+//                 }
+
+ 
+
+
+// });
+
+
+    //  $(document).ready(function(){
+
+      
+    //     console.log("dataKub" );
+        
+    //          if(username == ""){
+               
+    //           window.location.href = "/";
+
+    //          }else if(password == ""){
+    //            window.location.href = "/";
+    //          }
+
+    // });
+
+
+            //  if(data.priority != "Admin"){
+            //       window.location.href = "/";
+
+            //     }else if(data.priority != "User"){
+                  
+            //       window.location.href = "/";
+            //     }
+  // function register(){
+  //   window.location.href = "/account";
+  // }
+ 
+>>>>>>> Stashed changes
   
   function login()
+ 
   {
     var email = $("#email").val();
     var password = $("#password").val();
@@ -920,16 +1000,40 @@ window.onclick = function(event) {
     {
         if(password != "")
         {
+<<<<<<< Updated upstream
           $.post("/users/login", {email:email,password:password}, 
           function(data,status)
           {
               if(data)
               {
                 // console.log(getCookie("CookieUser"));
+=======
+          $.post("/users/login", {username:username,password:password}, 
+          
+          function(data,status) // data มันรัย res มาตาก server
+          {
+              if(data)
+              {
+                console.log("data:: ",data)
+>>>>>>> Stashed changes
 
-                
-                 window.location.href = "/main";
-              }
+                 if(data.priority == "Admin"){
+
+                  console.log("Your Privilege  "+data.priority); //งั้นแบบนี้มันก็ไม่เหมือน คุกกี้อะดิ ??
+                   window.location.href = "/homeadmin";
+
+                }else if (data.priority == "User"){
+
+                  console.log("Your Privilege  "+data.priority);
+                   window.location.href = "/main";
+
+                }
+
+
+                //console.log("Your Privilege  "+CookieUser.priority)
+                //console.log(getCookie("CookieUser"));
+                 //window.location.href = "/main";
+                }
               else{
 
                 alert("NO USER");
@@ -940,6 +1044,9 @@ window.onclick = function(event) {
     }
 
   }
+
+ 
+
 
 
 </script>

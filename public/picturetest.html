@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload File </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+      <div class="container">
+          <div class="page-header">
+              <h1>Upload File</h1>
+              <hr>
+          </div>
+          <div class="row">
+            <div class="col">
+              <form method="post" action="/upload" enctype="multipart/form-data">
+                <div class="form-group">
+                  <label for="firstname">Upload</label>
+                  <input type="file" class="form-control" name="fileupload" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-primary">Reset</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <script src="./jquery-3.2.1.slim.min.js" ></script>
+        <script src="./popper.min.js" ></script>
+        <script src="./bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
+<!-- <script>
+
+console.log("adsad")
+
+ $(".custom-file-input").on("change", function() 
+    {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+
+
+
+
+
+</script>
+
+<script type="text/javascript">
+   
+  // console.log(i);
+  // $("#imagefil").on("change",function(){
+  //     var _files = $(this)[0].files;
+  //     var _listFileName = "";
+  //     if(_files.length>0){
+  //         var _fileName = [];
+  //         $.each(_files,function(k,v){
+  //             _fileName[k] = v.name;
+  //         });
+  //         _listFileName = _fileName.join(",");
+  //     }
+  //     $(this).next("label").text(_listFileName);
+  // });
+
+
+
+
+  $("#filepicture").on("change",function(){
+      var _files = $(this)[0].files;
+      var _listFileName = "";
+      if(_files.length>0){
+          var _fileName = [];
+          $.each(_files,function(k,v){
+              _fileName[k] = v.name;
+          });
+          _listFileName = _fileName.join(",");
+      }
+      $(this).next("label").text(_listFileName);
+  });
+
+
+</script>
+
+<script>
+
+
+$(".uploadImage").submit(function(m) 
+  {
+      m.preventDefault();    
+      var formData = new FormData(this);
+      // console.log(formData.get("sampleimage").name);
+
+      let name_image = formData.get("sampleimage").name;
+      // console.log(window.location.pathname);
+
+      $.ajax({
+          url: '/uploadimage',
+          type: 'POST',
+          data: formData,
+          success: function (data) 
+          {
+              // console.log(data)
+              updateImage(name_image);
+              // console.log(file_data);
+          },
+          cache: false,
+          contentType: false,
+          processData: false
+      });
+  });
+
+  function updateImage(name_image)
+  {
+    // let nameiamge = $("#imagefil").val();
+    // console.log(nameiamge);
+    // let name_image = nameiamge.substring(12);
+    
+    image_data.push(name_image);
+
+    // console.log(image_data);
+    $.post('/update/image', { equipmentid : equipmentid,uploadimage : JSON.stringify(image_data)}, function(data,status){
+      // console.log(data);
+
+      if(data.result.ok == 1)
+      {
+          //window.location.reload();            
+      }
+
+    });
+  }
+
+
+
+
+$("#uploadForm").submit(function(e) 
+{
+    e.preventDefault();    
+    var formData = new FormData(this);
+
+    // console.log(window.location.pathname);
+
+    $.ajax({
+        url: '/upload',
+        type: 'POST',
+        data: formData,
+        success: function (datafile) 
+        {
+            // console.log(datafile)
+            updateDB(datafile);
+            // console.log(file_data);
+        },
+        cache: false,
+        contentType: false,
+        processData: false
+    });
+});
+
+
+function updateDB(datafile)
+{
+  let namefile = $("#filepicture").val();
+  // // console.log(namefile.substring(12));
+  let namefile2 = namefile.substring(12);
+
+  file_data.push(namefile2);
+
+
+  // console.log(file_data);
+
+
+  $.post('/update/files',{ equipmentid : equipmentid, uploadfilename : JSON.stringify(file_data) }, function(data, status)
+  {
+    // console.log(data);
+
+      if(data.result.ok == 1)
+      {
+          //window.location.reload();
+      }
+  });
+  // $.post('/upload/files',{file_data : file_data,
+  //                         equipmentid:equipmentid,
+  //                         equipment_ID:equipment_ID,
+  //                         name_equipment:name_equipment
+  //                       }, function(data, status){
+  //   console.log(data);
+  // });
+}
+
+
+</script> -->

@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <style>
+
+
+div.preview-images > img {
+        height: 50%;
+        width: 50%;
+      }
+
 body {
 	 background-color: #ffffff;
 }
@@ -15,11 +22,11 @@ body {
 	 text-align: center;
 	 text-transform: uppercase;
 }
- img {
+ /* img {
 	 border-radius: 50%;
 	 height: 60px;
 	 width: 60px;
-}
+} */
  .table-users {
 	 border: 1px solid #84F079;
 	 border-radius: 10px;
@@ -58,8 +65,50 @@ body {
 
 table td, table th  {
     border: 0.5px solid powderblue;
+    /* border-style: groove none none none; */
 }
  
+
+.dropbtn {
+  background-color: #ffffff;
+  color: rgb(73, 69, 69);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
+
  
  
 </style>
@@ -68,34 +117,51 @@ table td, table th  {
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Purchasing</a>
+        <a class="navbar-brand" href="/homeadmin">Purchasing</a>
       </div>
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
         <li><a href="/user">user</a></li>
         <li><a href="/admin">admin</a></li>
         <li><a href="/">Page 3</a></li>
-      </ul>
+      </ul> -->
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <div class="dropdown">
+             <button class="dropbtn">Setting
+             <i class="fa fa-caret-down"></i>
+             </button>
+             <div class="dropdown-content">
+             <a href="/adminedit">ดูข้อมูลสมาชิก</a>
+             <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+             <!-- <a href="#">Link 3</a> -->
+             </div>
+           </div>
+           </li>
+        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        </ul>
     </div>
+    
   </nav>
-  <div id="Home" class="tabcontent"style="margin: 40px;">
+  
+  <div id="Home" class="tabcontent"style="margin: 150px;">
     <!-- <h3>Home</h3> -->
     <div>
         <form style="text-align:  center; margin: 40px;" >
-          รหัสการชื้อ 
-          <input  readonly id="codeForBuy" name="first" type="text" >
+          <label > รหัสการจัดชื้อ </label>&nbsp;&nbsp;<input readonly id="codeForBuy" type="text" >
              
-          ชื่องบประมาณ
-          <input  readonly id="nameproject" name="last" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label> ชื่องบประมาณ </label>&nbsp;&nbsp; <input  readonly id="nameproject" type="text">
             
-          ราคารวมทั้งหมดของทุกชิ้น
-          <input  readonly id="amountAll" name="lastmak" type="text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <label>ราคารวมทั้งหมดของทุกชิ้น </label> &nbsp;&nbsp;<input readonly id="amountAll" type="text">
     
           <!--<button >ค้นหา</button>-->
         </form>
@@ -116,11 +182,11 @@ table td, table th  {
               <td>ราคารวม(เสนอ)</td>
               <td>ราคารวม(แก้ไข)</td>
               <td>ผู้รับผิดชอบ</td>
-              <!-- <td>รูป</td> -->
+              <td>รูป</td>
               <td width="230">สถานะ</td>
-              <td>ร้านค้า</td>
+              <!-- <td>ร้านค้า</td> -->
               <td>แก้ไข</td>
-              <td>ลบ</td>
+              <td>ลบ</td> 
               <tbody id="room-namedata"></tbody>
            </tr>
      
@@ -140,8 +206,8 @@ table td, table th  {
                -->
         </table>
      </div>
-     <button type="button" style="float: right; margin: 12.5px;" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูลสินค้า</button>
-     <button style="float: right; margin: 10px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มข้อมูลร้านค้า</button>
+     <button type="button" style="float: right; margin: 12px;" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูล</button>
+     <button style="float: right; margin: 12px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มร้านค้า</button>
     
       <!-- Modal -->
       <div class="modal fade" id="myModalforadddata" role="dialog">
@@ -149,52 +215,102 @@ table td, table th  {
         
           <!-- Modal content-->
           <div class="modal-content">
-            <div class="modal-header">
+            <!-- <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">เพิ่มสินค้า</h4>
-            </div>
+            </div> -->
             <div class="modal-body">
               <form>
-                <label>ชื่อวัสดุ</label>
-                <input  id="item" name="item" type="text"><br>
+                <!-- <br>
+                <label>ร้านค้าของท่าน</label> <select style="margin-left: 0.5em; width:183px; height: 25px;" class="custom-select storage" id="storage" required></select>
+                <br> -->
+                <br>
+                <label>ชื่อวัสดุ</label> <input  style="margin-left:4em" id="item" name="item" type="text"><br>
                 <br>
                 <label>Part Number</label>
-                <input id="partnumber" name="partnumber" type="text"><br> 
+                <input style="margin-left:1.3em" id="partnumber" name="partnumber" type="text"><br> 
                 <br>
                 <label>ราคา</label>
-                <input  id="price" name="price" type="number"><br>
+                <input  style="margin-left:5.1em" id="price" name="price" type="number"><br>
                 <br>
                 <label>จำนวน</label>
-                <input  id="amountz" name="amount" type="number"><br>
+                <input  style="margin-left:4.4em" id="amountz" name="amount" type="number"><br>
                 <br>
                 <label>ราคารวม</label>
-                <input  id="sumprice" name="sumprice" type="text"><br>
+                <input  style="margin-left:3.5em" id="sumprice" name="sumprice" type="text"><br>
                 <br>
                 <label>ผู้รับผิดชอบ</label>
-                <input  id="responsibleperson" name="responsibleperson" type="text"><br>
+                <input  style="margin-left:1.98em" id="responsibleperson" name="responsibleperson" type="text"><br>
                 <br>
-                <label>สถานะ</label>
-                <input  id="statusz" type="text"><br>
-                <label>ร้านค้าของท่าน</label>
-                <select
-                    class="custom-select storage"
-                    id="storage"
-                    required
-                  ></select>
-                <div class="form-group">
+                <label >สถานะ</label>
+                <input  style="margin-left:4.3em" id="statusz" type="text"><br>
+               
+                 <div class="form-group">
                     <label for="img">รูป:</label>
-                    <input type="file" id="img" name="img" accept="image/*">
+                    <!-- <input type="file" id="img" name="img" accept="image/*"> -->
+                    <!-- <input type="file" name="multi-files"  id="image" class="form-control-file border"/>
+                    <input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
+                    <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                    <!-- <div class="preview-images"></div> -->
+                    <!-- <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
+                    <br>
+                    <br>
+                    <button type="button"  class="btn btn-light" data-toggle="modal" data-target="#myModalForImage" >เพิ่มรูปภาพ</button>
+                    <!-- <input name="imagefile[]" type="file" id="takePictureField" accept="image/*" onchange="uploadPhotos(base66)" />
+                    <form id="uploadImageForm" enctype="multipart/form-data">
+                        <input id="name" value="#{name}" />
+                        ... a few more inputs ... 
+                    </form> -->
+
+
+                    
+                    <!-- <form action="/profile" method="post" enctype="multipart/form-data">
+                      <input type="file" name="avatar">
+                      <input type="submit" value="upload">
+                    </form> -->
+                    <!-- <input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   /> 
+                    <input type="button" value="Resize Image"   onclick="ResizeImage()"/>  
+                     <button type="button" class="btn btn-light" onclick="Main()">อัพโหลด</button>
+                      
+                    <br/>
+                    <img src="" id="preview">
+                    <img src="" id="output"> -->
+
+                    <!-- <form method="post" action="/upload" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label for="firstname">Upload</label>
+                        <input type="file" class="form-control" name="fileupload" id="image">
+                      </div>
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="reset" class="btn btn-primary">Reset</button>
+                    </form> -->
+
                 </div>
-                <br>
+
+                <!-- <form id="new_document_attachment" method="post">
+                  <div class="actions"><input type="submit" name="commit" value="Submit" /></div>
+                  <input type="file" id="imageFile" />
+                </form>  -->
+              
                 
-                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">เพิ่มข้อมูล</button>
-                <input class="btn btn-info btn-lg" type="reset" value="Reset">
-                </form>    
+                    <!-- <div class="preview-images"></div>
+                 -->
+                  <br>
+                
+                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
+                <input class="btn btn-light" type="reset" value="ล้าง">
+                </form> 
+                <!-- <form action="/profile" method="post" enctype="multipart/form-data">
+                  <input type="file" name="imagenakub">
+                  <input type="submit" value="upload">
+                </form> -->
+               
+
             </div>
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
+            </div> -->
           </div>
           
         </div>
@@ -202,37 +318,395 @@ table td, table th  {
   </div>
 
 
+   <!-- Modal -->
+   <div class="modal fade" id="myModalForImage" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <!-- <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">เพิ่มสินค้า</h4>
+        </div> -->
+        <div class="modal-body">
+        
+                <label for="img">รูป:</label>
+             
+
+                <form id="imageuploadkub"method="post" action="/upload" enctype="multipart/form-data">
+                  <div class="form-group">
+                    <label for="firstname">Upload</label>
+                    <input type="file" class="form-control" name="fileupload" id="image">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="reset" class="btn btn-primary">Reset</button>
+                </form>
+
+            </div>
+              <br>
+            </form> 
+            <!-- <form action="/profile" method="post" enctype="multipart/form-data">
+              <input type="file" name="imagenakub">
+              <input type="submit" value="upload">
+            </form> -->
+           
+
+        </div>
+        <!-- <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div> -->
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <script>
+
+$(".imageuploadkub").submit(function(e) 
+      {
+          m.preventDefault(); 
+      });
+
+//const form = document.getElementById("new_document_attachment");
+const fileInput = document.getElementById("imageFile");
+
+// fileInput.addEventListener('change', () => {
+//   form.submit();
+// });
+
+window.addEventListener('paste', e => {
+  fileInput.files = e.clipboardData.files;
+});
+//     $(document).ready(function() {
+
+// $('#imageFile').change(function(evt) {
+
+//     var files = evt.target.files;
+//     var file = files[0];
+
+//     if (file) {
+//         var reader = new FileReader();
+//         reader.onload = function(e) {
+//             document.getElementById('preview').src = e.target.result;
+//         };
+//         reader.readAsDataURL(file);
+//         console.log("momnew");
+//     }
+// });
+// });
+
+
+
+
+var filekub = "";
+var filekub2 = "";
+
+
+function ResizeImagenew() {
+  console.log("DDDDD")
+   for(let i =0 ; i <2;i++){
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var filesToUploads = document.getElementById('imageFilenew').files;
+    console.log("filesToUploads"+filesToUploads)
+    var file = filesToUploads[0];
+    if (file) {
+
+        var reader = new FileReader();
+        // Set the image once loaded into file reader
+        reader.onload = function(e) {
+
+            var img = document.createElement("img");
+            img.src = e.target.result;
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            var MAX_WIDTH = 200;
+            var MAX_HEIGHT = 200;
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            dataurl = canvas.toDataURL(file.type);
+            document.getElementById('output').src = dataurl;
+            filekub2 = dataurl;
+            console.log("[qw[pq[pwp=-=-=-=-"+filekub2);
+        }
+        console.log("MAMA");
+        reader.readAsDataURL(file);
+        console.log("file---->>"+canvas.toDataURL(file.type));
+        //filekub = canvas.toDataURL(file.type);
+        //console.log("[qw[pq[pwp"+filekub);
+    }
+
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+   }
+
+}
+
+ function ResizeImage() {
+   for(let i =0 ; i <2;i++){
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
+    var filesToUploads = document.getElementById('imageFile').files;
+    var file = filesToUploads[0];
+    if (file) {
+
+        var reader = new FileReader();
+        // Set the image once loaded into file reader
+        reader.onload = function(e) {
+
+            var img = document.createElement("img");
+            img.src = e.target.result;
+
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            var MAX_WIDTH = 200;
+            var MAX_HEIGHT = 200;
+            var width = img.width;
+            var height = img.height;
+
+            if (width > height) {
+                if (width > MAX_WIDTH) {
+                    height *= MAX_WIDTH / width;
+                    width = MAX_WIDTH;
+                }
+            } else {
+                if (height > MAX_HEIGHT) {
+                    width *= MAX_HEIGHT / height;
+                    height = MAX_HEIGHT;
+                }
+            }
+            canvas.width = width;
+            canvas.height = height;
+            var ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0, width, height);
+
+            dataurl = canvas.toDataURL(file.type);
+            document.getElementById('output').src = dataurl;
+            filekub = dataurl;
+            console.log("[qw[pq[pwp"+filekub);
+        }
+        console.log("MAMA");
+        reader.readAsDataURL(file);
+        console.log("file---->>"+canvas.toDataURL(file.type));
+        //filekub = canvas.toDataURL(file.type);
+        //console.log("[qw[pq[pwp"+filekub);
+    }
+
+} else {
+    alert('The File APIs are not fully supported in this browser.');
+}
+   }
+
+}
+
+
+
+
+
+    var base66 = "";
+    const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+});
+
+async function Main() {
+   const file = document.querySelector('#imageFile').files[0];
+   console.log(await toBase64(file));
+   base66 = await toBase64(file);
+   
+  }
+
+Main();
+
+var canvas = document.createElement("canvas");
+var ctx = canvas.getContext("2d");
+
+canvas.width = 32; // target width
+canvas.height = 32; // target height
+
+var image = new Image();
+document.getElementById("image").appendChild(image);
+
+image.onload = function(e) {
+    ctx.drawImage(image, 
+        0, 0, image.width, image.height, 
+        0, 0, canvas.width, canvas.height
+    );
+    // create a new base64 encoding
+    var resampledImage = new Image();
+    resampledImage.src = canvas.toDataURL();
+    document.getElementById("imagenew").appendChild(resampledImage);
+};
+
+
+// $(document).ready(function() {
+ 
+//  $('#imageFile').change(function(evt) {
+
+//      var files = evt.target.files;
+//      var file = files[0];
+
+//      if (file) {
+//          var reader = new FileReader();
+//          reader.onload = function(e) {
+//              document.getElementById('preview').src = e.target.result;
+//          };
+//          reader.readAsDataURL(file);
+//      }
+//  });
+// });
+
+
+
+
+
+
+$(".image").submit(function (m) {
+                m.preventDefault();
+                var formData = new FormData(this);
+                // console.log(formData.get("sampleimage").name);
+                console.log(formData.get("sampleimage").name);
+
+                let name_image = formData.get("sampleimage").name;
+                // console.log(window.location.pathname);
+
+                $.ajax({
+                  url: "/uploadImageTemporary",
+                  type: "POST",
+                  data: formData,
+                  success: function (data) {
+                    console.log(data);
+                    //updateImage(name_image);
+                    // console.log(file_data);
+                    imageUpload();
+                  },
+                  cache: false,
+                  contentType: false,
+                  processData: false,
+                });
+              });
+
+              function updateImage(name_image) {
+                $.post(
+                  "/getPicBySerialNumber",
+                  { serialnumber: serial_local },
+                  function (dataOutput, status) {
+                    var fileData = [];
+                    for (let i = 0; i < dataOutput.files.length; i++) {
+                      // add all files name to array
+                      fileData.push(dataOutput.files[i]);
+                    }
+                    $.post(
+                      "/update/image",
+                      {
+                        equipmentid: equipmentid,
+                        uploadimage: JSON.stringify(fileData),
+                      },
+                      function (data, status) {
+                        // console.log(data);
+
+                        if (data.result.ok == 1) {
+                          //window.location.reload();
+                          editequipment();
+                          // document.getElementById("exgallery").innerHTML = "";
+                        }
+                      }
+                    );
+                  }
+                );
+              }
+
+              
+    $(document).ready(function() {
+      let imagesPreview = function(input, placeToInsertImagePreview) {
+        if (input.files) {
+          let filesAmount = input.files.length;
+          for (i = 0; i < filesAmount; i++) {
+            let reader = new FileReader();
+            reader.onload = function(event) {
+              $($.parseHTML("<img>"))
+                .attr("src", event.target.result)
+                .appendTo(placeToInsertImagePreview);
+            };
+            reader.readAsDataURL(input.files[i]);
+          }
+        }
+      };
+      $("#image").on("change", function() {
+        imagesPreview(this, "div.preview-images");
+      });
+    });
+  </script>
+
   <div class="modal fade" id="ModalForAddShop" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
+        <!-- <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">แก้ไขข้อมูล</h4>
-        </div>
+        </div> -->
         <div class="modal-body">
           <form>
-            <label>ชื่อร้านค้า</label>
-            <input name="nameshop" type="text" id="nameshop"><br>
+            <br>
+            <!-- <select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select> -->
+            <br>
+            <input list="list_shop" type="text" id="storage" onkeyup="myFunction(this.value)">
+            <input id="storage_id" type="hidden">
+            <datalist id="list_shop">
+            </datalist>
+            
+            <!-- <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
             <br>
             <label for="typeshop">ประเภทร้านค้า</label>
-            <select name="typeshopp" id="typeshoppp">
-              <option value="1">ในประเทศ</option>
-              <option value="2">ต่างประเทศ</option>
-            </select>
+            <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
+              <option value="ในประเทศ">ในประเทศ</option>
+              <option value="ต่างประเทศ">ต่างประเทศ</option>
+            </select> -->
             <br>
-            <label>ภาษีร้านค้า</label>
-            <input name="taxshop" type="float" id="taxshop"><br>  
             <br>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">เพิ่มข้อมูล</button>
-            <input class="btn btn-info btn-lg" type="reset" value="Reset">
+            <!-- <label>ภาษีร้านค้า</label>
+            <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>   -->
+            <br>
+            <button type="button" class="btn btn-light" data-toggle="modal"  onclick="moveValueToTrash()" data-target="#ModalForAddShop" >บันทึก</button> 
+            <!-- onclick="addShop()" -->
+            <input class="btn btn-light" type="reset" value="ล้าง">
             </form>    
         </div>
-        <div class="modal-footer">
+        <!-- <div class="modal-footer">
           
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+        </div> -->
       </div>
       
     </div>
@@ -412,7 +886,7 @@ table td, table th  {
       </div>
   </div>
 
-   <div id="shopNameTab"><button type="button" class="btn btn-primary" onclick="showAllData()">DataAll</button></div>
+   <div id="shopNameTab"><button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
   <!-- <br>
   <button class="tablink" onclick="openPage('Home', this, 'red')" id="defaultOpen">ร้านแรก</button>
   <button class="tablink" onclick="openPage('News', this, 'green')" >ร้านสอง</button>
@@ -420,6 +894,7 @@ table td, table th  {
   <button class="tablink" onclick="openPage('About', this, 'orange')">ร้านสี่</button>
 <br> -->
 <br>
+<a style="margin-left: 40px;"></a>
         สถานะการจัดชื้อ:
         <select id="statusadmin"  >
             <option>รออนุมัติ / อนุมัติ /ตรวจรับแล้ว/ รอส่งของ </option>
@@ -431,6 +906,7 @@ table td, table th  {
           <br>
           <br>
           <br>
+          <a style="margin-left: 40px;"></a>
         หมายเหตุ:  
         <textarea id="reasonadmin" name="w3review" rows="4" cols="50">
             
@@ -438,6 +914,7 @@ table td, table th  {
 
         <iframe id="txtArea1" style="display:none"></iframe>
             <br><br>
+            <a style="margin-left: 100px;"></a>
             <input  onclick="goToTable()" type="submit" value="บันทึก">
 
             <button class="btn btn-info" onclick="Export()">export &nbsp;</button>
@@ -474,84 +951,209 @@ table td, table th  {
         
       </div>
     </div>
+    
+
+     <!-- Modal for Edit-->
+  <div class="modal fade" id="modalforeditshop" role="dialog" >
+    <!-- <div class="modal fade" id="Modalzz" role="dialog" onload="profile()"> -->
+      <div class="modal-dialog"  >
+      
+        <!-- Modal content-->
+        <div class="modal-content" >
+          <div class="modal-header" >
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal EDIT</h4>
+          </div>
+          <div class="modal-body"  id="Modal-D">
+        
+            <form>
+        <input class="btn btn-info btn-lg" type="reset" value="Reset">
+        <!-- <div id="Modal-a"></div> -->
+        
+        
+              </form>
+              <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
+          </div>
+          <div class="modal-footer">
+        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
    
 
 </body>
 </html>
 
 <script>
+var gm = require('gm');
+var myCookie = getCookie("CookieUser");
+
+if (myCookie == "") {
+  console.log("มอยอ"+myCookie);
+  window.location.href = "/";
+}
+
+
+
+
+var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+
+
+// console.log("COOKIE RON RON KUB"+CookieUser);
+
+
+
+console.log("มอยอ"+CookieUser)
+
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+ if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function getCookie(cname) {
+ var name = cname + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(";");
+ for (var i = 0; i < ca.length; i++) {
+   var c = ca[i];
+   while (c.charAt(0) == " ") {
+     c = c.substring(1);
+   }
+   if (c.indexOf(name) == 0) {
+     return c.substring(name.length, c.length);
+   }
+ }
+ return "";
+}
+
+  
 
 function showshop(val) {
 
 console.log("DDDDDDDD---->>   "+ val)
 //console.log("PEEGALE:"+ data[i].nameOfShop)
 var valueid = document.getElementById("forshop"+val).value;
+var shopname = document.getElementById("forshop"+val).innerHTML;
+console.log(" -0000000-000000000-00000000-0-0-"+document.getElementById("forshop"+val).innerHTML);
+localStorage.setItem("shopIdForAdd", valueid);
+console.log("qwpodkqwpokdpoqwokdqkpodw           "+localStorage.getItem("shopIdForAdd", valueid))
+localStorage.setItem("ShopNameForAddData", shopname);
 
-console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
+var checkPriceAdmin;
+var checkAmountAdmin;
+var checkSumPriceAdmin;
+var sum = 0;
+      
 
-//กรีด เดะวันนี้ไปชื้อบราวนี้ให้เลย มึงถามเขาก่อนส่งมาจะบูดไหม 55555 ช๊อต
+console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
+
+
 
     $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
     document.getElementById("room-namedata").innerHTML="";
     console.log("sadsadegeg ---->>>"+data.length)
     for (let i = 0; i < data.length; i++) {
 
+      if(data[i].priceadmin == null){
+            checkPriceAdmin = 0
+      } else {
+        checkPriceAdmin = data[i].priceadmin;
+        }
+        if(data[i].amountadmin == null){
+          checkAmountAdmin = 0
+      } else {
+        checkAmountAdmin = data[i].amountadmin;
+        }
+        if(data[i].sumpriceadmin == null){
+          checkSumPriceAdmin = ""
+      } else {
+        checkSumPriceAdmin = data[i].sumpriceadmin;
+        }
+      //   if(data[i].sumpriceadmin !== 0){
+      //   data[i].sumprice = data[i].sumpriceadmin;
+      // }
+
+      //   sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+
+
+        data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
     str = data[i]._id.replace(/\s/g, '');
     console.log(str);
     roomId = data;
    // let rstripId = data[i]._id.rs
     //$("#room-name-value").val(data[0].room);
      $("#room-namedata").append(
-    "<tr><td>" +
-      (i + 1) +
+      "<tr><td>" +
+            (i + 1) +
+            "</td>" +
+			"<td>" +
+            data[i].item +
+			"</td>" +
+			"<td>" +
+            data[i].partnumber +
+			"</td>" +
+			"<td>" +
+            data[i].price +
+			"</td>" +
+			"<td>" +
+            data[i].amount +
       "</td>" +
-      "<td id='order"+i+"'>" +
-        ShowShopName[data[i].shopid] +
-        //  ShowShopName[data[i].shopid] +
+      "<td>" +
+            checkPriceAdmin +
+            // data[i].priceadmin +
+			"</td>" +
+      "<td>" +
+            checkAmountAdmin +
+            // data[i].amountadmin +
       "</td>" +
-      "<td >" +
-     data[i].item +
-        //  ShowShopName[data[i].shopid] +
+      "<td>" +
+            data[i].sumprice +
       "</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>"+
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].item +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  ShowShopName[data[i].shopid] +
-        //  ShowShopName[data[i].shopid] +
-"</td>" +
-"<td >" +
-  data[i].mainid +
-        //  ShowShopName[data[i].shopid] +
-"</td>" 
+      "<td>" +
+            //checkSumPriceAdmin +
+            data[i].sumpriceadmin.toFixed(2) +
+      "</td>" +
+      "<td>" +
+            data[i].responsibleperson +
+      "</td>" +
+      "<td>" +
+         "<img width='200px' src="+data[i].picture+"  />"+ 
+        //data[i].picture+
+            
+      "</td>" +
+      "<td>" +
+            data[i].statusz +
+      "</td>" +
+      "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+      "</tr>"
+// "<td >" +
+//   ShowShopName[data[i].shopid] +
+//         //  ShowShopName[data[i].shopid] +
+// "</td>" +
+// "<td >" +
+//   data[i].mainid +
+//         //  ShowShopName[data[i].shopid] +
+// "</td>" 
 
 
 
@@ -565,7 +1167,41 @@ console.log("มาแล้วสัส   -----"+ valueid,getValueLocalStorage)
 
 var ShowShopName = {};
 
+var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+console.log("cookie ร้อนๆครับ"+CookieUser.name,CookieUser.surname);
+
+console.log("มอยอ"+CookieUser)
+
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+ if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function getCookie(cname) {
+ var name = cname + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(";");
+ for (var i = 0; i < ca.length; i++) {
+   var c = ca[i];
+   while (c.charAt(0) == " ") {
+     c = c.substring(1);
+   }
+   if (c.indexOf(name) == 0) {
+     return c.substring(name.length, c.length);
+   }
+ }
+ return "";
+}
+
 $(document).ready(function(){
+
+  if(CookieUser.priority != "Admin"){
+    window.location.href = "/user";
+  }
+
+
     $.post('/get/shop', function(data, status)
     {
       ShopName = data;
@@ -616,6 +1252,8 @@ $(document).ready(function(){
 	  } 
   }
 
+
+
   
 
   </script>
@@ -636,7 +1274,7 @@ $(document).ready(function(){
     }
     
     // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
+    //document.getElementById("defaultOpen").click();
     </script>
 
 <script>
@@ -674,7 +1312,7 @@ function Export(){
           } 
       csv.push(row.join(","));    
     }
-    // console.log(csv);
+    // m\console.log(csv);
     // Download CSV
     download_csv(csv.join("\n"), "export.csv");
 }
@@ -707,6 +1345,106 @@ function download_csv(csv, filename) {
   // Lanzamos
   downloadLink.click();
 }
+
+
+ 
+function  moveValueToTrash(){
+  console.log("Dankub");
+  //document.getElementById("storage").value="";
+  // x.remove(x.selectedIndex);
+  // document.getElementById('storage').setAttribute("disabled","disabled")
+  //console.log(document.getElementById('storage'))
+  //console.log(storage.value);
+  shoparray = [];
+  var storage_id = $('#storage_id').val();
+  
+  console.log(storage_id)
+
+  if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+      
+      //shoparray.push(shopidnew);
+      //console.log("pppppp"+shoparray.push(shopidnew))
+      //var storage = $("#storage").val();
+      console.log("น้องมารึยังน้าาาาาา"+storage_id  ,getValueLocalStorage);
+		  //var group = $("#group").val();
+		  //var department = $("#department").val();
+  
+		  $.post(
+      "/api/addmaintableadminforshopid",
+      
+			{
+			  //shop: shop,
+        LetServerGetDataOrderFromMainTable: getValueLocalStorage,
+        shopidnew: storage_id,
+      
+        //picture: req.body.picture,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+      },
+      
+
+			function (data, status) {
+			  window.location.href = "/admin";
+			  
+			}
+		  );
+		 } 
+}
+
+
+
+
+function myFunction(keyInput) {
+  // var key = document.getElementById("mySelect").value;
+  
+  
+  console.log("keyinput"+keyInput)
+
+  // let A2s = {"key": keyInput} ;
+
+  $.post("/post/shopforquery", {'key': keyInput} , function (data, status) {
+
+    let textlist = '';
+
+      console.log("aowaraima"+status);
+      // console.log("Check value:: ", data.nameOfShop);
+
+      for( i = 0 ; i < data.length ; i++){ //ได
+        textlist += '<option value="'+data[i].nameOfShop+'"></option>'
+        // console.log("LOOP ["+i+"]: "+textlist)
+        $('#storage_id').val(data[i]._id);
+      }
+
+      // console.log(textlist)
+
+      // $('#list_shop').html(textlist);
+      // document.getElementById("list_shop").innerHTML = textlist; //เอาค่าใน **textlist** ยัดไปใน **list_shop**
+
+
+    //document.getElementById("room-name").innerHTML="";
+    
+      // for (let i = 0; i < data.length; i++) {
+		  // //console.log(data[i]._id);
+		  // // str = data[i]._id.replace(/\s/g, '');
+		  // // console.log(str);
+      //   // roomId = data;
+		
+        
+      // }   
+    }); 
+
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -806,12 +1544,62 @@ function showAllData() {
 
 }
 
+ function admintomain(i){ 
+
+      setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+			console.log("AmountForMainTable--->>>> " + setValue);
+      localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
+      
+ }
 function showData() {
 
+  
+
+  // $.post("/get/showshopnameintableinadminaccess2", {'_MAINID': getValueLocalStorage } ,function (data, status) {
+  //     //console.log(""+localStorage.getItem("shopIdForAdd"))
+  //     var x = document.getElementById("storage");
+  //   //document.getElementById("room-namezz").innerHTML="";
+  //   for (let i = 0; i < data.length; i++) {
+  //   //console.log(data[i]._id);
+  //   str = data[i]._id.replace(/\s/g, '');
+  //   console.log(str);
+  //   roomId = data;
+  //   // let rstripId = data[i]._id.rs
+  //   //$("#room-name-value").val(data[0].room);
+  //   // if(data[i]._id == storage.value){
+  //     $("#shopNameTab").append(
+  //   // "<tr><td>" +
+  //   //       (i + 1) +
+  //   //       "</td>" +
+  //     //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+  //     // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+  //     // "<button></button>" 
+  //     '&nbsp;'+
+  //      "<button type='button' data-target='modalforeditshop' class='btn btn-light'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'  ondblclick='Editshop("+ i +")' >" + data[i].nameOfShop +"</button>" 
+  //     //  "<button data-target='modalforeditshop' ondblclick='Editshop("+ i +")'>" + "DDDDD" + "</button>" 
+  //       // "<button type='button' class='btn btn-primary' >" + "Dan" +"</button>"
+       
+       
+       
+       
+  //       // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
+        
+
+
+
+  //   );
+  //   //}
+      
+  
+  // }
+  // });
+
+  
   $.post("/get/maintable", function (data, status) {
       console.log(data);
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+        
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
 		  console.log(str);
@@ -820,6 +1608,7 @@ function showData() {
         //$("#room-name-value").val(data[0].room);
           $("#codeForBuy").val(getValueLocalStorage);
           $("#nameproject").val(getValueLocalStorageNameOrder);
+          // $("#amountAll").val(getValueLocalStorageAmount);
           $("#amountAll").val(getValueLocalStorageAmount);
         
       }   
@@ -830,11 +1619,11 @@ function showData() {
       for (let i = 0; i < roomData.length; i++) {
         let roomName = roomData[i].nameOfShop;
         console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
-        $(".storage").append(
-          "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
-        );
+        $("#list_shop").append(
+          "<option value="+ roomName +" id='list1'"+ roomData[i]._id+"' ></option>"
+          );
       }
-              });
+    });
     
     $.post("/get/data",function (data, status) {
 
@@ -844,6 +1633,9 @@ function showData() {
       for (let i = 0; i < data.length; i++) {
         data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
         data[i].sumprice = data[i].price * data[i].amount;
+        if(data[i]){
+
+        }
         sum += parseInt(data[i].sumpriceadmin);
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
@@ -857,22 +1649,94 @@ function showData() {
       }   
     }); 
 
+            $.post("/get/maintable",function (data, status) {
+
+                console.log("newnewnewnewnewnenwenwnen"+data);
+                 
+                //document.getElementById("room-name").innerHTML="";
+                for (let i = 0; i < data.length; i++) {
+                  
+                  //console.log("DWDOWKDPOWKD    ----"+ data[3].shopid);
+                //console.log(data[i]._id);
+                str = data[i]._id.replace(/\s/g, '');
+                console.log(str);
+                  roomId = data;
+                // let rstripId = data[i]._id.rs
+                  //$("#room-name-value").val(data[0].room);
+                    
+                    //$("#amountAll").val(sum);
+          
+        }   
+        }); 
+
     
 
   $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+
+
+    //let sumpriceDan = document.getElementById("Dan").innerHTML;
+
+    //localStorage.setItem("thisIsParameterNameForAmountz", sumpriceDan);
     //document.getElementById("room-name").innerHTML="";
       console.log('Daaawww'+getValueLocalStorage);
       var sum = 0 ;
+      // var handlenull = ""; 
+      var checkPriceAdmin;
+      var checkAmountAdmin;
+      var checkSumPriceAdmin;
+      var sum = 0;
+      
+      // var sumprice =
+      // var amountadmin 
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+
+        if(data[i].priceadmin == null){
+            checkPriceAdmin = 0
+      } else {
+        checkPriceAdmin = data[i].priceadmin;
+        }
+        if(data[i].amountadmin == null){
+          checkAmountAdmin = 0
+      } else {
+        checkAmountAdmin = data[i].amountadmin;
+        }
+        if(data[i].sumpriceadmin == null){
+          checkSumPriceAdmin = ""
+      } else {
+        checkSumPriceAdmin = data[i].sumpriceadmin;
+        }
+    //   if(data[i].sumpriceadmin !== 0){
+    //     data[i].sumprice = data[i].sumpriceadmin ;
+    //   }else {
+       
+    //     data[i].sumpriceadmin = data[i].sumprice;
+      
+      
+    // }
+
+        console.log(data[i].sumpriceadmin);
+    if( data[i].sumpriceadmin == null) {
+        sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+    }else {
+      sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+    }
+        console.log("--->>   ++++"+sum.toFixed(2))
+        $("#amountAll").val(sum.toFixed(2));
        // data[i].sumpriceadmin = 0;
        
          //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
-        //  data[i].sumprice = data[i].price * data[i].amount;
+          // data[i].sumprice = data[i].price * data[i].amount  
+          data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
          //data[i].sumprice = "";
         // data[i].sumpriceadmin = "";
+          data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+        //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
       //   sum += parseInt(data[i].sumpriceadmin);
        
+       //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+			// console.log("AmountForMainTable--->>>> " + setValue);
+			 //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
       //  console.log("Sum = "+ sum);   
 		  //console.log(data[i]._id);
@@ -894,33 +1758,48 @@ function showData() {
 			"<td>" +
             data[i].price +
 			"</td>" +
-			"<td>" +
+      "<td>" +
             data[i].amount +
       "</td>" +
       "<td>" +
-            data[i].priceadmin +
+             //data[i].priceadmin +
+            checkPriceAdmin +
 			"</td>" +
-			"<td>" +
-            data[i].amountadmin +
+      "<td>" +
+            checkAmountAdmin +
+             //data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice +
+        // "<td id='AmountForMainTable" + i + "'>" +
+            data[i].sumprice.toFixed(2) +
       "</td>" +
       "<td>" +
-            data[i].sumpriceadmin +
+        //checkSumPriceAdmin +
+             data[i].sumpriceadmin.toFixed(2) +
       "</td>" +
       "<td>" +
             data[i].responsibleperson +
       "</td>" +
+      "<td>" + "<img  width='200px' src="+data[i].picture+" />" +
+        // "<img  width='200px'  src='./public/upload/temp/pic/picture-1612171217266.jpg' />" +
+            // data[i].picture +
+      "</td>" +
       "<td>" +
             data[i].statusz +
       "</td>" +
-      "<td>" +
-            ShowShopName[data[i].shopid] +
-      "</td>" +
-      "<td>" +
-            [data[i].mainid] +
-      "</td>" +
+      // "<td>" +
+      //   "<td id='Dan" + i + "'>" +
+      //       sum +
+      // "</td>" +
+      // "<td>" +
+      //       Dan +
+      // "</td>" +
+      // "<td>" +
+      //       ShowShopName[data[i].shopid] +
+      // "</td>" +
+      // "<td>" +
+      //       [data[i].mainid] +
+      // "</td>" +
 			// "<td>" +
 			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
 			// "</td>" +
@@ -939,54 +1818,72 @@ function showData() {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
-			"</tr>"
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+        "</tr>"
+      
 			
 
         );  
       }
       
-    }); 
+     
 
-    $.post("/get/shop", function (data, status) {
+   
+  });
 
-    //document.getElementById("room-namezz").innerHTML="";
-    for (let i = 0; i < data.length; i++) {
-    //console.log(data[i]._id);
-    str = data[i]._id.replace(/\s/g, '');
-    console.log(str);
-    roomId = data;
-    // let rstripId = data[i]._id.rs
-    //$("#room-name-value").val(data[0].room);
-      $("#shopNameTab").append(
-    // "<tr><td>" +
-    //       (i + 1) +
-    //       "</td>" +
-      //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
-      // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
-      // "<button></button>" 
-      '&nbsp;'+
-       "<button type='button' class='btn btn-primary'    value='" + data[i]._id +"' id='forshop" + i + "' onclick='showshop("+ i +")'>" + data[i].nameOfShop +"</button>"
-       
-       
-        // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
-      // ใช่ปะ ไรนะ ได้ ๆ  เยส      งานไม่ทำละเหรอพี่55555      
+  $.post("/get/maintableforshopid",{_ID: getValueLocalStorage}, function (data, status) {
+
+// document.getElementById("room-namezz").innerHTML="";
+ // $("#shopNameTab").append(
+ //     "<a style='margin-left: 40px;'></a>"
+ //   );
+ for (let i = 0; i < data.length; i++) {
+  for (let j = 0; j < data[i].shopid.length; j++) {
+   console.log("3z"+data[i].shopid[j]);
+   str = data[i]._id.replace(/\s/g, '');
+ console.log(str);
+   roomId = data;
+// let rstripId = data[i]._id.rs
+   //$("#room-name-value").val(data[0].room);
+   $("#shopNameTab").append(
+ // "<tr><td>" +
+ //       (i + 1) +
+ //       "</td>" +
+       //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
+       // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
+       // "<button></button>" 
 
 
+        "<button class='btn btn-light' value='" + data[i].shopid[j] +"' id='forshop" + j + "' onclick='showshop("+ j +")'>" + ShowShopName[data[i].shopid[j]] +"</button>&nbsp;"
+     
+        
+        
+         // +"<input type='hidden' id='idshop"+i+"' value='" + data[i]._id +"'></input>"
+       // ใช่ปะ ไรนะ ได้ ๆ  เยส      งานไม่ทำละเหรอพี่55555      
+ 
+ 
 
-  );
-}
 
+ 
+   );
+  }
+ //console.log(data[i]._id);
+ 
+ }
+ 
 });
 
   }
 
   function addDataAdmin() {
-		console.log("asdasd");
+    //mage = [];
+    
+    console.log("asdasd");
+    //console.log(base66);
 	  {
       
-		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-      //var shop = $("#shop").val();
+		if (confirm("ต้องการเพิ่มรายการสินค้าใช่หรือไม่")) {
+      var storage = localStorage.getItem("shopIdForAdd");
       var codeForBuy = $("#codeForBuy").val();
 		  var item = $("#item").val();
 		  var partnumber = $("#partnumber").val();
@@ -998,38 +1895,41 @@ function showData() {
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
       var statusz = $("#statusz").val();
-      var storage = $("#storage").val();
-      console.log(codeForBuy);
+      //var image = filekub;
+      var image =  $("#image").val().substring(12);
+      //image = image[2];
+      //var storage = $("#storage").val();
+      console.log(codeForBuy,storage,amount,item,image);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
-		  $.post(
-			"/api/adddata",
-			{
-			  //shop: shop,
-			  item: item,
-			  partnumber: partnumber,
-        price: price,
-        amount: amount,
-        priceadmin: priceadmin,
-        amountadmin: amountadmin,
-        sumprice: sumprice,
-        sumpriceadmin: sumpriceadmin,
-        responsibleperson: responsibleperson,
-        statusz: statusz,
-        storage: storage,
-        mainid: codeForBuy,
-        //picture: req.body.picture,
-        //reason:  req.body.reason,
-			  //group: status,
-			  //department: department,
-			},
+		  // $.post(
+			// "/api/adddata",
+			// {
+			//   //shop: shop,
+			//   item: item,
+			//   partnumber: partnumber,
+      //   price: price,
+      //   amount: amount,
+      //   priceadmin: priceadmin,
+      //   amountadmin: amountadmin,
+      //   sumprice: sumprice,
+      //   sumpriceadmin: sumpriceadmin,
+      //   responsibleperson: responsibleperson,
+      //   statusz: statusz,
+      //   storage: storage,
+      //   mainid: codeForBuy,
+      //   picture: image,
+      //   //reason:  req.body.reason,
+			//   //group: status,
+			//   //department: department,
+			// },
 
-			function (data, status) {
-			  window.location.href = "/admin";
+			// function (data, status) {
+			//   window.location.href = "/admin";
 			  
-			}
-		  );
+			// }
+		  // );
 		 } 
 	  } 
   }
@@ -1040,7 +1940,8 @@ function showData() {
 						
 				//console.log(data[i]._id);
         getDataId = data[i]._id;
-        console.log("DATAID"+getDataId);
+        getdataPicture = data[i].picture;
+        console.log("DATAID"+getDataId,getdataPicture);
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
@@ -1078,7 +1979,9 @@ function showData() {
 					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
-					"<input type='file' id='img' name='img' accept='image/*'>"
+          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+          "<img  width='200px' src="+data[i].picture+" />" +
+          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
 
 				);
 						
@@ -1086,6 +1989,72 @@ function showData() {
 			});
     }
 
+    function editDataSoHard(i){
+      //var valueidq = document.getElementById("forshop"+val).value;
+      var valueID = localStorage.getItem("shopIdForAdd");
+      console.log("MOMNEWEWEWEWEWEWEWE"+localStorage.getItem("shopIdForAdd"));
+
+		//	console.log("addzsadsadzzz"+valueidq);
+			$.post("/get/dataForSearchTableMainIdAdmin23",{'_ID2': valueID ,_ID: getValueLocalStorage}, function (data, status) {
+						
+				//console.log(data[i]._id);
+        getDataId = data[i]._id;
+        getdataPicture = data[i].picture;
+        console.log("DATAID"+getDataId,getdataPicture);
+				//console.log("add");
+				document.getElementById("Modal-c").innerHTML="";
+				$("#Modal-c").append(
+          "ชื่อวัสดุ <br>"+
+					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
+          '<br>'+
+          "Part Number <br>"+
+					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคา(เสนอ) <br>"+
+					"<input id='pricenew'type='text' type='text'value='"+ data[i].price +"'>" +'<br>'+ 
+          '<br>'+
+          "จำนวน(เสนอ) <br>"+
+					"<input id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคา(แก้ไข) <br>"+
+					"<input id='pricenewedit'type='text' type='text'value='"+ data[i].priceadmin +"'>" +'<br>'+ 
+          '<br>'+
+          "จำนวน(แก้ไข) <br>"+
+					"<input id='amountnewedit'type='text' type='text'value='"+ data[i].amountadmin +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคารวม(เสนอ) <br>"+
+					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคารวม(แก้ไข) <br>"+
+					"<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
+          '<br>'+
+          // "ราคารวม(แก้ไข) <br>"+
+					// "<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
+          // '<br>'+
+          "ผู้รับผิดชอบ <br>"+
+					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
+          '<br>'+
+          "สถานะ <br>"+
+					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          '<br>'+
+          "รูป <br>"+
+          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+         "<img  width='200px'  src=" +data[i].picture+" />" +
+          //"<img  width='200px'  src='./public/upload/temp/pic/picture-1612171217266.jpg' />" +
+          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" +
+          "<img src='' id='output'>"
+
+				);
+						
+						
+			});
+    }
+
+
+
+    
+
+              
 
     function addEdit(){
 			console.log('DDazzzn');
@@ -1100,13 +2069,22 @@ function showData() {
     var sumpricenewedit = $("#sumpricenewedit").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = $("#statusznew").val();
+    //var image = filekub2;
+    var image;
    //var statusnew = $("#statusnew").val();
     //var statusnew = $("#statusnew").val();
 
+    if (filekub2 != ""){
+      image = filekub2;
+      
+    }else {
+      image = getdataPicture;
+      console.log("getdataPicture!"+getdataPicture,filekub2);
+    }
+    
 
-  console.log(itemnew,partnumbernew,pricenew,
-  amountnew,pricenewedit,amountnewedit,sumpricenew,sumpricenewedit,responsiblepersonnew,statusznew
-  );
+
+  console.log()
   //console.log(getDataId);
 
     $.post("/save/editdataadmin",{  
@@ -1122,6 +2100,7 @@ function showData() {
                             'sumpricenewedit':sumpricenewedit,		
 							              'responsiblepersonnew':responsiblepersonnew,
                             'statusznew':statusznew,
+                            'imagenew': image,
                             //amountnew:amountnew,
                             // nameordernew:nameordernew,
                             // statusnew:statusnew,
@@ -1132,6 +2111,7 @@ function showData() {
                            window.location.href = "/admin";
 							// showData();
         });
+        location.reload();
     }
 
 
@@ -1144,42 +2124,10 @@ function showData() {
 	});
   }	
 
-  function addShop() {
-		console.log("danxxx");
-	  {
-		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
-		  var shop = $("#nameshop").val();
-		  var type = $("#typeshoppp").val();
-		  var tax = $("#taxshop").val();
-      console.log(shop,type,tax);
-		  //var group = $("#group").val();
-		  //var department = $("#department").val();
-      if(tax="7"){
-        tax=1.07;
-      }
-		  $.post(
-			"/api/addshop",
-			{
-			  shop: shop,
-			  type: type,
-			  tax: tax,
-        //picture: req.body.picture,
-        //reason:  req.body.reason,
-			  //group: status,
-			  //department: department,
-			},
-
-			function (data, status) {
-        console.log(data);
-			  window.location.href = "/admin";
-			  
-			}
-		  );
-		 } 
-	  } 
-  }
+  
 
   var ShowShopName = {};
+  var ShowShopTax = {};
 
   $(document).ready(function(){
       $.post('/get/shop', function(data, status)
@@ -1191,6 +2139,7 @@ function showData() {
               let objId = ShopName[i]._id;
 
               ShowShopName[objId] = ShopName[i].nameOfShop;
+              ShowShopTax[objId] =  ShopName[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
 
@@ -1199,13 +2148,82 @@ function showData() {
   });
   
 
+  function Editshop(){
+
+    $.post("/get/shop",function (data, status) {
+
+      
+    //document.getElementById("room-name").innerHTML="";
+      console.log('Daaawwwwdqwdqwdqwd');
+      //var sum = 0 ;
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+       // data[i].sumpriceadmin = 0;
+       
+         //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+        //  data[i].sumprice = data[i].price * data[i].amount;
+         //data[i].sumprice = "";
+        // data[i].sumpriceadmin = "";
+      //   sum += parseInt(data[i].sumpriceadmin);
+       
+
+      //  console.log("Sum = "+ sum);   
+		  //console.log(data[i]._id);
+		  str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		// let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+        $("#modal-D").append(
+          "ชื่อวัสดุ <br>"+
+					"<input id='itemnew'type='text' type='text'value='"+ data[i].nameOfShop +"'>" +'<br>'+ 
+          '<br>'+
+          "Part Number <br>"+
+					"<input id='partnumbernew'type='text' type='text'value='"+ data[i].typeOfShop +"'>" +'<br>'+ 
+          '<br>'+
+          "ราคา(เสนอ) <br>"+
+					"<input id='pricenew'type='text' type='text'value='"+ data[i].tax +"'>" +'<br>'+ 
+          '<br>'
+			// "<td>" +
+			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+			// "</td>" +
+			//  "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+			// 	//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+      //       "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+      //       "<div class='modal-dialog modal-dialog-centered'>" +
+      //       "<div class='modal-content'>" +
+      //       "<div class='modal-header'>" +
+      //       "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+      //       "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+      //       "<span aria-hidden='true'>&times;</span>" +
+      //       "</button>" +
+      //       "</div>" +
+      //       "<div class='modal-footer'>" +
+      //       "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+      //       "</div>" +
+      //       "</div></td>" +
+      //       "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+		
+			
+
+        );  
+      }
+      
+    }); 
+
+  }
+
     
     var getDataId = "";
-
+    
+    var getShop = localStorage.getItem("shopIdForAdd");
+    
     var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 
     var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
 
     var getValueLocalStorageAmount = localStorage.getItem("thisIsParameterNameForAmount");
+
+    var Dannnn = localStorage.getItem("thisIsParameterNameForAmountAdminToMainTable"); //ระบุค่าครั้งที่ได้จากในนี้
 
 </script>

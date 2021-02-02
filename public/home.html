@@ -297,6 +297,89 @@ table td, table th  {
 
 
 <script>
+<<<<<<< Updated upstream
+=======
+
+var myCookie = getCookie("CookieUser");
+
+if (myCookie == "") {
+  console.log("มอยอ"+myCookie);
+  window.location.href = "/";
+}
+
+var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+
+
+// console.log("COOKIE RON RON KUB"+CookieUser);
+
+
+
+console.log("มอยอ"+CookieUser)
+
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+ if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function getCookie(cname) {
+ var name = cname + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(";");
+ for (var i = 0; i < ca.length; i++) {
+   var c = ca[i];
+   while (c.charAt(0) == " ") {
+     c = c.substring(1);
+   }
+   if (c.indexOf(name) == 0) {
+     return c.substring(name.length, c.length);
+   }
+ }
+ return "";
+}
+
+
+
+
+$(document).ready(function(){
+
+if(CookieUser.priority != "User"){
+  window.location.href = "/homeadmin";
+}
+
+
+  $.post('/get/shop', function(data, status)
+  {
+	ShopName = data;
+	  for(let i=0; i<ShopName.length; i++)
+	  {
+		  // console.log([data[i]]); 
+		  let objId = ShopName[i]._id;
+
+		  ShowShopName[objId] = ShopName[i].nameOfShop;
+
+		  //let nameCategory = categoryName[i].equip_category;
+
+	  }
+  });
+});
+
+
+
+
+
+
+function logout(){
+
+$.post("/users/logout", function(data, status){
+	if(data) {
+		window.location.href = "/";
+	}
+});
+}
+
+>>>>>>> Stashed changes
   
 	function Add() {
 		console.log("dan");
@@ -518,7 +601,7 @@ table td, table th  {
 			console.log("AmountForAnotherTable--->>>> " + setValue);
 			localStorage.setItem("thisIsParameterNameForAmount", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
-			window.location.href = "/admin";
+			window.location.href = "/user";
 			}
 
 		function edit(DataForQueryData){
