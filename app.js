@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var multer = require('multer');
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -20,9 +21,51 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 //app.use('/product', productRouter);
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './public/upload/temp/pic')
+  },
+  filename: (req, file, cb) => {
+      cb(null, file.originalname )}})
+
+const upload = multer({ storage: storage })
+
+
+
+app.post('/upload',upload.single('fileupload'),(req,res) => {
+  //res.render(req.file);
+ // res.send("OK");
+  res.redirect("/admin");
+  //res.status(200);
+})
+
+app.post('/uploadnew',upload.single('fileuploadNew'),(req,res) => {
+  //res.render(req.file);
+ // res.send("OK");
+  res.redirect("/admin");
+  //res.status(200);
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 app.get("/main", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/home.html"));
@@ -52,6 +95,27 @@ app.get("/register", (req, res) => {
 app.get("/history", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/HistoryDel.html"));
 });
+
+app.get("/useredit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/EditUserUser.html"));
+});
+
+app.get("/adminedit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/EditUserAdmin.html"));
+});
+
+app.get("/shopedit", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/Shopedit.html"));
+});
+
+app.get("/homeadmin", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/homeadmin.html"));
+});
+
+app.get("/loghistory", (req, res) => {
+  res.sendFile(path.join(__dirname + "/public/loghistory.html"));
+});
+
 
 
 

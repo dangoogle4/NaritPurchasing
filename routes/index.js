@@ -69,6 +69,22 @@ router.post("/api/regis", function (req, res, next) {
   });
 });
 
+router.post("/drop/imageNewNew", function (req, res, next) {
+  console.log("is that coming <<>>"+req.body.nameImageNew);
+  console.log("wpodjpqwd");
+  console.log(".."+__dirname);
+
+  fs.unlink(__dirname + '/../public/upload/temp/pic/'+req.body.nameImageNew, function (err) {
+    if (err) throw err;
+    // if no error, file has been deleted successfully
+    console.log('File deleted!');
+ });
+
+ res.send(200);
+
+ 
+});
+
 // router.post("/get/user", function (req, res, next) {
 //   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
 //     if (err) throw err;
@@ -831,6 +847,8 @@ router.post("/post/shopforquery", function (req, res, next) {
   // res.send("ok post complete"+" "+req.body.key);
 
   console.log('Dan+++++++++++++'+req.body.key);
+  var regexp = new RegExp('^'+req.body.key+'.*', "i" );
+  console.log("WOW---->      "+regexp);
 
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
@@ -840,23 +858,45 @@ router.post("/post/shopforquery", function (req, res, next) {
     dbo
       .collection("shop")
       //.find({shopid: req.body.shop})
-     .find( {nameOfShop: {$regex: "^req.body.key.*", $options:"i"}} ) //แก้นิดหน่อย
+     .aggregate( [{ $match: { nameOfShop: regexp}}]) //แก้นิดหน่อย
     // .find( { nameOfShop: { /^req.body.key/} ) //แก้นิดหน่อย
      // .find( { nameOfShop: /^req.body.key/} ) //แก้นิดหน่อย
     //, $options: 'is'
-     //.sort ({nameOfShop: -1 })
+     .sort ({nameOfShop: -1 })
     //.limit(5) 
     //new RegExp('^' + req.body.key )
        ///acme.*corp/ /^S.*$/
        //db.getCollection('shop').find({ nameOfShop: {'$regex': /^p.*$/}})
       .toArray(function (err, result) {
         if (err) throw err;
-         console.log(result);
-       // res.send(result);
+         //console.log(result);
+         console.log("OHHHHHHH--->>>>>   "+result.length);
+        res.send(result);
         db.close();
       });
   });
 });
+
+
+// app.get('/search/:text', async function (req, res, next) {
+//   console.log('in')
+//   try {
+//       console.log(req.params.text)
+//       let items = [];
+//       await db.instance().collection('test').find({name: { $regex : "^"+req.params.text}}).forEach((data) => {
+//           items.push(data);
+//       });
+//       console.log(items)
+//       await res.status(200).json({error: 0, payload: items});
+//   } catch (e) {
+//       console.log(e);
+//       await res.status(200).send(e);
+//   }
+// });
+
+
+
+
 
 
 router.post("/get/users", function (req, res, next) {

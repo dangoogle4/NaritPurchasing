@@ -220,7 +220,7 @@ table td, table th  {
               <h4 class="modal-title">เพิ่มสินค้า</h4>
             </div> -->
             <div class="modal-body">
-              <form>
+              <form id="imageuploadkub"method="post" action="/upload" enctype="multipart/form-data">
                 <!-- <br>
                 <label>ร้านค้าของท่าน</label> <select style="margin-left: 0.5em; width:183px; height: 25px;" class="custom-select storage" id="storage" required></select>
                 <br> -->
@@ -247,6 +247,16 @@ table td, table th  {
                
                  <div class="form-group">
                     <label for="img">รูป:</label>
+
+
+                    <!-- <form id="imageuploadkub"method="post" action="/upload" enctype="multipart/form-data"> -->
+                      <div class="form-group">
+                        <label for="firstname">Upload</label>
+                        <input type="file" class="form-control" name="fileupload" id="image">
+                      </div>
+                      <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                      <button type="reset" class="btn btn-primary">Reset</button>
+                    <!-- </form> -->
                     <!-- <input type="file" id="img" name="img" accept="image/*"> -->
                     <!-- <input type="file" name="multi-files"  id="image" class="form-control-file border"/>
                     <input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
@@ -255,7 +265,7 @@ table td, table th  {
                     <!-- <button type="button" class="btn btn-light" data-toggle="modal"  onclick="Main()">อัพโหลด</button> -->
                     <br>
                     <br>
-                    <button type="button"  class="btn btn-light" data-toggle="modal" data-target="#myModalForImage" >เพิ่มรูปภาพ</button>
+                    <!-- <button type="button"  class="btn btn-light" data-toggle="modal" data-target="#myModalForImage" >เพิ่มรูปภาพ</button> -->
                     <!-- <input name="imagefile[]" type="file" id="takePictureField" accept="image/*" onchange="uploadPhotos(base66)" />
                     <form id="uploadImageForm" enctype="multipart/form-data">
                         <input id="name" value="#{name}" />
@@ -297,7 +307,7 @@ table td, table th  {
                  -->
                   <br>
                 
-                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
+                <button  type="submit" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
                 <input class="btn btn-light" type="reset" value="ล้าง">
                 </form> 
                 <!-- <form action="/profile" method="post" enctype="multipart/form-data">
@@ -370,11 +380,11 @@ table td, table th  {
 
 $(".imageuploadkub").submit(function(e) 
       {
-          m.preventDefault(); 
+          e.preventDefault(); 
       });
 
 //const form = document.getElementById("new_document_attachment");
-const fileInput = document.getElementById("imageFile");
+const fileInput = document.getElementById("image");
 
 // fileInput.addEventListener('change', () => {
 //   form.submit();
@@ -944,7 +954,7 @@ $(".image").submit(function (m) {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button>
+        <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -1112,7 +1122,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             // data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice +
+            data[i].sumprice.toFixed(2) +
       "</td>" +
       "<td>" +
             //checkSumPriceAdmin +
@@ -1122,7 +1132,8 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             data[i].responsibleperson +
       "</td>" +
       "<td>" +
-         "<img width='200px' src="+data[i].picture+"  />"+ 
+        //  "<img width='200px' src="+data[i].picture+"  />"+ 
+        "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
         //data[i].picture+
             
       "</td>" +
@@ -1409,10 +1420,14 @@ function myFunction(keyInput) {
 
       console.log("aowaraima"+status);
       // console.log("Check value:: ", data.nameOfShop);
+      
+      $('#textlist').empty();
 
       for( i = 0 ; i < data.length ; i++){ //ได
+        console.log("wqkd[qwpldqw[d----->>>       "+data.length);
         textlist += '<option value="'+data[i].nameOfShop+'"></option>'
-        // console.log("LOOP ["+i+"]: "+textlist)
+         //console.log("LOOP ["+i+"]: "+textlist)
+
         $('#storage_id').val(data[i]._id);
       }
 
@@ -1740,7 +1755,8 @@ function showData() {
 
       //  console.log("Sum = "+ sum);   
 		  //console.log(data[i]._id);
-		  str = data[i]._id.replace(/\s/g, '');
+      str = data[i]._id.replace(/\s/g, '');
+      strnew = data[i].picture.replace(/\s/g, '');
 		  console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
@@ -1780,8 +1796,9 @@ function showData() {
       "<td>" +
             data[i].responsibleperson +
       "</td>" +
-      "<td>" + "<img  width='200px' src="+data[i].picture+" />" +
-        // "<img  width='200px'  src='./public/upload/temp/pic/picture-1612171217266.jpg' />" +
+      "<td>" + //"<img  width='200px' src="+data[i].picture+" />" +
+      //  "<img  width='200px'  src='./public/upload/temp/pic/"+ data[i].picture +"' >" +
+          "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
             // data[i].picture +
       "</td>" +
       "<td>" +
@@ -1818,7 +1835,7 @@ function showData() {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() +"') >ลบ</button></td>" +
         "</tr>"
       
 			
@@ -1903,33 +1920,33 @@ function showData() {
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
-		  // $.post(
-			// "/api/adddata",
-			// {
-			//   //shop: shop,
-			//   item: item,
-			//   partnumber: partnumber,
-      //   price: price,
-      //   amount: amount,
-      //   priceadmin: priceadmin,
-      //   amountadmin: amountadmin,
-      //   sumprice: sumprice,
-      //   sumpriceadmin: sumpriceadmin,
-      //   responsibleperson: responsibleperson,
-      //   statusz: statusz,
-      //   storage: storage,
-      //   mainid: codeForBuy,
-      //   picture: image,
-      //   //reason:  req.body.reason,
-			//   //group: status,
-			//   //department: department,
-			// },
+		  $.post(
+			"/api/adddata",
+			{
+			  //shop: shop,
+			  item: item,
+			  partnumber: partnumber,
+        price: price,
+        amount: amount,
+        priceadmin: priceadmin,
+        amountadmin: amountadmin,
+        sumprice: sumprice,
+        sumpriceadmin: sumpriceadmin,
+        responsibleperson: responsibleperson,
+        statusz: statusz,
+        storage: storage,
+        mainid: codeForBuy,
+        picture: image,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+			},
 
-			// function (data, status) {
-			//   window.location.href = "/admin";
+			function (data, status) {
+			  //window.location.href = "/admin";
 			  
-			// }
-		  // );
+			}
+		  );
 		 } 
 	  } 
   }
@@ -1979,9 +1996,10 @@ function showData() {
 					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
-          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
-          "<img  width='200px' src="+data[i].picture+" />" +
-          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
+          
+          "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" 
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
 
 				);
 						
@@ -2070,58 +2088,76 @@ function showData() {
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = $("#statusznew").val();
     //var image = filekub2;
-    var image;
+    var image = $("#imagenew").val().substring(12);
+
+    console.log("New"+image);
    //var statusnew = $("#statusnew").val();
     //var statusnew = $("#statusnew").val();
 
-    if (filekub2 != ""){
-      image = filekub2;
+    // if (filekub2 != ""){
+    //   image = filekub2;
       
-    }else {
-      image = getdataPicture;
-      console.log("getdataPicture!"+getdataPicture,filekub2);
-    }
+    // }else {
+    //   image = getdataPicture;
+    //   console.log("getdataPicture!"+getdataPicture,filekub2);
+    // }
     
 
 
-  console.log()
+  console.log(image);
   //console.log(getDataId);
 
-    $.post("/save/editdataadmin",{  
-							              'ServergetDataId':getDataId,	
-							              //'shopnew':shopnew,
-                            'itemnew':itemnew,
-                            'partnumbernew':partnumbernew,
-                            'pricenew':pricenew,
-                            'amountnew':amountnew,
-                             'pricenewedit':pricenewedit,
-                            'amountnewedit':amountnewedit,
-                            'sumpricenew':sumpricenew,
-                            'sumpricenewedit':sumpricenewedit,		
-							              'responsiblepersonnew':responsiblepersonnew,
-                            'statusznew':statusznew,
-                            'imagenew': image,
-                            //amountnew:amountnew,
-                            // nameordernew:nameordernew,
-                            // statusnew:statusnew,
-                            // department: department
+    // $.post("/save/editdataadmin",{  
+		// 					              'ServergetDataId':getDataId,	
+		// 					              //'shopnew':shopnew,
+    //                         'itemnew':itemnew,
+    //                         'partnumbernew':partnumbernew,
+    //                         'pricenew':pricenew,
+    //                         'amountnew':amountnew,
+    //                          'pricenewedit':pricenewedit,
+    //                         'amountnewedit':amountnewedit,
+    //                         'sumpricenew':sumpricenew,
+    //                         'sumpricenewedit':sumpricenewedit,		
+		// 					              'responsiblepersonnew':responsiblepersonnew,
+    //                         'statusznew':statusznew,
+    //                         'imagenew': image,
+    //                         //amountnew:amountnew,
+    //                         // nameordernew:nameordernew,
+    //                         // statusnew:statusnew,
+    //                         // department: department
                             
-                        },function(data, status){
-                          console.log(data);
-                           window.location.href = "/admin";
-							// showData();
-        });
-        location.reload();
+    //                     },function(data, status){
+    //                       console.log(data);
+    //                        //window.location.href = "/admin";
+		// 					// showData();
+    //     });
+    //     location.reload();
     }
 
 
     function DeleteDataAdmin(obj_id) {
-	let dropRoomId = obj_id.toString();
-	console.log("delete--->>>    " + obj_id);
-    $.post("/drop/dataAdmin", { dropRoomId: dropRoomId }, function (data, status) {
-      window.location.href = "/admin";
-      console.log(obj_id);
-	});
+     
+      //console.log("NAMEPICTURE"+strnew);
+      var spiltkub = obj_id.split("_*&^_");
+      console.log("MONEW"+obj_id.split("_*&^_"));
+      //console.log("MOMNEWKUB   "+spiltkub[0]);
+      console.log("MOMNEWKUB2   "+spiltkub[1]);
+       let dropRoomId = spiltkub[0].toString();
+      console.log("qwo[dkoqw[pkdpoqwkdqwokd[qkw[         "+dropRoomId);
+      console.log("delete--->>>    " + obj_id);
+
+      $.post("/drop/imageNewNew",{nameImageNew: spiltkub[1]},function(data,status){
+        console.log("come");
+
+          $.post("/drop/dataAdmin", { dropRoomId: dropRoomId }, function (data, status) {
+      
+          window.location.href = "/admin";
+          console.log(obj_id);
+          });
+
+      });
+  //console.log("pictureNew--->>>    " + pictureNew);
+ 
   }	
 
   
