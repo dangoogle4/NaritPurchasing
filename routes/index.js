@@ -5,6 +5,8 @@ const { ObjectId, Int32 } = require("mongodb");
 let MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/mydata";
 const fs = require("fs");
+const moment = require("moment");
+
 // const koaBody = require('koa-body');
 
 
@@ -321,6 +323,20 @@ router.post("/api/adddata", function (req, res, next) {
         res.send(true);
 
         db.close();
+
+        // let newid = ObjectId(result.ops[0]._id);
+        let itemForLog = req.body.item;
+        let mainId = req.body.mainid;
+        // let new_name = req.body.equipmentName;
+      
+       console.log("i want to see it! --->> ",itemForLog )
+
+          createlog(itemForLog,mainId,req,"ADDDATA",function (result_log) {
+
+            console.log("IS THAT COMING ?"+result_log);
+            res.send(true);
+          }
+        );
       }
     );
   });
@@ -359,6 +375,20 @@ router.post("/api/adddata2", function (req, res, next) {
         res.send(true);
 
         db.close();
+
+          // let newid = ObjectId(result.ops[0]._id);
+          let itemForLog = req.body.item;
+          let mainId = req.body.mainid;
+          // let new_name = req.body.equipmentName;
+        
+         console.log("i want to see it! --->> ",itemForLog )
+  
+         createlog(itemForLog,mainId,req,"ADDDATA",function (result_log) {
+  
+              console.log("IS THAT COMING ?"+result_log)
+              res.send(result_log);
+            }
+          );
       }
     );
   });
@@ -718,6 +748,7 @@ router.post("/save/editdata", function (req, res, next) {
     console.log("DAN" + req.body.ServergetDataId);
     console.log(req.body.shopnew);
     console.log(req.body.itemnew);
+    console.log(req.body.mainidnew);
     var newvalues = {
       $set: {
         //shop:req.body.shopnew,
@@ -743,7 +774,16 @@ router.post("/save/editdata", function (req, res, next) {
         // console.log("updata complete!!");
         db.close();
 
-        res.send(true);
+        let itemForLog = req.body.itemnew;
+        let mainId = req.body.mainidnew;
+        //let new_name = req.body.name_equipment;
+
+        createlog(itemForLog,mainId,req, "UPDATE", function (result_log) {
+            res.send(result_log);
+          }
+        );
+
+        // res.send(true);
       });
   });
 });
@@ -783,7 +823,16 @@ router.post("/save/editdataadmin", function (req, res, next) {
         // console.log("updata complete!!");
         db.close();
 
-        res.send(true);
+        let itemForLog = req.body.itemnew;
+        let mainId = req.body.mainidnew;
+        //let new_name = req.body.name_equipment;
+
+        createlog(itemForLog,mainId,req, "UPDATE", function (result_log) {
+            res.send(result_log);
+          }
+        );
+
+        //res.send(true);
       });
   });
 });
@@ -811,6 +860,30 @@ router.post("/get/shop", function (req, res, next) {
       });
   });
 });
+
+router.post("/get/loghistory", function (req, res, next) {
+  // res.send("ok post complete"+" "+req.body.nameuser);
+  console.log('Dan');
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    //var query = { _id: ObjectId(req.body.profile) };
+    //console.log(query);
+    dbo
+      .collection("historylog")
+      //.find({shopid: req.body.shop})
+       .find({})
+       .sort({_id: -1 })
+      .toArray(function (err, result) {
+        if (err) throw err;
+        // console.log(result);
+        res.send(result);
+        db.close();
+      });
+  });
+});
+
 
 
 // router.get("/getTemporaryImage", function (req, res) {
@@ -1106,8 +1179,19 @@ router.post("/drop/DataKrup", function (req, res, next) {
     dbo.collection("data").deleteOne(dropcategory, function (err, obj) {
       if (err) throw err;
       console.log("1 document deleted");
-      res.send('Dan');
+      //res.send('Dan');
       db.close();
+
+      let itemForLog = req.body.itemkub;
+      let mainId = req.body.mainid;
+      console.log("ppooo"+itemForLog);
+      // let new_name = req.body.equipmentName;
+
+      createlog( itemForLog,mainId, req,"DELETE", function (result_log) {
+          res.send(true);
+        }
+      );
+
     });
   });
 });
@@ -1124,6 +1208,18 @@ router.post("/drop/dataAdmin", function (req, res, next) {
       console.log("1 document deleted");
       res.send('Dan');
       db.close();
+
+      let itemForLog = req.body.itemkub;
+      let mainId = req.body.mainid;
+      console.log("ppooo"+itemForLog);
+      // let new_name = req.body.equipmentName;
+
+      createlog( itemForLog,mainId, req,"DELETE", function (result_log) {
+          res.send(true);
+        }
+      );
+
+
     });
   });
 });
@@ -1192,6 +1288,8 @@ router.post("/users/login", function (req, res, next) {
               name: result.name,
               surname: result.surname,
               priority: result.priority,
+              email: result.email,
+              username: result.username
             };
 
             let Max_Age = 1000 * 60 * 60 * 12; //อายุ cookie ครึ่งวัน 12 ชั่วโมง
@@ -1259,6 +1357,39 @@ router.post('/uploadimage', function(req, res)
   });
 });
 
+
+function createlog(itemForLog,mainId, req, operation) { // in the past they have "callback"
+  console.log("is that coming ?");
+  var myobj = {
+    itemhistory: itemForLog,
+    mainname: mainId,
+    // user_id: ObjectId(JSON.parse(req.cookies.CookieUser).id),
+    // equipment_id: equip_id,
+    // name: new_name,
+    date: new moment().format(),
+    activity: operation,
+    // note: JSON.stringify(req.body),
+    username: JSON.parse(req.cookies.CookieUser).name,
+  };
+
+   console.log("out out out"+new moment().format(),itemForLog,operation,
+                             JSON.parse(req.cookies.CookieUser).name);
+  //isnert log in database
+
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+
+    dbo.collection("historylog").insertOne(myobj, function (err, result) {
+      if (err) throw err;
+       console.log("1 document inserted");
+      // res.send(true);
+      db.close();
+    });
+  });
+
+  // callback(true);
+}
 
 
 

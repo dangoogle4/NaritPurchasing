@@ -331,7 +331,7 @@ table td, table th  {
               <h4 class="modal-title">เพิ่มข้อมูล</h4>
             </div>
             <div class="modal-body">
-              <form>
+              <form id="imageuploadkub"method="post" action="/uploaduser" enctype="multipart/form-data" >
                 <!-- <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select> -->
               
               <br>
@@ -352,6 +352,13 @@ table td, table th  {
                 <br>
                 <div class="form-group">
                   <label for="img">รูป:</label>
+
+                  <div class="form-group">
+                    <label for="firstname">Upload</label>
+                    <input type="file" class="form-control" name="fileuploadUser" id="image">
+                  </div>
+                  <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                  <button type="reset" class="btn btn-primary">Reset</button>
                   <!-- <input type="file" id="img" name="img" accept="image/*"> -->
                   <!-- <input type="file" name="multi-files"  id="image" class="form-control-file border"/>
                   <input type="button" value="Resize Image"  onclick="ResizeImage()"/> 
@@ -366,17 +373,17 @@ table td, table th  {
                       ... a few more inputs ... 
                   </form> -->
 
-                  <input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   /> 
+                  <!-- <input id="imageFile" name="imageFile" type="file" class="imageFile"  accept="image/*"   />  -->
                   <!-- <input id="imageFilenew" name="imageFilenew" type="file" class="imageFilenew"  accept="image/*"   />  -->
-                  <input type="button" value="Resize Image"   onclick="ResizeImage()"/> 
+                  <!-- <input type="button" value="Resize Image"   onclick="ResizeImage()"/>  -->
                   <!-- <button type="button" class="btn btn-light" onclick="Main()">อัพโหลด</button> -->
 
                   <br/>
-                  <img src="" id="preview">
-                  <img src="" id="output">
+                  <!-- <img src="" id="preview">
+                  <img src="" id="output"> -->
               </div>
                 <br>
-                <button class="btn btn-light" type="button" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
+                <button class="btn btn-light" type="submit" data-toggle="modal" data-target="#myModal" onclick="addData()">เพิ่มข้อมูล</button>
                 <input  class="btn btn-light" type="reset" value="ล้าง">
                 </form>    
             </div>
@@ -816,8 +823,8 @@ $(".image").submit(function (m) {
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
           </div>
           <div class="modal-footer">
-        <button  style="float: left;" type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button>
-            <button style="float: left;" type="button" class="btn btn-default" data-dismiss="modal">ล้าง</button>
+        <!-- <button  style="float: left;" type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalForEditData" onclick="addEdit()">บันทึก</button> -->
+            <button style="float: right;" type="button" class="btn btn-default" data-dismiss="modal">ล้าง</button>
           </div>
         </div>
         
@@ -837,6 +844,47 @@ $(".image").submit(function (m) {
   
   
   <script>
+
+//var myCookie = getCookie("CookieUser");
+
+var CookieUser = JSON.parse(getCookie("CookieUser"));
+
+console.log("cookieร้อนๆครับโผม-->",  CookieUser.priority,
+                                    CookieUser.name,
+                                    CookieUser.surname,
+                                    CookieUser.username,
+                                    CookieUser.email);
+
+// console.log("COOKIE RON RON KUB"+CookieUser);
+
+
+
+console.log("มอยอ"+CookieUser)
+
+function getCookie(name) {
+ const value = `; ${document.cookie}`;
+ const parts = value.split(`; ${name}=`);
+ if (parts.length === 2) return parts.pop().split(";").shift();
+}
+
+function getCookie(cname) {
+ var name = cname + "=";
+ var decodedCookie = decodeURIComponent(document.cookie);
+ var ca = decodedCookie.split(";");
+ for (var i = 0; i < ca.length; i++) {
+   var c = ca[i];
+   while (c.charAt(0) == " ") {
+     c = c.substring(1);
+   }
+   if (c.indexOf(name) == 0) {
+     return c.substring(name.length, c.length);
+   }
+ }
+ return "";
+}
+
+
+
   function openPage(pageName,elmnt,color) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
@@ -966,8 +1014,8 @@ $(".image").submit(function (m) {
       var statusz = $("#statusz").val();
       var storage = localStorage.getItem("shopIdForAdd");
       console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
-      var image = filekub;
-      console.log("FILEKUB"+ filekub);
+      var image =  $("#image").val().substring(12);
+      console.log("FILEKUB"+ image);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -995,7 +1043,7 @@ $(".image").submit(function (m) {
 			},
 
 			function (data, status) {
-			  window.location.href = "/user";
+			  //window.location.href = "/user";
 			  
 			}
 		  );
@@ -1098,7 +1146,9 @@ $(".image").submit(function (m) {
         
         data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
 		  //console.log(data[i]._id);
-		  str = data[i]._id.replace(/\s/g, '');
+      str = data[i]._id.replace(/\s/g, '');
+      strnew = data[i].picture.replace(/\s/g, '');
+      stritem = data[i].item.replace(/\s/g, '');
 		  console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
@@ -1126,7 +1176,8 @@ $(".image").submit(function (m) {
             data[i].responsibleperson +
       "</td>" +
       "<td>" +
-        "<img  width='200px' src="+data[i].picture+" />" +
+        "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
+        // "<img  width='200px' src="+data[i].picture+" />" +
       "</td>" +
       "<td>" +
             data[i].statusz +
@@ -1155,7 +1206,7 @@ $(".image").submit(function (m) {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-            "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+            "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
 			"</tr>"
 			
 
@@ -1223,7 +1274,8 @@ $(".image").submit(function (m) {
   function editData(i){
 			console.log("addzzzz"+getDataId);
 			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
-						
+        
+        //localStorage.setItem("itemforlogkub",itemNewForLog);
 				console.log(data[i]._id);
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
@@ -1232,6 +1284,7 @@ $(".image").submit(function (m) {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
+          "<form method='post' action='/uploadNewUser' enctype='multipart/form-data' >"+
           "<label style='padding: left; margin: 10px'>ชื่อวัสดุ</label>"+"<input style='margin-left: 35px;' id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
           "<label style='padding: left; margin: 10px'>Part Number</label>"+	"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
@@ -1247,11 +1300,27 @@ $(".image").submit(function (m) {
           // "<label style='padding: left; margin: 10px'>สถานะ</label>"+	"<input style='margin-left: 48px;' id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           // '<br>'+
           "<label style='padding: left; margin: 10px'>รูป</label>"+
-          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
-          "<img  width='200px' src="+data[i].picture+" />" +
-          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
+          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
+                "<div class='form-group'>"+
+                  "<label for='firstname'>Upload</label>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                "</div>"+
+           
+          
+          // "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+         
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
+          "<button type='submit' class='btn btn-primary' onclick='addEdit()'>update</button>"+
+                
+              "</form>"
+          // "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+          // "<img  width='200px' src="+data[i].picture+" />" +
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
 
         );
+
+        var itemNewForLog = document.getElementById(data[i].item);
+        console.log("oq"+data[i].item);
         
         const fileInputEditkub = document.getElementById("imageFilenew");
         window.addEventListener('paste', e => {
@@ -1284,6 +1353,7 @@ $(".image").submit(function (m) {
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
+          "<form method='post' action='/uploadNewUser' enctype='multipart/form-data' >"+
           "<label style='padding: left; margin: 10px'>ชื่อวัสดุ</label>"+"<input style='margin-left: 35px;' id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
           "<label style='padding: left; margin: 10px'>Part Number</label>"+	"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
@@ -1299,9 +1369,22 @@ $(".image").submit(function (m) {
           // "<label style='padding: left; margin: 10px'>สถานะ</label>"+	"<input style='margin-left: 48px;' id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           // '<br>'+
           "<label style='padding: left; margin: 10px'>รูป</label>"+
-          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
-          "<img  width='200px' src="+data[i].picture+" />" +
-          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
+          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
+                "<div class='form-group'>"+
+                  "<label for='firstname'>Upload</label>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                "</div>"+
+           
+          
+          // "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+         
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
+          "<button type='submit' class='btn btn-primary' onclick='addEdit()'>update</button>"+
+                
+              "</form>"
+          // "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
+          // "<img  width='200px' src="+data[i].picture+" />" +
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>"
 
         );
         // location.reload();
@@ -1371,7 +1454,7 @@ $(".image").submit(function (m) {
             data[i].responsibleperson +
             "</td>" +
             "<td>" +
-                "<img width='200px' height='120px' src="+data[i].picture+"  />"+ 
+              "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
             "</td>" +
             "<td>"+
             data[i].statusz +
@@ -1407,13 +1490,30 @@ $(".image").submit(function (m) {
   }
 
   function dropDataKrub(obj_id) {
-	let dropRoomId = obj_id.toString();
-	console.log(obj_id);
-    $.post("/drop/DataKrup", { dropRoomId: dropRoomId }, function (data, status) {
-      //showData();
-      location.reload();
-      console.log(obj_id);
-	});
+
+      var spiltkub = obj_id.split("_*&^_");
+      console.log("MONEW"+obj_id.split("_*&^_"));
+      //console.log("MOMNEWKUB   "+spiltkub[0]);
+      console.log("MOMNEWKUB2   "+spiltkub[1]);
+      let dropRoomId = spiltkub[0].toString();
+      let itemkub = spiltkub[2].toString();
+      console.log("newnewnew"+ itemkub);
+      console.log("DDDDD"+dropRoomId);
+
+
+      $.post("/drop/imageNewNew",{nameImageNew: spiltkub[1]},function(data,status){
+      //   console.log("come");
+
+          $.post("/drop/DataKrup", { dropRoomId: dropRoomId,'mainid': getValueLocalStorage,'itemkub': itemkub }, function (data, status) {
+      
+          //window.location.href = "/user";
+          console.log(obj_id);
+          });
+
+       });
+
+  
+
   }	
 
   var ShowShopName = {};
@@ -1442,7 +1542,8 @@ $(".image").submit(function (m) {
 
 
   function addEdit(){
-			console.log('DDan');
+      console.log('DDan');
+      if (confirm("ต้องการแก้ไขรายการสินค้าใช่หรือไม่")) {
     var shopnew = $("#shopnew").val();
     var itemnew = $("#itemnew").val();
     var partnumbernew = $("#partnumbernew").val();
@@ -1451,21 +1552,23 @@ $(".image").submit(function (m) {
     var sumpricenew = $("#sumpricenew").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = $("#statusznew").val();
-    var image;
+    var image = $("#imagenew").val().substring(12);
+    var mainidnew = getValueLocalStorage;
 
-    if (filekub2 != ""){
-      image = filekub2;
+
+    // if (filekub2 != ""){
+    //   image = filekub2;
       
-    }else {
-      image = getdataPicture;
-      console.log("getdataPicture!"+getdataPicture,filekub2);
-    }
+    // }else {
+    //   image = getdataPicture;
+    //   console.log("getdataPicture!"+getdataPicture,filekub2);
+    // }
    //var statusnew = $("#statusnew").val();
     //var statusnew = $("#statusnew").val();
 
 
-  console.log(shopnew,itemnew,partnumbernew,image);
-  console.log(getDataId);
+  console.log(image,codeForBuy);
+  //console.log(getDataId);
 
     $.post("/save/editdata",{  
 							              'ServergetDataId':getDataId,	
@@ -1478,17 +1581,19 @@ $(".image").submit(function (m) {
 							              'responsiblepersonnew':responsiblepersonnew,
                             'statusznew':statusznew,
                             'image':image,
+                            'mainidnew': mainidnew,
                             //amountnew:amountnew,
                             // nameordernew:nameordernew,
                             // statusnew:statusnew,
                             // department: department
                             
                         },function(data, status){
-                          window.location.href = "/user";
+                         // window.location.href = "/user";
 							          //showData();
         });
-        location.reload();
-}			
+        //location.reload();
+  }
+} 			
 
 function myFunctionselect(){
   console.log("DDDDDDDD---->>   "+ val)

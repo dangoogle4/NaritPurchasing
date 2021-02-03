@@ -290,13 +290,13 @@ body {
       <table cellspacing="0" style="margin-top: 150px">
          <tr>
         <!-- <td width="145">ลำดับ</td> -->
-            <td width="350"> ชื่อร้านค้า</td>
-            <td width="350">ประเภทร้านค้า</td>
-			<td>ภาษีร้านค้า</td>
+            <td width="20" > ลำดับ</td>
+            <td width="450">สินค้า</td>
+			<td width="350">ครั้งที่</td>
 			<!-- <td>สถานะ</td> -->
-			<td> แก้ไข </td>
-			<td> ลบ </td>
-        <!-- <td>ลบ</td> -->
+			<td width="250" > วันที่ </td>
+			<td width="170"> ลบ </td>
+        	<td width="200">ชื่อผู้แก้ไข</td>
         <tbody id="table_user"></tbody>
          </tr>
        
@@ -431,7 +431,7 @@ function getCookie(cname) {
 
     //let per_page_admin = $("#perpage").val();
 
-    $.post('/get/shop', {}, function(data, status)
+    $.post('/get/loghistory', {}, function(data, status)
     {
 
 	//   let user_data = data[0];
@@ -466,15 +466,14 @@ function getCookie(cname) {
 			str = data[i]._id.replace(/\s/g, '');
 
            $("#table_user").append("<tr><td>"
-                                    // + [i+1] +"</td><td>"
-                                    + data[i].nameOfShop +"</td><td>"
-                                    + data[i].typeOfShop +"</td><td>"
-									+ data[i].tax +"</td><td>"
-									// + user_data[i].priority +"</td><td>"
-									+"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='editData("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td>"+
-									 "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
-                                    // +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a> +str.toString()+ "
-                                    +"</td></tr>");                                                                                 
+                                     + [i+1] +"</td><td>"
+                                    + data[i].itemhistory +"</td><td>"
+									+ data[i].mainname +"</td><td>"
+									+ data[i].date +"</td><td>"
+									+ data[i].activity +"</td><td>"
+									+ data[i].username +"</td>"
+								    +"</tr>"
+									);                                                                                 
         }        
     //   }
       
@@ -611,35 +610,7 @@ function getCookie(cname) {
   }	
 
 
-  function addEdit(){
-			console.log('DDan');
-    var shopnewforedit = $("#shopnewforedit").val();
-    var typeshopppnew = $("#typeshopppnew").val();
-    var taxnew = $("#taxnew").val();
   
-   //var statusnew = $("#statusnew").val();
-    //var statusnew = $("#statusnew").val();
-
-
-  console.log(shopnewforedit,typeshopppnew,taxnew);
-  console.log(getDataId);
-
-    $.post("/save/editshop",{  
-							'ServergetDataId':getDataId,	
-							'shopnewforedit':shopnewforedit,
-                            'typeshopppnew':typeshopppnew,
-                            'taxnew':taxnew,
-                           
-                            //amountnew:amountnew,
-                            // nameordernew:nameordernew,
-                            // statusnew:statusnew,
-                            // department: department
-                            
-                        },function(data, status){
-                          window.location.href = "/shopedit";
-							          //showData();
-        });
-}			
 
 
 

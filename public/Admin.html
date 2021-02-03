@@ -941,21 +941,28 @@ $(".image").submit(function (m) {
         <div class="modal-content" >
           <div class="modal-header" >
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Modal EDIT</h4>
+            <h4 class="modal-title">Modal editAdmin</h4>
           </div>
           <div class="modal-body"  id="Modal-c">
-        
-            <form>
-        <input class="btn btn-info btn-lg" type="reset" value="Reset">
-        <!-- <div id="Modal-a"></div> -->
-        
-        
-              </form>
+          <form>
+            
+                <!-- <input class="btn btn-info btn-lg" type="reset" value="Reset"> -->
+                <!-- <div id="Modal-a"></div> -->
+              
+              
               <!-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modalzz">Update</button> -->
-          </div>
-          <div class="modal-footer">
-        <button type="submit" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                  <!-- <div class="form-group" style="margin: 20px;">
+                    <label for="firstname">Upload</label>
+                    <input type="file" class="form-control" name="fileupload" id="image">
+                  </div> -->
+  
+                  <div class="modal-footer">
+                  
+                    
+                    <!-- <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModalForEditDataAdmin" onclick="addEdit()">UpdateData</button> -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </form> 
           </div>
         </div>
         
@@ -1093,6 +1100,9 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
 
         data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
     str = data[i]._id.replace(/\s/g, '');
+    strnew = data[i].picture.replace(/\s/g, '');
+    stritem = data[i].item.replace(/\s/g, '');
+
     console.log(str);
     roomId = data;
    // let rstripId = data[i]._id.rs
@@ -1155,7 +1165,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
       "</tr>"
 // "<td >" +
 //   ShowShopName[data[i].shopid] +
@@ -1757,6 +1767,7 @@ function showData() {
 		  //console.log(data[i]._id);
       str = data[i]._id.replace(/\s/g, '');
       strnew = data[i].picture.replace(/\s/g, '');
+      stritem = data[i].item.replace(/\s/g, '');
 		  console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
@@ -1835,7 +1846,7 @@ function showData() {
             "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
             "</div>" +
             "</div></td>" +
-             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() +"') >ลบ</button></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
         "</tr>"
       
 			
@@ -1916,6 +1927,7 @@ function showData() {
       var image =  $("#image").val().substring(12);
       //image = image[2];
       //var storage = $("#storage").val();
+      console.log("Araiwa?--->", codeForBuy);
       console.log(codeForBuy,storage,amount,item,image);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
@@ -1962,6 +1974,7 @@ function showData() {
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
+          "<form method='post' action='/uploadnew' enctype='multipart/form-data' >"+
           "ชื่อวัสดุ <br>"+
 					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
@@ -1996,11 +2009,19 @@ function showData() {
 					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
+          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
+                "<div class='form-group'>"+
+                  "<label for='firstname'>Upload</label>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                "</div>"+
+           
           
-          "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
-          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" 
+          // "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+         
           // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
-
+          "<button type='submit' class='btn btn-primary' onclick='addEdit()'>update</button>"+
+                
+              "</form>"
 				);
 						
 						
@@ -2022,6 +2043,7 @@ function showData() {
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
+          "<form method='post' action='/uploadnew' enctype='multipart/form-data' >"+
           "ชื่อวัสดุ <br>"+
 					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
@@ -2056,12 +2078,19 @@ function showData() {
 					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
-          "<input id='imageFilenew' name='imageFilenew' type='file' class='imageFilenew'  accept='image/*' /> "+
-         "<img  width='200px'  src=" +data[i].picture+" />" +
-          //"<img  width='200px'  src='./public/upload/temp/pic/picture-1612171217266.jpg' />" +
-          "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" +
-          "<img src='' id='output'>"
-
+          "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
+                "<div class='form-group'>"+
+                  "<label for='firstname'>Upload</label>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                "</div>"+
+           
+          
+          // "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+         
+          // "<input type='button' value='Resize Image'   onclick='ResizeImagenew()'/>" 
+          "<button type='submit' class='btn btn-primary' onclick='addEdit()'>update</button>"+
+                
+              "</form>"
 				);
 						
 						
@@ -2075,7 +2104,8 @@ function showData() {
               
 
     function addEdit(){
-			console.log('DDazzzn');
+      console.log('DDazzzn');
+      if (confirm("ต้องการแก้ไขรายการสินค้าใช่หรือไม่")) {
     //var shopnew = $("#shopnew").val();
     var itemnew = $("#itemnew").val();
     var partnumbernew = $("#partnumbernew").val();
@@ -2087,6 +2117,7 @@ function showData() {
     var sumpricenewedit = $("#sumpricenewedit").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = $("#statusznew").val();
+    var mainidnew =  getValueLocalStorage;
     //var image = filekub2;
     var image = $("#imagenew").val().substring(12);
 
@@ -2107,49 +2138,51 @@ function showData() {
   console.log(image);
   //console.log(getDataId);
 
-    // $.post("/save/editdataadmin",{  
-		// 					              'ServergetDataId':getDataId,	
-		// 					              //'shopnew':shopnew,
-    //                         'itemnew':itemnew,
-    //                         'partnumbernew':partnumbernew,
-    //                         'pricenew':pricenew,
-    //                         'amountnew':amountnew,
-    //                          'pricenewedit':pricenewedit,
-    //                         'amountnewedit':amountnewedit,
-    //                         'sumpricenew':sumpricenew,
-    //                         'sumpricenewedit':sumpricenewedit,		
-		// 					              'responsiblepersonnew':responsiblepersonnew,
-    //                         'statusznew':statusznew,
-    //                         'imagenew': image,
-    //                         //amountnew:amountnew,
-    //                         // nameordernew:nameordernew,
-    //                         // statusnew:statusnew,
-    //                         // department: department
+    $.post("/save/editdataadmin",{  
+							              'ServergetDataId':getDataId,	
+							              //'shopnew':shopnew,
+                            'itemnew':itemnew,
+                            'partnumbernew':partnumbernew,
+                            'pricenew':pricenew,
+                            'amountnew':amountnew,
+                             'pricenewedit':pricenewedit,
+                            'amountnewedit':amountnewedit,
+                            'sumpricenew':sumpricenew,
+                            'sumpricenewedit':sumpricenewedit,		
+							              'responsiblepersonnew':responsiblepersonnew,
+                            'statusznew':statusznew,
+                            'imagenew': image,
+                            'mainidnew': mainidnew,
+                            //amountnew:amountnew,
+                            // nameordernew:nameordernew,
+                            // statusnew:statusnew,
+                            // department: department
                             
-    //                     },function(data, status){
-    //                       console.log(data);
-    //                        //window.location.href = "/admin";
-		// 					// showData();
-    //     });
-    //     location.reload();
+                        },function(data, status){
+                          console.log(data);
+                           //window.location.href = "/admin";
+							// showData();
+        });
+        //location.reload();
     }
+  }
 
 
     function DeleteDataAdmin(obj_id) {
      
-      //console.log("NAMEPICTURE"+strnew);
       var spiltkub = obj_id.split("_*&^_");
       console.log("MONEW"+obj_id.split("_*&^_"));
       //console.log("MOMNEWKUB   "+spiltkub[0]);
       console.log("MOMNEWKUB2   "+spiltkub[1]);
-       let dropRoomId = spiltkub[0].toString();
-      console.log("qwo[dkoqw[pkdpoqwkdqwokd[qkw[         "+dropRoomId);
-      console.log("delete--->>>    " + obj_id);
+      let dropRoomId = spiltkub[0].toString();
+      let itemkub = spiltkub[2].toString();
+      console.log("newnewnew"+ itemkub);
+      console.log("DDDDD"+dropRoomId);
 
       $.post("/drop/imageNewNew",{nameImageNew: spiltkub[1]},function(data,status){
         console.log("come");
 
-          $.post("/drop/dataAdmin", { dropRoomId: dropRoomId }, function (data, status) {
+          $.post("/drop/dataAdmin", { dropRoomId: dropRoomId,'mainid': getValueLocalStorage,'itemkub': itemkub }, function (data, status) {
       
           window.location.href = "/admin";
           console.log(obj_id);

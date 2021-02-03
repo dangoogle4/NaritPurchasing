@@ -40,10 +40,18 @@ const upload = multer({ storage: storage })
 
 app.post('/upload',upload.single('fileupload'),(req,res) => {
   //res.render(req.file);
- // res.send("OK");
+ //res.send("OK");
   res.redirect("/admin");
   //res.status(200);
 })
+
+app.post('/uploaduser',upload.single('fileuploadUser'),(req,res) => {
+  //res.render(req.file);
+ //res.send("OK");
+  res.redirect("/user");
+  //res.status(200);
+})
+
 
 app.post('/uploadnew',upload.single('fileuploadNew'),(req,res) => {
   //res.render(req.file);
@@ -51,6 +59,14 @@ app.post('/uploadnew',upload.single('fileuploadNew'),(req,res) => {
   res.redirect("/admin");
   //res.status(200);
 })
+
+app.post('/uploadNewUser',upload.single('fileuploadNew'),(req,res) => {
+  //res.render(req.file);
+ // res.send("OK");
+  res.redirect("/user");
+  //res.status(200);
+})
+
 
 
 
