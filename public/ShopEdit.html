@@ -598,17 +598,75 @@ function getCookie(cname) {
 	let dropRoomId = obj_id.toString();
 	console.log("delete--->>>    " + obj_id);
     // $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
-		$.post("/drop/DataShopInMain", { dropRoomId: dropRoomId }, function (data, status) {
+		$.post("/get/maintable2", { dropRoomId: dropRoomId, 'mainid': getValueLocalStorage }, async function (data, status) {
+
+			var EIEI; 
 		
-			console.log("00"+data);
-			// for ( i = 0 ; i < data[i].length)
-		// window.location.href = "/shopedit";
-		// console.log(obj_id);
+			console.log(getValueLocalStorage);
+			console.log(data.length);
+		
+			for ( i = 0 ; i < data.length ; i++){
+				var Archive = [1];
+				Archive.length =  data[i].shopid.length - 1 ;
+				let ArchiveIndex = 0;
+
+				 for ( j = 0 ; j < data[i].shopid.length ; j++) {
+
+					
+					 
+					//console.log("3z"+data[i].shopid[j]);
+
+					EIEI =  data[i].shopid[j];
+
+					//console.log("EIEI--->>"+ EIEI);
+
+					if( obj_id ==  EIEI ){
+						console.log("Danout "+EIEI);
+
+					}else {
+					   
+						// Archive = data[i].shopid[j];
+
+						Archive[ArchiveIndex] = data[i].shopid[j];
+
+						ArchiveIndex++;
+
+						//var Dan = JSON.stringify(Archive);
+
+						//console.log("EIEIEIEIEIEIEI"+JSON.parse(Dan))
+
+						console.log("Dan---->>"+Archive);
+
+						
+					}
+					 
+				 }
+				 console.log("Dan--sss-->>"+Archive);
+
+				let doIt = await shopEIEI(Archive);
+
+			 	
+				
+			 }
+						//console.log("00"+data);
+							// for ( i = 0 ; i < data[i].length)
+								// window.location.href = "/shopedit";
+								// console.log(obj_id);
 	  });
-      //window.location.href = "/shopedit";
-      
-	// });
+						//window.location.href = "/shopedit";
+						
+						// });
   }	
+
+  function shopEIEI(Archive){
+	  console.log("A"+Archive);
+	 $.post("/api/updateShopInMainqweqweqwe",{'mainIdForDeleteData': getValueLocalStorage , 'ShopKubEIEIEIEIEI': JSON.stringify(Archive)}, function(data,status){
+
+				
+
+	 });
+
+  }
 
 
   function addEdit(){

@@ -6,6 +6,7 @@ let MongoClient = require("mongodb").MongoClient;
 var url = "mongodb://localhost:27017/mydata";
 const fs = require("fs");
 const moment = require("moment");
+const { json } = require('body-parser');
 
 // const koaBody = require('koa-body');
 
@@ -203,6 +204,41 @@ router.post("/api/addmaintableadmin", function (req, res, next) {
     );
   });
 });
+
+router.post("/api/updateShopInMainqweqweqwe", function (req, res, next) {
+  // res.send("ok - "+ req.body.dbname);
+  var UPDATEKUB = JSON.parse(req.body.ShopKubEIEIEIEIEI);
+  console.log("Dannwqpdokqwpod---->>"+ req.body.mainIdForDeleteData);
+  console.log("DANMAPOW", JSON.parse(req.body.ShopKubEIEIEIEIEI));
+  //console.log("eiei"+ req.body.EI);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { order: req.body.mainIdForDeleteData};
+    //console.log(myquery);
+    var myitem = { 
+      //status: req.body.status,
+      $push: { shopid: UPDATEKUB
+ },
+       
+    };
+    // { $set: { [status: req.body.status],
+    //   reason: req.body.reason,}
+        
+        //group: req.body.group,
+        //department: req.body.department,
+     //};
+    dbo.collection("maintable").updateOne(myquery,myitem, function (err, result) {
+        if (err) throw err;
+        res.send(true);
+
+        db.close();
+      }
+    );
+  });
+});
+
+
 
 router.post("/api/addmaintableadminforshopid", function (req, res, next) {
   // res.send("ok - "+ req.body.dbname);
@@ -427,6 +463,7 @@ router.post("/get/maintable", function (req, res, next) {
     dbo
       .collection("maintable")
       .find({})
+      // .sort({_id: -1 })
       .toArray(function (err, result_category) {
         if (err) throw err;
          //console.log("DDannn" + result._id);
@@ -583,6 +620,7 @@ router.post("/get/dataForSearchTableMainIdAdmin3", function (req, res, next) {
     dbo
       .collection("data")
       .find({mainid: req.body._ID})
+      // .sort({_id: -1 })
       .toArray(function (err, result_category) {
         if (err) throw err;
         // console.log(result.name);
@@ -1246,7 +1284,7 @@ router.post("/drop/DataShopInMain", function (req, res, next) {
  MongoClient.connect(url, function (err, db) {
    if (err) throw err;
    var dbo = db.db("Purchasing");
-   var dropcategory = { shopid: {'$pull': ObjectId(req.body.dropRoomId)} };
+   var dropcategory = { shopid:  ObjectId(req.body.dropRoomId) };
    dbo.collection("maintable").deleteOne(dropcategory, function (err, obj) {
      if (err) throw err;
      console.log("1 document deleted");
@@ -1255,6 +1293,28 @@ router.post("/drop/DataShopInMain", function (req, res, next) {
    });
  });
 });
+
+router.post("/get/maintable2", function (req, res, next) {
+   console.log("hkr",req.body.mainid);
+  // res.send("HRK");
+  var maindForFind = req.body.mainid;
+  console.log("maid"+maindForFind);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    dbo
+      .collection("maintable")
+      .find({order: maindForFind})
+      // .sort({_id: -1 })
+      .toArray(function (err, result_category) {
+        if (err) throw err;
+         //console.log("DDannn" + result._id);
+        res.send(result_category);
+        db.close();
+      });
+  });
+});
+
 
 
 

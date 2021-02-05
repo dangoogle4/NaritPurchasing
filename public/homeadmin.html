@@ -199,6 +199,7 @@ table td, table th  {
 
 
 
+
  
 </style>
 <body onload="showMaintable()" >
@@ -466,7 +467,7 @@ $.post("/users/logout", function(data, status){
 			},
 
 			function (data, status) {
-			  window.location.href = "/main";
+			  window.location.href = "/homeadmin";
 			  
 			}
 		  );
@@ -796,167 +797,16 @@ $.post("/users/logout", function(data, status){
 		$.post("/get/dataForSearchTableMainIdAdmin3", {_ID: data[i].order},function (data, status){
 		sum = 0;
 		console.log("Damemdpqwkpz2");
-		if(data.length==0){
-			$.post("/get/maintable", function (data, status) { //แสดงข้อมูล
-					// var newnew = [];
-					console.log("Damemdpqwkp3");
-					if(newdan[i] == undefined){
-						newdan[i] = 0.00.toFixed(2);
+		
+			if(newdan[i] == undefined){
+				newdan[i] = 0.00;
 
-					}
-
-					document.getElementById("room-name").innerHTML="";
-					//console.log("Dataaa" + data.name);
-					var j = 0;
-					for (let i = 0; i < data.length; i++) {
-				    if(data[i].deldummymaintable == 0){
-						
-						
-						test = data[i]._id;
-						console.log("----->>>   "+test);
-						//console.log(data[i]._id);
-						str2 = data[i]._id.replace(/\s/g, '');
-						str = data[i]._id.replace(/\s/g, '');
-						//console.log("STRRRRRRRRRRRR ---->>    "+str);
-						roomId = data;
-						// let rstripId = data[i]._id.rs
-						//$("#room-name-value").val(data[0].room);
-						$("#room-name").append(
-						"<tr>"+
-						//   "<td>" +           
-						// 	(j+1) +
-						// 	"</td>" +
-						"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-						"</a></td>" +
-						"<td>" +
-						data[i].respon +
-						"</td>" +
-						"<td id='AmountForAnotherTable" + i + "'>" +
-						// data[i].amount
-						// newdan[i].toFixed(2) +
-						newdan[i] +
-						"</td>" +
-						"<td id='nameOrderForAnotherTable" + i + "' >" +
-						data[i].nameorder +
-						"</td>" +
-						"<td >" +
-						data[i].status[0] + "<td id='status-badge-"+i+"'>" +
-						"</td>" +
-						// "<td>" +
-						// data[i].shopid +
-						// "</td>" +
-						// "</td>" +
-						// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
-						// "</a></td>" +
-						// "<td>" +
-						// 	ShowDataAmount[data[i].mainid] +
-						// "</td>" +
-						// "<td>" +
-						// data[i].reason +
-						// "</td>" +
-						// "<td>" +
-						// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-						// "</td>" +
-						"<td><button style='margin-left: 10px ;' data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</button>" +
-							// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
-						"<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-						"<div class='modal-dialog modal-dialog-centered'>" +
-						"<div class='modal-content'>" +
-						"<div class='modal-header'>" +
-						"<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
-						"<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-						"<span aria-hidden='true'>&times;</span>" +
-						"</button>" +
-						"</div>" +
-						"<div class='modal-footer'>" +
-						"<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-						"</div>" +
-						"</div></td>" +
-						// "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-						// "<td><button class='btn btn-danger' onclick='dropMainTableForDummyMainTable("+ i +")' >ลบ</button></td>" +
-						"</tr>"
-
-						
-	
-
-					);
-					  //check and add badge to status field
-					  for(let i=0; i< data.length; i++){
-						var checkBadgeStatus = $('#status-badge-'+i).text();
-						if(checkBadgeStatus === 'ตรวจรับแล้ว'){
-							$('#status-badge-'+i).addClass('badge badge-success');
-						} 
-						else if(checkBadgeStatus === 'รออนุมัติ' || checkBadgeStatus === 'รอส่งของ'){
-							$('#status-badge-'+i).addClass('badge badge-warning');
-						} 
-						else if(checkBadgeStatus === 'อนุมัติ'){
-							$('#status-badge-'+i).addClass('badge badge-danger');
-						}
-						}
-	 		  j++;
- 			}
-				// test = data[i]._id;
-				// console.log("----->>>   "+test);
-				//   //console.log(data[i]._id);
-				//   str2 = data[i]._id.replace(/\s/g, '');
-				//   str = data[i]._id.replace(/\s/g, '');
-				//   //console.log("STRRRRRRRRRRRR ---->>    "+str);
-				// roomId = data;
-				// // let rstripId = data[i]._id.rs
-				// //$("#room-name-value").val(data[0].room);
-				// $("#room-name").append(
-				//   "<tr><td>" +           
-				// 	(i + 1) +
-				// 	"</td>" +
-				// 	"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-				// 	"</a></td>" +
-				// 	"<td>" +
-				//     data[i].respon +
-				// 	"</td>" +
-				// 	"<td id='AmountForAnotherTable" + i + "'>" +
-				//     data[i].amount +
-				// 	"</td>" +
-				// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
-				//     data[i].nameorder +
-				// 	"</td>" +
-				// 	// "</td>" +
-				// 	// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
-				// 	// "</a></td>" +
-				// 	"<td>" +
-				//     data[i].status +
-				// 	"</td>" +
-				// 	"<td>" +
-				//     data[i].reason +
-				// 	"</td>" +
-				// 	// "<td>" +
-				// 	// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-				// 	// "</td>" +
-				// 	 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
-				// 		// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
-				//     "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-				//     "<div class='modal-dialog modal-dialog-centered'>" +
-				//     "<div class='modal-content'>" +
-				//     "<div class='modal-header'>" +
-				//     "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
-				//     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-				//     "<span aria-hidden='true'>&times;</span>" +
-				//     "</button>" +
-				//     "</div>" +
-				//     "<div class='modal-footer'>" +
-				//     "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-				//     "</div>" +
-				//     "</div></td>" +
-				//     "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-				// 	"</tr>"
-					
-
-				// );
 			}
-		  });
-		}else{
 			for(let j = 0 ; j <data.length; j++){
 			//console.log(i+"data[i]._id in j",data[i]._id);
 			//console.log("maintable_ID"+j);
+		  console.log("data--->>WWWW", data.length);
+
 			if( data[j].sumpriceadmin == null) { // เอา sum มาใช้
 				sum = sum + data[j].sumprice * ShowShopTax[data[j].shopid];
 			}else {
@@ -968,21 +818,23 @@ $.post("/users/logout", function(data, status){
 			if(j == data.length-1){ //เช็คว่าวนเสดรึยัง
 				//console.log("newnewfrist "+newdan[z]);
 				//console.log("sum " +sum);
+				// if( newdan[j] == undefined){
+				// 	z++;
+				// }
+				
+
 				newdan[z] = sum;
-				z++;
+				
 				console.log("newnew "+newdan[z]);
 
 
 				$.post("/get/maintable", function (data, status) { //แสดงข้อมูล
 					// var newnew = [];
-					console.log("Damemdpqwkp3");
+					console.log("Damemdpqwkp3z");
 
 					document.getElementById("room-name").innerHTML="";
 					//console.log("Dataaa" + data.name);
-					if(newdan[i] == undefined){
-						newdan[i] = 0.00;
-
-					}
+					
 					var j = 0;
 					for (let i = 0; i < data.length; i++) {
 				    if(data[i].deldummymaintable == 0){
@@ -1008,13 +860,13 @@ $.post("/users/logout", function(data, status){
 						"</td>" +
 						"<td id='AmountForAnotherTable" + i + "'>" +
 						// data[i].amount
-						// newdan[i].toFixed(2) +
-						newdan[i].toFixed(2) +
+						 newdan[i].toFixed(2) +
+						//newdan[i] +
 						"</td>" +
 						"<td id='nameOrderForAnotherTable" + i + "' >" +
 						data[i].nameorder +
 						"</td>" +
-						"<td>" +
+						"<td >" +
 						data[i].status +
 						"</td>" +
 						// "</td>" +
@@ -1050,82 +902,17 @@ $.post("/users/logout", function(data, status){
 	
 
 					);
+				
 	 		  j++;
  			}
-				// test = data[i]._id;
-				// console.log("----->>>   "+test);
-				//   //console.log(data[i]._id);
-				//   str2 = data[i]._id.replace(/\s/g, '');
-				//   str = data[i]._id.replace(/\s/g, '');
-				//   //console.log("STRRRRRRRRRRRR ---->>    "+str);
-				// roomId = data;
-				// // let rstripId = data[i]._id.rs
-				// //$("#room-name-value").val(data[0].room);
-				// $("#room-name").append(
-				//   "<tr><td>" +           
-				// 	(i + 1) +
-				// 	"</td>" +
-				// 	"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-				// 	"</a></td>" +
-				// 	"<td>" +
-				//     data[i].respon +
-				// 	"</td>" +
-				// 	"<td id='AmountForAnotherTable" + i + "'>" +
-				//     data[i].amount +
-				// 	"</td>" +
-				// 	"<td id='nameOrderForAnotherTable" + i + "' >" +
-				//     data[i].nameorder +
-				// 	"</td>" +
-				// 	// "</td>" +
-				// 	// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
-				// 	// "</a></td>" +
-				// 	"<td>" +
-				//     data[i].status +
-				// 	"</td>" +
-				// 	"<td>" +
-				//     data[i].reason +
-				// 	"</td>" +
-				// 	// "<td>" +
-				// 	// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-				// 	// "</td>" +
-				// 	 "<td><a data-toggle='modal' data-target='#Modalzz' class='btn btn-info' data-target='#exampleModal02' onclick='edit("+ i +")' >แก้ไข</a>" +
-				// 		// "<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='addzz()' >แก้ไข</a>" +
-				//     "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-				//     "<div class='modal-dialog modal-dialog-centered'>" +
-				//     "<div class='modal-content'>" +
-				//     "<div class='modal-header'>" +
-				//     "<h5 class='modal-title' id='exampleModal02Label'>แก้ไข</h5>" +
-				//     "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-				//     "<span aria-hidden='true'>&times;</span>" +
-				//     "</button>" +
-				//     "</div>" +
-				//     "<div class='modal-footer'>" +
-				//     "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-				//     "</div>" +
-				//     "</div></td>" +
-				//     "<td><button href='#' class='btn btn-danger' onclick=dropMainTable('"+str.toString()+"') >ลบ</button></td>" +
-				// 	"</tr>"
-					
-
-				// );
-			}
-		  });
-		 }
-		 
-		
-
-
-
-
-
-
-
-
+				
+			 }
+		   });
+		  }
 		}
-			
-		}
-		 
-	});
+		z++;
+		// }
+      });
 
 
   //console.log(data[i]._id);

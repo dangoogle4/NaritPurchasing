@@ -3,6 +3,22 @@
 <style>
 
 
+
+/* .label {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+} */
+
+
+
 div.preview-images > img {
         height: 50%;
         width: 50%;
@@ -46,6 +62,7 @@ body {
  table td {
 	 text-align: center;
 	 vertical-align: middle;
+   padding: 20px;
 }
  table td:last-child {
 	 font-size: 0.95em;
@@ -115,12 +132,13 @@ table td, table th  {
 
 <body onload="showData()" >
   
-  <meta charset="utf-8">
+  <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
@@ -134,7 +152,7 @@ table td, table th  {
       </ul> -->
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <div class="dropdown">
+          <div   class="dropdown">
              <button class="dropbtn">Setting
              <i class="fa fa-caret-down"></i>
              </button>
@@ -150,6 +168,93 @@ table td, table th  {
     </div>
     
   </nav>
+
+
+    <!-- <div class="header">Users</div> -->
+    <div  id="divTableDataHolderForExportshopKub" >
+      
+      <table  cellspacing="0"  hidden>
+        <tr>
+            <td>ลำดับ </td>
+            <td>ชื่อวัสดุ</td>
+            <td>Part Number</td>
+            <td>ราคา(เสนอ)</td>
+            <td>จำนวน(เสนอ)</td>
+            <td>ราคา(แก้ไข)</td>
+            <td>จำนวน(แก้ไข)</td>
+            <td>ราคารวม(เสนอ)</td>
+            <td>ราคารวม(แก้ไข)</td>
+            <td>ผู้รับผิดชอบ</td>
+            <td width="200">รูป</td>
+            <td width="100">สถานะ</td>
+            <!-- <td>ร้านค้า</td> -->
+            <td>แก้ไข</td>
+            <td>ลบ</td> 
+            <tbody id="room-namedataforexportshop"></tbody>
+        </tr>
+  
+        <!-- <tr>
+            <td>1</td>
+            <td><a href="/">NewNewNew</a></td>
+            <td>jane.doe@foo.com</td>
+            <td><input name="first" type="text"></td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>
+              <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/> -->
+           
+          </table>
+    </div>
+
+
+
+
+     <!-- <div class="header">Users</div> -->
+     <div  id="divTableDataHolderForExport" hidden>
+      
+      <table  cellspacing="0"  >
+        <tr>
+            <td>ลำดับ </td>
+            <td>ชื่อวัสดุ</td>
+            <td>Part Number</td>
+            <td>ราคา(เสนอ)</td>
+            <td>จำนวน(เสนอ)</td>
+            <td>ราคา(แก้ไข)</td>
+            <td>จำนวน(แก้ไข)</td>
+            <td>ราคารวม(เสนอ)</td>
+            <td>ราคารวม(แก้ไข)</td>
+            <td>ผู้รับผิดชอบ</td>
+            <td width="200">รูป</td>
+            <td width="100">สถานะ</td>
+            <!-- <td>ร้านค้า</td> -->
+            <td>แก้ไข</td>
+            <td>ลบ</td> 
+            <tbody id="room-namedataforexport"></tbody>
+        </tr>
+  
+        <!-- <tr>
+            <td>1</td>
+            <td><a href="/">NewNewNew</a></td>
+            <td>jane.doe@foo.com</td>
+            <td><input name="first" type="text"></td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>
+              <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/> -->
+           
+          </table>
+    </div>      
+ 
+
+
   
   <div id="Home" class="tabcontent"style="margin: 150px;">
     <!-- <h3>Home</h3> -->
@@ -166,45 +271,48 @@ table td, table th  {
           <!--<button >ค้นหา</button>-->
         </form>
         <br>
+
+    
+
     
     
         <!-- <div class="header">Users</div> -->
-        
-        <table cellspacing="0">
-           <tr>
-              <td>ลำดับ </td>
-              <td>ชื่อวัสดุ</td>
-              <td>Part Number</td>
-              <td>ราคา(เสนอ)</td>
-              <td>จำนวน(เสนอ)</td>
-              <td>ราคา(แก้ไข)</td>
-              <td>จำนวน(แก้ไข)</td>
-              <td>ราคารวม(เสนอ)</td>
-              <td>ราคารวม(แก้ไข)</td>
-              <td>ผู้รับผิดชอบ</td>
-              <td>รูป</td>
-              <td width="230">สถานะ</td>
-              <!-- <td>ร้านค้า</td> -->
-              <td>แก้ไข</td>
-              <td>ลบ</td> 
-              <tbody id="room-namedata"></tbody>
-           </tr>
-     
-           <!-- <tr>
-              <td>1</td>
-              <td><a href="/">NewNewNew</a></td>
-              <td>jane.doe@foo.com</td>
-              <td><input name="first" type="text"></td>
-              <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>01 800 2000</td>
-              <td>
-                <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/>
-               -->
-        </table>
+               <div id="divTableDataHolder" >
+                  <table cellspacing="0" >
+                    <tr>
+                        <td>ลำดับ </td>
+                        <td>ชื่อวัสดุ</td>
+                        <td>Part Number</td>
+                        <td>ราคา(เสนอ)</td>
+                        <td>จำนวน(เสนอ)</td>
+                        <td>ราคา(แก้ไข)</td>
+                        <td>จำนวน(แก้ไข)</td>
+                        <td>ราคารวม(เสนอ)</td>
+                        <td>ราคารวม(แก้ไข)</td>
+                        <td>ผู้รับผิดชอบ</td>
+                        <td width="200">รูป</td>
+                        <td width="100">สถานะ</td>
+                        <!-- <td>ร้านค้า</td> -->
+                        <td>แก้ไข</td>
+                        <td>ลบ</td> 
+                        <tbody id="room-namedata"></tbody>
+                    </tr>
+              
+                    <!-- <tr>
+                        <td>1</td>
+                        <td><a href="/">NewNewNew</a></td>
+                        <td>jane.doe@foo.com</td>
+                        <td><input name="first" type="text"></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+                        <td>01 800 2000</td>
+                        <td>01 800 2000</td>
+                        <td>01 800 2000</td>
+                        <td>01 800 2000</td>
+                        <td>01 800 2000</td>
+                        <td>
+                          <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/> -->
+                </div>      
+             </table>
      </div>
      <button type="button" style="float: right; margin: 12px;" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" >เพิ่มข้อมูล</button>
      <button style="float: right; margin: 12px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มร้านค้า</button>
@@ -243,7 +351,15 @@ table td, table th  {
                 <input  style="margin-left:1.98em" id="responsibleperson" name="responsibleperson" type="text"><br>
                 <br>
                 <label >สถานะ</label>
-                <input  style="margin-left:4.3em" id="statusz" type="text"><br>
+                <!-- <input  style="margin-left:4.3em" id="statusz" type="text"><br> -->
+                <select style="margin-left:4.3em"name="status" id="statusz">
+                  <!-- <option value="0">เลือกสี</option> -->
+                  <!-- <option value="อนุมัติ">อนุมัติ</option> -->
+                  <option value="รออนุมัติ">รออนุมัติ</option>
+                  <!-- <option value="ไม่อนุมัติ">ไม่อนุมัติ</option> -->
+                  <!-- <option value="4">แดง</option> -->
+                </select>
+                
                
                  <div class="form-group">
                     <label for="img">รูป:</label>
@@ -371,6 +487,9 @@ table td, table th  {
     </div>
   </div>
 </div>
+
+
+
 
 
 
@@ -925,9 +1044,23 @@ $(".image").submit(function (m) {
         <iframe id="txtArea1" style="display:none"></iframe>
             <br><br>
             <a style="margin-left: 100px;"></a>
-            <input  onclick="goToTable()" type="submit" value="บันทึก">
+            <input  class="btn btn-light" onclick="goToTable()" type="submit" value="บันทึก">
 
-            <button class="btn btn-info" onclick="Export()">export &nbsp;</button>
+            <!-- <button class="btn btn-info" onclick="Export()">export &nbsp;</button> -->
+            <button class="btn btn-light" id="myButtonControlID">Export Data All</button>
+            <button onclick="ExportDataAll()" class="btn btn-light" id="myButtonControlIDShop">Export Shop</button>
+            <br>
+            <br>
+            <br>
+
+            <script>
+              function ExportDataAll(){
+                confirm("ถ้าคุณต้องการ Export ข้อมูลการจัดชื้อของร้านค้านั้นๆให้คุณกดที่ปุ่มร้านค้าแล้วถึง Export ได้ :D")
+              }
+            </script>
+
+
+            
         
   
         <!--<button >ค้นหา</button>-->
@@ -1071,7 +1204,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
 
 
 
-    $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
+  $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
     document.getElementById("room-namedata").innerHTML="";
     console.log("sadsadegeg ---->>>"+data.length)
     for (let i = 0; i < data.length; i++) {
@@ -1147,6 +1280,133 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
         //data[i].picture+
             
       "</td>" +
+      "<td > " + 
+          "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                    
+      "</td>" +
+      "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
+      "</tr>"
+        // "<td >" +
+        //   ShowShopName[data[i].shopid] +
+        //         //  ShowShopName[data[i].shopid] +
+        // "</td>" +
+        // "<td >" +
+        //   data[i].mainid +
+        //         //  ShowShopName[data[i].shopid] +
+        // "</td>" 
+
+
+
+      );
+      var checkBadgeStatus = data[i].statusz;
+                
+                if(checkBadgeStatus == 'อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-success');
+            } 
+            else if(checkBadgeStatus == 'รออนุมัติ' ){
+              $('#status-badge-'+i).addClass('label label-warning');
+              console.log("ส้มม")
+            } 
+            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-danger');
+            }
+    }
+
+  });
+
+
+  $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
+    document.getElementById("room-namedataforexportshop").innerHTML="";
+    console.log("sadsadegeg ---->>>"+data.length)
+    for (let i = 0; i < data.length; i++) {
+
+      if(data[i].priceadmin == null){
+            checkPriceAdmin = 0
+      } else {
+        checkPriceAdmin = data[i].priceadmin;
+        }
+        if(data[i].amountadmin == null){
+          checkAmountAdmin = 0
+      } else {
+        checkAmountAdmin = data[i].amountadmin;
+        }
+        if(data[i].sumpriceadmin == null){
+          checkSumPriceAdmin = ""
+      } else {
+        checkSumPriceAdmin = data[i].sumpriceadmin;
+        }
+      //   if(data[i].sumpriceadmin !== 0){
+      //   data[i].sumprice = data[i].sumpriceadmin;
+      // }
+
+      //   sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+
+
+        data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+    str = data[i]._id.replace(/\s/g, '');
+    strnew = data[i].picture.replace(/\s/g, '');
+    stritem = data[i].item.replace(/\s/g, '');
+
+    console.log(str);
+    roomId = data;
+   // let rstripId = data[i]._id.rs
+    //$("#room-name-value").val(data[0].room);
+     $("#room-namedataforexportshop").append(
+      "<tr><td>" +
+            (i + 1) +
+            "</td>" +
+			"<td>" +
+            data[i].item +
+			"</td>" +
+			"<td>" +
+            data[i].partnumber +
+			"</td>" +
+			"<td>" +
+            data[i].price +
+			"</td>" +
+			"<td>" +
+            data[i].amount +
+      "</td>" +
+      "<td>" +
+            checkPriceAdmin +
+            // data[i].priceadmin +
+			"</td>" +
+      "<td>" +
+            checkAmountAdmin +
+            // data[i].amountadmin +
+      "</td>" +
+      "<td>" +
+            data[i].sumprice.toFixed(2) +
+      "</td>" +
+      "<td>" +
+            //checkSumPriceAdmin +
+            data[i].sumpriceadmin.toFixed(2) +
+      "</td>" +
+      "<td>" +
+            data[i].responsibleperson +
+      "</td>" +
+      "<td>" +
+        //  "<img width='200px' src="+data[i].picture+"  />"+ 
+        "<img width='12%' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+        // "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
+        //data[i].picture+
+            
+      "</td>" +
       "<td>" +
             data[i].statusz +
       "</td>" +
@@ -1167,21 +1427,24 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             "</div></td>" +
              "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
       "</tr>"
-// "<td >" +
-//   ShowShopName[data[i].shopid] +
-//         //  ShowShopName[data[i].shopid] +
-// "</td>" +
-// "<td >" +
-//   data[i].mainid +
-//         //  ShowShopName[data[i].shopid] +
-// "</td>" 
+        // "<td >" +
+        //   ShowShopName[data[i].shopid] +
+        //         //  ShowShopName[data[i].shopid] +
+        // "</td>" +
+        // "<td >" +
+        //   data[i].mainid +
+        //         //  ShowShopName[data[i].shopid] +
+        // "</td>" 
 
 
 
-  );
-}
+      );
+    }
 
-});
+  });
+
+
+
 
 }
 
@@ -1347,6 +1610,12 @@ function download_csv(csv, filename) {
             csv
             ],
             { type: "text/csv;charset=utf-8" });
+
+            $("[id$=myButtonControlID]").click(function(e) {
+            window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExport]').html()));
+            e.preventDefault();
+            //window.close();
+          });
 
   // Download link
   downloadLink = document.createElement("a");
@@ -1696,7 +1965,7 @@ function showData() {
 
     
 
-  $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+$.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
 
 
     //let sumpriceDan = document.getElementById("Dan").innerHTML;
@@ -1716,6 +1985,200 @@ function showData() {
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
 
+            if(data[i].priceadmin == null){
+                checkPriceAdmin = 0
+          } else {
+            checkPriceAdmin = data[i].priceadmin;
+            }
+            if(data[i].amountadmin == null){
+              checkAmountAdmin = 0
+          } else {
+            checkAmountAdmin = data[i].amountadmin;
+            }
+            if(data[i].sumpriceadmin == null){
+              checkSumPriceAdmin = ""
+          } else {
+            checkSumPriceAdmin = data[i].sumpriceadmin;
+            }
+          //   if(data[i].sumpriceadmin !== 0){
+          //     data[i].sumprice = data[i].sumpriceadmin ;
+          //   }else {
+            
+          //     data[i].sumpriceadmin = data[i].sumprice;
+            
+            
+          // }
+
+                console.log(data[i].sumpriceadmin);
+            if( data[i].sumpriceadmin == null) {
+                sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+            }else {
+              sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+            }
+                console.log("--->>   ++++"+sum.toFixed(2))
+                $("#amountAll").val(sum.toFixed(2));
+              // data[i].sumpriceadmin = 0;
+              
+                //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+                  // data[i].sumprice = data[i].price * data[i].amount  
+                  data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
+                //data[i].sumprice = "";
+                // data[i].sumpriceadmin = "";
+                  data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+                //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+              //   sum += parseInt(data[i].sumpriceadmin);
+              
+              //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+              // console.log("AmountForMainTable--->>>> " + setValue);
+              //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
+
+              //  console.log("Sum = "+ sum);   
+              //console.log(data[i]._id);
+              str = data[i]._id.replace(/\s/g, '');
+              strnew = data[i].picture.replace(/\s/g, '');
+              stritem = data[i].item.replace(/\s/g, '');
+              console.log(str);
+                roomId = data;
+            // let rstripId = data[i]._id.rs
+                //$("#room-name-value").val(data[0].room);
+                
+          
+                $("#room-namedata").append(
+              "<tr><td>" +
+                    (i + 1) +
+                    "</td>" +
+              "<td>" +
+                    data[i].item +
+              "</td>" +
+              "<td>" +
+                    data[i].partnumber +
+              "</td>" +
+              "<td>" +
+                    data[i].price +
+              "</td>" +
+              "<td>" +
+                    data[i].amount +
+              "</td>" +
+              "<td>" +
+                    //data[i].priceadmin +
+                    checkPriceAdmin +
+              "</td>" +
+              "<td>" +
+                    checkAmountAdmin +
+                    //data[i].amountadmin +
+              "</td>" +
+              "<td>" +
+                // "<td id='AmountForMainTable" + i + "'>" +
+                    data[i].sumprice.toFixed(2) +
+              "</td>" +
+              "<td>" +
+                //checkSumPriceAdmin +
+                    data[i].sumpriceadmin.toFixed(2) +
+              "</td>" +
+              "<td>" +
+                    data[i].responsibleperson +
+              "</td>" +
+              "<td>" + //"<img  width='200px' src="+data[i].picture+" />" +
+                  //"<img  width='200px'  src='/upload/temp/pic/"+ data[i].picture +"' >" +
+                   "<img width='200px' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+                  // "<img  width='200px' src='http://localhost:4500/upload/temp/pic/TH-49FX500T-Variation_Image_for_See_All_1Global-1_th_th.png'>"+
+                    // data[i].picture +
+              "</td>" +
+              "<td > " + 
+                "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                    
+              "</td>" +
+              // "<td>" +  &emsp;
+              //   "<td id='Dan" + i + "'>" +
+              //       sum +
+              // "</td>" +
+              // "<td>" +
+              //       Dan +
+              // "</td>" +
+              // "<td>" +
+              //       ShowShopName[data[i].shopid] +
+              // "</td>" +
+              // "<td>" +
+              //       [data[i].mainid] +
+              // "</td>" +
+              // "<td>" +
+              // <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+              // "</td>" +
+              "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+                //"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+                    "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+                    "<div class='modal-dialog modal-dialog-centered'>" +
+                    "<div class='modal-content'>" +
+                    "<div class='modal-header'>" +
+                    "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+                    "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+                    "<span aria-hidden='true'>&times;</span>" +
+                    "</button>" +
+                    "</div>" +
+                    "<div class='modal-footer'>" +
+                    "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+                    "</div>" +
+                    "</div></td>" +
+                    "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
+                "</tr>"
+      
+			
+
+        );
+              //for(let i=0; i<data.length; i++){
+                //console.log("koqwpdddddddddddddddddddddddddddddddddddddddddd")
+                var checkBadgeStatus = data[i].statusz;
+                
+                if(checkBadgeStatus == 'อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-success');
+            } 
+            else if(checkBadgeStatus == 'รออนุมัติ' ){
+              $('#status-badge-'+i).addClass('label label-warning');
+              console.log("ส้มม")
+            } 
+            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-danger');
+            }
+            // else if(checkBadgeStatus == '4'){
+            //   $('#status-badge-'+i).addClass('label label-danger');
+            // }
+              //}
+            }
+
+
+
+
+      
+      
+     
+
+   
+  });
+
+
+
+
+
+  $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+
+
+//let sumpriceDan = document.getElementById("Dan").innerHTML;
+
+//localStorage.setItem("thisIsParameterNameForAmountz", sumpriceDan);
+//document.getElementById("room-name").innerHTML="";
+  console.log('Daaawww'+getValueLocalStorage);
+  var sum = 0 ;
+  // var handlenull = ""; 
+  var checkPriceAdmin;
+  var checkAmountAdmin;
+  var checkSumPriceAdmin;
+  var sum = 0;
+  
+  // var sumprice =
+  // var amountadmin 
+//document.getElementById("room-name").innerHTML="";
+  for (let i = 0; i < data.length; i++) {
+
         if(data[i].priceadmin == null){
             checkPriceAdmin = 0
       } else {
@@ -1731,133 +2194,166 @@ function showData() {
       } else {
         checkSumPriceAdmin = data[i].sumpriceadmin;
         }
-    //   if(data[i].sumpriceadmin !== 0){
-    //     data[i].sumprice = data[i].sumpriceadmin ;
-    //   }else {
-       
-    //     data[i].sumpriceadmin = data[i].sumprice;
-      
-      
-    // }
+      //   if(data[i].sumpriceadmin !== 0){
+      //     data[i].sumprice = data[i].sumpriceadmin ;
+      //   }else {
+        
+      //     data[i].sumpriceadmin = data[i].sumprice;
+        
+        
+      // }
 
-        console.log(data[i].sumpriceadmin);
-    if( data[i].sumpriceadmin == null) {
-        sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
-    }else {
-      sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
-    }
-        console.log("--->>   ++++"+sum.toFixed(2))
-        $("#amountAll").val(sum.toFixed(2));
-       // data[i].sumpriceadmin = 0;
-       
-         //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
-          // data[i].sumprice = data[i].price * data[i].amount  
-          data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
-         //data[i].sumprice = "";
-        // data[i].sumpriceadmin = "";
-          data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
-        //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
-      //   sum += parseInt(data[i].sumpriceadmin);
-       
-       //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
-			// console.log("AmountForMainTable--->>>> " + setValue);
-			 //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
+            console.log(data[i].sumpriceadmin);
+        if( data[i].sumpriceadmin == null) {
+            sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+        }else {
+          sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+        }
+            console.log("--->>   ++++"+sum.toFixed(2))
+            $("#amountAll").val(sum.toFixed(2));
+          // data[i].sumpriceadmin = 0;
+          
+            //data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
+              // data[i].sumprice = data[i].price * data[i].amount  
+              data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
+            //data[i].sumprice = "";
+            // data[i].sumpriceadmin = "";
+              data[i].sumpriceadmin =  data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+            //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
+          //   sum += parseInt(data[i].sumpriceadmin);
+          
+          //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+          // console.log("AmountForMainTable--->>>> " + setValue);
+          //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
-      //  console.log("Sum = "+ sum);   
-		  //console.log(data[i]._id);
-      str = data[i]._id.replace(/\s/g, '');
-      strnew = data[i].picture.replace(/\s/g, '');
-      stritem = data[i].item.replace(/\s/g, '');
-		  console.log(str);
-        roomId = data;
-		// let rstripId = data[i]._id.rs
-        //$("#room-name-value").val(data[0].room);
-        $("#room-namedata").append(
-		  "<tr><td>" +
-            (i + 1) +
-            "</td>" +
-			"<td>" +
-            data[i].item +
-			"</td>" +
-			"<td>" +
-            data[i].partnumber +
-			"</td>" +
-			"<td>" +
-            data[i].price +
-			"</td>" +
-      "<td>" +
-            data[i].amount +
-      "</td>" +
-      "<td>" +
-             //data[i].priceadmin +
-            checkPriceAdmin +
-			"</td>" +
-      "<td>" +
-            checkAmountAdmin +
-             //data[i].amountadmin +
-      "</td>" +
-      "<td>" +
-        // "<td id='AmountForMainTable" + i + "'>" +
-            data[i].sumprice.toFixed(2) +
-      "</td>" +
-      "<td>" +
-        //checkSumPriceAdmin +
-             data[i].sumpriceadmin.toFixed(2) +
-      "</td>" +
-      "<td>" +
-            data[i].responsibleperson +
-      "</td>" +
-      "<td>" + //"<img  width='200px' src="+data[i].picture+" />" +
-      //  "<img  width='200px'  src='./public/upload/temp/pic/"+ data[i].picture +"' >" +
-          "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
-            // data[i].picture +
-      "</td>" +
-      "<td>" +
-            data[i].statusz +
-      "</td>" +
-      // "<td>" +
-      //   "<td id='Dan" + i + "'>" +
-      //       sum +
-      // "</td>" +
-      // "<td>" +
-      //       Dan +
-      // "</td>" +
-      // "<td>" +
-      //       ShowShopName[data[i].shopid] +
-      // "</td>" +
-      // "<td>" +
-      //       [data[i].mainid] +
-      // "</td>" +
-			// "<td>" +
-			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
-			// "</td>" +
-			 "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
-				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
-            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
-            "<div class='modal-dialog modal-dialog-centered'>" +
-            "<div class='modal-content'>" +
-            "<div class='modal-header'>" +
-            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
-            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-            "<span aria-hidden='true'>&times;</span>" +
-            "</button>" +
-            "</div>" +
-            "<div class='modal-footer'>" +
-            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
-            "</div>" +
-            "</div></td>" +
-             "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
-        "</tr>"
+          //  console.log("Sum = "+ sum);   
+          //console.log(data[i]._id);
+          str = data[i]._id.replace(/\s/g, '');
+          strnew = data[i].picture.replace(/\s/g, '');
+          stritem = data[i].item.replace(/\s/g, '');
+          console.log(str);
+            roomId = data;
+        // let rstripId = data[i]._id.rs
+            //$("#room-name-value").val(data[0].room);
+            
       
-			
+            $("#room-namedataforexport").append(
+          "<tr><td>" +
+                (i + 1) +
+                "</td>" +
+          "<td>" +
+                data[i].item +
+          "</td>" +
+          "<td>" +
+                data[i].partnumber +
+          "</td>" +
+          "<td>" +
+                data[i].price +
+          "</td>" +
+          "<td>" +
+                data[i].amount +
+          "</td>" +
+          "<td>" +
+                //data[i].priceadmin +
+                checkPriceAdmin +
+          "</td>" +
+          "<td>" +
+                checkAmountAdmin +
+                //data[i].amountadmin +
+          "</td>" +
+          "<td>" +
+            // "<td id='AmountForMainTable" + i + "'>" +
+                data[i].sumprice.toFixed(2) +
+          "</td>" +
+          "<td>" +
+            //checkSumPriceAdmin +
+                data[i].sumpriceadmin.toFixed(2) +
+          "</td>" +
+          "<td>" +
+                data[i].responsibleperson +
+          "</td>" +
+          "<td>" + //"<img  width='200px' src="+data[i].picture+" />" +
+              //"<img  width='200px'  src='/upload/temp/pic/"+ data[i].picture +"' >" +
+               "<img width='12%' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+              // "<img  width='200px' src='http://localhost:4500/upload/temp/pic/TH-49FX500T-Variation_Image_for_See_All_1Global-1_th_th.png'>"+
+                // data[i].picture +
+          "</td>" +
+          "<td > " + 
+            "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                
+          "</td>" +
+          // "<td>" +  &emsp;
+          //   "<td id='Dan" + i + "'>" +
+          //       sum +
+          // "</td>" +
+          // "<td>" +
+          //       Dan +
+          // "</td>" +
+          // "<td>" +
+          //       ShowShopName[data[i].shopid] +
+          // "</td>" +
+          // "<td>" +
+          //       [data[i].mainid] +
+          // "</td>" +
+          // "<td>" +
+          // <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+          // "</td>" +
+          "<td>"+
+            //"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+                "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+                "<div class='modal-dialog modal-dialog-centered'>" +
+                "<div class='modal-content'>" +
+                "<div class='modal-header'>" +
+                "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+                "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+                "<span aria-hidden='true'>&times;</span>" +
+                "</button>" +
+                "</div>" +
+                "<div class='modal-footer'>" +
+                "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+                "</div>" +
+                "</div></td>" +
+                
+            "</tr>"
+  
+  
 
-        );  
-      }
-      
-     
+    );
+          //for(let i=0; i<data.length; i++){
+            //console.log("koqwpdddddddddddddddddddddddddddddddddddddddddd")
+            var checkBadgeStatus = data[i].statusz;
+            
+            if(checkBadgeStatus == 'อนุมัติ'){
+          $('#status-badge-'+i).addClass('label label-success');
+        } 
+        else if(checkBadgeStatus == 'รออนุมัติ' ){
+          $('#status-badge-'+i).addClass('label label-warning');
+          console.log("ส้มม")
+        } 
+        else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+          $('#status-badge-'+i).addClass('label label-danger');
+        }
+        // else if(checkBadgeStatus == '4'){
+        //   $('#status-badge-'+i).addClass('label label-danger');
+        // }
+          //}
+        }
 
-   
-  });
+
+
+
+  
+  
+ 
+
+
+});
+
+
+
+
+
+
 
   $.post("/get/maintableforshopid",{_ID: getValueLocalStorage}, function (data, status) {
 
@@ -2006,13 +2502,20 @@ function showData() {
 					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
           '<br>'+
           "สถานะ <br>"+
-					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          "<select style='margin-left:4.3em' name='status' id='statusznew'>"+
+            "<option value='' selected disabled hidden>เลือกสถานะ</option>"+
+            "<option value='อนุมัติ'>อนุมัติ</option> "+
+            "<option value='รออนุมัติ'>รออนุมัติ</option> "+
+            "<option value='ไม่อนุมัติ'>ไม่อนุมัติ</option> "+
+                
+            "</select> "+
+					// "<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
                 "<div class='form-group'>"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' required>"+
                 "</div>"+
            
           
@@ -2074,8 +2577,14 @@ function showData() {
           "ผู้รับผิดชอบ <br>"+
 					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
           '<br>'+
-          "สถานะ <br>"+
-					"<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
+          "สถานะ "+ 
+          "<select style='margin-left:4.3em' name='status' id='statusznew'>"+
+            "<option value='' selected disabled hidden>เลือกสถานะ</option>"+
+            "<option value='อนุมัติ'>อนุมัติ</option> "+
+            "<option value='รออนุมัติ'>รออนุมัติ</option> "+
+            "<option value='ไม่อนุมัติ'>ไม่อนุมัติ</option> "+
+                
+            "</select> "+
           '<br>'+
           "รูป <br>"+
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
@@ -2281,6 +2790,36 @@ function showData() {
     }); 
 
   }
+
+
+  
+  $("[id$=myButtonControlID]").click(function(e) {
+  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExport]').html()));
+  e.preventDefault();
+  //window.close();
+});
+
+$("[id$=myButtonControlIDShop]").click(function(e) {
+  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExportshopKub]').html()));
+  e.preventDefault();
+  //window.close();
+});
+
+// $("[id$=myButtonControlID]").click(function (e) {
+// window.open('data:application/vnd.ms-excel;base64,' + $.base64.encode($('div[id$=divTableDataHolder]').html()));
+// e.preventDefault();
+// });
+
+// $("#exportar").click(function (e) {
+// window.open('data:application/vnd.ms-excel;base64,' + $.base64.encode($('#TabelaDados').html()));
+// e.preventDefault();
+// });
+
+
+
+
+
+
 
     
     var getDataId = "";

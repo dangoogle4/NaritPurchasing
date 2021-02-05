@@ -236,6 +236,94 @@ table td, table th  {
         </ul>
     </div>
   </nav>
+
+     <!-- <div class="header">Users</div> -->
+     <div  id="divTableDataHolderForExportshopKub" >
+      
+      <table  cellspacing="0"  hidden>
+        <tr>
+            <td>ลำดับ </td>
+            <td>ชื่อวัสดุ</td>
+            <td>Part Number</td>
+            <td>ราคา</td>
+            <td>จำนวน</td>
+            <td>ราคารวม</td>
+            <td>ผู้รับผิดชอบ</td>
+            <td width="200">รูป</td>
+            <td width="100">สถานะ</td>
+            <!-- <td>ร้านค้า</td> -->
+            <td>แก้ไข</td>
+            <td>ลบ</td> 
+            <tbody id="room-namedata-forexportshop"></tbody>
+        </tr>
+  
+        <!-- <tr>
+            <td>1</td>
+            <td><a href="/">NewNewNew</a></td>
+            <td>jane.doe@foo.com</td>
+            <td><input name="first" type="text"></td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>
+              <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/> -->
+           
+          </table>
+    </div>
+
+
+    <!-- <div class="header">Users</div> -->
+    <div  id="divTableDataHolderForExport" hidden>
+      
+      <table  cellspacing="0"  >
+        <tr>
+            <td>ลำดับ </td>
+            <td>ชื่อวัสดุ</td>
+            <td>Part Number</td>
+            <td>ราคา</td>
+            <td>จำนวน</td>
+            <td>ราคารวม</td>
+            <td>ผู้รับผิดชอบ</td>
+            <td width="200">รูป</td>
+            <td width="100">สถานะ</td>
+            <!-- <td>ร้านค้า</td> -->
+            <td>แก้ไข</td>
+            <td>ลบ</td> 
+            <tbody id="room-name-export"></tbody>
+        </tr>
+  
+        <!-- <tr>
+            <td>1</td>
+            <td><a href="/">NewNewNew</a></td>
+            <td>jane.doe@foo.com</td>
+            <td><input name="first" type="text"></td>
+            <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>01 800 2000</td>
+            <td>
+              <input type="button" id="button" value = "สถานะ" style= "color:rgb(0, 0, 0)" onclick="setColor('button', '#000000')";/> -->
+           
+          </table>
+    </div>  
+
+
+
+
+
+
+
+
+
+
+
+
+
   <div id="Home" class="tabcontent">
     <!-- <h3>Home</h3> -->
     <div style="margin: 150px;">
@@ -259,7 +347,7 @@ table td, table th  {
         <br>
     
         <!-- <div class="header">Users</div> -->
-        <table id ="myInput"cellspacing="0" style="margin-top: 5px">
+        <table id ="myInput"cellspacing="0" style="margin-top: 5px" >
            <tr>
               <th>ลำดับ </th>
               <th>ชื่อวัสดุ</th>
@@ -682,25 +770,72 @@ $(".image").submit(function (m) {
 
       </script>
 
+
+<div class="modal fade" id="ModalForAddShop" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <!-- <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">แก้ไขข้อมูล</h4>
+      </div> -->
+      <div class="modal-body">
+        <form>
+          <br>
+          <!-- <select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage"  required></select> -->
+          <br>
+          <input list="list_shop" type="text" id="storage" onkeyup="myFunction(this.value)">
+          <input id="storage_id" type="hidden">
+          <datalist id="list_shop">
+          </datalist>
+          
+          <!-- <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+          <br>
+          <label for="typeshop">ประเภทร้านค้า</label>
+          <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
+            <option value="ในประเทศ">ในประเทศ</option>
+            <option value="ต่างประเทศ">ต่างประเทศ</option>
+          </select> -->
+          <br>
+          <br>
+          <!-- <label>ภาษีร้านค้า</label>
+          <input style="margin-left:3.5em" name="taxshop" type="float" id="taxshop"><br>   -->
+          <br>
+          <button type="button" class="btn btn-light" data-toggle="modal"  onclick="moveValueToTrash()" data-target="#ModalForAddShop" >บันทึก</button> 
+          <!-- onclick="addShop()" -->
+          <input class="btn btn-light" type="reset" value="ล้าง">
+          </form>    
+      </div>
+      <!-- <div class="modal-footer">
+        
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+    
+  </div>
+</div>
+
+
       <div id="shopNameTab"> <button style="margin-left: 40px;" type="button" class="btn btn-light" onclick="showAllData()">DataAll</button>&nbsp;</div>
       
       
-
+<!-- 
       <div class="modal fade" id="ModalForAddShop" role="dialog">
         <div class="modal-dialog">
-        
+         -->
           <!-- Modal content-->
-          <div class="modal-content">
+          <!-- <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
               <h4 class="modal-title">เพิ่มร้านค้า</h4>
             </div>
             <div class="modal-body">
-              <form>
-                <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select>
+              <form> -->
+                <!-- <label>ร้านค้าของท่าน</label><select style="margin-left: 0.5em; width:170px; height: 25px;" class="custom-select storage" style="width:150px; height: 25px;" id="storage" required></select> -->
                 <!-- <label>ชื่อร้านค้า</label><input style="margin-left:2em" name="nameshop" type="text" id="nameshop"><br> -->
-                <br>
-                <br>
+                <!-- <br>
+                <br> -->
               
                 
                 <!-- <label for="typeshop">ประเภทร้านค้า</label>
@@ -713,18 +848,18 @@ $(".image").submit(function (m) {
                 <label>ภาษีร้านค้า</label>
                 <input style="margin-left:1.5em" name="taxshop" type="float" id="taxshop"><br>  
                 <br> -->
-                <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
+                <!-- <button class="btn btn-default" type="button"  data-toggle="modal" data-target="#ModalForAddShop" onclick="addShop()">บันทึก</button>
                 <input  class="btn btn-default" type="reset" value="ล้าง">
                 </form>    
-            </div>
+            </div> -->
             <!-- <div class="modal-footer">
               
               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div> -->
-          </div>
+          <!-- </div> -->
           
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
 
 
@@ -793,7 +928,23 @@ $(".image").submit(function (m) {
         </div>
       </div>
   </div>
- 
+  <br>
+  <br>
+  <br>
+
+  <div>
+    <button style="margin: 20px;" class="btn btn-light" id="myButtonControlID">Export Data All</button>
+     <button style="margin: 20px;" onclick="ExportDataAll()" class="btn btn-light" id="myButtonControlIDShop">Export Shop</button>
+            <br>
+            <br>
+            <br>
+
+            <script>
+              function ExportDataAll(){
+                confirm("ถ้าคุณต้องการ Export ข้อมูลการจัดชื้อของร้านค้านั้นๆให้คุณกดที่ปุ่มร้านค้าแล้วถึง Export ได้ :D")
+              }
+            </script>
+  </div>
 
 
   
@@ -985,6 +1136,65 @@ function getCookie(cname) {
   </script>
 
 <script>
+
+
+
+
+
+
+function  moveValueToTrash(){
+  console.log("Dankub");
+  //document.getElementById("storage").value="";
+  // x.remove(x.selectedIndex);
+  // document.getElementById('storage').setAttribute("disabled","disabled")
+  //console.log(document.getElementById('storage'))
+  //console.log(storage.value);
+  shoparray = [];
+  var storage_id = $('#storage_id').val();
+  
+  console.log(storage_id)
+
+  if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+      
+      //shoparray.push(shopidnew);
+      //console.log("pppppp"+shoparray.push(shopidnew))
+      //var storage = $("#storage").val();
+      console.log("น้องมารึยังน้าาาาาา"+storage_id  ,getValueLocalStorage);
+		  //var group = $("#group").val();
+		  //var department = $("#department").val();
+  
+		  $.post(
+      "/api/addmaintableadminforshopid",
+      
+			{
+			  //shop: shop,
+        LetServerGetDataOrderFromMainTable: getValueLocalStorage,
+        shopidnew: storage_id,
+      
+        //picture: req.body.picture,
+        //reason:  req.body.reason,
+			  //group: status,
+			  //department: department,
+      },
+      
+
+			function (data, status) {
+			  window.location.href = "/admin";
+			  
+			}
+		  );
+		 } 
+}
+
+
+
+
+
+
+
+
+
+
   $(document).ready(function(){
     $("#myInput").on("keyup", function() {
       var value = $(this).val().toLowerCase();
@@ -1011,7 +1221,7 @@ function getCookie(cname) {
       var sumprice = $("#sumprice").val();
       var sumpriceadmin =  "";
       var responsibleperson = $("#responsibleperson").val();
-      var statusz = $("#statusz").val();
+      var statusz = "รออนุมัติ"
       var storage = localStorage.getItem("shopIdForAdd");
       console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
       var image =  $("#image").val().substring(12);
@@ -1116,9 +1326,9 @@ function getCookie(cname) {
         let roomName = roomData[i].nameOfShop;
 
         console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
-        $(".storage").append(
+        $("#list_shop").append(
           
-            "<option value=" + roomData[i]._id + ">" + roomName + "</option>"
+          "<option value="+ roomName +" id='list1'"+ roomData[i]._id+"' ></option>"
             
 
           
@@ -1179,6 +1389,107 @@ function getCookie(cname) {
         "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
         // "<img  width='200px' src="+data[i].picture+" />" +
       "</td>" +
+      "<td > " + 
+                "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                    
+              "</td>" +
+      // "<td>" +
+      //         sum.toFixed(2) +
+      // "</td>" +
+      // "<td>" +
+      //       ShowShopName[data[i].shopid] +
+      // "</td>" +
+			// "<td>" +
+			// <a data-toggle="modal" data-target="#Modalzz">แก้ไข</a> +
+			// "</td>" +
+			 "<td><a data-toggle='modal' data-target='#ModalForEditData' class='btn btn-info'  onclick='editData("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+            "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString() + "_*&^_"+ strnew.toString() + "_*&^_" +  stritem.toString() +"') >ลบ</button></td>" +
+			 "</tr>"
+			
+
+        );
+        var checkBadgeStatus = data[i].statusz;
+                
+                if(checkBadgeStatus == 'อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-success');
+            } 
+            else if(checkBadgeStatus == 'รออนุมัติ' ){
+              $('#status-badge-'+i).addClass('label label-warning');
+              console.log("ส้มม")
+            } 
+            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-danger');
+            }
+      }
+      
+    });
+
+
+
+    $.post("/get/dataForSearchTableMainIdUser", {_ID: getValueLocalStorage},function (data, status) {
+    document.getElementById("room-name-export").innerHTML="";
+      
+      console.log(data);
+		//document.getElementById("room-name").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+        // data[i].sumprice =  data[i].price * data[i].amount;
+        if( data[i].sumpriceadmin == null) {
+        sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
+    }else {
+      sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
+    }
+        $("#amountAll").val(sum.toFixed(2));
+        
+        data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
+		  //console.log(data[i]._id);
+      str = data[i]._id.replace(/\s/g, '');
+      strnew = data[i].picture.replace(/\s/g, '');
+      stritem = data[i].item.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		// let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+        $("#room-name-export").append(
+		  "<tr><td>" +
+            (i + 1) +
+            "</td>" +    
+			"<td>" +
+            data[i].item +
+			"</td>" +
+			"<td>" +
+            data[i].partnumber +
+			"</td>" +
+			"<td>" +
+            data[i].price +
+			"</td>" +
+			"<td>" +
+            data[i].amount +
+      "</td>" +
+      "<td>" +
+            data[i].sumprice.toFixed(2) +
+      "</td>" +
+      "<td>" +
+            data[i].responsibleperson +
+      "</td>" +
+      "<td>" +
+        "<img width='12%' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+        // "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
+        // "<img  width='200px' src="+data[i].picture+" />" +
+      "</td>" +
       "<td>" +
             data[i].statusz +
       "</td>" +
@@ -1213,6 +1524,9 @@ function getCookie(cname) {
         );
       }
     });
+
+
+
     $.post("/get/maintableforshopid",{_ID: getValueLocalStorage}, function (data, status) {
 
      // document.getElementById("room-namezz").innerHTML="";
@@ -1303,7 +1617,7 @@ function getCookie(cname) {
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
                 "<div class='form-group'>"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' required>"+
                 "</div>"+
            
           
@@ -1372,7 +1686,7 @@ function getCookie(cname) {
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
                 "<div class='form-group'>"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' required >"+
                 "</div>"+
            
           
@@ -1404,7 +1718,52 @@ function getCookie(cname) {
     
         
         
+    function myFunction(keyInput) {
+  // var key = document.getElementById("mySelect").value;
+  
+  
+  console.log("keyinput"+keyInput)
+
+  // let A2s = {"key": keyInput} ;
+
+  $.post("/post/shopforquery", {'key': keyInput} , function (data, status) {
+
+    let textlist = '';
+
+      console.log("aowaraima"+status);
+      // console.log("Check value:: ", data.nameOfShop);
+      
+      $('#textlist').empty();
+
+      for( i = 0 ; i < data.length ; i++){ //ได
+        console.log("wqkd[qwpldqw[d----->>>       "+data.length);
+        textlist += '<option value="'+data[i].nameOfShop+'"></option>'
+         //console.log("LOOP ["+i+"]: "+textlist)
+
+        $('#storage_id').val(data[i]._id);
+      }
+
+      // console.log(textlist)
+
+      // $('#list_shop').html(textlist);
+      // document.getElementById("list_shop").innerHTML = textlist; //เอาค่าใน **textlist** ยัดไปใน **list_shop**
+
+
+    //document.getElementById("room-name").innerHTML="";
     
+      // for (let i = 0; i < data.length; i++) {
+		  // //console.log(data[i]._id);
+		  // // str = data[i]._id.replace(/\s/g, '');
+		  // // console.log(str);
+      //   // roomId = data;
+		
+        
+      // }   
+    }); 
+
+  }
+
+
         
     
 
@@ -1456,6 +1815,88 @@ function getCookie(cname) {
             "<td>" +
               "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
             "</td>" +
+            "<td > " + 
+                "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                    
+              "</td>" +
+            "<td><a data-toggle='modal' data-target='#ModalForEditData' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
+				//"<td><a data-toggle='modal' data-target='#Modalzz' data-target='#exampleModal02' onclick='save()' >แก้ไข</a>" +
+            "<div class='modal fade' id='exampleModal02' tabindex='-1' role='dialog' aria-labelledby='exampleModal02Label' aria-hidden='true' data-backdrop='static' data-keyboard='false'>" +
+            "<div class='modal-dialog modal-dialog-centered'>" +
+            "<div class='modal-content'>" +
+            "<div class='modal-header'>" +
+            "<h5 class='modal-title'  id='exampleModal02Label'>แก้ไข</h5>" +
+            "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+            "<span aria-hidden='true'>&times;</span>" +
+            "</button>" +
+            "</div>" +
+            "<div class='modal-footer'>" +
+            "<button type='button' class='btn btn-secondary' data-dismiss='modal'>ยกเลิก</button>" +
+            "</div>" +
+            "</div></td>" +
+             "<td><button href='#' class='btn btn-danger' onclick=dropDataKrub('"+str.toString()+"') >ลบ</button></td>" +
+      "</tr>"
+      // "<td id='order"+i+"'>" +
+      //         ShowShopName[data[i].shopid] +
+      //         //  ShowShopName[data[i].shopid] +
+      // "</td>" +
+
+        );
+        var checkBadgeStatus = data[i].statusz;
+                
+                if(checkBadgeStatus == 'อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-success');
+            } 
+            else if(checkBadgeStatus == 'รออนุมัติ' ){
+              $('#status-badge-'+i).addClass('label label-warning');
+              console.log("ส้มม")
+            } 
+            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+              $('#status-badge-'+i).addClass('label label-danger');
+            }
+        // document.getElementById("room-name").innerHTML="";
+      }
+      
+    });
+
+
+
+    $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
+      document.getElementById("room-namedata-forexportshop").innerHTML="";
+      for (let i = 0; i < data.length; i++) {
+        data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
+      str = data[i]._id.replace(/\s/g, '');
+		  console.log(str);
+        roomId = data;
+		    // let rstripId = data[i]._id.rs
+        //$("#room-name-value").val(data[0].room);
+        $("#room-namedata-forexportshop").append(
+		  "<tr><td>" +
+            (i + 1) +
+            "</td>" +
+            "<td >" +
+             data[i].item +
+            "</td>" +
+            "<td>" +
+            data[i].partnumber +
+            "</td>" +
+            "<td>" +
+            data[i].price +
+			      "</td>" +
+            "<td>" +
+            data[i].amount +
+            "</td>" +
+            "<td>" +
+            data[i].sumprice.toFixed(2) +
+            "</td>" +
+            "<td>" +
+            data[i].responsibleperson +
+            "</td>" +
+            "<td>" +
+              "<img width='12%' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+              // "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
+              // "<img  width='200px' src="+data[i].picture+" />" +
+            "</td>" +
             "<td>"+
             data[i].statusz +
             "</td>" +
@@ -1486,6 +1927,9 @@ function getCookie(cname) {
       }
       
     });
+
+
+
     
   }
 
@@ -1551,7 +1995,7 @@ function getCookie(cname) {
     var amountnew = $("#amountnew").val();
     var sumpricenew = $("#sumpricenew").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
-    var statusznew = $("#statusznew").val();
+    var statusznew = "รออนุมัติ"
     var image = $("#imagenew").val().substring(12);
     var mainidnew = getValueLocalStorage;
 
@@ -1807,6 +2251,27 @@ location.reload();
                         document.body.removeChild(link);
                       }
                     })();
+
+
+
+
+  $("[id$=myButtonControlID]").click(function(e) {
+  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExport]').html()));
+  e.preventDefault();
+  //window.close();
+});
+
+$("[id$=myButtonControlIDShop]").click(function(e) {
+  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExportshopKub]').html()));
+  e.preventDefault();
+  //window.close();
+});
+
+
+
+
+
+
 		
 var getValueLocalStorage = localStorage.getItem('thisIsParameterName');
 var getValueLocalStorageNameOrder = localStorage.getItem("thisIsParameterNameForNameOrder");
