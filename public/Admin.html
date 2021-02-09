@@ -346,8 +346,21 @@ table td, table th  {
                 <input  style="margin-left:4.4em" id="amountz" name="amount" type="number"><br>
                 <br>
                 <label>ราคารวม</label>
-                <input  style="margin-left:3.5em" id="sumprice" name="sumprice" type="text"><br>
+             
+                  
+                <input  style="margin-left:3.5em" id="sumprice" name="sumprice" type="number" disabled><br>
                 <br>
+              
+
+         
+               
+                
+                
+
+                 
+                    
+                  
+                
                 <!-- <label>ผู้รับผิดชอบ</label>
                 <input  style="margin-left:1.98em" id="responsibleperson" name="responsibleperson" type="text" value="nameNew"><br>
                 <br> -->
@@ -444,15 +457,49 @@ table td, table th  {
       </div>
   </div>
 
+  <script>
+
+      var a;
+      var b;
+      var d;
+      $(document).ready(function(){
+        $("#amountz").keyup(function(){
+          a = $("#price").val();
+          b = $("#amountz").val();
+          d =a * b;
+          $("#sumprice").val(d);
+        });
+        $("#price").keyup(function(){
+          a = $("#price").val();
+          b = $("#amountz").val();
+          d =a * b;
+          $("#sumprice").val(d);
+        });
+      });
+
+
+
+// var priceOn = $("#price").val();
+// var amountzOn = $("#amountz").val();
+
+// var sumForSum = priceOn * amountzOn
+
+//   $( ".numbersum" ).append( "<input  value='10000' style='margin-left:3.5em' id='sumprice' name='sumprice' type='number'><br>" );
+
+  
+
+
+  </script>
+
 
   <script>
     var numofnameshop = 0;
     function arlertfunction(){
       if(numofnameshop == 0){
         alert("กรุณาเลือกร้านค้าก่อนจะเพิ่มข้อมูลด้วยครับ/ค่ะ");
-        $(function (){
-          $('#myModalforadddata').modal('hide');
-        });
+        // $(function (){
+        //   $('#myModalforadddata').modal('hide');
+        // });
       }
         
       //window.location.href = '/admin';
@@ -462,6 +509,8 @@ table td, table th  {
      
    
     }
+
+   
    
   </script>
 
@@ -2515,10 +2564,50 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 	  } 
   }
 
+  
+
   function editData(i){
 			console.log("addzsadsadzzz");
 			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
 						
+
+      var price;
+      var amount;
+      var sum;
+      $(document).ready(function(){        //keyup1
+        $("#amountnew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+        $("#pricenew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+      });
+
+
+      $(document).ready(function(){       //keyup2
+        $("#amountnewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+        $("#pricenewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+      });
+
+
+
+
 				//console.log(data[i]._id);
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
@@ -2546,10 +2635,10 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 					"<input id='amountnewedit'type='text' type='text'value='"+ data[i].amountadmin +"'>" +'<br>'+ 
           '<br>'+
           "ราคารวม(เสนอ) <br>"+
-					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"' disabled>" +'<br>'+ 
           '<br>'+
           "ราคารวม(แก้ไข) <br>"+
-					"<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
+					"<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"' disabled>" +'<br>'+ 
           '<br>'+
           // "ราคารวม(แก้ไข) <br>"+
 					// "<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
@@ -2571,7 +2660,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
                 "<div class='form-group'>"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' required>"+
+                  "<input type='file' value='" + data[i].picture + "' class='form-control' name='fileuploadNew' id='imagenew'  required>"+
                 "</div>"+
            
           
@@ -2596,6 +2685,40 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 			$.post("/get/dataForSearchTableMainIdAdmin23",{'_ID2': valueID ,_ID: getValueLocalStorage}, function (data, status) {
 						
 				//console.log(data[i]._id);
+        var a;
+      var b;
+      var d;
+      $(document).ready(function(){        //keyup1
+        $("#amountnew").keyup(function(){
+          a = $("#pricenew").val();
+          b = $("#amountnew").val();
+          d =a * b;
+          $("#sumpricenew").val(d);
+        });
+        $("#pricenew").keyup(function(){
+          a = $("#pricenew").val();
+          b = $("#amountnew").val();
+          d =a * b;
+          $("#sumpricenew").val(d);
+        });
+      });
+
+
+      $(document).ready(function(){       //keyup2
+        $("#amountnewedit").keyup(function(){
+          a = $("#pricenewedit").val();
+          b = $("#amountnewedit").val();
+          d =a * b;
+          $("#sumpricenewedit").val(d);
+        });
+        $("#pricenewedit").keyup(function(){
+          a = $("#pricenewedit").val();
+          b = $("#amountnewedit").val();
+          d =a * b;
+          $("#sumpricenewedit").val(d);
+        });
+      });
+
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
         console.log("DATAID"+getDataId,getdataPicture);
@@ -2622,10 +2745,10 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 					"<input id='amountnewedit'type='text' type='text'value='"+ data[i].amountadmin +"'>" +'<br>'+ 
           '<br>'+
           "ราคารวม(เสนอ) <br>"+
-					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+					"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"' disabled> " +'<br>'+ 
           '<br>'+
           "ราคารวม(แก้ไข) <br>"+
-					"<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
+					"<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"' disabled>" +'<br>'+ 
           '<br>'+
           // "ราคารวม(แก้ไข) <br>"+
 					// "<input id='sumpricenewedit'type='text' type='text'value='"+ data[i].sumpriceadmin +"'>" +'<br>'+ 
@@ -2663,6 +2786,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     }
 
 
+     
 
     function ClickToChangeColor(i){
       console.log("color");
@@ -2675,7 +2799,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
         if(data[i].statusz == "รออนุมัติ"){
 
           data[i].statusz = "อนุมัติ";
-
+          
         }else if(data[i].statusz == "อนุมัติ"){
         
           data[i].statusz = "ไม่อนุมัติ";
@@ -2685,11 +2809,13 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
         data[i].statusz = "รออนุมัติ";
 
       }
+      
     
       var statusColor = data[i].statusz
 
       console.log("ColorADD"+ statusColor);
 
+     
       
     $.post("/save/editdataadminColor",{  
 							              'ServergetDataId':dataId,	
@@ -2724,7 +2850,8 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     var sumpricenew = $("#sumpricenew").val();
     var sumpricenewedit = $("#sumpricenewedit").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
-    var statusznew = $("#statusznew").val();
+    var statusznew = "รออนุมัติ";
+    // var statusznew = $("#statusznew").val();
     var mainidnew =  getValueLocalStorage;
     //var image = filekub2;
     var image = $("#imagenew").val().substring(12);
@@ -2913,6 +3040,7 @@ $("[id$=myButtonControlIDShop]").click(function(e) {
 // window.open('data:application/vnd.ms-excel;base64,' + $.base64.encode($('#TabelaDados').html()));
 // e.preventDefault();
 // });
+
 
 
 

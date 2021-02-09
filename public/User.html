@@ -1628,6 +1628,43 @@ function  moveValueToTrash(){
 			console.log("addzzzz"+getDataId);
 			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
         
+
+      var price;
+      var amount;
+      var sum;
+      $(document).ready(function(){        //keyup1
+        $("#amountnew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+        $("#pricenew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+      });
+
+
+      $(document).ready(function(){       //keyup2
+        $("#amountnewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+        $("#pricenewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+      });
+
+
+
         //localStorage.setItem("itemforlogkub",itemNewForLog);
 				console.log(data[i]._id);
         getDataId = data[i]._id;
@@ -1646,7 +1683,7 @@ function  moveValueToTrash(){
           '<br>'+
           "<label style='padding: left; margin: 10px'>จำนวน</label>"+	"<input  style='margin-left: 41px;' id='amountnew'type='text' type='text'value='"+ data[i].amount +"'>" +'<br>'+ 
           '<br>'+
-          "<label style='padding: left; margin: 10px'>ราคารวม</label>"+"<input  style='margin-left: 35px;' id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ราคารวม</label>"+"<input  style='margin-left: 35px;' id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"' disabled >" +'<br>'+ 
           '<br>'+
           "<label style='padding: left; margin: 10px'>ผู้รับผิดชอบ</label>"+	"<input style='margin-left: 10px;' id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"'>" +'<br>'+ 
           '<br>'+
@@ -1698,6 +1735,43 @@ function  moveValueToTrash(){
       //editphoto = i;
       $.post("/get/dataForSearchTableMainIdAdmin23",{'_ID2': valueID ,_ID: getValueLocalStorage}, function (data, status) {
 						
+
+      var price;
+      var amount;
+      var sum;
+      $(document).ready(function(){        //keyup1
+        $("#amountnew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+        $("#pricenew").keyup(function(){
+          price = $("#pricenew").val();
+          amount = $("#amountnew").val();
+          sum =price * amount;
+          $("#sumpricenew").val(sum).toFixed(2);
+        });
+      });
+
+
+      $(document).ready(function(){       //keyup2
+        $("#amountnewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+        $("#pricenewedit").keyup(function(){
+          price = $("#pricenewedit").val();
+          amount = $("#amountnewedit").val();
+          sum =price * amount;
+          $("#sumpricenewedit").val(sum).toFixed(2);
+        });
+      });
+
+
+
 				console.log(data[i]._id);
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
