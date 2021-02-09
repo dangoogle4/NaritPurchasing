@@ -285,13 +285,13 @@ body {
 //     </script> 
 <!-- //   <div id="includedContent"></div> -->
  
-  <div style="margin: 40px;" >
+  <div style="margin: 100px;" >
 
       <table cellspacing="0" style="margin-top: 150px">
          <tr>
         <!-- <td width="145">ลำดับ</td> -->
-            <td width="350"> ชื่อ</td>
-            <td width="350">นามสกุล</td>
+            <td > ชื่อ</td>
+            <td >นามสกุล</td>
 			<td>Username</td>
 			<td>สถานะ</td>
         <td> แก้ไข </td>
@@ -440,8 +440,9 @@ window.location.href = "/adminedit";
         // }
         for(let i = 0; i < user_data.length; i++)
         {
+			if(CookieUser.username == user_data[i].username){
 
-           $("#table_user").append("<tr><td>"
+				$("#table_user").append("<tr><td>"
                                     // + [i+1] +"</td><td>"
                                     + user_data[i].name +"</td><td>"
                                     + user_data[i].surname +"</td><td>"
@@ -449,7 +450,22 @@ window.location.href = "/adminedit";
 									+ user_data[i].priority +"</td><td>"
                                     +"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='editData("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td>"
                                     // +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a>"
-                                    +"</td></tr>");                                                                                 
+                                    +"</td></tr>");  
+				}else if (CookieUser.priority == 'Admin'){
+
+					$("#table_user").append("<tr><td>"
+                                    // + [i+1] +"</td><td>"
+                                    + user_data[i].name +"</td><td>"
+                                    + user_data[i].surname +"</td><td>"
+									+ user_data[i].username +"</td><td>"
+									+ user_data[i].priority +"</td><td>"
+                                    +"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='editData("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td>"
+                                    // +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a>"
+                                    +"</td></tr>");  	
+
+				}
+
+                                                                                        
         }        
     //   }
       
@@ -477,22 +493,23 @@ window.location.href = "/adminedit";
   }
 
   function editData(i){
+	 
 			console.log("addzzzz");
 			$.post("/get/users", function (data, status) {
 						
 				console.log(data[i]._id);
-        getDataId = data[i]._id;
-        console.log(data);
+        		getDataId = data[i]._id;
+        		console.log(data);
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-          "<label style='padding: left; margin: 10px'>ชื่อ</label>"+"<input style='margin-left: 45px;' id='itemnew'type='text' type='text'value='"+ data[i].name +"'>" +'<br>'+ 
+          "<label style='padding: left; margin: 10px'>ชื่อ</label>"+"<input style='margin-left: 45px;' id='name'type='text' type='text'value='"+ data[i].name +"'>" +'<br>'+ 
           '<br>'+
-          "<label style='margin: 10px'>นามสกุล</label>"+"<input  style='margin-left: 10px;' id='partnumbernew'type='text' type='text'value='"+ data[i].surname +"'>" +'<br>'+ 
+          "<label style='margin: 10px'>นามสกุล</label>"+"<input  style='margin-left: 10px;' id='surname'type='text' type='text'value='"+ data[i].surname +"'>" +'<br>'+ 
           '<br>'+
-          "<label style='margin: 10px'>username</label>"+"<input id='pricenew'type='text' type='text'value='"+ data[i].username +"'>" +'<br>'+ 
+          "<label style='margin: 10px'>username</label>"+"<input id='username'type='text' type='text'value='"+ data[i].username +"'>" +'<br>'+ 
           '<br>'+
-          "<label style='margin: 10px'>password</label>"+"<input id='amountnew'type='password' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
+          "<label style='margin: 10px'>password</label>"+"<input id='password'type='password' type='text'value='"+ data[i].password +"'>" +'<br>'+ 
           '<br>'
         //   "ราคารวม <br>"+
 		// 			"<input id='sumpricenew'type='text' type='text'value='"+ data[i].sumprice +"'>" +'<br>'+ 
@@ -523,5 +540,37 @@ window.location.href = "/adminedit";
     }
     
   }
+
+  function addEdit(){
+	  confirm("คุณต้องการแก้ไขข้อมูลส่วนตัวใช่หรือไม่ ?")
+			console.log('DDan');
+    //var shopnew = $("#shopnew").val();
+    var name = $("#name").val();
+    var surname = $("#surname").val();
+    var username = $("#username").val();
+    var password = $("#password").val();
+    // var sumpricenew = $("#sumpricenew").val();
+    // var responsiblepersonnew = $("#responsiblepersonnew").val();
+    // var statusznew = $("#statusznew").val();
+   //var statusnew = $("#statusnew").val();
+    //var statusnew = $("#statusnew").val();
+
+
+  console.log(name,surname,username,password);
+  console.log(getDataId);
+
+    $.post("/save/editDataUserAdmin",{  
+							'ServergetDataId':getDataId,	
+                            'name':name,
+                            'surname':surname,
+                            'username':username,
+                            'password':password,     
+                        },function(data, status){
+							window.location.href ='/useredit';
+        });
+    }
+
+	var getDataId =""
+  
 
 </script>

@@ -210,15 +210,15 @@ router.post("/api/updateShopInMainqweqweqwe", function (req, res, next) {
   var UPDATEKUB = JSON.parse(req.body.ShopKubEIEIEIEIEI);
   console.log("Dannwqpdokqwpod---->>"+ req.body.mainIdForDeleteData);
   console.log("DANMAPOW", JSON.parse(req.body.ShopKubEIEIEIEIEI));
+  
   //console.log("eiei"+ req.body.EI);
   MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
     if (err) throw err;
     var dbo = db.db("Purchasing");
     var myquery = { order: req.body.mainIdForDeleteData};
     //console.log(myquery);
-    var myitem = { 
-      //status: req.body.status,
-      $push: { shopid: UPDATEKUB
+    var myitem = { //status: req.body.status,
+      $set: { shopid: UPDATEKUB,
  },
        
     };
@@ -228,7 +228,7 @@ router.post("/api/updateShopInMainqweqweqwe", function (req, res, next) {
         //group: req.body.group,
         //department: req.body.department,
      //};
-    dbo.collection("maintable").updateOne(myquery,myitem, function (err, result) {
+    dbo.collection("maintable").updateMany(myquery,myitem, function (err, result) {
         if (err) throw err;
         res.send(true);
 
@@ -300,6 +300,8 @@ router.post("/uploadImageTemporary", function (req, res) {
       sampleimage = req.files.sampleimage[i];
 
       uploadPath =
+      
+      
         __dirname + "/../public/upload/temporary/pic/" + sampleimage.name;
 
       sampleimage.mv(uploadPath, function (err) {
@@ -825,6 +827,46 @@ router.post("/save/editdata", function (req, res, next) {
       });
   });
 });
+
+router.post("/save/editDataUserAdmin", function (req, res, next) {
+  //console.log('DDDD');
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    console.log("DAN" + req.body.ServergetDataId);
+    var newvalues = {
+      $set: {
+        //shop:req.body.shopnew,
+        name:req.body.name,
+        surname:req.body.surname,
+        username:req.body.username,
+        password: req.body.password,
+        //mainid: ObjectId(req.body.mainid),
+      },
+    };
+    dbo
+      .collection("user")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        // let itemForLog = req.body.name;
+        // let mainId = req.body.mainidnew;
+        //let new_name = req.body.name_equipment;
+
+        // createlog(itemForLog,mainId,req, "UPDATE", function (result_log) {
+        //     res.send(result_log);
+        //   }
+        //);
+
+         res.send(true);
+      });
+  });
+});
+
 
 router.post("/save/editdataadmin", function (req, res, next) {
   console.log('DDDD');

@@ -428,13 +428,19 @@ if(CookieUser.priority != "Admin"){
 
 
 function logout(){
-
-$.post("/users/logout", function(data, status){
-	if(data) {
-		window.location.href = "/";
+		if(confirm("คุณต้องการ Logout ใช่หรือไม่")){
+			$.post("/users/logout", function(data, status){
+				if(data) {
+			  window.location.href = "/";
+                }
+			});	
 	}
-});
 }
+
+
+
+
+
 
   
 	function Add() {
@@ -707,9 +713,9 @@ $.post("/users/logout", function(data, status){
 				$("#Modal-a").append(
 					"<label style='padding: left; margin: 10px'>รหัสจัดชื้อ</label>"+"<input style='margin-left: 31px;' id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
 					'<br>'+
-					"<label style='padding: left; margin: 10px'>ชื่อผู้รับผิดชอบ</label>"+"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + '<br>' +
+					"<label style='padding: left; margin: 10px'>ชื่อผู้รับผิดชอบ</label>"+"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + 
 					'<br>' +
-					"<label style='padding: left; margin: 10px'>ยอดการจัดชื้อ</label>"+"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
+					// "<label style='padding: left; margin: 10px'>ยอดการจัดชื้อ</label>"+"<input id='amountnew' type='text'value='"+ data[DataForQueryData].amount +"'>" + '<br>' +
 					'<br>'+ 
 					"<label style='padding: left; margin: 10px'>ชื่องบประมาณ</label>"+"<input id='nameordernew' type='text'value='"+ data[DataForQueryData].nameorder +"'>" + 
 					'<br>' +
@@ -866,9 +872,12 @@ $.post("/users/logout", function(data, status){
 						"<td id='nameOrderForAnotherTable" + i + "' >" +
 						data[i].nameorder +
 						"</td>" +
-						"<td >" +
-						data[i].status +
-						"</td>" +
+						"<td > " + 
+                		"<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].status+"</label>"+
+             			"</td>" +
+						// "<td >" +
+						// data[i].status +
+						// "</td>" +
 						// "</td>" +
 						// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
 						// "</a></td>" +
@@ -902,6 +911,21 @@ $.post("/users/logout", function(data, status){
 	
 
 					);
+					var checkBadgeStatus = data[i].status;
+                
+					if(checkBadgeStatus == 'อนุมัติ'){ 
+						$('#status-badge-'+i).addClass('label label-success');
+						} 
+							else if(checkBadgeStatus == 'รออนุมัติ' ){
+							$('#status-badge-'+i).addClass('label label-warning');
+							console.log("ส้มม")
+							} 
+								else if(checkBadgeStatus == 'รอส่งของ'){
+								$('#status-badge-'+i).addClass('label label-danger');
+								}
+								 else if(checkBadgeStatus == 'ตรวจรับแล้ว'){
+									$('#status-badge-'+i).addClass('label label-primary');
+								 }
 				
 	 		  j++;
  			}
@@ -1009,26 +1033,26 @@ $.post("/users/logout", function(data, status){
 
 
 
-		function dropMainTableForDummyMainTable(DataForQueryData){
-			console.log('Dan--->>>'+ getDataId);
-			var deldummymaintablemark2 = "1";
-			
+			function dropMainTableForDummyMainTable(DataForQueryData){
+				console.log('Dan--->>>'+ getDataId);
+				var deldummymaintablemark2 = "1";
+				
 
-			$.post("/get/maintable", function (data, status) {
-						
-						
-						getDataId2 = data[DataForQueryData]._id;
-						$.post("/save/editmaindummydrop",{ 
-							ServergetDataId:getDataId2,
+				$.post("/get/maintable", function (data, status) {
 							
-                            // department: department
-                            
-                        },function(data, status){
-							showMaintable();    
-			});
-						
-			});
-			//console.log("DUMMMMMMMMMMMMMMMMMMMMY    "+deldummymaintablemark2);
+							
+							getDataId2 = data[DataForQueryData]._id;
+							$.post("/save/editmaindummydrop",{ 
+								ServergetDataId:getDataId2,
+								
+								// department: department
+								
+							},function(data, status){
+								showMaintable();    
+				});
+							
+				});
+				//console.log("DUMMMMMMMMMMMMMMMMMMMMY    "+deldummymaintablemark2);
 
     		
 		}

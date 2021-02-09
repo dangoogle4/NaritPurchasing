@@ -405,9 +405,29 @@ table td, table th  {
 <!--         
       </table>
    </div>  -->
-     <button style="float: right; margin: 20px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+     <button style="float: right; margin: 20px;" type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal" onclick="arlertfunction()" >เพิ่มข้อมูล</button>
      <button style="float: right; margin: 20px;" type="button"  class="btn btn-light" data-toggle="modal" data-target="#ModalForAddShop">เพิ่มร้านค้า</button>
      <!-- <button  style="float: right; margin: 10px;" onclick='showshop()'>DATAALL</button> -->
+
+     <script>
+      var numofnameshop = 0;
+    function arlertfunction(){
+      if(numofnameshop == 0){
+        alert("กรุณาเลือกร้านค้าก่อนจะเพิ่มข้อมูลด้วยครับ/ค่ะ");
+        $(function (){
+          $('#myModal').modal('hide');
+        });
+      }
+        
+      //window.location.href = '/admin';
+    
+      
+      
+     
+   
+    }
+     
+    </script>
       <!-- Modal -->
       <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -432,12 +452,19 @@ table td, table th  {
                 <br>
                 <label>จำนวน</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="amountz" name="amount" type="number"><br>
                 <br>
-                <label>ราคารวม</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="sumprice" name="sumprice" type="text"><br>
+                <label>ราคารวม</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="sumprice" name="sumprice" type="text">
                 <br>
-                <label>ผู้รับผิดชอบ</label>&nbsp;&nbsp;&nbsp;&nbsp;<input  id="responsibleperson" name="responsibleperson" type="text"><br>
+                <!-- <label>ผู้รับผิดชอบ</label>&nbsp;&nbsp;&nbsp;&nbsp;<input  id="responsibleperson" name="responsibleperson" type="text"><br> -->
                 <br>
-                <label >สถานะ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  id="statusz" type="text"><br>
-                <br>
+                <label >สถานะ</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              
+                <select style="margin-left:4.3em"name="status" id="statusz">
+                  <!-- <option value="0">เลือกสี</option> -->
+                  <!-- <option value="อนุมัติ">อนุมัติ</option> -->
+                  <option value="รออนุมัติ">รออนุมัติ</option>
+                  <!-- <option value="ไม่อนุมัติ">ไม่อนุมัติ</option> -->
+                  <!-- <option value="4">แดง</option> -->
+                </select>
                 <div class="form-group">
                   <label for="img">รูป:</label>
 
@@ -941,8 +968,19 @@ $(".image").submit(function (m) {
 
             <script>
               function ExportDataAll(){
-                confirm("ถ้าคุณต้องการ Export ข้อมูลการจัดชื้อของร้านค้านั้นๆให้คุณกดที่ปุ่มร้านค้าแล้วถึง Export ได้ :D")
-              }
+                if(numofnameshop == 0){
+                  console.log("Check")
+                  alert("ถ้าคุณต้องการ Export ข้อมูลการจัดชื้อของร้านค้านั้นๆให้คุณกดที่ปุ่มร้านค้าแล้วถึง Export ได้ :D")
+                  
+                  $("[id$=myButtonControlIDShop]").click(function(e) {
+                  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExportshopKub]').html()));
+                  e.preventDefault();
+                  //window.close();
+                  });
+
+                  }
+                }
+               
             </script>
   </div>
 
@@ -1220,7 +1258,8 @@ function  moveValueToTrash(){
       var amountadmin =  "";
       var sumprice = $("#sumprice").val();
       var sumpriceadmin =  "";
-      var responsibleperson = $("#responsibleperson").val();
+      var responsibleperson = CookieUser.name;  
+      //var responsibleperson = $("#responsibleperson").val();
       var statusz = "รออนุมัติ"
       var storage = localStorage.getItem("shopIdForAdd");
       console.log("NAMEOFSHOP!!!---> "+codeForBuy,storage);
@@ -1783,6 +1822,8 @@ function  moveValueToTrash(){
 
       $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
       document.getElementById("room-name").innerHTML="";
+      console.log("DataLength"+  data.length)
+      numofnameshop = data.length;
       for (let i = 0; i < data.length; i++) {
         data[i].sumprice = data[i].price * data[i].amount * ShowShopTax[data[i].shopid];
       str = data[i]._id.replace(/\s/g, '');
@@ -1950,11 +1991,13 @@ function  moveValueToTrash(){
 
           $.post("/drop/DataKrup", { dropRoomId: dropRoomId,'mainid': getValueLocalStorage,'itemkub': itemkub }, function (data, status) {
       
-          //window.location.href = "/user";
+         
           console.log(obj_id);
           });
 
        });
+
+       window.location.href = "/user";
 
   
 
@@ -2261,11 +2304,12 @@ location.reload();
   //window.close();
 });
 
-$("[id$=myButtonControlIDShop]").click(function(e) {
-  window.open('data:application/vnd.ms-excel,' + encodeURIComponent( $(' div[id$=divTableDataHolderForExportshopKub]').html()));
-  e.preventDefault();
-  //window.close();
-});
+
+
+ 
+
+
+
 
 
 

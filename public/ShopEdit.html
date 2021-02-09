@@ -597,7 +597,7 @@ function getCookie(cname) {
   function DeleteDataAdmin(obj_id) {
 	let dropRoomId = obj_id.toString();
 	console.log("delete--->>>    " + obj_id);
-    // $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
+     $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
 		$.post("/get/maintable2", { dropRoomId: dropRoomId, 'mainid': getValueLocalStorage }, async function (data, status) {
 
 			var EIEI; 
@@ -643,7 +643,7 @@ function getCookie(cname) {
 				 }
 				 console.log("Dan--sss-->>"+Archive);
 
-				let doIt = await shopEIEI(Archive);
+				let doIt =  await shopEIEI(Archive);
 
 			 	
 				
@@ -655,7 +655,7 @@ function getCookie(cname) {
 	  });
 						//window.location.href = "/shopedit";
 						
-						// });
+	 });
   }	
 
   function shopEIEI(Archive){
