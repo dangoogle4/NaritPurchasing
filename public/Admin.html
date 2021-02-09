@@ -2134,12 +2134,12 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
               "</td>" +
               "<td>" + //"<img  width='200px' src="+data[i].picture+" />" +
                   //"<img  width='200px'  src='/upload/temp/pic/"+ data[i].picture +"' >" +
-                   "<img width='200px' src='http://localhost:4500/upload/temp/pic/"+data[i].picture+"' >" +
+                   "<img width='200px' src='upload/temp/pic/"+data[i].picture+"' >" +
                   // "<img  width='200px' src='http://localhost:4500/upload/temp/pic/TH-49FX500T-Variation_Image_for_See_All_1Global-1_th_th.png'>"+
                     // data[i].picture +
               "</td>" +
               "<td > " + 
-                "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                "<label onclick='ClickToChangeColor("+ i +")' id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
                     
               "</td>" +
               // "<td>" +  &emsp;
@@ -2557,14 +2557,14 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           "ผู้รับผิดชอบ <br>"+
 					"<input id='responsiblepersonnew'type='text' type='text'value='"+ data[i].responsibleperson +"' disabled >" +'<br>'+ 
           '<br>'+
-          "สถานะ <br>"+
-          "<select style='margin-left:4.3em' name='status' id='statusznew'>"+
-            "<option value='' selected disabled hidden>เลือกสถานะ</option>"+
-            "<option value='อนุมัติ'>อนุมัติ</option> "+
-            "<option value='รออนุมัติ'>รออนุมัติ</option> "+
-            "<option value='ไม่อนุมัติ'>ไม่อนุมัติ</option> "+
+          // "สถานะ <br>"+
+          // "<select style='margin-left:4.3em' name='status' id='statusznew'>"+
+          //   "<option value='' selected disabled hidden>เลือกสถานะ</option>"+
+          //   "<option value='อนุมัติ'>อนุมัติ</option> "+
+          //   "<option value='รออนุมัติ'>รออนุมัติ</option> "+
+          //   "<option value='ไม่อนุมัติ'>ไม่อนุมัติ</option> "+
                 
-            "</select> "+
+          //   "</select> "+
 					// "<input id='statusznew'type='text' type='text'value='"+ data[i].statusz +"'>" +'<br>'+ 
           '<br>'+
           "รูป <br>"+
@@ -2664,7 +2664,50 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
 
 
+    function ClickToChangeColor(i){
+      console.log("color");
+
+      
+      
+      $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+        //console.log(data[i].statusz);
+        var dataId  = data[i]._id;
+        if(data[i].statusz == "รออนุมัติ"){
+
+          data[i].statusz = "อนุมัติ";
+
+        }else if(data[i].statusz == "อนุมัติ"){
+        
+          data[i].statusz = "ไม่อนุมัติ";
+
+        }else if(data[i].statusz == "ไม่อนุมัติ"){
+        
+        data[i].statusz = "รออนุมัติ";
+
+      }
     
+      var statusColor = data[i].statusz
+
+      console.log("ColorADD"+ statusColor);
+
+      
+    $.post("/save/editdataadminColor",{  
+							              'ServergetDataId':dataId,	
+                            'statusColor':statusColor, 
+                        },function(data, status){
+                          //console.log(data);
+                          window.location.href = "/admin";
+                        //  document.getElementById("room-namedata").innerHTML="";
+							// showData();
+        });
+
+
+
+
+      });
+   
+
+    }
 
               
 

@@ -868,6 +868,46 @@ router.post("/save/editDataUserAdmin", function (req, res, next) {
 });
 
 
+router.post("/save/editdataadminColor", function (req, res, next) {
+  //console.log('DDDD');
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    console.log("DAN" + req.body.ServergetDataId);
+    var newvalues = {
+      $set: {
+        //shop:req.body.shopnew,
+        statusz:req.body.statusColor,
+        //mainid: ObjectId(req.body.mainid),
+      },
+    };
+    dbo
+      .collection("data")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        // let itemForLog = req.body.name;
+        // let mainId = req.body.mainidnew;
+        //let new_name = req.body.name_equipment;
+
+        // createlog(itemForLog,mainId,req, "UPDATE", function (result_log) {
+        //     res.send(result_log);
+        //   }
+        //);
+
+         res.send(true);
+      });
+  });
+});
+
+
+
+
+
 router.post("/save/editdataadmin", function (req, res, next) {
   console.log('DDDD');
   // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
