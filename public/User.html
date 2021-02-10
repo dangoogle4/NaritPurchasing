@@ -204,6 +204,8 @@ table td, table th  {
 <body onload="showData()"   >
   <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -232,10 +234,31 @@ table td, table th  {
              </div>
            </div>
            </li>
-        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
   </nav>
+
+  <script>
+    function logout(){
+				swal({
+			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.post("/users/logout", function(data, status){
+				if(data) {
+			  window.location.href = "/";
+                }
+			 });
+			} 
+			});
+      
+}
+  </script>
 
      <!-- <div class="header">Users</div> -->
      <div  id="divTableDataHolderForExportshopKub" >
@@ -1429,7 +1452,7 @@ function  moveValueToTrash(){
         // "<img  width='200px' src="+data[i].picture+" />" +
       "</td>" +
       "<td > " + 
-                "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                "<button  onclick='ClickToChangeColor("+ i +")' id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+
                     
               "</td>" +
       // "<td>" +
@@ -1464,14 +1487,14 @@ function  moveValueToTrash(){
         var checkBadgeStatus = data[i].statusz;
                 
                 if(checkBadgeStatus == 'อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-success');
+              $('#status-badge-'+i).addClass('btn btn-success');
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
-              $('#status-badge-'+i).addClass('label label-warning');
+              $('#status-badge-'+i).addClass('btn btn-warning');
               console.log("ส้มม")
             } 
             else if(checkBadgeStatus == 'ไม่อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-danger');
+              $('#status-badge-'+i).addClass('btn btn-danger');
             }
       }
       
@@ -1609,6 +1632,81 @@ function  moveValueToTrash(){
     });
   }
 
+
+          function ClickToChangeColor(i){
+
+              
+        $(document).ready(function(){        //keyup1
+                  $("button").click(function(){
+                  
+                    $("#status-badge-1"+i).css("background-color", "yellow");
+                  });
+              });
+
+
+
+        console.log("color");
+
+
+
+        $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
+          //console.log(data[i].statusz);
+
+          var dataId  = data[i]._id;
+
+          if(data[i].statusz == "รออนุมัติ"){
+            console.log("color1");
+            data[i].statusz = "อนุมัติ";
+            
+          }else if(data[i].statusz == "อนุมัติ"){
+            console.log("color2");
+            data[i].statusz = "ไม่อนุมัติ";
+
+          }else if(data[i].statusz == "ไม่อนุมัติ"){
+            console.log("color3");
+          data[i].statusz = "รออนุมัติ";
+
+        }
+        swal({
+        title: data[i].statusz,
+        text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
+        icon: "success",
+        });
+
+
+
+
+
+
+        var statusColor = data[i].statusz
+
+
+        console.log("ColorADD"+ statusColor);
+
+
+
+        $.post("/save/editdataadminColor",{  
+                              'ServergetDataId':dataId,	
+                              'statusColor':statusColor, 
+                          },function(data, status){
+                            //console.log(data);
+                            //window.location.href = "/admin";
+                          //  document.getElementById("room-namedata").innerHTML="";
+                // showData();
+          });
+
+
+
+
+        });
+
+
+        }
+
+
+
+
+
   function openPage(pageName,elmnt,color) {
     console.log("openPage");
       var i, tabcontent, tablinks;
@@ -1674,7 +1772,7 @@ function  moveValueToTrash(){
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-          "<form method='post' action='/uploadNewUser' enctype='multipart/form-data' >"+
+          "<form  method='post' action='/uploadNewUser' enctype='multipart/form-data'>"+
           "<label style='padding: left; margin: 10px'>ชื่อวัสดุ</label>"+"<input style='margin-left: 35px;' id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
           "<label style='padding: left; margin: 10px'>Part Number</label>"+	"<input id='partnumbernew'type='text' type='text'value='"+ data[i].partnumber +"'>" +'<br>'+ 
@@ -1691,9 +1789,10 @@ function  moveValueToTrash(){
           // '<br>'+
           "<label style='padding: left; margin: 10px'>รูป</label>"+
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
-                "<div class='form-group'>"+
+                "<div class='form-group'  >"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' required>"+
+                  "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' >"+
+                  "<input id='imagenew2'type='text' type='text'value='"+ data[i].picture +"'  >" +'<br>'+       
                 "</div>"+
            
           
@@ -2050,6 +2149,20 @@ function  moveValueToTrash(){
 
   function dropDataKrub(obj_id) {
 
+    
+    swal({
+      title: "คุณแน่ใจใช่มั้ยว่าจะลบข้อมูลสินค้านี้?",
+      text: "ถ้าคุณลบข้อมูลนี้ไปแล้ว ข้อมูลสินค้านี้จะไม่สามารถกู้คืนมาได้อีก",
+      icon: "warning",
+      dangerMode: true,
+        buttons: true,
+   
+      })
+      .then((willDelete) => {
+      if (willDelete) {
+      swal("ข้อมูลสินค้าของคุณถูกลบแล้ว", {
+      icon: "success",
+      });
       var spiltkub = obj_id.split("_*&^_");
       console.log("MONEW"+obj_id.split("_*&^_"));
       //console.log("MOMNEWKUB   "+spiltkub[0]);
@@ -2070,8 +2183,12 @@ function  moveValueToTrash(){
           });
 
        });
+      } else {
+      swal("ข้อมูลสินค้าของคุณยังไม่ถูกลบ");
+      }
+      });
 
-       window.location.href = "/user";
+       //window.location.href = "/user";
 
   
 
@@ -2113,9 +2230,13 @@ function  moveValueToTrash(){
     var sumpricenew = $("#sumpricenew").val();
     var responsiblepersonnew = $("#responsiblepersonnew").val();
     var statusznew = "รออนุมัติ"
-    var image = $("#imagenew").val().substring(12);
+    //var image = $("#imagenew").val().substring(12);
     var mainidnew = getValueLocalStorage;
-
+    if( $("#imagenew").val().substring(12) == "" ){
+        var image = $("#imagenew2").val();
+    }else if( $("#imagenew").val().substring(12) != "" ){
+      var image = $("#imagenew").val().substring(12);
+    }   
 
     // if (filekub2 != ""){
     //   image = filekub2;

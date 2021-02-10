@@ -135,6 +135,8 @@ table td, table th  {
   <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -163,11 +165,34 @@ table td, table th  {
              </div>
            </div>
            </li>
-        <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+        <li><a onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
         </ul>
     </div>
     
   </nav>
+
+  <script>
+    
+      function logout(){
+				swal({
+			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.post("/users/logout", function(data, status){
+				if(data) {
+			  window.location.href = "/";
+                }
+			 });
+			} 
+			});
+      
+}
+    
+  </script>
 
 
     <!-- <div class="header">Users</div> -->
@@ -289,7 +314,7 @@ table td, table th  {
                         <td>จำนวน(แก้ไข)</td>
                         <td>ราคารวม(เสนอ)</td>
                         <td>ราคารวม(แก้ไข)</td>
-                        <td>ผู้รับผิดชอบ</td>
+                        <td >ผู้รับผิดชอบ</td>
                         <td width="200">รูป</td>
                         <td width="100">สถานะ</td>
                         <!-- <td>ร้านค้า</td> -->
@@ -436,7 +461,7 @@ table td, table th  {
                     <!-- <div class="preview-images"></div>
                  -->
                   <br>
-                
+                  <!-- <input type="button" id="button" value = "button" style= "color:white" onclick="setColor('button', '#101010')";/> -->
                 <button  type="submit" class="btn btn-light" data-toggle="modal" data-target="#myModalforadddata" onclick="addDataAdmin()">บันทึก</button>
                 <input class="btn btn-light" type="reset" value="ล้าง">
                 </form> 
@@ -457,7 +482,16 @@ table td, table th  {
       </div>
   </div>
 
+  <script>addBackToTop({
+    diameter: 56,
+    backgroundColor: 'rgb(255, 82, 82)',
+    textColor: '#fff'
+  })</script> 
+
+  
+  
   <script>
+    
 
       var a;
       var b;
@@ -1220,6 +1254,12 @@ $(".image").submit(function (m) {
 </html>
 
 <script>
+
+
+
+
+
+
 //var gm = require('gm');
 var myCookie = getCookie("CookieUser");
 
@@ -2066,8 +2106,7 @@ function showData() {
         }   
         }); 
 
-    
-
+        
 $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
 
 
@@ -2188,9 +2227,10 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                     // data[i].picture +
               "</td>" +
               "<td > " + 
-                "<label onclick='ClickToChangeColor("+ i +")' id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
-                    
+               
+                "<button    onclick='ClickToChangeColor("+ i +")' id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+ 
               "</td>" +
+              
               // "<td>" +  &emsp;
               //   "<td id='Dan" + i + "'>" +
               //       sum +
@@ -2233,15 +2273,17 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                 var checkBadgeStatus = data[i].statusz;
                 
                 if(checkBadgeStatus == 'อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-success');
+              $('#status-badge-'+i).addClass("btn btn-success");
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
-              $('#status-badge-'+i).addClass('label label-warning');
+              $('#status-badge-'+i).addClass("btn btn-warning");
               console.log("ส้มมหยุด")
             } 
-            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-danger');
-            }
+            else if(checkBadgeStatus == 'ไม่อนุมัติ' ){
+              $('#status-badge-'+i).addClass("btn btn-danger");
+              console.log("ส้มมหยุด")
+            } 
+            
             // else if(checkBadgeStatus == '4'){
             //   $('#status-badge-'+i).addClass('label label-danger');
             // }
@@ -2426,16 +2468,16 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
             //console.log("koqwpdddddddddddddddddddddddddddddddddddddddddd")
             var checkBadgeStatus = data[i].statusz;
             
-            if(checkBadgeStatus == 'อนุมัติ'){
-          $('#status-badge-'+i).addClass('label label-success');
-        } 
-        else if(checkBadgeStatus == 'รออนุมัติ' ){
-          $('#status-badge-'+i).addClass('label label-warning');
-          console.log("ส้มม")
-        } 
-        else if(checkBadgeStatus == 'ไม่อนุมัติ'){
-          $('#status-badge-'+i).addClass('label label-danger');
-        }
+        //     if(checkBadgeStatus == 'อนุมัติ'){
+        //   $('#status-badge-'+i).addClass('label label-success');
+        // } 
+        // else if(checkBadgeStatus == 'รออนุมัติ' ){
+        //   $('#status-badge-'+i).addClass('label label-warning');
+        //   console.log("ส้มม")
+        // } 
+        // else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+        //   $('#status-badge-'+i).addClass('label label-danger');
+        // }
         // else if(checkBadgeStatus == '4'){
         //   $('#status-badge-'+i).addClass('label label-danger');
         // }
@@ -2556,7 +2598,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 			},
 
 			function (data, status) {
-			  //window.location.href = "/admin";
+			  window.location.href = "/admin";
 			  
 			}
 		  );
@@ -2578,13 +2620,13 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
         $("#amountnew").keyup(function(){
           price = $("#pricenew").val();
           amount = $("#amountnew").val();
-          sum =price * amount;
+          sum = price * amount;
           $("#sumpricenew").val(sum).toFixed(2);
         });
         $("#pricenew").keyup(function(){
           price = $("#pricenew").val();
           amount = $("#amountnew").val();
-          sum =price * amount;
+          sum = price * amount;
           $("#sumpricenew").val(sum).toFixed(2);
         });
       });
@@ -2615,7 +2657,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
-          "<form method='post' action='/uploadnew' enctype='multipart/form-data' >"+
+          "<form  method='post' action='/uploadnew' enctype='multipart/form-data' >"+
           "ชื่อวัสดุ <br>"+
 					"<input id='itemnew'type='text' type='text'value='"+ data[i].item +"'>" +'<br>'+ 
           '<br>'+
@@ -2658,10 +2700,11 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           '<br>'+
           "รูป <br>"+
           "<img  width='200px'  src='upload/temp/pic/"+data[i].picture+"' />" +
-                "<div class='form-group'>"+
+                "<div class='form-group'  >"+
                   "<label for='firstname'>Upload</label>"+
-                  "<input type='file' value='" + data[i].picture + "' class='form-control' name='fileuploadNew' id='imagenew'  required>"+
+                  "<input type='file' value='" + data[i].picture + "' class='form-control' name='fileuploadNew' id='imagenew'  >"+
                 "</div>"+
+                "<input id='imagenew2'type='text' type='text'value='"+ data[i].picture +"'  hidden>" +'<br>'+       
            
           
           // "<input action='/uploadnew' type='file' class='form-control' name='fileuploadNew' id='imagenew'>"+
@@ -2789,30 +2832,53 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
      
 
     function ClickToChangeColor(i){
+
+      
+      $(document).ready(function(){        //keyup1
+                $("button").click(function(){
+                 
+                  $("#status-badge-1"+i).css("background-color", "yellow");
+                });
+            });
+
+     
+
       console.log("color");
 
       
       
       $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
         //console.log(data[i].statusz);
-        var dataId  = data[i]._id;
-        if(data[i].statusz == "รออนุมัติ"){
 
+        var dataId  = data[i]._id;
+
+        if(data[i].statusz == "รออนุมัติ"){
+          console.log("color1");
           data[i].statusz = "อนุมัติ";
           
         }else if(data[i].statusz == "อนุมัติ"){
-        
+          console.log("color2");
           data[i].statusz = "ไม่อนุมัติ";
 
         }else if(data[i].statusz == "ไม่อนุมัติ"){
-        
+          console.log("color3");
         data[i].statusz = "รออนุมัติ";
 
       }
+      swal({
+      title: data[i].statusz,
+      text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
+      icon: "success",
+      });
       
+      
+      
+      
+
     
       var statusColor = data[i].statusz
 
+   
       console.log("ColorADD"+ statusColor);
 
      
@@ -2822,7 +2888,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                             'statusColor':statusColor, 
                         },function(data, status){
                           //console.log(data);
-                          window.location.href = "/admin";
+                          //window.location.href = "/admin";
                         //  document.getElementById("room-namedata").innerHTML="";
 							// showData();
         });
@@ -2854,7 +2920,13 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     // var statusznew = $("#statusznew").val();
     var mainidnew =  getValueLocalStorage;
     //var image = filekub2;
-    var image = $("#imagenew").val().substring(12);
+    if( $("#imagenew").val().substring(12) == "" ){
+        var image = $("#imagenew2").val();
+    }else if( $("#imagenew").val().substring(12) != "" ){
+      var image = $("#imagenew").val().substring(12);
+    }
+    //var image = $("#imagenew").val().substring(12);
+    //var image = $("#imagenew").val()
 
     console.log("New"+image);
    //var statusnew = $("#statusnew").val();
@@ -2904,7 +2976,19 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
 
     function DeleteDataAdmin(obj_id) {
-     
+      swal({
+      title: "คุณแน่ใจใช่มั้ยว่าจะลบข้อมูลสินค้านี้?",
+      text: "ถ้าคุณลบข้อมูลนี้ไปแล้ว ข้อมูลสินค้านี้จะไม่สามารถกู้คืนมาได้อีก",
+      icon: "warning",
+      dangerMode: true,
+        buttons: true,
+   
+      })
+      .then((willDelete) => {
+      if (willDelete) {
+      swal("ข้อมูลสินค้าของคุณถูกลบแล้ว", {
+      icon: "success",
+      });
       var spiltkub = obj_id.split("_*&^_");
       console.log("MONEW"+obj_id.split("_*&^_"));
       //console.log("MOMNEWKUB   "+spiltkub[0]);
@@ -2924,6 +3008,12 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           });
 
       });
+      } else {
+      swal("ข้อมูลสินค้าของคุณยังไม่ถูกลบ");
+      }
+      });
+
+      
   //console.log("pictureNew--->>>    " + pictureNew);
  
   }	

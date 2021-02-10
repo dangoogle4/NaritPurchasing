@@ -205,10 +205,11 @@ table td, table th  {
 <body onload="showMaintable()" >
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
@@ -423,18 +424,31 @@ if(CookieUser.priority != "Admin"){
   });
 });
 
-
+// $.post("/users/logout", function(data, status){
+// 				if(data) {
+// 			  window.location.href = "/";
+//                 }
+// 			});
 
 
 
 function logout(){
-		if(confirm("คุณต้องการ Logout ใช่หรือไม่")){
-			$.post("/users/logout", function(data, status){
+				swal({
+			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.post("/users/logout", function(data, status){
 				if(data) {
 			  window.location.href = "/";
                 }
-			});	
-	}
+			 });
+			} 
+			});
+      
 }
 
 
