@@ -135,12 +135,13 @@ table td, table th  {
   <meta charset="utf-8" >
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
   <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
@@ -161,6 +162,7 @@ table td, table th  {
              <div class="dropdown-content">
              <a href="/adminedit">ดูข้อมูลสมาชิก</a>
              <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+             <a href="/history">ดูข้อมูลการจัดชื้อที่ถูกลบ</a>
              <!-- <a href="#">Link 3</a> -->
              </div>
            </div>
@@ -174,21 +176,31 @@ table td, table th  {
   <script>
     
       function logout(){
-				swal({
-			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
-			icon: "warning",
-			buttons: true,
-			dangerMode: true,
-			})
-			.then((willDelete) => {
-			if (willDelete) {
-				$.post("/users/logout", function(data, status){
+
+        
+        
+				Swal.fire({
+  title: 'Are you sure?',
+  text: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'คุณออกระบบแล้ว',
+      'Your file has been deleted.',
+      'success'
+    )
+	$.post("/users/logout", function(data, status){
 				if(data) {
 			  window.location.href = "/";
                 }
 			 });
-			} 
-			});
+  }
+});
       
 }
     
@@ -305,6 +317,7 @@ table td, table th  {
                <div id="divTableDataHolder" >
                   <table cellspacing="0" >
                     <tr>
+                      <tr>
                         <td>ลำดับ </td>
                         <td>ชื่อวัสดุ</td>
                         <td>Part Number</td>
@@ -322,6 +335,27 @@ table td, table th  {
                         <td>ลบ</td> 
                         <tbody id="room-namedata"></tbody>
                     </tr>
+                  </tr>
+                  <tr>
+                    <tr>
+                      <td> </td>
+                      <td></td>
+                      <td> </td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td ></td>
+                      <td width="200"></td>
+                      <td width="100"></td>
+                      <!-- <td>ร้านค้า</td> -->
+                      <td></td>
+                      <td></td> 
+                      <!-- <tbody id="room-namedata"></tbody> -->
+                  </tr>
+                </tr>
               
                     <!-- <tr>
                         <td>1</td>
@@ -530,7 +564,16 @@ table td, table th  {
     var numofnameshop = 0;
     function arlertfunction(){
       if(numofnameshop == 0){
-        alert("กรุณาเลือกร้านค้าก่อนจะเพิ่มข้อมูลด้วยครับ/ค่ะ");
+        //alert("กรุณาเลือกร้านค้าก่อนจะเพิ่มข้อมูลด้วยครับ/ค่ะ");
+        Swal.fire({
+          icon: 'error',
+          title: 'กรุณาเลือกร้านค้าก่อนจะเพิ่มข้อมูลด้วยครับ/ค่ะ',
+          text: 'หากกดเลือกร้านแล้วแต่ขึ้นแจ้งเตือนจะเป็นเฉพาะกับของชิ้นแรกของร้านเท่านั้น',
+        }
+  
+  
+  
+)
         // $(function (){
         //   $('#myModalforadddata').modal('hide');
         // });
@@ -1314,7 +1357,7 @@ var valueid = document.getElementById("forshop"+val).value;
 var shopname = document.getElementById("forshop"+val).innerHTML;
 console.log(" -0000000-000000000-00000000-0-0-"+document.getElementById("forshop"+val).innerHTML);
 localStorage.setItem("shopIdForAdd", valueid);
-console.log("qwpodkqwpokdpoqwokdqkpodw           "+localStorage.getItem("shopIdForAdd", valueid))
+console.log(" LOCALSTORAGE GET ITEM!"+localStorage.getItem("shopIdForAdd", valueid))
 localStorage.setItem("ShopNameForAddData", shopname);
 
 var checkPriceAdmin;
@@ -1389,7 +1432,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             // data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice.toFixed(2) +
+            data[i].sumprice +
       "</td>" +
       "<td>" +
             //checkSumPriceAdmin +
@@ -1405,7 +1448,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             
       "</td>" +
       "<td > " + 
-                "<label  id='status-badges-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+                "<button  onclick='ClickToChangeColorShop("+ i +")' id='status-badgeforshop-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+
                     
               "</td>" +
       "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
@@ -1440,17 +1483,17 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
       );
       var checkBadgeStatus = data[i].statusz;
                 
-      console.log("Dan",checkBadgeStatus);
+      // console.log("Dan",checkBadgeStatus);
       
                 if(checkBadgeStatus == 'อนุมัติ'){
-              $('#status-badges-'+i).addClass('label label-success');
+              $('#status-badgeforshop-'+i).addClass('btn btn-success');
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
-              $('#status-badges-'+i).addClass('label label-warning');
-              console.log('#status-badges-'+i)
+              $('#status-badgeforshop-'+i).addClass('btn btn-warning');
+              console.log('#status-badgeforshop-'+i)
             } 
             else if(checkBadgeStatus == 'ไม่อนุมัติ'){
-              $('#status-badges-'+i).addClass('label label-danger');
+              $('#status-badgeforshop-'+i).addClass('btn btn-danger');
             }
      
     }
@@ -1521,7 +1564,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             // data[i].amountadmin +
       "</td>" +
       "<td>" +
-            data[i].sumprice.toFixed(2) +
+            data[i].sumprice +
       "</td>" +
       "<td>" +
             //checkSumPriceAdmin +
@@ -1538,7 +1581,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             
       "</td>" +
       "<td > " + 
-          "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+          "<button id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+
                     
       "</td>" +
       "<td><a data-toggle='modal' data-target='#myModalForEditDataAdmin' class='btn btn-info'  onclick='editDataSoHard("+i+")' >แก้ไข</a>" +
@@ -1570,18 +1613,18 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
 
 
       );
-      var checkBadgeStatus = data[i].statusz;
+      // var checkBadgeStatus = data[i].statusz;
                 
-                if(checkBadgeStatus == 'อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-success');
-            } 
-            else if(checkBadgeStatus == 'รออนุมัติ' ){
-              $('#status-badge-'+i).addClass('label label-warning');
-              console.log("ส้มม")
-            } 
-            else if(checkBadgeStatus == 'ไม่อนุมัติ'){
-              $('#status-badge-'+i).addClass('label label-danger');
-            }
+      //           if(checkBadgeStatus == 'อนุมัติ'){
+      //         $('#status-badge-'+i).addClass('label label-success');
+      //       } 
+      //       else if(checkBadgeStatus == 'รออนุมัติ' ){
+      //         $('#status-badge-'+i).addClass('label label-warning');
+      //         console.log("ส้มม")
+      //       } 
+      //       else if(checkBadgeStatus == 'ไม่อนุมัติ'){
+      //         $('#status-badge-'+i).addClass('label label-danger');
+      //       }
     }
 
   });
@@ -1649,10 +1692,23 @@ $(document).ready(function(){
     function goToTable() {
     console.log("บันทึกข้อมูล");
     //console.log(getValueLocalStorage);
-	  {    
-		if (confirm("คุณต้องการบันทึกข้อมูลใช่หรือไม่")) {
-      //var shop = $("#shop").val();
-      var reason = $("#reasonadmin").val();
+	  {  
+      Swal.fire({
+  title: 'Are you sure?',
+ 
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, Save it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Save!',
+      'Your file has been Saved.',
+      'success'
+    )
+    var reason = $("#reasonadmin").val();
       var status = $("#statusadmin").val();
       console.log(status,reason);
 		  //var group = $("#group").val();
@@ -1675,7 +1731,9 @@ $(document).ready(function(){
 			  
 			}
 		  );
-		 } 
+  }
+})  
+	
 	  } 
   }
 
@@ -1746,7 +1804,7 @@ function Export(){
 function download_csv(csv, filename) {
   var csvFile;
   var downloadLink;
-
+  
   // CSV FILE
   csvFile = new Blob([
             new Uint8Array([0xEF, 0xBB, 0xBF]), // UTF-8 BOM
@@ -2064,10 +2122,11 @@ function showData() {
     
     $.post("/get/data",function (data, status) {
 
-      console.log("newnewnewnewnewnenwenwnen"+data);
+      
       var sum = 0 ;
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
+        console.log("newnewnewnewnewnenwenwnenzzz"+data[i].responsibleperson);
         data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
         data[i].sumprice = data[i].price * data[i].amount;
         if(data[i]){
@@ -2170,7 +2229,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                 //data[i].priceadmin * data[i].amountadmin * ShowShopTax[data[i].shopid];
               //   sum += parseInt(data[i].sumpriceadmin);
               
-              //setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
+              
               // console.log("AmountForMainTable--->>>> " + setValue);
               //localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
@@ -2273,6 +2332,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                 var checkBadgeStatus = data[i].statusz;
                 
                 if(checkBadgeStatus == 'อนุมัติ'){
+              
               $('#status-badge-'+i).addClass("btn btn-success");
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
@@ -2424,7 +2484,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                 // data[i].picture +
           "</td>" +
           "<td > " + 
-            "<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</label>"+
+            "<button style='padding: 5px;'>"+ data[i].statusz+"</button>"+
                 
           "</td>" +
           // "<td>" +  &emsp;
@@ -2834,12 +2894,15 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     function ClickToChangeColor(i){
 
       
-      $(document).ready(function(){        //keyup1
-                $("button").click(function(){
+      //document.getElementById("status-badge-"+i+"").color = "xx" ;
+
+      
+      // $(document).ready(function(){        //keyup1
+      //           $("button").click(function(){
                  
-                  $("#status-badge-1"+i).css("background-color", "yellow");
-                });
-            });
+      //             $("#status-badge-"+i).css("background-color", "yellow");
+      //           });
+      //       });
 
      
 
@@ -2849,27 +2912,42 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
       
       $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
         //console.log(data[i].statusz);
-
+        var statusButton = document.getElementById("status-badge-"+i+"");
+        console.log("Status",statusButton)
         var dataId  = data[i]._id;
 
         if(data[i].statusz == "รออนุมัติ"){
           console.log("color1");
-          data[i].statusz = "อนุมัติ";
+         statusButton.innerText = "อนุมัติ";
+         $('#status-badge-'+i).removeClass("btn btn-warning");
+         $('#status-badge-'+i).addClass("btn btn-success");
+
+          //document.getElementById("status-badge-"+i+"").value="New Button Text";
+
+           data[i].statusz = "อนุมัติ";
           
         }else if(data[i].statusz == "อนุมัติ"){
           console.log("color2");
+          statusButton.innerText = "ไม่อนุมัติ";
           data[i].statusz = "ไม่อนุมัติ";
+          $('#status-badge-'+i).removeClass("btn btn-success");
+          $('#status-badge-'+i).addClass("btn btn-danger");
+
 
         }else if(data[i].statusz == "ไม่อนุมัติ"){
           console.log("color3");
-        data[i].statusz = "รออนุมัติ";
+          statusButton.innerText = "รออนุมัติ";
+          data[i].statusz = "รออนุมัติ";
+          $('#status-badge-'+i).removeClass("btn btn-danger");
+          $('#status-badge-'+i).addClass("btn btn-warning");
+
 
       }
-      swal({
-      title: data[i].statusz,
-      text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
-      icon: "success",
-      });
+      // swal({
+      // title: data[i].statusz,
+      // text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
+      // icon: "success",
+      // });
       
       
       
@@ -2890,16 +2968,116 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
                           //console.log(data);
                           //window.location.href = "/admin";
                         //  document.getElementById("room-namedata").innerHTML="";
-							// showData();
+							 //showData();
         });
 
 
 
 
-      });
+       });
+
+      
    
 
     }
+
+
+
+
+    function ClickToChangeColorShop(i){
+
+
+      console.log("Shopforadd"+ getShop);
+
+
+
+      
+//document.getElementById("status-badge-"+i+"").color = "xx" ;
+
+
+// $(document).ready(function(){        //keyup1
+//           $("button").click(function(){
+           
+//             $("#status-badge-"+i).css("background-color", "yellow");
+//           });
+//       });
+
+
+
+console.log("color");
+
+
+
+$.post("/get/showshopnameintableinadminaccess",{ '_ID': getShop ,'_MAINID': getValueLocalStorage }, function (data, status) {
+  //console.log(data[i].statusz);
+  var statusButton = document.getElementById("status-badgeforshop-"+i+"");
+  console.log("Status",statusButton)
+  var dataId  = data[i]._id;
+
+  if(data[i].statusz == "รออนุมัติ"){
+    console.log("color1");
+   statusButton.innerText = "อนุมัติ";
+   $('#status-badgeforshop-'+i).removeClass("btn btn-warning");
+   $('#status-badgeforshop-'+i).addClass("btn btn-success");
+
+    //document.getElementById("status-badge-"+i+"").value="New Button Text";
+
+     data[i].statusz = "อนุมัติ";
+    
+  }else if(data[i].statusz == "อนุมัติ"){
+    console.log("color2");
+    statusButton.innerText = "ไม่อนุมัติ";
+    data[i].statusz = "ไม่อนุมัติ";
+    $('#status-badgeforshop-'+i).removeClass("btn btn-success");
+    $('#status-badgeforshop-'+i).addClass("btn btn-danger");
+
+
+  }else if(data[i].statusz == "ไม่อนุมัติ"){
+    console.log("color3");
+    statusButton.innerText = "รออนุมัติ";
+    data[i].statusz = "รออนุมัติ";
+    $('#status-badgeforshop-'+i).removeClass("btn btn-danger");
+    $('#status-badgeforshop-'+i).addClass("btn btn-warning");
+
+
+}
+// swal({
+// title: data[i].statusz,
+// text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
+// icon: "success",
+// });
+
+
+
+
+
+
+var statusColor = data[i].statusz
+
+
+console.log("ColorADD"+ statusColor);
+
+
+
+$.post("/save/editdataadminColor",{  
+                      'ServergetDataId':dataId,	
+                      'statusColor':statusColor, 
+                  },function(data, status){
+                    //console.log(data);
+                    //window.location.href = "/admin";
+                  //  document.getElementById("room-namedata").innerHTML="";
+         //showData();
+  });
+
+
+
+
+ });
+
+
+
+
+}
 
               
 
@@ -2976,20 +3154,22 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
 
     function DeleteDataAdmin(obj_id) {
-      swal({
-      title: "คุณแน่ใจใช่มั้ยว่าจะลบข้อมูลสินค้านี้?",
-      text: "ถ้าคุณลบข้อมูลนี้ไปแล้ว ข้อมูลสินค้านี้จะไม่สามารถกู้คืนมาได้อีก",
-      icon: "warning",
-      dangerMode: true,
-        buttons: true,
-   
-      })
-      .then((willDelete) => {
-      if (willDelete) {
-      swal("ข้อมูลสินค้าของคุณถูกลบแล้ว", {
-      icon: "success",
-      });
-      var spiltkub = obj_id.split("_*&^_");
+      Swal.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    var spiltkub = obj_id.split("_*&^_");
       console.log("MONEW"+obj_id.split("_*&^_"));
       //console.log("MOMNEWKUB   "+spiltkub[0]);
       console.log("MOMNEWKUB2   "+spiltkub[1]);
@@ -3008,10 +3188,10 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           });
 
       });
-      } else {
-      swal("ข้อมูลสินค้าของคุณยังไม่ถูกลบ");
-      }
-      });
+  }
+})
+     
+     
 
       
   //console.log("pictureNew--->>>    " + pictureNew);

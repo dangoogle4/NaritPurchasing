@@ -1452,7 +1452,7 @@ function  moveValueToTrash(){
         // "<img  width='200px' src="+data[i].picture+" />" +
       "</td>" +
       "<td > " + 
-                "<button  onclick='ClickToChangeColor("+ i +")' id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+
+                "<button   id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].statusz+"</button>"+
                     
               "</td>" +
       // "<td>" +
@@ -1633,75 +1633,7 @@ function  moveValueToTrash(){
   }
 
 
-          function ClickToChangeColor(i){
-
-              
-        $(document).ready(function(){        //keyup1
-                  $("button").click(function(){
-                  
-                    $("#status-badge-1"+i).css("background-color", "yellow");
-                  });
-              });
-
-
-
-        console.log("color");
-
-
-
-        $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
-          //console.log(data[i].statusz);
-
-          var dataId  = data[i]._id;
-
-          if(data[i].statusz == "รออนุมัติ"){
-            console.log("color1");
-            data[i].statusz = "อนุมัติ";
-            
-          }else if(data[i].statusz == "อนุมัติ"){
-            console.log("color2");
-            data[i].statusz = "ไม่อนุมัติ";
-
-          }else if(data[i].statusz == "ไม่อนุมัติ"){
-            console.log("color3");
-          data[i].statusz = "รออนุมัติ";
-
-        }
-        swal({
-        title: data[i].statusz,
-        text: "เปลี่ยนสภานะเป็น "+data[i].statusz+" เรียบร้อยแล้วหากต้องการเห็นสีเปลี่ยนแปลงกรุณารีเฟรชหน้าเว็บใหม่อีกครั้ง",
-        icon: "success",
-        });
-
-
-
-
-
-
-        var statusColor = data[i].statusz
-
-
-        console.log("ColorADD"+ statusColor);
-
-
-
-        $.post("/save/editdataadminColor",{  
-                              'ServergetDataId':dataId,	
-                              'statusColor':statusColor, 
-                          },function(data, status){
-                            //console.log(data);
-                            //window.location.href = "/admin";
-                          //  document.getElementById("room-namedata").innerHTML="";
-                // showData();
-          });
-
-
-
-
-        });
-
-
-        }
+          
 
 
 
@@ -1792,7 +1724,7 @@ function  moveValueToTrash(){
                 "<div class='form-group'  >"+
                   "<label for='firstname'>Upload</label>"+
                   "<input type='file' class='form-control' name='fileuploadNew' id='imagenew' >"+
-                  "<input id='imagenew2'type='text' type='text'value='"+ data[i].picture +"'  >" +'<br>'+       
+                  "<input id='imagenew2'type='text' type='text'value='"+ data[i].picture +"'  hidden>" +'<br>'+       
                 "</div>"+
            
           

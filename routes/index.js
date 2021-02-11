@@ -465,7 +465,7 @@ router.post("/get/maintable", function (req, res, next) {
     dbo
       .collection("maintable")
       .find({})
-      // .sort({_id: -1 })
+      .sort({_id: -1 })
       .toArray(function (err, result_category) {
         if (err) throw err;
          //console.log("DDannn" + result._id);

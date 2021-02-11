@@ -157,6 +157,48 @@ table td, table th  {
     border: 0.5px solid powderblue;
 }
  
+.dropbtn {
+  background-color: #ffffff;
+  color: rgb(73, 69, 69);
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #ffffff;
+}
+
+
+ 
 
 
 
@@ -174,21 +216,55 @@ table td, table th  {
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">Purchasing</a>
+        <a class="navbar-brand" href="#">X</a>
       </div>
-      <ul class="nav navbar-nav">
+      <!-- <ul class="nav navbar-nav">
         <li ><a href="/main">Home</a></li>
         <li><a href="/user">User</a></li>
         <li><a href="/admin">Admin</a></li>
         <li><a href="/">Page 3</a></li>
-	  </ul>
+	  </ul> -->
 	  <ul class="nav navbar-nav navbar-right">
-		<li><a href="/register"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-		<li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<li>
+			<div class="dropdown">
+			   <button class="dropbtn">Setting
+				 <i class="fa fa-caret-down"></i>
+			   </button>
+			   <div class="dropdown-content">
+				 <a href="/adminedit">ดูข้อมูลสมาชิก</a>
+				 <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+				 <a href="/history">ดูข้อมูลการจัดชื้อที่ถูกลบ</a>
+				 <!-- <a href="#">Link 3</a> -->
+			   </div>
+			 </div>
+		   </li>
+		<li><a onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 	  </ul>
     </div>
   </nav>
-  <div style="margin: 40px;">
+
+  <script>
+	  
+function logout(){
+				swal({
+			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+			icon: "warning",
+			buttons: true,
+			dangerMode: true,
+			})
+			.then((willDelete) => {
+			if (willDelete) {
+				$.post("/users/logout", function(data, status){
+				if(data) {
+			  window.location.href = "/";
+                }
+			 });
+			} 
+			});
+      
+}
+  </script>
+  <!-- <div style="margin: 40px;">
 	<form style="text-align:  center; ">
       ชื่อผู้รับผิดชอบ
       <input id="" type="text">
@@ -198,10 +274,10 @@ table td, table th  {
         
       <button onclick="search()">ค้นหา</button>
     </form>
-    <br>
+    <br> -->
 
 
-    <!-- <div class="header" style="margin-top: 20px" >Users</div> -->
+    <div  style="margin: 100px" >
     
     <table cellspacing="0" style="margin-top: 100px">
        <tr>
@@ -220,7 +296,7 @@ table td, table th  {
 	</table>
 	
  </div>
- <button  style="float: right; margin: 40px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button>
+ <!-- <button  style="float: right; margin: 40px;" type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">เพิ่มข้อมูล</button> -->
  
 
   <!-- Modal  for ADD  -->

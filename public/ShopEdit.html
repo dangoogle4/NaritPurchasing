@@ -239,7 +239,7 @@ body {
         <li><a href="/">Page 3</a></li>
 	  </ul> -->
 	  <ul class="nav navbar-nav navbar-right">
-		<!-- <li>
+		<li>
 			<div class="dropdown">
 			   <button class="dropbtn">Setting
 				 <i class="fa fa-caret-down"></i>
@@ -247,10 +247,11 @@ body {
 			   <div class="dropdown-content">
 				 <a href="/useredit">ดูข้อมูลสมาชิก</a>
 				 <a href="/shopedit">ดูข้อมูลร้านค้า</a>
-				  <a href="#">Link 3</a> -->
-			   <!-- </div>
+				 <a href="/history">ดูข้อมูลการจัดชื้อที่ถูกลบ</a>
+				  <!-- <a href="#">Link 3</a>   -->
+			   </div>
 			 </div>
-		   </li>  -->
+		   </li> 
 		   
 		<li><a onclick="logout()"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 		<!-- <li><span class="glyphicon glyphicon-user" ><div class="dropdown">
@@ -619,7 +620,7 @@ function getCookie(cname) {
   function DeleteDataAdmin(obj_id) {
 	let dropRoomId = obj_id.toString();
 	console.log("delete--->>>    " + obj_id);
-     $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
+    // $.post("/drop/DataShop", { dropRoomId: dropRoomId }, function (data, status) {
 		$.post("/get/maintable2", { dropRoomId: dropRoomId, 'mainid': getValueLocalStorage }, async function (data, status) {
 
 			var EIEI; 
@@ -677,7 +678,7 @@ function getCookie(cname) {
 	  });
 						//window.location.href = "/shopedit";
 						
-	 });
+	// });
   }	
 
   function shopEIEI(Archive){

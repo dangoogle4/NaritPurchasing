@@ -209,7 +209,8 @@ table td, table th  {
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
   <nav class="navbar navbar-default">
     <div class="container-fluid" style="background-color: rgb(255, 255, 255);">
       <div class="navbar-header">
@@ -230,6 +231,7 @@ table td, table th  {
 			   <div class="dropdown-content">
 				 <a href="/adminedit">ดูข้อมูลสมาชิก</a>
 				 <a href="/shopedit">ดูข้อมูลร้านค้า</a>
+				 <a href="/history">ดูข้อมูลการจัดชื้อที่ถูกลบ</a>
 				 <!-- <a href="#">Link 3</a> -->
 			   </div>
 			 </div>
@@ -297,8 +299,9 @@ table td, table th  {
             &nbsp;<input style="margin: 5px;" id="amount" type="text"><br>  
             <br>
             <label>ชื่องบประมาณ</label>
-            &nbsp;<input  style="margin: 5px;" id="nameorder" type="text"><br>
+            &nbsp;<textarea   id="nameorder" type="text"></textarea>
             <br>
+			
             <!-- <label>สถานะ</label>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input  style="margin: 10px;" id="status" type="text"><br> -->
 			<br>
@@ -433,22 +436,29 @@ if(CookieUser.priority != "Admin"){
 
 
 function logout(){
-				swal({
-			title: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
-			icon: "warning",
-			buttons: true,
-			dangerMode: true,
-			})
-			.then((willDelete) => {
-			if (willDelete) {
-				$.post("/users/logout", function(data, status){
+	Swal.fire({
+  title: 'Are you sure?',
+  text: "คุณแน่ใจหรือว่าต้องการจะออกระบบ?",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'คุณออกระบบแล้ว',
+      'Your file has been deleted.',
+      'success'
+    )
+	$.post("/users/logout", function(data, status){
 				if(data) {
 			  window.location.href = "/";
                 }
 			 });
-			} 
-			});
-      
+  }
+})
+				
 }
 
 
@@ -725,7 +735,7 @@ function logout(){
 				//console.log("Dannnn" + getDataId);
 				document.getElementById("Modal-a").innerHTML="";
 				$("#Modal-a").append(
-					"<label style='padding: left; margin: 10px'>รหัสจัดชื้อ</label>"+"<input style='margin-left: 31px;' id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"'>" +'<br>'+ 
+					"<label style='padding: left; margin: 10px'>รหัสจัดชื้อ</label>"+"<input style='margin-left: 31px;' id='ordernew'type='text' type='text'value='"+ data[DataForQueryData].order +"' disabled >" +'<br>'+ 
 					'<br>'+
 					"<label style='padding: left; margin: 10px'>ชื่อผู้รับผิดชอบ</label>"+"<input id='responnew' type='text'value='"+ data[DataForQueryData].respon +"'>" + 
 					'<br>' +
@@ -873,8 +883,8 @@ function logout(){
 						//   "<td>" +           
 						// 	(j+1) +
 						// 	"</td>" +
-						"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-						"</a></td>" +
+						"<td><button class='btn btn-light' onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+						"</button></td>" +
 						"<td>" +
 						data[i].respon +
 						"</td>" +
@@ -1048,7 +1058,22 @@ function logout(){
 
 
 			function dropMainTableForDummyMainTable(DataForQueryData){
-				console.log('Dan--->>>'+ getDataId);
+				Swal.fire({
+  				title: 'Are you sure?',
+  				text: "You won't be able to revert this!",
+  				icon: 'warning',
+  				showCancelButton: true,
+  				confirmButtonColor: '#3085d6',
+  				cancelButtonColor: '#d33',
+  				confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+  				if (result.isConfirmed) {
+    				Swal.fire(
+      				'Deleted!',
+      				'Your file has been deleted.',
+      				'success'
+   					 )
+						console.log('Dan--->>>'+ getDataId);
 				var deldummymaintablemark2 = "1";
 				
 
@@ -1069,6 +1094,9 @@ function logout(){
 				//console.log("DUMMMMMMMMMMMMMMMMMMMMY    "+deldummymaintablemark2);
 
     		
+ 				}
+			})
+				
 		}
 
 
@@ -1081,6 +1109,7 @@ function logout(){
     var statusnew = $("#statusnew").val();
 
 	console.log(ordernew);
+	
 
     $.post("/save/editmain",{  
 							ServergetDataId:getDataId,	
@@ -1094,6 +1123,7 @@ function logout(){
                         },function(data, status){
 							showMaintable();    
         });
+		
 }			
 		
 			
