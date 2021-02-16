@@ -826,7 +826,7 @@ function logout(){
 			//console.log(i+"data[i]._id",data[i].order);
 		$.post("/get/dataForSearchTableMainIdAdmin3", {_ID: data[i].order},function (data, status){
 		sum = 0;
-		console.log("Damemdpqwkpz2");
+		//console.log("Damemdpqwkpz2");
 		
 			if(newdan[i] == undefined){
 				newdan[i] = 0.00;
@@ -835,7 +835,7 @@ function logout(){
 			for(let j = 0 ; j <data.length; j++){
 			//console.log(i+"data[i]._id in j",data[i]._id);
 			//console.log("maintable_ID"+j);
-		  console.log("data--->>WWWW", data.length);
+		//  console.log("data--->>WWWW", data.length);
 
 			if( data[j].sumpriceadmin == null) { // เอา sum มาใช้
 				sum = sum + data[j].sumprice * ShowShopTax[data[j].shopid];
@@ -844,7 +844,7 @@ function logout(){
 			}
 			//newdan[0] = 0;
 			
-			console.log("Dameasdsadsadsadmdpqwkpz2");
+		//	console.log("Dameasdsadsadsadmdpqwkpz2");
 			if(j == data.length-1){ //เช็คว่าวนเสดรึยัง
 				//console.log("newnewfrist "+newdan[z]);
 				//console.log("sum " +sum);
@@ -855,12 +855,12 @@ function logout(){
 
 				newdan[z] = sum;
 				
-				console.log("newnew "+newdan[z]);
+			//	console.log("newnew "+newdan[z]);
 
 
 				$.post("/get/maintable", function (data, status) { //แสดงข้อมูล
 					// var newnew = [];
-					console.log("Damemdpqwkp3z");
+					//console.log("Damemdpqwkp3z");
 
 					document.getElementById("room-name").innerHTML="";
 					//console.log("Dataaa" + data.name);
@@ -870,7 +870,7 @@ function logout(){
 				    if(data[i].deldummymaintable == 0){
 						
 						test = data[i]._id;
-						console.log("----->>>   "+test);
+						//console.log("----->>>   "+test);
 						//console.log(data[i]._id);
 						str2 = data[i]._id.replace(/\s/g, '');
 						str = data[i]._id.replace(/\s/g, '');
@@ -942,7 +942,7 @@ function logout(){
 						} 
 							else if(checkBadgeStatus == 'รออนุมัติ' ){
 							$('#status-badge-'+i).addClass('label label-warning');
-							console.log("ส้มม")
+							//console.log("ส้มม")
 							} 
 								else if(checkBadgeStatus == 'รอส่งของ'){
 								$('#status-badge-'+i).addClass('label label-danger');
@@ -965,7 +965,7 @@ function logout(){
 
   //console.log(data[i]._id);
   str = data[i]._id.replace(/\s/g, '');
-  console.log(str);
+  //console.log(str);
 
 	//   console.log("NEWNEWNEWNENWENWENWENWNENEWNEN    "+newnew[i]);
  	// $("#amountAll").val(localStorage.getItem("thisIsParameterName"));

@@ -688,7 +688,7 @@ var filekub2 = "";
 
 
 function ResizeImagenew() {
-  console.log("DDDDD")
+ // console.log("DDDDD")
    for(let i =0 ; i <2;i++){
     if (window.File && window.FileReader && window.FileList && window.Blob) {
     var filesToUploads = document.getElementById('imageFilenew').files;
@@ -791,9 +791,9 @@ function ResizeImagenew() {
             filekub = dataurl;
             console.log("[qw[pq[pwp"+filekub);
         }
-        console.log("MAMA");
+      //  console.log("MAMA");
         reader.readAsDataURL(file);
-        console.log("file---->>"+canvas.toDataURL(file.type));
+       // console.log("file---->>"+canvas.toDataURL(file.type));
         //filekub = canvas.toDataURL(file.type);
         //console.log("[qw[pq[pwp"+filekub);
     }
@@ -1322,8 +1322,8 @@ var nameNew = CookieUser.name;
 
 
 
-console.log("มอยอ"+CookieUser);
-console.log("USER"+ nameNew);
+//console.log("มอยอ"+CookieUser);
+//console.log("USER"+ nameNew);
 
 function getCookie(name) {
  const value = `; ${document.cookie}`;
@@ -1351,7 +1351,7 @@ function getCookie(cname) {
 
 function showshop(val) {
 
-console.log("DDDDDDDD---->>   "+ val)
+//console.log("DDDDDDDD---->>   "+ val)
 //console.log("PEEGALE:"+ data[i].nameOfShop)
 var valueid = document.getElementById("forshop"+val).value;
 var shopname = document.getElementById("forshop"+val).innerHTML;
@@ -1366,13 +1366,13 @@ var checkSumPriceAdmin;
 var sum = 0;
       
 
-console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
+//console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส่งไป >> ได้ ได้
 
 
 
   $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
     document.getElementById("room-namedata").innerHTML="";
-    console.log("sadsadegeg ---->>>"+data.length)
+   // console.log("sadsadegeg ---->>>"+data.length)
     numofnameshop = data.length;
     for (let i = 0; i < data.length; i++) {
 
@@ -1403,7 +1403,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
     strnew = data[i].picture.replace(/\s/g, '');
     stritem = data[i].item.replace(/\s/g, '');
 
-    console.log(str);
+   // console.log(str);
     roomId = data;
    // let rstripId = data[i]._id.rs
     //$("#room-name-value").val(data[0].room);
@@ -1490,7 +1490,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
               $('#status-badgeforshop-'+i).addClass('btn btn-warning');
-              console.log('#status-badgeforshop-'+i)
+           //   console.log('#status-badgeforshop-'+i)
             } 
             else if(checkBadgeStatus == 'ไม่อนุมัติ'){
               $('#status-badgeforshop-'+i).addClass('btn btn-danger');
@@ -1504,7 +1504,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
 
   $.post("/get/showshopnameintableinadminaccess",{ '_ID': valueid ,'_MAINID': getValueLocalStorage }, function (data, status) {
     document.getElementById("room-namedataforexportshop").innerHTML="";
-    console.log("sadsadegeg ---->>>"+data.length)
+  //  console.log("sadsadegeg ---->>>"+data.length)
     
     for (let i = 0; i < data.length; i++) {
 
@@ -1535,7 +1535,7 @@ console.log("มาแล้ว   -----"+ valueid,getValueLocalStorage) // ส�
     strnew = data[i].picture.replace(/\s/g, '');
     stritem = data[i].item.replace(/\s/g, '');
 
-    console.log(str);
+    //console.log(str);
     roomId = data;
    // let rstripId = data[i]._id.rs
     //$("#room-name-value").val(data[0].room);
@@ -1639,9 +1639,9 @@ var ShowShopName = {};
 
 var CookieUser = JSON.parse(getCookie("CookieUser"));
 
-console.log("cookie ร้อนๆครับ"+CookieUser.name,CookieUser.surname);
+//console.log("cookie ร้อนๆครับ"+CookieUser.name,CookieUser.surname);
 
-console.log("มอยอ"+CookieUser)
+//console.log("มอยอ"+CookieUser)
 
 function getCookie(name) {
  const value = `; ${document.cookie}`;
@@ -1690,7 +1690,7 @@ $(document).ready(function(){
   
 
     function goToTable() {
-    console.log("บันทึกข้อมูล");
+   // console.log("บันทึกข้อมูล");
     //console.log(getValueLocalStorage);
 	  {  
       Swal.fire({
@@ -1710,10 +1710,10 @@ $(document).ready(function(){
     )
     var reason = $("#reasonadmin").val();
       var status = $("#statusadmin").val();
-      console.log(status,reason);
+    //  console.log(status,reason);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
-      console.log(getValueLocalStorage);
+     // console.log(getValueLocalStorage);
       $.post(
 			"/api/addmaintableadmin",
 			{
@@ -1840,7 +1840,7 @@ function download_csv(csv, filename) {
 
  
 function  moveValueToTrash(){
-  console.log("Dankub");
+ // console.log("Dankub");
   //document.getElementById("storage").value="";
   // x.remove(x.selectedIndex);
   // document.getElementById('storage').setAttribute("disabled","disabled")
@@ -1849,14 +1849,14 @@ function  moveValueToTrash(){
   shoparray = [];
   var storage_id = $('#storage_id').val();
   
-  console.log(storage_id)
+ // console.log(storage_id)
 
   if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
       
       //shoparray.push(shopidnew);
       //console.log("pppppp"+shoparray.push(shopidnew))
       //var storage = $("#storage").val();
-      console.log("น้องมารึยังน้าาาาาา"+storage_id  ,getValueLocalStorage);
+     // console.log("น้องมารึยังน้าาาาาา"+storage_id  ,getValueLocalStorage);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -1890,7 +1890,7 @@ function myFunction(keyInput) {
   // var key = document.getElementById("mySelect").value;
   
   
-  console.log("keyinput"+keyInput)
+ // console.log("keyinput"+keyInput)
 
   // let A2s = {"key": keyInput} ;
 
@@ -1898,13 +1898,13 @@ function myFunction(keyInput) {
 
     let textlist = '';
 
-      console.log("aowaraima"+status);
+     // console.log("aowaraima"+status);
       // console.log("Check value:: ", data.nameOfShop);
       
       $('#textlist').empty();
 
       for( i = 0 ; i < data.length ; i++){ //ได
-        console.log("wqkd[qwpldqw[d----->>>       "+data.length);
+        //console.log("wqkd[qwpldqw[d----->>>       "+data.length);
         textlist += '<option value="'+data[i].nameOfShop+'"></option>'
          //console.log("LOOP ["+i+"]: "+textlist)
 
@@ -2042,7 +2042,7 @@ function showAllData() {
  function admintomain(i){ 
 
       setValue = document.getElementById("AmountForMainTable" + String(i)).innerHTML;
-			console.log("AmountForMainTable--->>>> " + setValue);
+		//	console.log("AmountForMainTable--->>>> " + setValue);
       localStorage.setItem("thisIsParameterNameForAmountAdminToMainTable", setValue); //ระบุค่าครั้งที่ได้จากในนี้
       
  }
@@ -2091,13 +2091,13 @@ function showData() {
 
   
   $.post("/get/maintable", function (data, status) {
-      console.log(data);
+     // console.log(data);
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
         
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
-		  console.log(str);
+		 // console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
@@ -2113,7 +2113,7 @@ function showData() {
       let roomData = data;
       for (let i = 0; i < roomData.length; i++) {
         let roomName = roomData[i].nameOfShop;
-        console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
+     //   console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
         $("#list_shop").append(
           "<option value="+ roomName +" id='list1'"+ roomData[i]._id+"' ></option>"
           );
@@ -2126,7 +2126,7 @@ function showData() {
       var sum = 0 ;
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
-        console.log("newnewnewnewnewnenwenwnenzzz"+data[i].responsibleperson);
+      //  console.log("newnewnewnewnewnenwenwnenzzz"+data[i].responsibleperson);
         data[i].sumpriceadmin = data[i].priceadmin * data[i].amountadmin;
         data[i].sumprice = data[i].price * data[i].amount;
         if(data[i]){
@@ -2135,7 +2135,7 @@ function showData() {
         sum += parseInt(data[i].sumpriceadmin);
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
-		  console.log(str);
+		 // console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);
@@ -2147,7 +2147,7 @@ function showData() {
 
             $.post("/get/maintable",function (data, status) {
 
-                console.log("newnewnewnewnewnenwenwnen"+data);
+             //   console.log("newnewnewnewnewnenwenwnen"+data);
                  
                 //document.getElementById("room-name").innerHTML="";
                 for (let i = 0; i < data.length; i++) {
@@ -2155,7 +2155,7 @@ function showData() {
                   //console.log("DWDOWKDPOWKD    ----"+ data[3].shopid);
                 //console.log(data[i]._id);
                 str = data[i]._id.replace(/\s/g, '');
-                console.log(str);
+             //   console.log(str);
                   roomId = data;
                 // let rstripId = data[i]._id.rs
                   //$("#room-name-value").val(data[0].room);
@@ -2173,7 +2173,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
     //localStorage.setItem("thisIsParameterNameForAmountz", sumpriceDan);
     //document.getElementById("room-name").innerHTML="";
-      console.log('Daaawww'+getValueLocalStorage);
+    //  console.log('Daaawww'+getValueLocalStorage);
       var sum = 0 ;
       // var handlenull = ""; 
       var checkPriceAdmin;
@@ -2210,13 +2210,13 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
             
           // }
 
-                console.log(data[i].sumpriceadmin);
+               // console.log(data[i].sumpriceadmin);
             if( data[i].sumpriceadmin == null) {
                 sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
             }else {
               sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
             }
-                console.log("--->>   ++++"+sum.toFixed(2))
+              //  console.log("--->>   ++++"+sum.toFixed(2))
                 $("#amountAll").val(sum.toFixed(2));
               // data[i].sumpriceadmin = 0;
               
@@ -2238,7 +2238,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
               str = data[i]._id.replace(/\s/g, '');
               strnew = data[i].picture.replace(/\s/g, '');
               stritem = data[i].item.replace(/\s/g, '');
-              console.log(str);
+             // console.log(str);
                 roomId = data;
             // let rstripId = data[i]._id.rs
                 //$("#room-name-value").val(data[0].room);
@@ -2337,11 +2337,11 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
             } 
             else if(checkBadgeStatus == 'รออนุมัติ' ){
               $('#status-badge-'+i).addClass("btn btn-warning");
-              console.log("ส้มมหยุด")
+            //  console.log("ส้มมหยุด")
             } 
             else if(checkBadgeStatus == 'ไม่อนุมัติ' ){
               $('#status-badge-'+i).addClass("btn btn-danger");
-              console.log("ส้มมหยุด")
+             // console.log("ส้มมหยุด")
             } 
             
             // else if(checkBadgeStatus == '4'){
@@ -2371,7 +2371,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
 //localStorage.setItem("thisIsParameterNameForAmountz", sumpriceDan);
 //document.getElementById("room-name").innerHTML="";
-  console.log('Daaawww'+getValueLocalStorage);
+ // console.log('Daaawww'+getValueLocalStorage);
   var sum = 0 ;
   // var handlenull = ""; 
   var checkPriceAdmin;
@@ -2408,13 +2408,13 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
         
       // }
 
-            console.log(data[i].sumpriceadmin);
+         //   console.log(data[i].sumpriceadmin);
         if( data[i].sumpriceadmin == null) {
             sum = sum + data[i].sumprice * ShowShopTax[data[i].shopid];
         }else {
           sum = sum + data[i].sumpriceadmin * ShowShopTax[data[i].shopid];
         }
-            console.log("--->>   ++++"+sum.toFixed(2))
+          //  console.log("--->>   ++++"+sum.toFixed(2))
             $("#amountAll").val(sum.toFixed(2));
           // data[i].sumpriceadmin = 0;
           
@@ -2436,7 +2436,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
           str = data[i]._id.replace(/\s/g, '');
           strnew = data[i].picture.replace(/\s/g, '');
           stritem = data[i].item.replace(/\s/g, '');
-          console.log(str);
+        //  console.log(str);
             roomId = data;
         // let rstripId = data[i]._id.rs
             //$("#room-name-value").val(data[0].room);
@@ -2568,9 +2568,9 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
  //   );
  for (let i = 0; i < data.length; i++) {
   for (let j = 0; j < data[i].shopid.length; j++) {
-   console.log("3z"+data[i].shopid[j]);
+  // console.log("3z"+data[i].shopid[j]);
    str = data[i]._id.replace(/\s/g, '');
- console.log(str);
+ //console.log(str);
    roomId = data;
 // let rstripId = data[i]._id.rs
    //$("#room-name-value").val(data[0].room);
@@ -2607,7 +2607,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
   function addDataAdmin() {
     //mage = [];
     
-    console.log("asdasd");
+   // console.log("asdasd");
     //console.log(base66);
 	  {
       
@@ -2630,8 +2630,8 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
       var image =  $("#image").val().substring(12);
       //image = image[2];
       //var storage = $("#storage").val();
-      console.log("Araiwa?--->", codeForBuy);
-      console.log(codeForBuy,storage,amount,item,image);
+     // console.log("Araiwa?--->", codeForBuy);
+     // console.log(codeForBuy,storage,amount,item,image);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -2669,7 +2669,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
   
 
   function editData(i){
-			console.log("addzsadsadzzz");
+	//		console.log("addzsadsadzzz");
 			$.post("/get/dataForSearchTableMainIdAdmin2",{_ID: getValueLocalStorage}, function (data, status) {
 						
 
@@ -2713,7 +2713,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 				//console.log(data[i]._id);
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
-        console.log("DATAID"+getDataId,getdataPicture);
+      //  console.log("DATAID"+getDataId,getdataPicture);
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
@@ -2782,7 +2782,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     function editDataSoHard(i){
       //var valueidq = document.getElementById("forshop"+val).value;
       var valueID = localStorage.getItem("shopIdForAdd");
-      console.log("MOMNEWEWEWEWEWEWEWE"+localStorage.getItem("shopIdForAdd"));
+    //  console.log("MOMNEWEWEWEWEWEWEWE"+localStorage.getItem("shopIdForAdd"));
 
 		//	console.log("addzsadsadzzz"+valueidq);
 			$.post("/get/dataForSearchTableMainIdAdmin23",{'_ID2': valueID ,_ID: getValueLocalStorage}, function (data, status) {
@@ -2824,7 +2824,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
         getDataId = data[i]._id;
         getdataPicture = data[i].picture;
-        console.log("DATAID"+getDataId,getdataPicture);
+       // console.log("DATAID"+getDataId,getdataPicture);
 				//console.log("add");
 				document.getElementById("Modal-c").innerHTML="";
 				$("#Modal-c").append(
@@ -2906,18 +2906,18 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
      
 
-      console.log("color");
+     // console.log("color");
 
       
       
       $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},function (data, status) {
         //console.log(data[i].statusz);
         var statusButton = document.getElementById("status-badge-"+i+"");
-        console.log("Status",statusButton)
+      //  console.log("Status",statusButton)
         var dataId  = data[i]._id;
 
         if(data[i].statusz == "รออนุมัติ"){
-          console.log("color1");
+        //  console.log("color1");
          statusButton.innerText = "อนุมัติ";
          $('#status-badge-'+i).removeClass("btn btn-warning");
          $('#status-badge-'+i).addClass("btn btn-success");
@@ -2927,7 +2927,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
            data[i].statusz = "อนุมัติ";
           
         }else if(data[i].statusz == "อนุมัติ"){
-          console.log("color2");
+         // console.log("color2");
           statusButton.innerText = "ไม่อนุมัติ";
           data[i].statusz = "ไม่อนุมัติ";
           $('#status-badge-'+i).removeClass("btn btn-success");
@@ -2957,7 +2957,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
       var statusColor = data[i].statusz
 
    
-      console.log("ColorADD"+ statusColor);
+     // console.log("ColorADD"+ statusColor);
 
      
       
@@ -2987,7 +2987,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
     function ClickToChangeColorShop(i){
 
 
-      console.log("Shopforadd"+ getShop);
+   //   console.log("Shopforadd"+ getShop);
 
 
 
@@ -3004,18 +3004,18 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 
 
 
-console.log("color");
+//console.log("color");
 
 
 
 $.post("/get/showshopnameintableinadminaccess",{ '_ID': getShop ,'_MAINID': getValueLocalStorage }, function (data, status) {
   //console.log(data[i].statusz);
   var statusButton = document.getElementById("status-badgeforshop-"+i+"");
-  console.log("Status",statusButton)
+ // console.log("Status",statusButton)
   var dataId  = data[i]._id;
 
   if(data[i].statusz == "รออนุมัติ"){
-    console.log("color1");
+ //   console.log("color1");
    statusButton.innerText = "อนุมัติ";
    $('#status-badgeforshop-'+i).removeClass("btn btn-warning");
    $('#status-badgeforshop-'+i).addClass("btn btn-success");
@@ -3025,7 +3025,7 @@ $.post("/get/showshopnameintableinadminaccess",{ '_ID': getShop ,'_MAINID': getV
      data[i].statusz = "อนุมัติ";
     
   }else if(data[i].statusz == "อนุมัติ"){
-    console.log("color2");
+   // console.log("color2");
     statusButton.innerText = "ไม่อนุมัติ";
     data[i].statusz = "ไม่อนุมัติ";
     $('#status-badgeforshop-'+i).removeClass("btn btn-success");
@@ -3033,7 +3033,7 @@ $.post("/get/showshopnameintableinadminaccess",{ '_ID': getShop ,'_MAINID': getV
 
 
   }else if(data[i].statusz == "ไม่อนุมัติ"){
-    console.log("color3");
+   // console.log("color3");
     statusButton.innerText = "รออนุมัติ";
     data[i].statusz = "รออนุมัติ";
     $('#status-badgeforshop-'+i).removeClass("btn btn-danger");
@@ -3055,7 +3055,7 @@ $.post("/get/showshopnameintableinadminaccess",{ '_ID': getShop ,'_MAINID': getV
 var statusColor = data[i].statusz
 
 
-console.log("ColorADD"+ statusColor);
+//console.log("ColorADD"+ statusColor);
 
 
 
@@ -3082,7 +3082,7 @@ $.post("/save/editdataadminColor",{
               
 
     function addEdit(){
-      console.log('DDazzzn');
+    //  console.log('DDazzzn');
       if (confirm("ต้องการแก้ไขรายการสินค้าใช่หรือไม่")) {
     //var shopnew = $("#shopnew").val();
     var itemnew = $("#itemnew").val();
@@ -3106,7 +3106,7 @@ $.post("/save/editdataadminColor",{
     //var image = $("#imagenew").val().substring(12);
     //var image = $("#imagenew").val()
 
-    console.log("New"+image);
+   // console.log("New"+image);
    //var statusnew = $("#statusnew").val();
     //var statusnew = $("#statusnew").val();
 
@@ -3120,7 +3120,7 @@ $.post("/save/editdataadminColor",{
     
 
 
-  console.log(image);
+  //console.log(image);
   //console.log(getDataId);
 
     $.post("/save/editdataadmin",{  
@@ -3144,7 +3144,7 @@ $.post("/save/editdataadminColor",{
                             // department: department
                             
                         },function(data, status){
-                          console.log(data);
+                         // console.log(data);
                            //window.location.href = "/admin";
 							// showData();
         });
@@ -3170,21 +3170,21 @@ $.post("/save/editdataadminColor",{
       'success'
     )
     var spiltkub = obj_id.split("_*&^_");
-      console.log("MONEW"+obj_id.split("_*&^_"));
+     // console.log("MONEW"+obj_id.split("_*&^_"));
       //console.log("MOMNEWKUB   "+spiltkub[0]);
-      console.log("MOMNEWKUB2   "+spiltkub[1]);
+     // console.log("MOMNEWKUB2   "+spiltkub[1]);
       let dropRoomId = spiltkub[0].toString();
       let itemkub = spiltkub[2].toString();
-      console.log("newnewnew"+ itemkub);
-      console.log("DDDDD"+dropRoomId);
+     // console.log("newnewnew"+ itemkub);
+     // console.log("DDDDD"+dropRoomId);
 
       $.post("/drop/imageNewNew",{nameImageNew: spiltkub[1]},function(data,status){
-        console.log("come");
+      //  console.log("come");
 
           $.post("/drop/dataAdmin", { dropRoomId: dropRoomId,'mainid': getValueLocalStorage,'itemkub': itemkub }, function (data, status) {
       
           window.location.href = "/admin";
-          console.log(obj_id);
+        //  console.log(obj_id);
           });
 
       });
@@ -3228,7 +3228,7 @@ $.post("/save/editdataadminColor",{
 
       
     //document.getElementById("room-name").innerHTML="";
-      console.log('Daaawwwwdqwdqwdqwd');
+     // console.log('Daaawwwwdqwdqwdqwd');
       //var sum = 0 ;
 		//document.getElementById("room-name").innerHTML="";
       for (let i = 0; i < data.length; i++) {
@@ -3244,7 +3244,7 @@ $.post("/save/editdataadminColor",{
       //  console.log("Sum = "+ sum);   
 		  //console.log(data[i]._id);
 		  str = data[i]._id.replace(/\s/g, '');
-		  console.log(str);
+		  //console.log(str);
         roomId = data;
 		// let rstripId = data[i]._id.rs
         //$("#room-name-value").val(data[0].room);

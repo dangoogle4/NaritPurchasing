@@ -378,7 +378,7 @@ function logout(){
 }
   
 	function Add() {
-		console.log("dan");
+		//console.log("dan");
 	  {
 		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
 		  var order = $("#order").val();
@@ -388,7 +388,7 @@ function logout(){
 		  var status = "รออนุมัติ";
 		  var DeleteForDummyMainTable = "0";
 		  var reason = "";
-		  console.log(order,respon,amount,nameorder,status);
+		  //console.log(order,respon,amount,nameorder,status);
 		  //var group = $("#group").val();
 		  //var department = $("#department").val();
   
@@ -620,24 +620,24 @@ function logout(){
 			
 
 			function GotoAnotherTable1(i) {
-				console.log("datanakub--->> "+ i);
+				//console.log("datanakub--->> "+ i);
 			let setValue = document.getElementById("roWorder" + String(i)).innerHTML;
-			console.log("DATAAAA--->>>> " + setValue);
+			//console.log("DATAAAA--->>>> " + setValue);
 			localStorage.setItem("thisIsParameterName", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
 			setValue = document.getElementById("nameOrderForAnotherTable" + String(i)).innerHTML;
-			console.log("DATAAAA--->>>> " + setValue);
+			//console.log("DATAAAA--->>>> " + setValue);
 			localStorage.setItem("thisIsParameterNameForNameOrder", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
 			setValue = document.getElementById("AmountForAnotherTable" + String(i)).innerHTML;
-			console.log("AmountForAnotherTable--->>>> " + setValue);
+			//console.log("AmountForAnotherTable--->>>> " + setValue);
 			localStorage.setItem("thisIsParameterNameForAmount", setValue); //ระบุค่าครั้งที่ได้จากในนี้
 
 			window.location.href = "/user";
 			}
 
 		function edit(DataForQueryData){
-			console.log("adqwdjqwd9qwd--->>" + DataForQueryData );
+			//console.log("adqwdjqwd9qwd--->>" + DataForQueryData );
 			$.post("/get/maintable", function (data, status) {
 						
 				//console.log("DDAANN" + str2);
@@ -703,7 +703,7 @@ function logout(){
               let objId = DataItem[i]._id;
 
 			  ShowDataItem[objId] = DataItem[i].order;
-			  console.log("Dan"+ objId);
+			  //console.log("Dan"+ objId);
             //   ShowShopTax[objId] =  DataItem[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
@@ -714,7 +714,7 @@ function logout(){
 
   function showMaintable() {
 
-			console.log("Damemdpqwkp");
+			//console.log("Damemdpqwkp");
 
 			// $.post("/get/showshopnameintableinadminaccessZ", {'MAIN_IDD': local } ,function (data, status) {
 
@@ -724,7 +724,7 @@ function logout(){
 
 			$.post("/get/maintable",function (data, status){
 				
-					console.log(data);
+					//console.log(data);
 					
 				var sum = 0;
 
@@ -737,7 +737,7 @@ function logout(){
 					//console.log(i+"data[i]._id",data[i].order);
 				$.post("/get/dataForSearchTableMainIdAdmin3", {_ID: data[i].order},function (data, status){
 				sum = 0;
-				console.log("Damemdpqwkpz2");
+				//console.log("Damemdpqwkpz2");
 
 					if(newdan[i] == undefined){
 						newdan[i] = 0.00;
@@ -747,7 +747,7 @@ function logout(){
 						nameForShowInTable[j] = data[j].responsibleperson;
 							//console.log(i+"data[i]._id in j",data[i]._id);
 							//console.log("maintable_ID"+j);
-						console.log("data--->>WWWW", data.length);
+						//console.log("data--->>WWWW", data.length);
 
 							if( data[j].sumpriceadmin == null) { // เอา sum มาใช้
 								sum = sum + data[j].sumprice * ShowShopTax[data[j].shopid];
@@ -756,7 +756,7 @@ function logout(){
 							}
 					//newdan[0] = 0;
 					
-					console.log("DamMMMMMMNNN"+data[j].responsibleperson);
+					//console.log("DamMMMMMMNNN"+data[j].responsibleperson);
 					if(j == data.length-1){ //เช็คว่าวนเสดรึยัง
 						//console.log("newnewfrist "+newdan[z]);
 						//console.log("sum " +sum);
@@ -767,12 +767,12 @@ function logout(){
 
 					newdan[z] = sum;
 					
-					console.log("newnew "+newdan[z]);
+					//console.log("newnew "+newdan[z]);
 
 				
 					$.post("/get/maintable", function (data, status) { //แสดงข้อมูล
 						// var newnew = [];
-						console.log("Damemdpqwkp3z");
+						//console.log("Damemdpqwkp3z");
 
 						document.getElementById("room-name").innerHTML="";
 						//console.log("Dataaa" + data.name);
@@ -782,7 +782,7 @@ function logout(){
 						if(data[i].deldummymaintable == 0){
 							
 							test = data[i]._id;
-							console.log("----->>>   "+test);
+							//console.log("----->>>   "+test);
 							//console.log(data[i]._id);
 							str2 = data[i]._id.replace(/\s/g, '');
 							str = data[i]._id.replace(/\s/g, '');
@@ -795,8 +795,8 @@ function logout(){
 							//   "<td>" +           
 							// 	(j+1) +
 							// 	"</td>" +
-							"<td><a onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
-							"</a></td>" +
+							"<td><button class='btn btn-light' onclick='GotoAnotherTable1(" + i + ")' id='roWorder" + i + "' >" + data[i].order +
+							"</button></td>" +
 							"<td>" +
 							data[i].respon +
 							"</td>" +
@@ -811,9 +811,9 @@ function logout(){
 							"<td > " + 
 							"<label id='status-badge-"+i+"' style='padding: 5px;'>"+ data[i].status+"</label>"+
 							"</td>" +
-							"<td >" +
-								nameForShowInTable[j] +
-							"</td>" +
+							// "<td >" +
+							// 	nameForShowInTable[j] +
+							// "</td>" +
 							// "</td>" +
 							// "<td><a  id='nameOderForAdminTable" + i + "' >" + data[i].nameorder +
 							// "</a></td>" +
@@ -854,7 +854,7 @@ function logout(){
 							} 
 								else if(checkBadgeStatus == 'รออนุมัติ' ){
 								$('#status-badge-'+i).addClass('label label-warning');
-								console.log("ส้มม")
+								//console.log("ส้มม")
 								} 
 									else if(checkBadgeStatus == 'รอส่งของ'){
 									$('#status-badge-'+i).addClass('label label-danger');
@@ -876,7 +876,7 @@ function logout(){
 
 			//console.log(data[i]._id);
 			str = data[i]._id.replace(/\s/g, '');
-			console.log(str);
+			//console.log(str);
 
 			//   console.log("NEWNEWNEWNENWENWENWENWNENEWNEN    "+newnew[i]);
 			// $("#amountAll").val(localStorage.getItem("thisIsParameterName"));
@@ -969,7 +969,7 @@ function logout(){
 
 
 	function dropMainTableForDummyMainTable(DataForQueryData){
-		console.log('Dan--->>>'+ getDataId);
+		//console.log('Dan--->>>'+ getDataId);
 		var deldummymaintablemark2 = "1";
 		
 
@@ -994,14 +994,14 @@ function logout(){
 
 
 		function addzz(){
-			console.log('Dan--->>>'+ getDataId);
+		//	console.log('Dan--->>>'+ getDataId);
     var ordernew = $("#ordernew").val();
     var responnew = $("#responnew").val();
     var amountnew = $("#amountnew").val();
     var nameordernew = $("#nameordernew").val();
     var statusnew = $("#statusnew").val();
 
-	console.log(ordernew);
+	//console.log(ordernew);
 
     $.post("/save/editmain",{  
 							ServergetDataId:getDataId,	
@@ -1034,7 +1034,7 @@ var nameRespon = {};
               //ShowShopTax[objId] =  ShopName[i].tax;
 
               //let nameCategory = categoryName[i].equip_category;
-			  console.log("DATAMAMAMA"+nameRespon[objId])
+			  //console.log("DATAMAMAMA"+nameRespon[objId])
           }
       });
 	  

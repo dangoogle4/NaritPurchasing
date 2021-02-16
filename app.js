@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var multer = require('multer');
+import 'bootstrap';
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -135,8 +136,7 @@ app.get("/loghistory", (req, res) => {
 
 
 
-
-
+app.use(express.static(__dirname + '/css'));
 
 
 // catch 404 and forward to error handler

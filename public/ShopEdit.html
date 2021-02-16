@@ -216,6 +216,9 @@ body {
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv='cache-control' content='no-cache'> 
+  <meta http-equiv='expires' content='0'> 
+  <meta http-equiv='pragma' content='no-cache'> 
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://unpkg.com/vanilla-back-to-top@7.2.1/dist/vanilla-back-to-top.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -343,10 +346,13 @@ body {
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">แก้ไขข้อมูล</h4>
         </div> -->
-        <div class="modal-body">
+        <div class="modal-body">   
           <form>
             <br>
-            <label>ชื่อร้านค้า</label><input style="margin-left:4em"name="nameshop" type="text" id="nameshop"><br>
+            <label>ชื่อร้านค้า</label><input  style="width:180px; height: 25px; margin-left:4.5em" list="list_shop" type="text" id="nameshop" onkeyup="myFunction(this.value)"> <br>
+			<input id="storage_id" >
+			<datalist id="list_shop">
+			</datalist>
             <br>
             <label for="typeshop">ประเภทร้านค้า</label>
             <select style="width:180px; height: 25px; margin-left:2em" name="typeshopp" id="typeshoppp">
@@ -452,6 +458,27 @@ function getCookie(cname) {
   
   function tableData(){
 
+	$.post("/get/shopforadd", function (data, status) {
+    
+	let roomData = data;
+	for (let i = 0; i < roomData.length; i++) {
+	  let roomName = roomData[i].nameOfShop;
+
+	  //console.log("dadadadadadad--->>>>>???? "+roomData[i]._id)
+	  $("#list_shop").append(
+		
+		"<option value="+ roomName +" id='list1'"+ roomData[i]._id+"' ></option>"
+		  
+
+		
+		
+		
+	  );
+	  //console.log("room----.>>>>>    "+roomName);
+	}
+			});
+
+
     //let per_page_admin = $("#perpage").val();
 
     $.post('/get/shop', {}, function(data, status)
@@ -525,21 +552,84 @@ function getCookie(cname) {
   }
 
 
+  function myFunction(keyInput) {
+	  
+  // var key = document.getElementById("mySelect").value;
+  
+  
+  console.log("keyinput"+keyInput)
+
+  // let A2s = {"key": keyInput} ;
+
+  $.post("/post/shopforquery", {'key': keyInput} , function (data, status) {
+
+    let textlist = '';
+
+      console.log("aowaraima"+status);
+      // console.log("Check value:: ", data.nameOfShop);
+      
+       $('#textlist').empty();
+
+      for( i = 0 ; i < data.length ; i++){ //ได
+		//document.getElementById("storage_id").innerHTML = "";
+        console.log("wqkd[qwpldqw[d----->>>       "+data.length);
+        textlist += '<option value="'+data[i].nameOfShop+'"></option>'
+         console.log("LOOP ["+i+"]: "+textlist)
+		 //console.log("huw"+data[i].nameOfShop)
+
+        $('#storage_id').val(data[i]._id);
+		$('#taxshop').val(data[i].tax);
+
+		
+		
+		
+      }
+	  var element = document.getElementById("nameshop");
+			if (typeof element !== "undefined" && element.value == '' || textlist == '') {
+				console.log("DD"+element);
+					document.getElementById("storage_id").value = "";
+					document.getElementById("taxshop").value = "";
+           }
+
+      // console.log(textlist)
+
+      // $('#list_shop').html(textlist);
+      // document.getElementById("list_shop").innerHTML = textlist; //เอาค่าใน **textlist** ยัดไปใน **list_shop**
+
+
+    //document.getElementById("room-name").innerHTML="";
+    
+      // for (let i = 0; i < data.length; i++) {
+		  // //console.log(data[i]._id);
+		  // // str = data[i]._id.replace(/\s/g, '');
+		  // // console.log(str);
+      //   // roomId = data;
+		
+        
+      // }   
+    }); 
+
+  }
+
+
+
   function addShop() {
-		console.log("danxxx");
-	  {
-		if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
+
+		  var storage_id = $('#storage_id').val();
+		  //if (confirm("ต้องการเพิ่มผู้ใช้หรือไม่")) {
 		  //var mainid = getValueLocalStorage;
 		  var shop = $("#nameshop").val();
 		  var type = $("#typeshoppp").val();
 		  var tax = $("#taxshop").val();
+		  if(tax="7"){
+        	 tax=1.07;
+      			}
       console.log(shop,type,tax);
-		  //var group = $("#group").val();
-		  //var department = $("#department").val();
-      if(tax="7"){
-        tax=1.07;
-      }
-		  $.post(
+		if(storage_id == ""){
+
+			console.log("DAN");
+
+			$.post(
 			"/api/addshop",
 			{
 			  //mainid: mainid,	
@@ -558,8 +648,33 @@ function getCookie(cname) {
 			  
 			}
 		  );
-		 } 
-	  } 
+
+		}else {
+			console.log("MAMA"+storage_id);
+			
+			$.post("/save/editShopWhenPeoPleDontLookCareFully",{  
+							'ServergetDataId':storage_id,	
+							'shopnewforedit':shop,
+                            'typeshopppnew':type,
+                            'taxnew':tax,
+                           
+                            //amountnew:amountnew,
+                            // nameordernew:nameordernew,
+                            // statusnew:statusnew,
+                            // department: department
+                            
+                        },function(data, status){
+                          window.location.href = "/shopedit";
+							          //showData();
+        });
+		}
+	
+	
+		
+     
+	
+		// } 
+	   
   }
 
   function editData(i){

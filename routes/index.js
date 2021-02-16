@@ -721,6 +721,40 @@ router.post("/save/editshop", function (req, res, next) {
   });
 });
 
+router.post("/save/editShopWhenPeoPleDontLookCareFully", function (req, res, next) {
+ 
+  // res.send("save me" + "  " +req.body.name+" "+req.body.surname+" "+req.body.iduser);
+  MongoClient.connect(url, { useUnifiedTopology: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("Purchasing");
+    var myquery = { _id: ObjectId(req.body.ServergetDataId) };
+    //console.log("MAINMAINMAINMAINMAIN    "+req.body.deldummymaintablenew);
+    
+    //console.log(req.body.ordernew);
+    var newvalues = {
+      $set: {
+        nameOfShop: req.body.shopnewforedit,
+        typeOfShop: req.body.typeshopppnew,
+        tax: req.body.taxnew,
+        // nameorder: req.body.nameordernew,
+        // status: req.body.statusnew,
+        //deldummymaintable: 1,
+        //status: req.body.status,
+      },
+    };
+    dbo
+      .collection("shop")
+      .updateOne(myquery, newvalues, function (err, result) {
+        if (err) throw err;
+        // console.log("updata complete!!");
+        db.close();
+
+        res.send(true);
+      });
+  });
+});
+
+
 
 router.post("/save/editmaindummydrop", function (req, res, next) {
  
