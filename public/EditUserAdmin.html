@@ -424,6 +424,7 @@ function getCookie(cname) {
       // console.log(paging_user)
 
       response = data[0];
+	  
     //   if(user_count > 0)
     //   {
         // for(let j=0; j<paging_user; j++)
@@ -443,6 +444,9 @@ function getCookie(cname) {
         // }
         for(let i = 0; i < user_data.length; i++)
         {
+			str = user_data[i]._id.replace(/\s/g, '');
+			
+			
 
            $("#table_user").append("<tr><td>"
                                     // + [i+1] +"</td><td>"
@@ -451,7 +455,7 @@ function getCookie(cname) {
 									+ user_data[i].username +"</td><td>"
 									+ user_data[i].priority +"</td><td>"
 									+"<a data-toggle='modal' data-target='#Modalzz' href='' onclick='editData("+i+")'><i class='glyphicon glyphicon-pencil'></i></a></td>"+
-									 "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+i+"') >ลบ</button></td>" +
+									 "<td><button href='#' class='btn btn-danger' onclick=DeleteDataAdmin('"+str.toString()+"') >ลบ</button></td>" +
                                     // +"<a href='' onclick='drop("+i+")'><i class='glyphicon glyphicon-fire'></i></a> +str.toString()+ "
                                     +"</td></tr>");                                                                                 
         }        
@@ -506,7 +510,7 @@ if(CookieUser.priority != "Admin"){
 				//console.log("add");
 				document.getElementById("Modal-b").innerHTML="";
 				$("#Modal-b").append(
-		"<label style='padding: left; margin: 10px'>ชื่อ</label>"+"<input style='margin-left: 45px; id='itemnew'type='text' type='text'value='"+ data[i].name +"'>" +'<br>'+ 
+		"<label style='padding: left; margin: 10px'>ชื่อ</label>"+"<input style='margin-left: 45px;' id='namenamename'type='text' type='text'value='"+ data[i].name +"'>" +'<br>'+ 
           '<br>'+
           "<label style='margin: 10px'>นามสกุล</label>"+"<input style='margin-left: 10px;' id='partnumbernew'type='text' type='text'value='"+ data[i].surname +"'>" +'<br>'+ 
           '<br>'+
@@ -543,5 +547,51 @@ if(CookieUser.priority != "Admin"){
     }
     
   }
+
+  function addEdit(){
+	  confirm("คุณต้องการแก้ไขข้อมูลส่วนตัวใช่หรือไม่ ?")
+			console.log('DDan');
+    //var shopnew = $("#shopnew").val();
+    var nameINEW = $("#namenamename").val();
+    var surname = $("#partnumbernew").val();
+    var username = $("#pricenew").val();
+    var password = $("#amountnew").val();
+    // var sumpricenew = $("#sumpricenew").val();
+    // var responsiblepersonnew = $("#responsiblepersonnew").val();
+    // var statusznew = $("#statusznew").val();
+   //var statusnew = $("#statusnew").val();
+    //var statusnew = $("#statusnew").val();
+
+
+  console.log("check"+nameINEW,surname,username,password);
+  console.log($("#namenamename").val())
+  console.log(getDataId);
+
+    $.post("/save/editDataUserAdmin",{  
+							'ServergetDataId':getDataId,	
+                            'name':nameINEW,
+                            'surname':surname,
+                            'username':username,
+                            'password':password,     
+                        },function(data, status){
+							window.location.href ='/adminedit';
+        });
+     }
+
+
+	 function DeleteDataAdmin(obj_id) {
+	let dropRoomId = obj_id.toString();
+	console.log("delete--->>>    " + obj_id);
+    $.post("/drop/DataUser", { dropRoomId: dropRoomId }, function (data, status) {
+      window.location.href = "/adminedit";
+      console.log(obj_id);
+	});
+  }	
+
+
+
+  
+
+	var getDataId =""
 
 </script>

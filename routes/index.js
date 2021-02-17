@@ -1394,6 +1394,24 @@ router.post("/drop/DataShop", function (req, res, next) {
   });
 });
 
+router.post("/drop/DataUser", function (req, res, next) {
+  console.log("Hi DataShop");
+ // console.log(req.body.drop_id_category);
+ MongoClient.connect(url, function (err, db) {
+   if (err) throw err;
+   var dbo = db.db("Purchasing");
+   var dropcategory = { _id: ObjectId(req.body.dropRoomId) };
+   dbo.collection("user").deleteOne(dropcategory, function (err, obj) {
+     if (err) throw err;
+     console.log("1 document deleted");
+     res.send('Dan');
+     db.close();
+   });
+ });
+});
+
+
+
 router.post("/drop/DataShopInMain", function (req, res, next) {
   console.log("Hi DataShop");
  // console.log(req.body.drop_id_category);

@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var multer = require('multer');
-import 'bootstrap';
 
 var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
@@ -131,6 +130,10 @@ app.get("/homeadmin", (req, res) => {
 
 app.get("/loghistory", (req, res) => {
   res.sendFile(path.join(__dirname + "/public/loghistory.html"));
+});
+
+app.get("/css", (req, res) => {
+  res.sendFile(path.join(__dirname + "/css/bootstrap.min.css"));
 });
 
 
