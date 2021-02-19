@@ -2146,12 +2146,13 @@ function  moveValueToTrash(){
       .then((willDelete) => {
       if (willDelete) {
       swal("ข้อมูลสินค้าของคุณถูกลบแล้ว", {
+
       icon: "success",
       });
       var spiltkub = obj_id.split("_*&^_");
     //  console.log("MONEW"+obj_id.split("_*&^_"));
-      //console.log("MOMNEWKUB   "+spiltkub[0]);
-     // console.log("MOMNEWKUB2   "+spiltkub[1]);
+      console.log("MOMNEWKUB   "+spiltkub[0]);
+      console.log("MOMNEWKUB2   "+spiltkub[1]);
       let dropRoomId = spiltkub[0].toString();
       let itemkub = spiltkub[2].toString();
      /// console.log("newnewnew"+ itemkub);
@@ -2163,17 +2164,20 @@ function  moveValueToTrash(){
 
           $.post("/drop/DataKrup", { dropRoomId: dropRoomId,'mainid': getValueLocalStorage,'itemkub': itemkub }, function (data, status) {
       
-         
+            
           //console.log(obj_id);
           });
+          window.location.href = "/user";
 
        });
+      
+       
       } else {
       swal("ข้อมูลสินค้าของคุณยังไม่ถูกลบ");
       }
       });
 
-       //window.location.href = "/user";
+       
 
   
 

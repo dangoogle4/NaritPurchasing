@@ -388,7 +388,7 @@ table td, table th  {
               <h4 class="modal-title">เพิ่มสินค้า</h4>
             </div> -->
             <div class="modal-body">
-              <form id="imageuploadkub"method="post" action="/upload" enctype="multipart/form-data">
+              <form id="imageuploadkub" method="post" action="/uploadAdmin" enctype="multipart/form-data">
                 <!-- <br>
                 <label>ร้านค้าของท่าน</label> <select style="margin-left: 0.5em; width:183px; height: 25px;" class="custom-select storage" id="storage" required></select>
                 <br> -->
@@ -423,12 +423,12 @@ table td, table th  {
                 <!-- <label>ผู้รับผิดชอบ</label>
                 <input  style="margin-left:1.98em" id="responsibleperson" name="responsibleperson" type="text" value="nameNew"><br>
                 <br> -->
-                <label >สถานะ</label>
+                <label hidden>สถานะ</label>
                 <!-- <input  style="margin-left:4.3em" id="statusz" type="text"><br> -->
-                <select style="margin-left:4.3em"name="status" id="statusz">
+                <select style="margin-left:4.3em"name="status" id="statusz" hidden>
                   <!-- <option value="0">เลือกสี</option> -->
                   <!-- <option value="อนุมัติ">อนุมัติ</option> -->
-                  <option value="รออนุมัติ">รออนุมัติ</option>
+                  <option value="รออนุมัติ">รออนุมัติ</option hidden>
                   <!-- <option value="ไม่อนุมัติ">ไม่อนุมัติ</option> -->
                   <!-- <option value="4">แดง</option> -->
                 </select>
@@ -525,6 +525,8 @@ table td, table th  {
   
   
   <script>
+
+    
     
 
       var a;
@@ -647,10 +649,10 @@ table td, table th  {
 
   <script>
 
-$(".imageuploadkub").submit(function(e) 
-      {
-          e.preventDefault(); 
-      });
+// $(".imageuploadkub").submit(function(e) 
+//       {
+//           e.preventDefault(); 
+//       });
 
 //const form = document.getElementById("new_document_attachment");
 const fileInput = document.getElementById("image");
@@ -2577,7 +2579,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
    $("#shopNameTab").append(
  // "<tr><td>" +
  //       (i + 1) +
- //       "</td>" +
+ //       "</td>" + 
        //  "<td>"+ "<button class='tablink' onclick='"+openPage+"('"+data[i].nameOfShop+"'',"+this+", 'red')' id='order"+i+"'>" + data[i].nameOfShop +"</button>" + "</td>" 
        // "<td><button href='#' onclick=openPage('"+data[i].nameOfShop+"')  >name</button></td>" 
        // "<button></button>" 
@@ -2658,7 +2660,7 @@ $.post("/get/dataForSearchTableMainIdAdmin", {_ID: getValueLocalStorage},functio
 			},
 
 			function (data, status) {
-			  window.location.href = "/admin";
+			//  window.location.href = "/admin";
 			  
 			}
 		  );

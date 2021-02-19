@@ -34,11 +34,22 @@ const storage = multer.diskStorage({
   filename: (req, file, cb) => {
       cb(null, file.originalname )}})
 
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//       cb(null, './public/upload/temp/pic')
+//   },
+//   filename: (req, file, cb) => {
+//       cb(null, 'file-' +   file.originalname + Date.now() 
+//       )}
+// })
+
+
+
 const upload = multer({ storage: storage })
 
 
 
-app.post('/upload',upload.single('fileupload'),(req,res) => {
+ app.post('/uploadAdmin',upload.single('fileupload'),(req,res) => {
   //res.render(req.file);
  //res.send("OK");
   res.redirect("/admin");
