@@ -32,7 +32,7 @@ const storage = multer.diskStorage({
       cb(null, './public/upload/temp/pic')
   },
   filename: (req, file, cb) => {
-      cb(null, file.originalname )}})
+      cb(null, file.originalname + Date.now() )}})
 
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
